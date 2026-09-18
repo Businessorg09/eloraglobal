@@ -393,20 +393,18 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
     start: 'top 90%',
 
     onEnter: (batch) => {
-      gsap.to(batch, {
-        y: 0,
-        opacity: 1,
-
-        filter: 'blur(0px)',
-
-        duration: 1.3,
-
-        ease: 'power3.out',
-
-        stagger: 0.3,
-
-        overwrite: true,
-      });
+      gsap.fromTo(batch, 
+        { y: 40, opacity: 0, filter: 'blur(8px)' },
+        {
+          y: 0,
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 1.3,
+          ease: 'power3.out',
+          stagger: 0.3,
+          overwrite: true,
+        }
+      );
     },
   });
 
