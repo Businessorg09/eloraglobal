@@ -9337,16 +9337,13 @@ figcaption {
   }
 }
 
-/* PERFECT SCROLL OVERRIDES */
+
+/* HORIZONTAL SCROLL OVERRIDES v14 */
 .scroll_track, .position_sticky-wrap {
-  height: auto !important;
+  height: auto !important; /* GSAP Pin handles the height now */
 }
-.section_step, .section_insight {
-  position: relative !important;
-  top: auto !important;
-}
-.step_card-list {
-  flex-wrap: wrap !important;
+.step_card-list, .insight_card-list {
+  flex-wrap: nowrap !important;
   margin-right: 0 !important;
-  justify-content: center !important;
+  display: flex !important;
 }

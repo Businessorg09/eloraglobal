@@ -558,62 +558,92 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
   }
 
   
-  // 3. Premium Stripe-style animations for Steps
-  const stepCards = gsap.utils.toArray('.step_card-stroke');
-  if (stepCards.length > 0) {
-    ScrollTrigger.batch(stepCards, {
-      interval: 0.1,
-      start: 'top 85%',
-      onEnter: (batch) => {
-        gsap.fromTo(batch, 
-          { 
-            y: 60, 
-            opacity: 0, 
-            scale: 0.96,
-            rotationX: -10,
-            transformOrigin: 'center top'
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            rotationX: 0,
-            duration: 1.4,
-            ease: 'expo.out',
-            stagger: 0.15,
-            overwrite: true,
-          }
-        );
+  
+  
+  /* ============================================================
+     PERFECT HORIZONTAL SCROLL (WEBFLOW RECREATION) v14
+  ============================================================ */
+
+  // 1. Horizontal Scroll for Steps
+  const stepSection = document.querySelector('.section_step');
+  const stepList = document.querySelector('.step_card-list');
+  const stepCardsInner = gsap.utils.toArray('.step_card-stroke');
+  
+  if (stepSection && stepList && stepCardsInner.length > 0) {
+    stepList.style.flexWrap = 'nowrap';
+    stepList.style.width = 'max-content';
+    
+    let getStepScrollAmount = () => -(stepList.scrollWidth - window.innerWidth + window.innerWidth * 0.1);
+
+    // Pin and slide left
+    gsap.to(stepList, {
+      x: getStepScrollAmount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: stepSection,
+        start: "top top",
+        end: () => "+=" + (stepList.scrollWidth),
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
       }
+    });
+
+    // Reveal cards as they scroll into the viewport
+    stepCardsInner.forEach((card, i) => {
+      gsap.fromTo(card,
+        { y: 80, opacity: 0, scale: 0.9, rotationY: 10 },
+        {
+          y: 0, opacity: 1, scale: 1, rotationY: 0,
+          duration: 1, ease: 'expo.out',
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: gsap.getById("stepTween") || gsap.getTweensOf(stepList)[0],
+            start: "left 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
     });
   }
 
-  // 4. Premium Stripe-style animations for Insights
-  const insightCards = gsap.utils.toArray('.insight_card');
-  if (insightCards.length > 0) {
-    ScrollTrigger.batch(insightCards, {
-      interval: 0.1,
-      start: 'top 85%',
-      onEnter: (batch) => {
-        gsap.fromTo(batch, 
-          { 
-            y: 60, 
-            opacity: 0, 
-            scale: 0.96,
-            rotationX: -10,
-            transformOrigin: 'center top'
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            rotationX: 0,
-            duration: 1.4,
-            ease: 'expo.out',
-            stagger: 0.15,
-            overwrite: true,
-          }
-        );
+  // 2. Horizontal Scroll for Insights
+  const insightSection = document.querySelector('.section_insight');
+  const insightList = document.querySelector('.insight_card-list');
+  const insightCardsInner = gsap.utils.toArray('.insight_card');
+
+  if (insightSection && insightList && insightCardsInner.length > 0) {
+    insightList.style.flexWrap = 'nowrap';
+    insightList.style.width = 'max-content';
+
+    let getInsightScrollAmount = () => -(insightList.scrollWidth - window.innerWidth + window.innerWidth * 0.1);
+
+    gsap.to(insightList, {
+      x: getInsightScrollAmount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: insightSection,
+        start: "top top",
+        end: () => "+=" + (insightList.scrollWidth),
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
       }
+    });
+
+    insightCardsInner.forEach((card, i) => {
+      gsap.fromTo(card,
+        { y: 80, opacity: 0, scale: 0.9, rotationY: 10 },
+        {
+          y: 0, opacity: 1, scale: 1, rotationY: 0,
+          duration: 1, ease: 'expo.out',
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: gsap.getTweensOf(insightList)[0],
+            start: "left 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
     });
   }
