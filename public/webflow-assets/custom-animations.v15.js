@@ -560,8 +560,9 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
   
   
   
+  
   /* ============================================================
-     PERFECT HORIZONTAL SCROLL (WEBFLOW RECREATION) v14
+     PERFECT HORIZONTAL SCROLL (WEBFLOW RECREATION) v15
   ============================================================ */
 
   // 1. Horizontal Scroll for Steps
@@ -575,8 +576,8 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
     
     let getStepScrollAmount = () => -(stepList.scrollWidth - window.innerWidth + window.innerWidth * 0.1);
 
-    // Pin and slide left
-    gsap.to(stepList, {
+    // Pin and slide left - SAVE TWEEN TO VARIABLE
+    let stepScrollTween = gsap.to(stepList, {
       x: getStepScrollAmount,
       ease: "none",
       scrollTrigger: {
@@ -598,7 +599,7 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
           duration: 1, ease: 'expo.out',
           scrollTrigger: {
             trigger: card,
-            containerAnimation: gsap.getById("stepTween") || gsap.getTweensOf(stepList)[0],
+            containerAnimation: stepScrollTween,
             start: "left 80%",
             toggleActions: "play none none reverse"
           }
@@ -618,7 +619,7 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
 
     let getInsightScrollAmount = () => -(insightList.scrollWidth - window.innerWidth + window.innerWidth * 0.1);
 
-    gsap.to(insightList, {
+    let insightScrollTween = gsap.to(insightList, {
       x: getInsightScrollAmount,
       ease: "none",
       scrollTrigger: {
@@ -639,7 +640,7 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
           duration: 1, ease: 'expo.out',
           scrollTrigger: {
             trigger: card,
-            containerAnimation: gsap.getTweensOf(insightList)[0],
+            containerAnimation: insightScrollTween,
             start: "left 80%",
             toggleActions: "play none none reverse"
           }
