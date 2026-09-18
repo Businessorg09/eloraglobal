@@ -78,6 +78,27 @@
     }
   </style>
 
+
+
+<style>
+  /* Disable massive scroll tracks and sticky behavior */
+  .scroll_track, .position_sticky-wrap {
+    height: auto !important;
+  }
+  .section_step, .section_insight, .insight_card {
+    position: relative !important;
+    top: auto !important;
+  }
+  /* Restore the step card list to wrap naturally instead of overflowing horizontally */
+  .step_card-list {
+    flex-wrap: wrap !important;
+    margin-right: 0 !important;
+  }
+  .step_card-stroke {
+    flex: 1 1 300px !important;
+  }
+</style>
+
 </head>
 <body>
   <div class="page-wrapper"><div class="global-styles w-embed"><style>
