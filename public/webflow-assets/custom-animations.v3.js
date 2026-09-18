@@ -488,21 +488,61 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
 
  
 
-  
   /* ============================================================
-     NORMAL FADE IN FOR STEPS AND INSIGHTS
+     3 STEPS HORIZONTAL SCROLL (CUSTOM GSAP)
   ============================================================ */
-  const cardsToAnimate = gsap.utils.toArray('.step_card-stroke, .insight_card');
-  
-  if (cardsToAnimate.length > 0) {
-    ScrollTrigger.batch(cardsToAnimate, {
-      interval: 0.1,
-      start: 'top 90%',
-      onEnter: (batch) => {
-        gsap.fromTo(batch, 
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, overwrite: true, ease: 'power2.out' }
+  const stepScrollTrack = document.querySelector('.scroll_track');
+  const stepList = document.querySelector('.step_card-list');
+
+  if (stepScrollTrack && stepList) {
+    let mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+      gsap.fromTo(stepList,
+        { x: 0 },
+        {
+          x: () => {
+             // Calculate how much we need to scroll left
+             const scrollDistance = stepList.scrollWidth - window.innerWidth;
+             return scrollDistance > 0 ? -(scrollDistance + 100) : 0;
+          },
+          ease: 'none',
+          scrollTrigger: {
+            trigger: stepScrollTrack,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        }
+      );
+    });
+  }
+
+  /* ============================================================
+     INSIGHT CARDS SCROLL REVEAL (CUSTOM GSAP)
+  ============================================================ */
+  const insightScrollTrack = document.querySelector('.position_sticky-wrap');
+  const insightCards = gsap.utils.toArray('.insight_card');
+
+  if (insightScrollTrack && insightCards.length > 0) {
+    let mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: insightScrollTrack,
+          start: 'top top',
+          end: 'bottom bottom',
+            scrub: 1,
+            invalidateOnRefresh: true
+        }
+      });
+      
+      insightCards.forEach((card, index) => {
+        tl.fromTo(card, 
+          { opacity: 0.1, y: 80, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power1.out' },
+          index * 0.5
         );
-      }
+      });
     });
   }
