@@ -388,24 +388,72 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
   ============================================================ */
 
   ScrollTrigger.batch('[data-stagger="animate"] > *', {
-    interval: 0.08,
-
-    start: 'top 90%',
-
+    interval: 0.1,
+    start: 'top 85%',
     onEnter: (batch) => {
       gsap.fromTo(batch, 
-        { y: 40, opacity: 0, filter: 'blur(8px)' },
+        { 
+          y: 60, 
+          opacity: 0, 
+          scale: 0.96,
+          rotationX: -10,
+          transformOrigin: 'center top'
+        },
         {
           y: 0,
           opacity: 1,
-          filter: 'blur(0px)',
-          duration: 1.3,
-          ease: 'power3.out',
-          stagger: 0.3,
+          scale: 1,
+          rotationX: 0,
+          duration: 1.4,
+          ease: 'expo.out',
+          stagger: 0.1,
           overwrite: true,
         }
       );
-    },
+    }
+  });
+
+  /* ============================================================
+     PREMIUM TYPOGRAPHY REVEAL (APPLE STYLE)
+  ============================================================ */
+  const headings = gsap.utils.toArray('.heading-style-h1, .heading-style-h2, .heading-style-h3');
+  
+  headings.forEach((heading) => {
+    if (!heading.closest('[data-stagger="animate"]')) {
+      const split = new SplitText(heading, { type: 'lines,words', linesClass: 'split-line' });
+      
+      split.lines.forEach(line => {
+        const wrapper = document.createElement('div');
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.verticalAlign = 'top';
+        wrapper.style.paddingBottom = '0.1em';
+        wrapper.style.margin = '-0.1em 0';
+        line.parentNode.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
+      });
+
+      gsap.fromTo(split.words, 
+        { 
+          y: '120%', 
+          opacity: 0,
+          rotationZ: 3
+        },
+        {
+          y: '0%',
+          opacity: 1,
+          rotationZ: 0,
+          duration: 1.4,
+          ease: 'expo.out',
+          stagger: 0.02,
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    }
   });
 
   /* ============================================================
@@ -509,44 +557,63 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
       insightSection.style.paddingTop = '8.75rem';
   }
 
-  // 3. Simple, beautiful fade-in animations for Steps
+  
+  // 3. Premium Stripe-style animations for Steps
   const stepCards = gsap.utils.toArray('.step_card-stroke');
   if (stepCards.length > 0) {
-    stepCards.forEach((card, i) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 40 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
+    ScrollTrigger.batch(stepCards, {
+      interval: 0.1,
+      start: 'top 85%',
+      onEnter: (batch) => {
+        gsap.fromTo(batch, 
+          { 
+            y: 60, 
+            opacity: 0, 
+            scale: 0.96,
+            rotationX: -10,
+            transformOrigin: 'center top'
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotationX: 0,
+            duration: 1.4,
+            ease: 'expo.out',
+            stagger: 0.15,
+            overwrite: true,
           }
-        }
-      );
+        );
+      }
     });
   }
 
-  // 4. Simple, beautiful fade-in animations for Insights
+  // 4. Premium Stripe-style animations for Insights
   const insightCards = gsap.utils.toArray('.insight_card');
   if (insightCards.length > 0) {
-    insightCards.forEach((card, i) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 40 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
+    ScrollTrigger.batch(insightCards, {
+      interval: 0.1,
+      start: 'top 85%',
+      onEnter: (batch) => {
+        gsap.fromTo(batch, 
+          { 
+            y: 60, 
+            opacity: 0, 
+            scale: 0.96,
+            rotationX: -10,
+            transformOrigin: 'center top'
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotationX: 0,
+            duration: 1.4,
+            ease: 'expo.out',
+            stagger: 0.15,
+            overwrite: true,
           }
-        }
-      );
+        );
+      }
     });
   }
