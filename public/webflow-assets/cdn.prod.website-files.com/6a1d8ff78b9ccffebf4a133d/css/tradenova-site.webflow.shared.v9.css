@@ -9336,3 +9336,17 @@ figcaption {
     grid-area: span 1 / span 2 / span 1 / span 2;
   }
 }
+
+/* PERFECT SCROLL OVERRIDES */
+.scroll_track, .position_sticky-wrap {
+  height: auto !important;
+}
+.section_step, .section_insight {
+  position: relative !important;
+  top: auto !important;
+}
+.step_card-list {
+  flex-wrap: wrap !important;
+  margin-right: 0 !important;
+  justify-content: center !important;
+}
