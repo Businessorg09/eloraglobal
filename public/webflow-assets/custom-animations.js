@@ -388,9 +388,9 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
   ============================================================ */
 
   ScrollTrigger.batch('[data-stagger="animate"] > *', {
-    interval: 0.08,
+    interval: 0.05,
 
-    start: 'top 90%',
+    start: 'top 95%',
 
     onEnter: (batch) => {
       gsap.to(batch, {
@@ -399,11 +399,11 @@ gsap.registerPlugin(Flip,ScrollTrigger,SplitText,MotionPathPlugin,CustomEase);
 
         filter: 'blur(0px)',
 
-        duration: 1.3,
+        duration: 0.6,
 
         ease: 'power3.out',
 
-        stagger: 0.3,
+        stagger: 0.1,
 
         overwrite: true,
       });
