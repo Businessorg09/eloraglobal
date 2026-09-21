@@ -9350,3 +9350,54 @@ figcaption {
   margin-right: 0 !important;
   justify-content: center !important;
 }
+
+/* ============================================================
+   ELORA GLOBAL v18 — LAYOUT FIXES
+   These overrides ensure the vertical scroll layout works cleanly.
+============================================================ */
+
+/* Kill the sticky horizontal scroll tracks entirely */
+.scroll_track,
+.position_sticky-wrap {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Step and Insight card lists should wrap naturally */
+.step_card-list,
+.insight_card-list {
+  flex-wrap: wrap !important;
+  margin-right: 0 !important;
+  gap: 1.5rem;
+}
+
+/* Step and Insight cards should be full width or auto on smaller screens */
+.step_card-stroke {
+  width: 100%;
+  max-width: 420px;
+}
+
+.insight_card {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Remove the sticky position from sections */
+.section_step,
+.section_insight {
+  position: relative !important;
+}
+
+/* Ensure cards are initially visible (GSAP will control opacity via fromTo) */
+.step_card-stroke,
+.insight_card,
+[card-fade-in],
+[data-stagger="animate"] > *,
+.section_heading,
+.pricing_card-plan {
+  opacity: 0;
+}
+
+/* After GSAP runs, the above elements will have opacity set by JS.
+   This ensures no flash of visible content before animation runs,
+   but also no permanent invisible state if JS fails. */
