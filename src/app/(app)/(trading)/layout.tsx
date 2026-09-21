@@ -88,11 +88,11 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen bg-[#F8F9FA] overflow-hidden font-body-md text-on-surface">
       
       {/* Sidebar */}
-      <aside className="w-[280px] bg-white border-r border-[#E5E7EB] flex flex-col justify-between h-full flex-shrink-0">
+      <aside className="hidden md:flex w-[280px] bg-white border-r border-[#E5E7EB] flex-col justify-between h-full flex-shrink-0">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <div className="w-8 h-8 bg-[#1D4ED8] rounded-lg flex items-center justify-center text-white font-bold text-lg">E</div>
               <div>
                 <h2 className="font-bold text-[18px] leading-tight tracking-tight text-[#111827]">ELORA</h2>
@@ -211,7 +211,7 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
 
           {/* Right: Actions & Profile */}
           <div className="flex items-center gap-4 ml-auto">
-            <button className="flex items-center gap-2 bg-[#E5E7EB] text-[#9CA3AF] px-4 py-2 rounded-lg font-bold text-[13px] shadow-sm cursor-not-allowed">
+            <button className="hidden sm:flex items-center gap-2 bg-[#E5E7EB] text-[#9CA3AF] px-4 py-2 rounded-lg font-bold text-[13px] shadow-sm cursor-not-allowed">
               <span className="material-symbols-outlined text-[18px]">play_circle</span>
               Awaiting Module
             </button>
@@ -236,11 +236,116 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto bg-[#F8F9FA] p-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto bg-[#F8F9FA] p-4 md:p-8 pb-24 md:pb-8 custom-scrollbar">
           <div className="max-w-[1400px] mx-auto w-full">
             {children}
           </div>
         </div>
+
+      
+      {/* Mobile Bottom Navigation (Visible only on small screens) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E7EB] z-50 pb-safe-bottom">
+        <div className="flex items-center justify-around px-2 py-2">
+          {[
+            { name: 'Home', path: '/trading', icon: 'space_dashboard' },
+            { name: 'Market', path: '/trading/market', icon: 'language' },
+            { name: 'Terminal', path: '/trading/terminal', icon: 'monitoring', primary: true },
+            { name: 'Academy', path: '/trading/academy', icon: 'school' },
+            { name: 'Menu', path: '#menu', icon: 'menu', action: 'toggleMenu' }
+          ].map((item, i) => {
+            const isActive = pathname === item.path || (pathname.startsWith(`${item.path}/`) && item.path !== '/trading');
+            const locked = isRouteLocked(item.path);
+            
+            if (item.action === 'toggleMenu') {
+              return (
+                <button key={i} onClick={() => document.getElementById('mobile-menu')?.classList.toggle('hidden')} className="flex flex-col items-center gap-1 p-2 text-[#6B7280] hover:text-[#111827]">
+                  <span className="material-symbols-outlined text-[24px]">{item.icon}</span>
+                  <span className="text-[10px] font-bold uppercase">{item.name}</span>
+                </button>
+              )
+            }
+            
+            return (
+              <Link 
+                key={i} 
+                href={locked ? '#' : item.path} 
+                className={`flex flex-col items-center gap-1 p-2 ${isActive ? 'text-[#1D4ED8]' : locked ? 'text-[#D1D5DB]' : 'text-[#6B7280] hover:text-[#111827]'}`}
+                onClick={(e) => { if(locked) e.preventDefault(); }}
+              >
+                {item.primary ? (
+                  <div className={`w-10 h-10 -mt-5 rounded-full flex items-center justify-center text-white shadow-lg ${locked ? 'bg-slate-300' : 'bg-[#1D4ED8]'}`}>
+                    <span className="material-symbols-outlined text-[20px]">{locked ? 'lock' : item.icon}</span>
+                  </div>
+                ) : (
+                  <span className="material-symbols-outlined text-[24px]">{locked ? 'lock' : item.icon}</span>
+                )}
+                <span className="text-[10px] font-bold uppercase">{item.name}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
+
+      {/* Mobile Full Screen Menu Overlay */}
+      <div id="mobile-menu" className="hidden md:hidden fixed inset-0 z-[60] bg-white flex flex-col h-full">
+        <div className="flex items-center justify-between p-4 border-b border-[#E5E7EB]">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#1D4ED8] rounded-lg flex items-center justify-center text-white font-bold text-lg">E</div>
+            <div>
+              <h2 className="font-bold text-[18px] leading-tight tracking-tight text-[#111827]">ELORA</h2>
+              <p className="text-[10px] uppercase font-bold tracking-widest text-[#6B7280]">Trading Engine</p>
+            </div>
+          </div>
+          <button onClick={() => document.getElementById('mobile-menu')?.classList.add('hidden')} className="p-2 text-[#6B7280]">
+            <span className="material-symbols-outlined text-[24px]">close</span>
+          </button>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+          {navCategories.map((cat, i) => (
+            <div key={i} className="mb-6">
+              <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">{cat.title}</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {cat.items.map((item) => {
+                  const isActive = pathname === item.path || (pathname.startsWith(`${item.path}/`) && item.path !== '/trading');
+                  const locked = isRouteLocked(item.path);
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.path}
+                      onClick={(e) => {
+                        if (locked) e.preventDefault();
+                        else document.getElementById('mobile-menu')?.classList.add('hidden');
+                      }}
+                      className={`flex flex-col gap-2 p-3 rounded-xl border ${
+                        isActive 
+                          ? 'bg-[#EFF6FF] border-[#BFDBFE] text-[#1D4ED8]' 
+                          : locked 
+                            ? 'bg-[#F9FAFB] border-[#F3F4F6] text-[#9CA3AF]' 
+                            : 'bg-white border-[#E5E7EB] text-[#4B5563] hover:border-[#D1D5DB]'
+                      }`}
+                    >
+                      <span className={`material-symbols-outlined text-[24px] ${isActive ? 'text-[#1D4ED8]' : 'text-[#9CA3AF]'}`}>
+                        {locked ? 'lock' : item.icon}
+                      </span>
+                      <span className="text-[12px] font-bold">{item.name}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
+          
+          <div className="mt-8 mb-4 border-t border-[#E5E7EB] pt-6 flex flex-col gap-3">
+             <Link href="/dashboard" className="flex items-center justify-center gap-2 w-full p-3 bg-[#F3F4F6] text-[#4B5563] rounded-xl font-bold text-sm">
+                <span className="material-symbols-outlined text-[18px]">swap_horiz</span> Switch to Business
+             </Link>
+             <button onClick={handleLogout} className="flex items-center justify-center gap-2 w-full p-3 text-[#EF4444] bg-[#FEF2F2] rounded-xl font-bold text-sm">
+                <span className="material-symbols-outlined text-[18px]">logout</span> Logout
+             </button>
+          </div>
+        </div>
+      </div>
 
       </main>
       

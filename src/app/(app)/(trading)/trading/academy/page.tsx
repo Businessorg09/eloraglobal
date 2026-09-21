@@ -496,23 +496,7 @@ export default function AcademyPage() {
 
     
 
-      {/* --- MOBILE QUICK ACTION BAR (STICKY BOTTOM NAV) --- */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-3 pb-safe-bottom flex items-center justify-between md:hidden shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
-        <a href="/trading" className="flex flex-col items-center gap-1 px-2 text-slate-500 hover:text-blue-600">
-          <span className="material-symbols-outlined text-[20px]">dashboard</span>
-          <span className="text-[9px] font-bold uppercase tracking-wider">Dashboard</span>
-        </a>
-        
-        <button onClick={handleResumeHero} className="flex-1 max-w-[200px] flex items-center justify-center gap-2 mx-2 py-2.5 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-600/20 font-bold text-xs hover:bg-blue-700 active:scale-95 transition-all">
-          <span className="material-symbols-outlined text-[18px]">play_arrow</span>
-          Resume Learning
-        </button>
-        
-        <a href="/trading/market" className="flex flex-col items-center gap-1 px-2 text-slate-500 hover:text-blue-600">
-          <span className="material-symbols-outlined text-[20px]">candlestick_chart</span>
-          <span className="text-[9px] font-bold uppercase tracking-wider">Trade</span>
-        </a>
-      </div>
+      
   </div>
   )
 }
