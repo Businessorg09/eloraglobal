@@ -146,7 +146,7 @@ export default function EWalletPage() {
       try {
         const res = await fetch('/api/wallet/balance')
         if (res.status === 401) {
-          router.push('/login')
+          // removed aggressive logout
           return
         }
         const data = await res.json()

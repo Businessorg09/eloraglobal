@@ -80,7 +80,7 @@ export default function TreePage() {
     try {
       const res = await fetch('/api/user/profile')
       if (res.status === 401) {
-        router.push('/login')
+        // removed aggressive logout
         return
       }
       const data = await res.json()
@@ -149,7 +149,7 @@ export default function TreePage() {
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
-      router.push('/login')
+      // removed aggressive logout
     } catch {
       console.error('Logout failed')
     }

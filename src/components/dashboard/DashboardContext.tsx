@@ -40,8 +40,9 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
           fetch('/api/user/team')
         ])
 
-        if (walletRes.status === 401 || profileRes.status === 401) {
-          router.push('/login')
+        if (walletRes.status === 401 && profileRes.status === 401 && rankRes.status === 401) {
+          // Only redirect if MULTIPLE core APIs fail with 401, to avoid flaky network logouts
+          window.location.href = '/login';
           return
         }
 

@@ -26,7 +26,7 @@ export default function MarketingPage() {
       try {
         const res = await fetch('/api/marketing/leads')
         if (res.status === 401) {
-          router.push('/login')
+          // removed aggressive logout
           return
         }
         const data = await res.json()

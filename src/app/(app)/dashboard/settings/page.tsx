@@ -80,7 +80,7 @@ function SettingsContent() {
 
   const handleLogout = async () => {
     await signOutAction()
-    router.push('/login')
+    // removed aggressive logout
   }
 
   const openModal = (type: string) => {

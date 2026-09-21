@@ -64,7 +64,7 @@ export default function DashboardPage() {
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
-      router.push('/login')
+      // removed aggressive logout
     } catch (err) {
       console.error('Logout failed')
     }
