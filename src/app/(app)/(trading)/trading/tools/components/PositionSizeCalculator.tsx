@@ -14,7 +14,7 @@ export function PositionSizeCalculator() {
   const standardLots = (parseFloat(riskAmount) / (parseFloat(stopLoss || '1') * pipValue)).toFixed(2)
 
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col h-full">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-full">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] flex items-center justify-center text-[#1D4ED8]">
           <span className="material-symbols-outlined text-[20px]">calculate</span>
@@ -77,7 +77,7 @@ export function PositionSizeCalculator() {
         </div>
       </div>
 
-      <div className="mt-auto bg-[#F8FAFC] rounded-[24px] border border-[#E5E7EB] p-5 flex flex-col gap-3">
+      <div className="mt-auto bg-[#F8FAFC] rounded-[24px] border border-[#E5E7EB] p-4 md:p-5 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span className="text-[12px] font-bold text-[#6B7280]">Maximum Risk (USD)</span>
           <span className="text-[16px] font-bold text-[#EF4444]">${riskAmount}</span>

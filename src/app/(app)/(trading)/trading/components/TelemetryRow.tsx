@@ -3,7 +3,7 @@ export function TelemetryRow() {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
       
       {/* 1. Pathway Allocation */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 flex flex-col justify-between">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 flex flex-col justify-between">
         <div className="flex justify-between items-start mb-4">
           <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight w-20">Pathway Allocation</span>
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Elite Tier</span>
@@ -31,7 +31,7 @@ export function TelemetryRow() {
       </div>
 
       {/* 2. Account Net Equity */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 flex flex-col justify-between">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 flex flex-col justify-between">
         <div className="flex justify-between items-start mb-4">
           <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight w-20">Account Net Equity</span>
           <span className="bg-[#ECFDF5] text-[#059669] px-2 py-1 rounded text-[11px] font-bold tracking-wider flex items-center gap-1">
@@ -62,7 +62,7 @@ export function TelemetryRow() {
       </div>
 
       {/* 3. Risk & Drawdown Sentry */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 flex flex-col justify-between">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 flex flex-col justify-between">
         <div className="flex justify-between items-start mb-4">
           <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight w-20">Risk & Drawdown Sentry</span>
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">100% Intact</span>
@@ -89,7 +89,7 @@ export function TelemetryRow() {
       </div>
 
       {/* 4. Execution Quality */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 flex flex-col justify-between">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 flex flex-col justify-between">
         <div className="flex justify-between items-start mb-4">
           <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight w-20">Execution Quality</span>
           <span className="bg-[#ECFDF5] text-[#059669] px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Exceptional</span>

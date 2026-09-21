@@ -136,8 +136,8 @@ export default function PropDashboardPage() {
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[400px] bg-blue-400/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
 
       {/* Top Banner */}
-      <div className="pt-10 px-8 pb-6 max-w-[1400px] mx-auto w-full flex items-end justify-between">
-        <div className="flex items-center gap-4 md:p-6">
+      <div className="pt-6 px-4 md:pt-10 md:px-8 pb-6 max-w-[1400px] mx-auto w-full flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-0">
+        <div className="flex items-start md:items-center gap-4 md:gap-6">
           <Link href="/trading" className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all hover:-translate-y-0.5">
             <span className="material-symbols-outlined text-[24px]">arrow_back</span>
           </Link>
@@ -153,7 +153,7 @@ export default function PropDashboardPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 md:p-6 bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <div className="flex items-center gap-4 md:gap-6 bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="flex flex-col">
             <span className="text-[10px] text-gray-400 uppercase font-black tracking-widest mb-0.5">MT4/MT5 Account ID</span>
             <span className="text-base font-black font-mono text-gray-900 tracking-tight">{account.account_number}</span>
@@ -427,7 +427,7 @@ export default function PropDashboardPage() {
                                   const sumUsd = (txs: any[]) => txs.reduce((sum, t) => sum + t.amount_usd, 0);
 
                                   return (
-                                    <div className="flex flex-col p-6 gap-4 md:p-6 bg-white">
+                                    <div className="flex flex-col p-6 gap-4 md:gap-6 bg-white">
                                       {/* Top Row: Trader & Company */}
                                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-emerald-50/50 border border-emerald-100 rounded-[24px] p-4 flex flex-col">
@@ -456,7 +456,7 @@ export default function PropDashboardPage() {
                                             </div>
                                             <span className="font-mono font-black text-blue-700">Total: ${sumUsd(sponsorTxs).toFixed(2)}</span>
                                           </div>
-                                          <table className="w-full text-left text-sm">
+                                          <div className="overflow-x-auto w-full"><table className="w-full text-left text-sm whitespace-nowrap">
                                             <thead className="bg-white text-gray-400 uppercase tracking-widest font-black text-[9px] border-b border-gray-50">
                                               <tr>
                                                 <th className="px-5 py-2.5">Level</th>
@@ -479,10 +479,7 @@ export default function PropDashboardPage() {
                                                   <td className="px-5 py-2.5 text-right font-mono text-gray-500 text-xs">₹{dist.amount_inr.toLocaleString('en-IN')}</td>
                                                 </tr>
                                               ))}
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      )}
+                                            </tbody></table></div></div>)}
 
                                       {/* Leadership Income */}
                                       {leadershipTxs.length > 0 && (
@@ -494,7 +491,7 @@ export default function PropDashboardPage() {
                                             </div>
                                             <span className="font-mono font-black text-amber-700">Total: ${sumUsd(leadershipTxs).toFixed(2)}</span>
                                           </div>
-                                          <table className="w-full text-left text-sm">
+                                          <div className="overflow-x-auto w-full"><table className="w-full text-left text-sm whitespace-nowrap">
                                             <thead className="bg-white text-gray-400 uppercase tracking-widest font-black text-[9px] border-b border-gray-50">
                                               <tr>
                                                 <th className="px-5 py-2.5">Level</th>
@@ -517,10 +514,7 @@ export default function PropDashboardPage() {
                                                   <td className="px-5 py-2.5 text-right font-mono text-gray-500 text-xs">₹{dist.amount_inr.toLocaleString('en-IN')}</td>
                                                 </tr>
                                               ))}
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      )}
+                                            </tbody></table></div></div>)}
                                       
                                       {payout.distributions.length === 0 && (
                                         <div className="text-center py-6 text-gray-400 font-medium text-xs">
@@ -541,7 +535,7 @@ export default function PropDashboardPage() {
               </div>
             ) : (
             <>
-            <table className="hidden md:table w-full text-left border-collapse text-sm">
+            <div className="overflow-x-auto w-full"><table className="hidden md:table w-full text-left border-collapse text-sm">
               <thead className="bg-white text-gray-400 uppercase tracking-widest font-black text-[10px] border-b border-gray-100">
                 <tr>
                   <th className="px-8 py-5 whitespace-nowrap">Order ID</th>
@@ -587,7 +581,7 @@ export default function PropDashboardPage() {
                   ))
                 )}
               </tbody>
-            </table>
+            </table></div>
             {/* Mobile Trade Cards */}
             <div className="flex md:hidden flex-col gap-3 mt-4">
               {(activeTab === 'HISTORY' ? closedTrades : openTrades).length === 0 ? (
@@ -696,7 +690,7 @@ export default function PropDashboardPage() {
               </button>
             </div>
             
-            <div className="p-4 md:p-8 flex flex-col gap-4 md:p-6">
+            <div className="p-4 md:p-8 flex flex-col gap-4 md:gap-6">
               {payoutSuccess ? (
                 <div className="flex flex-col items-center justify-center py-8 text-center">
                   <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4">

@@ -32,9 +32,9 @@ export default function GroupsPage() {
       {isLoading ? (
         <div className="text-center py-20 text-on-surface-variant font-body-lg">Loading groups...</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {groups.map((group, i) => (
-            <div key={i} className="bg-surface-container-lowest border border-surface-container-low rounded-2xl p-6 flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow cursor-pointer group">
+            <div key={i} className="bg-surface-container-lowest border border-surface-container-low rounded-2xl p-4 md:p-6 flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow cursor-pointer group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-[24px] bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-[24px]">{group.icon}</span>

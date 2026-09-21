@@ -7,7 +7,7 @@ export default function StrategyPage() {
   return (
     <GatedContent minPackageRequired={3} blurLevel="md" customMessage="The Strategy Lab and Case Studies are reserved for Package 3. Upgrade your subscription for full access.">
       <div className="w-full h-full font-sans">
-        <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-8 pb-10">
+        <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-8 pb-10">
           
   {/* Header Banner & Showcase Title */}
   <section>
@@ -19,7 +19,7 @@ export default function StrategyPage() {
   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
   <div>
   <div className="flex items-center gap-2.5">
-  <h1 className="text-2xl lg:text-2xl md:text-3xl font-display font-extrabold text-slate-900 tracking-tight">Trader Case Studies Showcase</h1>
+  <h1 className="text-lg md:text-2xl lg:text-2xl md:text-3xl font-display font-extrabold text-slate-900 tracking-tight">Trader Case Studies Showcase</h1>
   <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">84 Audited Dossiers</span>
   </div>
   <p className="text-sm text-slate-500 mt-1 max-w-3xl">
@@ -100,9 +100,9 @@ export default function StrategyPage() {
   </div>
   <span className="text-xs text-slate-400 font-medium">Click any card to launch clean Notion-style reader</span>
   </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
   {/* CARD 1: David K. */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   {/* Header with Trader & Account Badge */}
   <div className="flex items-start justify-between gap-3 mb-4">
@@ -129,7 +129,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$46,250 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$46,250 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">3 Bank Transfers</span>
   </div>
@@ -147,7 +147,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">London Open</span>
   </div>
   {/* Metrics Pills */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">54.6%</span>
@@ -171,7 +171,7 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 2: Sofia Mendez */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
@@ -197,7 +197,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$92,400 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$92,400 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">Scaled Combine</span>
   </div>
@@ -215,7 +215,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Psychology Overhaul</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">59.2%</span>
@@ -238,7 +238,7 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 3: Elena Rostova */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
@@ -264,7 +264,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$34,800 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$34,800 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">Bi-Weekly Payout</span>
   </div>
@@ -282,7 +282,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">5m Breakers</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">54.0%</span>
@@ -305,7 +305,7 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 4: Marcus Sterling */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
@@ -331,7 +331,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$124,000 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$124,000 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">Master Trader</span>
   </div>
@@ -349,7 +349,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Post-News Retest</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">48.5%</span>
@@ -372,7 +372,7 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 5: Tariq S. */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
@@ -398,7 +398,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$18,500 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$18,500 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">First Time Pass</span>
   </div>
@@ -416,7 +416,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">12-Week Run</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">62.0%</span>
@@ -439,7 +439,7 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 6: Liam Parker */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
@@ -465,7 +465,7 @@ export default function StrategyPage() {
   <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
-  <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$26,900 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
+  <p className="text-lg md:text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$26,900 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
   </div>
   <span className="text-[11px] font-semibold text-emerald-700 bg-white px-2 py-1 rounded-md border border-emerald-200 shadow-2xs">2 Payout Runs</span>
   </div>
@@ -483,7 +483,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Asymmetric R:R</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">49.0%</span>
@@ -509,7 +509,7 @@ export default function StrategyPage() {
   </section>
   {/* END: Showcase Cards Grid */}
   {/* Footer Callout / Submission */}
-  <section className="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 rounded-2xl p-7 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+  <section className="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 rounded-2xl p-7 text-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
   <div className="space-y-1.5">
   <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-200 text-xs font-bold rounded-full border border-blue-400/30">
               Open Submissions Cohort 2024

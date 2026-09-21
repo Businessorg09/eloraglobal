@@ -6,7 +6,7 @@ export function TraderPassport() {
   ]
 
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col h-full">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 w-full flex flex-col h-full">
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-[#1D4ED8]">badge</span>

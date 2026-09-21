@@ -1,6 +1,6 @@
 export function UpcomingDeskWidget() {
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 w-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <span className="flex items-center gap-2 text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight">
           <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span> Upcoming Desk Session

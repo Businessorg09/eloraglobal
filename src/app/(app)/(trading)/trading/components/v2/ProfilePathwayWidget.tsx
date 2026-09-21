@@ -54,7 +54,7 @@ export function ProfilePathwayWidget() {
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex items-center justify-center min-h-[400px]">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex items-center justify-center min-h-[400px]">
         <span className="material-symbols-outlined text-[24px] text-blue-500 animate-spin">refresh</span>
       </div>
     );
@@ -65,7 +65,7 @@ export function ProfilePathwayWidget() {
   return (
     <div className="flex flex-col gap-4">
       {/* Profile Card */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 relative overflow-hidden">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 relative overflow-hidden">
         {/* Decorative background element for higher tiers */}
         {p.tier > 1 && (
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-full blur-2xl pointer-events-none"></div>

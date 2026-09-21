@@ -24,20 +24,20 @@ export default function TradingToolsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start mb-8">
           <TimezoneOverlapMatrix />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start mb-12">
           
           {/* Left Column */}
-          <div className="flex flex-col gap-8 h-full">
+          <div className="flex flex-col gap-4 md:gap-8 h-full">
             <PositionSizeCalculator />
             <CompoundingCalculator />
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-8 h-full">
+          <div className="flex flex-col gap-4 md:gap-8 h-full">
             <RiskRewardMatrix />
             <PipValueCalculator />
           </div>

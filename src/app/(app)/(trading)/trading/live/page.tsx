@@ -73,7 +73,7 @@ export default function LiveClassesPage() {
         </div>
       )}
 
-      <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-8 pb-10">
+      <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-8 pb-10">
         <GatedContent minPackageRequired={3} blurLevel="md" customMessage="The Live Institutional Trading Floor is reserved for Package 3 members. Upgrade to get real-time market access.">
         <div className="flex flex-col w-full gap-gutter-xl pb-margin-page">
 {/* Executive Breadcrumb & Header Title */}
@@ -233,7 +233,7 @@ export default function LiveClassesPage() {
           <span className="">Copy URL</span>
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a className="py-2 rounded-lg bg-[#1D4ED8] text-white font-headline-md text-headline-md text-center hover:bg-blue-700 transition-all flex items-center justify-center gap-1.5" href="https://zoom.us/j/private-clinic" target="_blank">
           <span className="material-symbols-outlined text-[18px]">videocam</span>
           <span className="">Join Desk</span>
@@ -470,7 +470,7 @@ export default function LiveClassesPage() {
 {/* Time Slot Selector (4 Cols) */}
 <div className="lg:col-span-4 flex flex-col gap-2">
 <label className="font-label-md text-label-md text-on-surface font-semibold">2. Select Available Slot (45m)</label>
-<div className="grid grid-cols-2 gap-2">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
   {['10:00 AM GMT', '11:30 AM GMT', '02:00 PM GMT', '04:30 PM GMT'].map((time) => (
     <button 
       key={time}

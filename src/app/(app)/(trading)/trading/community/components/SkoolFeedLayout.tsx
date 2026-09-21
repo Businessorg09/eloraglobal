@@ -332,7 +332,7 @@ export function SkoolFeedLayout() {
       {/* --- Gated Access Overlay --- */}
       {!isPremiumMember && (
         <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-background/60 rounded-[24px]">
-          <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-xl border border-surface-container-low max-w-md text-center flex flex-col items-center animate-in zoom-in-95 duration-200">
+          <div className="bg-surface-container-lowest p-4 md:p-8 rounded-2xl shadow-xl border border-surface-container-low max-w-md text-center flex flex-col items-center animate-in zoom-in-95 duration-200">
             <div className="w-16 h-16 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-[32px]">lock</span>
             </div>
@@ -381,7 +381,7 @@ export function SkoolFeedLayout() {
       {/* --- Fullscreen Story Viewer Overlay --- */}
       {activeStory && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 animate-in fade-in duration-200">
-          <div className="absolute top-6 right-6 flex gap-4">
+          <div className="absolute top-4 md:p-6 right-6 flex gap-4">
             <button onClick={() => setActiveStory(null)} className="text-white hover:text-white/70 transition-colors">
               <span className="material-symbols-outlined text-[32px]">close</span>
             </button>
@@ -396,7 +396,7 @@ export function SkoolFeedLayout() {
             </div>
             
             {/* Story Author Info */}
-            <div className="absolute top-8 left-4 flex items-center gap-3 z-10">
+            <div className="absolute top-4 md:p-8 left-4 flex items-center gap-3 z-10">
                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">{activeStory.img}</div>
                <span className="text-white font-headline-md text-[14px] font-bold drop-shadow-[0_8px_30px_rgba(0,0,0,0.04)]">{activeStory.name}</span>
                <span className="text-white/70 font-body-sm text-[12px] drop-shadow-[0_8px_30px_rgba(0,0,0,0.04)]">2h</span>

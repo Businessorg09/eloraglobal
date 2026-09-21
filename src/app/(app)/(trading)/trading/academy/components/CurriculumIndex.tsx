@@ -2,7 +2,7 @@ export function CurriculumIndex() {
   return (
     <div className="flex flex-col gap-4">
       {/* Index Header Panel */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-5 w-full flex flex-col">
         <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-1">Institutional Blueprint</span>
         <h2 className="font-bold text-[18px] text-[#111827] leading-tight flex items-center justify-between">
           Curriculum Index

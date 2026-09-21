@@ -44,7 +44,7 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
   };
 
   return (
-    <form action={handleAction} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col h-full relative">
+    <form action={handleAction} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-full relative">
       <div className="flex items-center justify-between mb-6 border-b border-[#F3F4F6] pb-4">
         <h2 className="text-[16px] font-bold text-[#111827] leading-tight flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">edit_document</span>
@@ -59,10 +59,10 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
         </div>
       )}
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4 md:p-5">
         
         {/* Top Row */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-[10px] font-bold text-[#4B5563] uppercase tracking-wider">Asset</label>
             <input 
@@ -89,7 +89,7 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-[10px] font-bold text-[#4B5563] uppercase tracking-wider">Lots</label>
             <input 

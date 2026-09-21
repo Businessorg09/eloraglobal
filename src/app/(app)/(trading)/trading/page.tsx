@@ -8,10 +8,10 @@ import { ReferenceLibraryWidget } from './components/v2/ReferenceLibraryWidget'
 export default function NewTradingDashboardPage() {
   return (
     <div className="max-w-[1600px] mx-auto w-full pb-10 pt-4">
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-6 items-start">
         
         {/* Top Banner / Breadcrumbs */}
-        <div className="order-2 xl:order-1 xl:col-span-12 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 md:p-6 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
+        <div className="order-2 xl:order-1 xl:col-span-12 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-4 md:p-6 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[#EFF6FF] rounded-lg flex items-center justify-center text-[#1D4ED8]">
               <span className="material-symbols-outlined text-[24px]">school</span>

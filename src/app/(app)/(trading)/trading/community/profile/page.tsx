@@ -89,7 +89,7 @@ export default function CommunityProfilePage() {
       </div>
 
       {/* Profile Header (Instagram Style) */}
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16 px-4 md:px-8 mb-10">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 md:gap-16 px-4 md:px-8 mb-10">
         
         {/* Avatar */}
         <div className="relative">
@@ -104,9 +104,9 @@ export default function CommunityProfilePage() {
         </div>
 
         {/* Stats & Actions */}
-        <div className="flex flex-col flex-1 gap-5 w-full">
+        <div className="flex flex-col flex-1 gap-4 md:p-5 w-full">
           
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 md:gap-8">
             <h1 className="font-headline-xl text-[24px] text-on-surface flex items-center gap-2">
               {displayName}
               {profileData?.is_verified && <span className="material-symbols-outlined text-primary text-[20px]">verified</span>}
@@ -124,7 +124,7 @@ export default function CommunityProfilePage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
             <div className="flex gap-1.5 font-body-md text-[16px]">
               <span className="font-bold text-on-surface">{userPosts.length}</span>
               <span className="text-on-surface-variant">posts</span>
@@ -184,7 +184,7 @@ export default function CommunityProfilePage() {
       )}
 
       {/* Highlights / Story Archive */}
-      <div className="flex gap-6 px-4 md:px-8 mb-12 overflow-x-auto hide-scrollbar pb-2">
+      <div className="flex gap-4 md:gap-6 px-4 md:px-8 mb-12 overflow-x-auto hide-scrollbar pb-2">
         {[
           { name: 'Wins', img: '💰' },
           { name: 'Setups', img: '📉' },
@@ -217,7 +217,7 @@ export default function CommunityProfilePage() {
       </div>
 
       {/* Photo Grid */}
-      <div className="grid grid-cols-3 gap-1 md:gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2">
         {userPosts.length === 0 && !isLoading && (
           <div className="col-span-3 py-20 flex flex-col items-center justify-center text-on-surface-variant">
             <span className="material-symbols-outlined text-[48px] mb-2 opacity-50">photo_camera</span>
@@ -239,7 +239,7 @@ export default function CommunityProfilePage() {
             )}
             
             {/* Hover overlay with likes/comments */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-6">
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 md:gap-6">
               <div className="flex items-center gap-1.5 text-white font-bold">
                 <span className="material-symbols-outlined filled text-[20px]">favorite</span>
                 {post.likes_count || 0}
@@ -256,7 +256,7 @@ export default function CommunityProfilePage() {
       {/* Post Viewer Modal */}
       {activePost && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200">
-          <div className="absolute top-6 right-6">
+          <div className="absolute top-4 md:p-6 right-6">
             <button onClick={() => setActivePost(null)} className="text-white hover:text-white/70 transition-colors">
               <span className="material-symbols-outlined text-[32px]">close</span>
             </button>
@@ -268,7 +268,7 @@ export default function CommunityProfilePage() {
               {activePost.image_url ? (
                 <img src={activePost.image_url} alt="Post" className="w-full h-full object-contain" />
               ) : (
-                <div className="p-8 text-center flex flex-col items-center">
+                <div className="p-4 md:p-8 text-center flex flex-col items-center">
                   <span className="material-symbols-outlined text-[48px] text-on-surface-variant/50 mb-4">article</span>
                   <p className="font-body-lg text-on-surface">{activePost.content}</p>
                 </div>

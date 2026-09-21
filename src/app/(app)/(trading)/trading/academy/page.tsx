@@ -177,11 +177,11 @@ export default function AcademyPage() {
   if (!isLoading && userTier === 0) {
     return (
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
-        <div className="bg-white p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
+        <div className="bg-white p-4 md:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-symbols-outlined text-[32px]">school</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-2">Academy Access Locked</h2>
+          <h2 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 mb-2">Academy Access Locked</h2>
           <p className="text-slate-500 mb-6 text-sm">
             You do not have a trading account assigned to you yet. Please request one from the terminal or purchase an affiliate package to unlock Academy curricula.
           </p>
@@ -200,13 +200,13 @@ export default function AcademyPage() {
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 tracking-tight">Video Library & Playlists</h1>
+          <h1 className="text-lg md:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 tracking-tight">Video Library & Playlists</h1>
           <p className="text-slate-500 text-sm mt-1">Explore curated masterclass video series, on-demand playback vaults, strategy breakdowns, and track completed modules.</p>
         </div>
       </div>
 
       {/* --- PROGRESS TRACKER --- */}
-      <section className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+      <section className="bg-white border border-slate-200/90 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-5 border-slate-100 gap-4">
           <div>
             <div className="flex items-center gap-2.5">
@@ -228,10 +228,10 @@ export default function AcademyPage() {
 
       {/* --- HERO PLAYLIST (CONTINUE WATCHING) --- */}
       {lastProgress && lastProgress.episode && (
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132c66] via-[#1a3d8c] to-[#1e4cb8] p-5 md:p-9 text-white shadow-xl">
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132c66] via-[#1a3d8c] to-[#1e4cb8] p-4 md:p-5 md:p-9 text-white shadow-xl">
           <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
           <div className="absolute -left-10 -bottom-10 w-60 h-60 rounded-full bg-indigo-500/15 blur-2xl pointer-events-none"></div>
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-8">
             <div className="max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-xs font-semibold text-blue-200 tracking-wide backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
@@ -279,7 +279,7 @@ export default function AcademyPage() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {modules.map((mod) => {
               const isLocked = mod.isLocked;
               
@@ -347,7 +347,7 @@ export default function AcademyPage() {
 
       {/* --- ALL EPISODES LIST --- */}
       {!isLoading && modules.length > 0 && (
-        <section className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <section className="bg-white border border-slate-200/80 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
             <div>
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Granular Episode Breakdown</span>
@@ -409,7 +409,7 @@ export default function AcademyPage() {
                   });
                 })}
               </tbody>
-            </table>
+            </table></div>
           </div>
 
           {/* MOBILE EPISODES LIST (Stack of Cards) */}
@@ -481,7 +481,7 @@ export default function AcademyPage() {
             </div>
             
             {(activeEpisode.description || activeEpisode.pdf_url) && (
-              <div className="p-6 bg-slate-900 border-t border-slate-800 text-slate-300">
+              <div className="p-4 md:p-6 bg-slate-900 border-t border-slate-800 text-slate-300">
                 {activeEpisode.description && <p className="text-sm mb-4">{activeEpisode.description}</p>}
                 {activeEpisode.pdf_url && (
                   <a href={activeEpisode.pdf_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white font-bold text-xs transition-colors">

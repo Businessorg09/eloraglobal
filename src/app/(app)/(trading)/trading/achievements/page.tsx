@@ -56,7 +56,7 @@ export default function AchievementsPage() {
   ]
 
   return (
-    <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-6">
+    <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-4 md:gap-6">
       
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
@@ -73,17 +73,17 @@ export default function AchievementsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-6 items-start">
         
         {/* Left: Badges Grid */}
         <div className="xl:col-span-7 flex flex-col gap-4">
-          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6">
+          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6">
             <h2 className="text-[16px] font-bold text-[#111827] mb-6 flex items-center justify-between">
               <span>Your Milestones ({isLoading ? '-' : unlockedCount}/{badges.length} Unlocked)</span>
               <span className="text-[11px] font-normal text-[#6B7280] bg-[#F3F4F6] px-2 py-1 rounded">Click locked badges to simulate unlock</span>
             </h2>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {badges.map((badge, idx) => (
                 <div 
                   key={idx} 
@@ -114,7 +114,7 @@ export default function AchievementsPage() {
 
         {/* Right: Leaderboard */}
         <div className="xl:col-span-5 flex flex-col gap-4">
-          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
+          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-[16px] font-bold text-[#111827] flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#F59E0B]">emoji_events</span>

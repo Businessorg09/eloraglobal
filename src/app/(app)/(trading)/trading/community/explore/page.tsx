@@ -113,7 +113,7 @@ export default function ExplorePage() {
         <h2 className="font-headline-lg font-bold mb-4 flex items-center gap-2 text-on-surface">
           <span className="material-symbols-outlined text-primary">explore</span> Explore Feed
         </h2>
-        <div className="grid grid-cols-3 gap-1 md:gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2">
           {isLoading ? (
             <div className="col-span-3 py-20 text-center text-outline">Loading feed...</div>
           ) : explorePosts.length === 0 ? (
@@ -128,7 +128,7 @@ export default function ExplorePage() {
                      <span className="font-body-sm text-[11px] md:text-[13px] line-clamp-4 w-full break-words opacity-80">{post.content}</span>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-6">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 md:gap-6">
                   <div className="flex items-center gap-1.5 text-white font-bold">
                     <span className="material-symbols-outlined filled text-[20px]">favorite</span>
                     {post.likes_count || post.likes?.length || 0}
@@ -147,7 +147,7 @@ export default function ExplorePage() {
       {/* Post Viewer Modal */}
       {activePost && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200">
-          <div className="absolute top-6 right-6">
+          <div className="absolute top-4 md:p-6 right-6">
             <button onClick={() => setActivePost(null)} className="text-white hover:text-white/70 transition-colors">
               <span className="material-symbols-outlined text-[32px]">close</span>
             </button>
@@ -157,7 +157,7 @@ export default function ExplorePage() {
               {activePost.image_url ? (
                 <img src={activePost.image_url} alt="Post" className="w-full h-full object-contain" />
               ) : (
-                <div className="p-8 text-center flex flex-col items-center">
+                <div className="p-4 md:p-8 text-center flex flex-col items-center">
                   <span className="material-symbols-outlined text-[48px] text-on-surface-variant/50 mb-4">article</span>
                   <p className="font-body-lg text-on-surface">{activePost.content}</p>
                 </div>

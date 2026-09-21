@@ -2,7 +2,7 @@ export function LessonContentPanels() {
   return (
     <div className="flex flex-col mt-8 w-full">
       {/* Tabs */}
-      <div className="flex items-center gap-6 border-b border-[#E5E7EB] pb-0">
+      <div className="flex items-center gap-4 md:gap-6 border-b border-[#E5E7EB] pb-0">
         <button className="flex items-center gap-2 pb-3 border-b-2 border-[#1D4ED8] text-[#1D4ED8] font-bold text-[13px]">
           <span className="material-symbols-outlined text-[18px]">tv</span> Overview & Concepts
         </button>
@@ -20,21 +20,21 @@ export function LessonContentPanels() {
       <div className="py-6">
         {/* Rules Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-4 md:p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 1: Hard Capital Exposure</span>
             <div className="text-[20px] font-bold text-[#1D4ED8] my-1">1.0% — 2.0%</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
               Never risk exceeding 2% of total qualified account equity on any singular market setup.
             </p>
           </div>
-          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-4 md:p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 2: Market Volatility Buffer</span>
             <div className="text-[20px] font-bold text-[#059669] my-1">1.5 × ATR</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
               Average True Range (14 period) spacing prevents micro stop-outs from broker spreads.
             </p>
           </div>
-          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-4 md:p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 3: Pip Value Uniformity</span>
             <div className="text-[20px] font-bold text-[#111827] my-1">$10.00 / lot</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
@@ -44,7 +44,7 @@ export function LessonContentPanels() {
         </div>
 
         {/* Formula Block */}
-        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 mb-6">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <span className="flex items-center gap-2 text-[14px] font-bold text-[#111827]">
               <span className="material-symbols-outlined text-[#1D4ED8]">functions</span> The Core Lot Sizing Formulation
@@ -52,7 +52,7 @@ export function LessonContentPanels() {
             <span className="bg-[#1D4ED8] text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Formula #RISK-01</span>
           </div>
 
-          <div className="bg-[#F8F9FA] rounded-lg border border-[#E5E7EB] p-8 flex items-center justify-center font-serif text-[#1D4ED8]">
+          <div className="bg-[#F8F9FA] rounded-lg border border-[#E5E7EB] p-4 md:p-8 flex items-center justify-center font-serif text-[#1D4ED8]">
             {/* Styled Equation */}
             <div className="flex items-center gap-4 text-[24px] font-bold">
               <span>Position Size (Lots)</span>

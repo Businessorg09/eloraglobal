@@ -124,7 +124,7 @@ function MessagesContent() {
       
       {/* Left Sidebar - Chat List */}
       <div className={`w-full md:w-[350px] flex flex-col bg-surface-container-lowest border border-surface-container-low rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] shrink-0 ${activeRoomId && !isNewMessageMode ? 'hidden md:flex' : 'flex'}`}>
-        <div className="p-5 border-b border-surface-container-low flex justify-between items-center">
+        <div className="p-4 md:p-5 border-b border-surface-container-low flex justify-between items-center">
           <h2 className="font-headline-lg text-[18px] text-on-surface font-bold">
             {isNewMessageMode ? 'New Message' : 'Messages'}
           </h2>
@@ -162,9 +162,9 @@ function MessagesContent() {
           ) : (
             <>
               {isLoadingRooms ? (
-                 <div className="p-8 text-center text-outline">Loading...</div>
+                 <div className="p-4 md:p-8 text-center text-outline">Loading...</div>
               ) : rooms.length === 0 ? (
-                 <div className="p-8 text-center text-outline font-body-sm">No active conversations. Click the edit icon to start a chat.</div>
+                 <div className="p-4 md:p-8 text-center text-outline font-body-sm">No active conversations. Click the edit icon to start a chat.</div>
               ) : (
                 rooms.map((room) => (
                   <div 
@@ -201,7 +201,7 @@ function MessagesContent() {
         ) : (
           <>
             {/* Active Chat Header */}
-            <div className="flex items-center gap-4 p-5 border-b border-surface-container-low bg-surface-container-lowest rounded-tr-2xl">
+            <div className="flex items-center gap-4 p-4 md:p-5 border-b border-surface-container-low bg-surface-container-lowest rounded-tr-2xl">
               <button onClick={() => setActiveRoomId(null)} className="md:hidden text-on-surface-variant hover:text-on-surface">
                 <span className="material-symbols-outlined">arrow_back</span>
               </button>
@@ -219,7 +219,7 @@ function MessagesContent() {
             </div>
             
             {/* Active Chat Messages */}
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6 bg-[#F8F9FA]/50">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 md:gap-6 bg-[#F8F9FA]/50">
               <div className="text-center font-label-sm text-[11px] text-outline my-2">Beginning of conversation</div>
               
               {messages.map((msg, i) => {

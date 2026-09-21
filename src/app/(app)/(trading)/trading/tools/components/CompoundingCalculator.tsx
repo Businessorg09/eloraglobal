@@ -31,10 +31,10 @@ export function CompoundingCalculator() {
         </div>
       </div>
 
-      <div className="p-5 flex flex-col gap-5 flex-1">
+      <div className="p-5 flex flex-col gap-4 md:p-5 flex-1">
         <p className="text-[12px] text-[#6B7280]">Forecast account growth based on your mechanical edge (Win Rate & Risk:Reward) over a set series of trades.</p>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider">Initial Balance ($)</label>
             <input 
@@ -55,7 +55,7 @@ export function CompoundingCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-[11px] font-bold text-[#4B5563] uppercase tracking-wider">Win Rate (%)</label>
             <input 

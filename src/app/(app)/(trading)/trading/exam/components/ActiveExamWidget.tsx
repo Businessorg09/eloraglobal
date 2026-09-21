@@ -21,7 +21,7 @@ export function ActiveExamWidget() {
   }
 
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col mb-6">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col mb-6">
       
       {!isStarted ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -53,8 +53,8 @@ export function ActiveExamWidget() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg p-5">
+          <div className="flex flex-col gap-4 md:gap-6">
+            <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg p-4 md:p-5">
               <div className="flex gap-4">
                 <span className="text-[24px] font-bold text-[#1D4ED8]">14.</span>
                 <div className="flex flex-col">

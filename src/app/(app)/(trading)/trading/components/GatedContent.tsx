@@ -53,8 +53,8 @@ export function GatedContent({
         {children}
       </div>
       
-      <div className="absolute inset-0 z-50 flex items-center justify-center p-6">
-        <div className="bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl p-8 max-w-md w-full flex flex-col items-center text-center transform transition-all">
+      <div className="absolute inset-0 z-50 flex items-center justify-center p-4 md:p-6">
+        <div className="bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl p-4 md:p-8 max-w-md w-full flex flex-col items-center text-center transform transition-all">
           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-inner ${
             examLocked ? 'bg-[#FEF2F2] text-[#EF4444]' : 'bg-gradient-to-br from-[#FEF3C7] to-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.4)]'
           }`}>

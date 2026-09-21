@@ -58,7 +58,7 @@ export default function AnalyticsPage() {
 
   return (
     <GatedContent minPackageRequired={3} blurLevel="md" customMessage="Institutional telemetry and behavioral metrics are reserved for Package 3. Upgrade your subscription for full analytics.">
-      <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-8">
+      <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-4 md:gap-8">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-2">
@@ -82,11 +82,11 @@ export default function AnalyticsPage() {
             <h2 className="text-[18px] font-bold text-[#111827]">Syllabus Telemetry</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
             
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {/* Course Completion Widget */}
-              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col md:flex-row items-center justify-between col-span-3">
+              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col md:flex-row items-center justify-between col-span-3">
                 <div className="flex flex-col text-center md:text-left mb-6 md:mb-0">
                   <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Course Progression</span>
                   <span className="text-[36px] font-black text-[#111827] leading-none">
@@ -120,7 +120,7 @@ export default function AnalyticsPage() {
               </div>
 
               {/* Time Spent Learning */}
-              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
+              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#1D4ED8] mb-4">
                   <span className="material-symbols-outlined text-[24px]">schedule</span>
                 </div>
@@ -133,7 +133,7 @@ export default function AnalyticsPage() {
               </div>
 
               {/* Avg Completion Time */}
-              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
+              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#FEF2F2] flex items-center justify-center text-[#EF4444] mb-4">
                   <span className="material-symbols-outlined text-[24px]">speed</span>
                 </div>
@@ -146,7 +146,7 @@ export default function AnalyticsPage() {
               </div>
               
               {/* Exam Readiness */}
-              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
+              <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#8B5CF6] mb-4">
                   <span className="material-symbols-outlined text-[24px]">workspace_premium</span>
                 </div>
@@ -159,7 +159,7 @@ export default function AnalyticsPage() {
             </div>
 
             {/* Study Hours Bar Chart */}
-            <div className="lg:col-span-4 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col h-[330px]">
+            <div className="lg:col-span-4 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-[330px]">
               <h3 className="text-[14px] font-bold text-[#111827] mb-6">Study Velocity (This Week)</h3>
               <div className="flex-1 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
             <h2 className="text-[18px] font-bold text-[#111827]">Syllabus Progression Roadmap</h2>
           </div>
 
-          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-8 flex flex-col relative overflow-hidden">
+          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-8 flex flex-col relative overflow-hidden">
             {/* Background design */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#8B5CF6]/5 rounded-full blur-3xl pointer-events-none"></div>
 

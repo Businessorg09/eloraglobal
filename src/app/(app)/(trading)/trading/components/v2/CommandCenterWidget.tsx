@@ -137,10 +137,10 @@ export function CommandCenterWidget() {
   const episode = lastProgress?.episode;
 
   return (
-    <div id="command-center" className="flex flex-col gap-6">
+    <div id="command-center" className="flex flex-col gap-4 md:gap-6">
       
       {/* Video Module */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-0.5 rounded">Continue Watching</span>
           <span>{episode?.module?.title || "Active Module"}</span>
@@ -270,7 +270,7 @@ export function CommandCenterWidget() {
       </div>
 
       {/* Homework Drill Module */}
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col">
         <div className="flex items-start gap-3 mb-4">
           <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0 text-[#9CA3AF]">
             <span className="material-symbols-outlined text-[20px]">assignment</span>
@@ -285,7 +285,7 @@ export function CommandCenterWidget() {
           No active assignment
         </div>
 
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-6 flex flex-col items-center justify-center min-h-[200px] text-center">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center min-h-[200px] text-center">
           <span className="material-symbols-outlined text-[#9CA3AF] text-[32px] mb-2">assignment_late</span>
           <span className="text-[13px] font-bold text-[#4B5563]">No Assignment Available</span>
           <p className="text-[11px] text-[#9CA3AF] mt-1 max-w-[250px]">Assignments will appear here when you unlock a new module.</p>

@@ -21,7 +21,7 @@ const data = [
 
 export function CapitalGrowthChart() {
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex flex-col relative overflow-hidden">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 w-full flex flex-col relative overflow-hidden">
       
       <div className="flex items-start justify-between mb-8 relative z-10">
         <div>
@@ -83,7 +83,7 @@ export function CapitalGrowthChart() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mt-8 pt-4 border-t border-[#F3F4F6] relative z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 pt-4 border-t border-[#F3F4F6] relative z-10">
         <div className="bg-[#F8F9FA] p-3 rounded-lg flex flex-col">
           <span className="text-[11px] text-[#6B7280] font-medium">Avg Win</span>
           <span className="text-[16px] font-bold text-[#111827]">+$480.20</span>

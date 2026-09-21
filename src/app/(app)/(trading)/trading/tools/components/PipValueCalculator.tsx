@@ -37,7 +37,7 @@ export function PipValueCalculator() {
         </div>
       </div>
 
-      <div className="p-5 flex flex-col gap-5 flex-1">
+      <div className="p-5 flex flex-col gap-4 md:p-5 flex-1">
         <p className="text-[12px] text-[#6B7280]">Determine the exact monetary value of a single pip for precise lot sizing and risk allocation.</p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

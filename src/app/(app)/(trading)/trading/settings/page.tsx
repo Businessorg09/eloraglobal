@@ -49,16 +49,16 @@ export default function SettingsPage() {
           </div>
 
           {/* Right: Content Area */}
-          <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col p-6 sm:p-8 min-h-[500px]">
+          <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col p-4 md:p-6 sm:p-8 min-h-[500px]">
             
             {activeTab === 'profile' && (
-              <div className="flex flex-col gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Trader Identity</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your public persona and verified details.</p>
                 </div>
                 
-                <div className="flex items-center gap-6 p-4 rounded-[24px] bg-surface-container-low border border-surface-container-high/50">
+                <div className="flex items-center gap-4 md:gap-6 p-4 rounded-[24px] bg-surface-container-low border border-surface-container-high/50">
                   <div className="w-20 h-20 rounded-[24px] bg-primary-container text-on-primary-container font-headline-xl text-[24px] flex items-center justify-center shadow-inner">
                     AV
                   </div>
@@ -70,7 +70,7 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   <div className="flex flex-col gap-2">
                     <label className="font-label-sm text-label-sm text-outline uppercase tracking-wider">First Name</label>
                     <input type="text" defaultValue="Alex" className="w-full bg-surface-container-low border border-surface-container-high rounded-lg p-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" />
@@ -100,7 +100,7 @@ export default function SettingsPage() {
             )}
 
             {activeTab === 'platform' && (
-              <div className="flex flex-col gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Engine Preferences</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Customize your trading environment and telemetry alerts.</p>
@@ -165,13 +165,13 @@ export default function SettingsPage() {
             )}
 
             {activeTab === 'billing' && (
-              <div className="flex flex-col gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Allocation & Subscription</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your current trading tier and associated capital.</p>
                 </div>
                 
-                <div className="bg-primary/5 border border-primary/20 rounded-[24px] p-6 flex flex-col gap-4 relative overflow-hidden">
+                <div className="bg-primary/5 border border-primary/20 rounded-[24px] p-4 md:p-6 flex flex-col gap-4 relative overflow-hidden">
                   <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
                   
                   <div className="flex items-center justify-between relative z-10">
@@ -186,7 +186,7 @@ export default function SettingsPage() {
                     </span>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4 mt-2 mb-2 relative z-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 mb-2 relative z-10">
                     <div className="flex flex-col">
                       <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">Split</span>
                       <span className="font-headline-md text-label-md text-on-surface">90% / 10%</span>

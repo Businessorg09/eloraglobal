@@ -15,7 +15,7 @@ export function TimezoneOverlapMatrix() {
         </div>
       </div>
 
-      <div className="p-6 flex flex-col gap-6">
+      <div className="p-6 flex flex-col gap-4 md:gap-6">
         <p className="text-[12px] text-[#6B7280]">Visualize major institutional market hours. The highest volume and liquidity typically occur during session overlaps.</p>
         
         <div className="w-full relative h-[180px] bg-[#F8FAFC] rounded-[24px] border border-[#E5E7EB] p-4 flex flex-col justify-between">

@@ -108,11 +108,11 @@ export default async function TraderPassportPage() {
   if (highestTier === 0) {
     return (
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
-        <div className="bg-white p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
+        <div className="bg-white p-4 md:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-symbols-outlined text-[32px]">account_balance_wallet</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-2">No Trading Account Found</h2>
+          <h2 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 mb-2">No Trading Account Found</h2>
           <p className="text-slate-500 mb-6 text-sm">
             You currently do not have an active trading account or purchased package. Please request an account from the terminal or wait for an admin to assign one to you.
           </p>
@@ -204,7 +204,7 @@ export default async function TraderPassportPage() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 pt-6 bg-surface-container-low/60 p-4 rounded-[24px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 mt-6 pt-6 bg-surface-container-low/60 p-4 rounded-[24px]">
               <div className="flex flex-col">
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                   Passport Score
@@ -648,7 +648,7 @@ export default async function TraderPassportPage() {
                 </span>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
               {[
                 { t: 1, val: '$10,000', label: 'Starter' },
                 { t: 2, val: '$25,000', label: 'Growth' },
@@ -824,7 +824,7 @@ export default async function TraderPassportPage() {
                 </span>
               </a>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6 bg-surface-container-low/60 p-4 rounded-[24px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 mb-6 bg-surface-container-low/60 p-4 rounded-[24px]">
               <div className="flex flex-col">
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                   Total Study Time
@@ -1176,7 +1176,7 @@ export default async function TraderPassportPage() {
 
                 if (unlockedBadges.length === 0) {
                   return (
-                    <div className="col-span-full p-6 text-center bg-surface-container-low rounded-[24px] border border-dashed border-outline-variant">
+                    <div className="col-span-full p-4 md:p-6 text-center bg-surface-container-low rounded-[24px] border border-dashed border-outline-variant">
                       <span className="material-symbols-outlined text-outline text-[32px] mb-2">
                         lock
                       </span>

@@ -1,6 +1,6 @@
 export function CurriculumHeader() {
   return (
-    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex items-center justify-between">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 w-full flex items-center justify-between">
       <div className="flex flex-col">
         <div className="flex items-center gap-2 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">
           <span className="material-symbols-outlined text-[16px]">school</span>
@@ -16,7 +16,7 @@ export function CurriculumHeader() {
         </p>
       </div>
 
-      <div className="flex items-center gap-6 shrink-0">
+      <div className="flex items-center gap-4 md:gap-6 shrink-0">
         <div className="flex items-center gap-4">
           <div className="relative w-14 h-14 flex items-center justify-center">
             {/* Circular Progress SVG */}

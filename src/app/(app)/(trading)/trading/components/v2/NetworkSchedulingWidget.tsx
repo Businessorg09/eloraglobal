@@ -31,7 +31,7 @@ export function NetworkSchedulingWidget() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4 md:gap-6">
       
       {/* Live Class Timetable */}
       <div className="flex flex-col">
