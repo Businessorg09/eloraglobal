@@ -72,7 +72,7 @@ export function TradeLogTable({ trades }: TradeLogTableProps) {
               ))
             )}
           </tbody>
-        </table></div>
+        </table>
       </div>
     </div>
   )

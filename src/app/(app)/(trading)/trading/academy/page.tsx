@@ -409,7 +409,7 @@ export default function AcademyPage() {
                   });
                 })}
               </tbody>
-            </table></div>
+            </table>
           </div>
 
           {/* MOBILE EPISODES LIST (Stack of Cards) */}
