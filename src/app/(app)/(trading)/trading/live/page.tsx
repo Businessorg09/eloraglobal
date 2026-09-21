@@ -108,7 +108,7 @@ export default function LiveClassesPage() {
 <option>(GMT+08:00) Singapore / SGT</option>
 </select>
 </div>
-<button className="flex items-center gap-1 px-4 py-2 rounded-lg bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all text-headline-md font-headline-md" onClick={() => {}}>
+<button className="flex items-center gap-1 px-4 py-2 rounded-lg bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all text-[16px] font-bold" onClick={() => {}}>
 <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
 <span className="">Book 1-1 Zoom&nbsp;</span>
 </button>
@@ -134,7 +134,7 @@ export default function LiveClassesPage() {
             Passcode Embedded
           </span>
 </div>
-<h2 className="font-extrabold text-[20px] md:text-[24px] text-[#111827] font-semibold tracking-tight">
+<h2 className="font-extrabold text-[20px] md:text-[20px] md:text-[24px] text-[#111827] font-semibold tracking-tight">
           {loading ? 'Loading…' : (lz.heading || 'Weekly Masterclass')}
         </h2>
 {/* Speaker Badges & Details */}
@@ -246,7 +246,7 @@ export default function LiveClassesPage() {
   </div>
 ) : (
   <div className="flex flex-col items-center justify-center gap-3 py-6 h-full border-2 border-dashed border-slate-200 rounded-[24px] bg-slate-50">
-    <span className="material-symbols-outlined text-[24px] md:text-[32px] text-slate-300">event_busy</span>
+    <span className="material-symbols-outlined text-[20px] md:text-[24px] md:text-[20px] md:text-[24px] md:text-[32px] text-slate-300">event_busy</span>
     <p className="text-[13px] text-slate-500 font-medium text-center max-w-[200px]">No upcoming 1-on-1 sessions booked. Select a mentor below to schedule.</p>
     <button onClick={() => document.getElementById('tutorSection')?.scrollIntoView({ behavior: 'smooth' })} className="mt-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-slate-50">
       Browse Mentors
@@ -261,10 +261,10 @@ export default function LiveClassesPage() {
 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E5E7EB]">
 <div className="flex items-center gap-3">
 <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center text-[#6B7280]">
-<span className="material-symbols-outlined text-[20px] md:text-[24px]">calendar_month</span>
+<span className="material-symbols-outlined text-[20px] md:text-[20px] md:text-[24px]">calendar_month</span>
 </div>
 <div className="flex flex-col">
-<h3 className="font-headline-lg text-headline-lg text-[#111827] font-semibold">
+<h3 className="font-bold text-[18px] md:text-[20px] text-[#111827] font-semibold">
   {loading ? 'Loading...' : (config?.scheduleHeading || 'Weekly Institutional Masterclass Schedule')}
 </h3>
 <span className="font-medium text-[13px] text-[#6B7280]">
@@ -284,11 +284,11 @@ export default function LiveClassesPage() {
 </div>
 </div>
 {/* Calendar Timeline Columns (Mon - Fri) */}
-<div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-start">
+<div className="flex md:grid md:grid-cols-5 overflow-x-auto md:overflow-visible gap-4 items-start pb-4 md:pb-0 snap-x snap-mandatory">
 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => {
   const dayClasses = masterclasses.filter((c: any) => c.day === day);
   return (
-    <div key={day} className="flex flex-col gap-2 rounded-[24px] p-3 bg-[#F9FAFB] border border-[#E5E7EB]">
+    <div key={day} className="flex flex-col gap-2 rounded-[24px] p-3 bg-[#F9FAFB] border border-[#E5E7EB] min-w-[280px] md:min-w-0 snap-center shrink-0">
       <div className="flex items-center justify-between pb-2 border-b border-[#E5E7EB]">
         <div className="flex flex-col">
           <span className="font-bold text-[16px] text-[#111827] font-bold">{day}</span>
@@ -357,7 +357,7 @@ export default function LiveClassesPage() {
 <div>
 <div className="flex items-center gap-2">
 <span className="w-2.5 h-2.5 rounded-full bg-[#1D4ED8]"></span>
-<h3 className="font-headline-lg text-headline-lg text-[#111827] font-semibold">
+<h3 className="font-bold text-[18px] md:text-[20px] text-[#111827] font-semibold">
           Verified Senior Desk Tutor Showcase
         </h3>
 </div>
@@ -370,7 +370,7 @@ export default function LiveClassesPage() {
     </span>
 </div>
 {/* 3 Rich Side-by-Side Tutor Profile Cards */}
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 {tutors.map((tutor: any) => (
   <div
     key={tutor.id}
@@ -419,7 +419,7 @@ export default function LiveClassesPage() {
 </div>
 {/* EXPANDING INSTANT BOOKING TRAY (Directly Below Selected Tutor) */}
 <div className="bg-white p-4 md:p-6 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] flex flex-col gap-4 transition-all duration-300" id="bookingTray">
-<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 bg-[#F9FAFB] -mx-6 -mt-6 p-4 rounded-t-xl border-b border-[#E5E7EB]">
+<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 bg-[#F9FAFB] -mx-4 md:-mx-6 -mt-4 md:-mt-6 p-4 rounded-t-xl border-b border-[#E5E7EB]">
 <div className="flex items-center gap-2">
 <div className="w-10 h-10 rounded-lg bg-[#1D4ED8] text-white flex items-center justify-center">
 <span className="material-symbols-outlined text-[22px]">calendar_today</span>
@@ -454,14 +454,14 @@ export default function LiveClassesPage() {
     <button 
       key={d.date}
       onClick={() => setSelectedDate(`${d.day} ${d.date}`)}
-      className={`date-pick-btn flex flex-col items-center justify-center p-2 rounded-lg font-bold text-[13px] transition-colors border ${
+      className={`date-pick-btn flex flex-col items-center justify-center p-2 rounded-lg font-bold text-[11px] md:text-[13px] transition-colors border ${
         selectedDate === `${d.day} ${d.date}`
           ? 'bg-[#1D4ED8] text-white shadow-xs border-[#1D4ED8]'
           : 'bg-[#F8FAFC] text-[#111827] hover:bg-[#F3F4F6] border-[#E5E7EB]'
       }`}
     >
       <span className={`text-[10px] uppercase ${selectedDate === `${d.day} ${d.date}` ? 'font-bold text-white' : 'text-[#9CA3AF]'}`}>{d.day}</span>
-      <span className="text-headline-md font-bold">{d.date}</span>
+      <span className="text-[16px] font-bold">{d.date}</span>
     </button>
   ))}
 </div>
