@@ -18,7 +18,7 @@ export default function SettingsPage() {
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant mt-1">Manage your institutional account, billing, and engine preferences</p>
           </div>
-          <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md transition-colors shadow-sm">
+          <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <span className="material-symbols-outlined text-[18px]">save</span>
             Save Changes
           </button>
@@ -27,7 +27,7 @@ export default function SettingsPage() {
         <div className="flex flex-col md:flex-row gap-gutter-lg items-start">
           
           {/* Left: Navigation */}
-          <div className="w-full md:w-[260px] bg-surface-container-lowest rounded-xl shadow-sm border-none flex flex-col overflow-hidden shrink-0">
+          <div className="w-full md:w-[260px] bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col overflow-hidden shrink-0">
             <button 
               onClick={() => setActiveTab('profile')}
               className={`flex items-center gap-3 px-5 py-4 font-label-md text-label-md transition-colors text-left border-l-4 ${activeTab === 'profile' ? 'bg-surface-container-low border-primary text-primary' : 'bg-transparent border-transparent text-on-surface-variant hover:bg-surface-container-low/50'}`}
@@ -49,7 +49,7 @@ export default function SettingsPage() {
           </div>
 
           {/* Right: Content Area */}
-          <div className="flex-1 bg-surface-container-lowest rounded-xl shadow-sm border-none flex flex-col p-6 sm:p-8 min-h-[500px]">
+          <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col p-6 sm:p-8 min-h-[500px]">
             
             {activeTab === 'profile' && (
               <div className="flex flex-col gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -58,8 +58,8 @@ export default function SettingsPage() {
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your public persona and verified details.</p>
                 </div>
                 
-                <div className="flex items-center gap-6 p-4 rounded-xl bg-surface-container-low border border-surface-container-high/50">
-                  <div className="w-20 h-20 rounded-xl bg-primary-container text-on-primary-container font-headline-xl text-[24px] flex items-center justify-center shadow-inner">
+                <div className="flex items-center gap-6 p-4 rounded-[24px] bg-surface-container-low border border-surface-container-high/50">
+                  <div className="w-20 h-20 rounded-[24px] bg-primary-container text-on-primary-container font-headline-xl text-[24px] flex items-center justify-center shadow-inner">
                     AV
                   </div>
                   <div className="flex flex-col gap-2">
@@ -106,7 +106,7 @@ export default function SettingsPage() {
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Customize your trading environment and telemetry alerts.</p>
                 </div>
                 
-                <div className="flex flex-col bg-surface-container-low rounded-xl border border-surface-container-high/50 overflow-hidden">
+                <div className="flex flex-col bg-surface-container-low rounded-[24px] border border-surface-container-high/50 overflow-hidden">
                   
                   <div className="flex items-center justify-between p-4 border-b border-surface-container-high/30">
                     <div className="flex flex-col gap-0.5">
@@ -117,7 +117,7 @@ export default function SettingsPage() {
                       <span className="font-body-sm text-body-sm text-on-surface-variant ml-6.5">Reduces eye strain during extended sessions.</span>
                     </div>
                     <div className="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
-                      <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-sm"></div>
+                      <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"></div>
                     </div>
                   </div>
 
@@ -130,7 +130,7 @@ export default function SettingsPage() {
                       <span className="font-body-sm text-body-sm text-on-surface-variant ml-6.5">Push notifications when orders are filled.</span>
                     </div>
                     <div className="w-11 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
-                      <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-sm"></div>
+                      <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"></div>
                     </div>
                   </div>
 
@@ -143,7 +143,7 @@ export default function SettingsPage() {
                       <span className="font-body-sm text-body-sm text-on-surface-variant ml-6.5">Sound cues for risk limits and price alerts.</span>
                     </div>
                     <div className="w-11 h-6 bg-surface-container-high rounded-full relative cursor-pointer shadow-inner">
-                      <div className="w-4 h-4 bg-surface-variant rounded-full absolute left-1 top-1 shadow-sm"></div>
+                      <div className="w-4 h-4 bg-surface-variant rounded-full absolute left-1 top-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"></div>
                     </div>
                   </div>
 
@@ -156,7 +156,7 @@ export default function SettingsPage() {
                       <span className="font-body-sm text-body-sm text-on-surface-variant ml-6.5">Obfuscate absolute balance figures, show percentages only.</span>
                     </div>
                     <div className="w-11 h-6 bg-surface-container-high rounded-full relative cursor-pointer shadow-inner">
-                      <div className="w-4 h-4 bg-surface-variant rounded-full absolute left-1 top-1 shadow-sm"></div>
+                      <div className="w-4 h-4 bg-surface-variant rounded-full absolute left-1 top-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"></div>
                     </div>
                   </div>
 
@@ -171,7 +171,7 @@ export default function SettingsPage() {
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your current trading tier and associated capital.</p>
                 </div>
                 
-                <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 flex flex-col gap-4 relative overflow-hidden">
+                <div className="bg-primary/5 border border-primary/20 rounded-[24px] p-6 flex flex-col gap-4 relative overflow-hidden">
                   <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
                   
                   <div className="flex items-center justify-between relative z-10">
@@ -198,7 +198,7 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="flex gap-3 mt-2 relative z-10">
-                    <button className="bg-surface-container-lowest text-on-surface border border-surface-container-high px-4 py-2.5 rounded-lg font-label-md text-label-md transition-colors hover:bg-surface-container-low shadow-sm">
+                    <button className="bg-surface-container-lowest text-on-surface border border-surface-container-high px-4 py-2.5 rounded-lg font-label-md text-label-md transition-colors hover:bg-surface-container-low shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                       Update Payment Method
                     </button>
                     <button className="text-error bg-error-container/30 px-4 py-2.5 rounded-lg font-label-md text-label-md transition-colors hover:bg-error-container">

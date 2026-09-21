@@ -21,7 +21,7 @@ export function ActiveExamWidget() {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col mb-6">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col mb-6">
       
       {!isStarted ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -34,7 +34,7 @@ export function ActiveExamWidget() {
           </p>
           <button 
             onClick={() => setIsStarted(true)}
-            className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-8 py-3 rounded-xl font-bold text-[15px] shadow-sm transition-colors"
+            className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-8 py-3 rounded-[24px] font-bold text-[15px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors"
           >
             Start Exam Now <span className="material-symbols-outlined text-[20px]">timer</span>
           </button>
@@ -98,7 +98,7 @@ export function ActiveExamWidget() {
                 <span className="text-[10px] text-[#9CA3AF] ml-2">...</span>
               </div>
 
-              <button className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-lg font-bold text-[13px] shadow-sm transition-colors">
+              <button className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-lg font-bold text-[13px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors">
                 Confirm & Next <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </button>
             </div>

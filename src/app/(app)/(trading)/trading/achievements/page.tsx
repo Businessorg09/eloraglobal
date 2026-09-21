@@ -68,7 +68,7 @@ export default function AchievementsPage() {
           <p className="text-[13px] text-[#6B7280] mt-1">Unlock gamified milestones across learning, execution, and networking</p>
         </div>
         <div className="flex bg-[#F3F4F6] p-1 rounded-lg">
-          <button className="bg-white text-[#111827] px-4 py-1.5 text-[12px] font-bold rounded-md shadow-sm border border-[#E5E7EB]">Global</button>
+          <button className="bg-white text-[#111827] px-4 py-1.5 text-[12px] font-bold rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">Global</button>
           <button className="px-4 py-1.5 text-[12px] font-medium text-[#6B7280] hover:text-[#111827]">Cohort Alpha</button>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function AchievementsPage() {
         
         {/* Left: Badges Grid */}
         <div className="xl:col-span-7 flex flex-col gap-4">
-          <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
+          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6">
             <h2 className="text-[16px] font-bold text-[#111827] mb-6 flex items-center justify-between">
               <span>Your Milestones ({isLoading ? '-' : unlockedCount}/{badges.length} Unlocked)</span>
               <span className="text-[11px] font-normal text-[#6B7280] bg-[#F3F4F6] px-2 py-1 rounded">Click locked badges to simulate unlock</span>
@@ -88,12 +88,12 @@ export default function AchievementsPage() {
                 <div 
                   key={idx} 
                   onClick={() => badge.locked && handleManualUnlockTest(badge.id)}
-                  className={`relative flex flex-col items-center text-center p-5 rounded-xl border ${badge.locked ? 'bg-[#F8FAFC] border-[#E5E7EB] opacity-60 grayscale cursor-pointer hover:opacity-100 hover:grayscale-0' : badge.premium ? 'bg-gradient-to-b from-[#FEF3C7] to-white border-[#F59E0B] shadow-md transform hover:-translate-y-1 transition-transform cursor-default' : 'bg-white border-[#E5E7EB] shadow-sm hover:border-[#1D4ED8] hover:shadow-md transition-all cursor-default'}`}
+                  className={`relative flex flex-col items-center text-center p-5 rounded-[24px] border ${badge.locked ? 'bg-[#F8FAFC] border-[#E5E7EB] opacity-60 grayscale cursor-pointer hover:opacity-100 hover:grayscale-0' : badge.premium ? 'bg-gradient-to-b from-[#FEF3C7] to-white border-[#F59E0B] shadow-[0_8px_30px_rgba(0,0,0,0.04)] transform hover:-translate-y-1 transition-transform cursor-default' : 'bg-white border-[#E5E7EB] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#1D4ED8] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all cursor-default'}`}
                 >
                   
                   {/* Premium Badge Glow Effect */}
                   {!badge.locked && badge.premium && (
-                    <div className="absolute inset-0 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.3)] pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-[24px] shadow-[0_0_15px_rgba(245,158,11,0.3)] pointer-events-none"></div>
                   )}
 
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white mb-3 shadow-inner relative`} style={{ backgroundColor: badge.color }}>
@@ -114,7 +114,7 @@ export default function AchievementsPage() {
 
         {/* Right: Leaderboard */}
         <div className="xl:col-span-5 flex flex-col gap-4">
-          <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col">
+          <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-[16px] font-bold text-[#111827] flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#F59E0B]">emoji_events</span>
@@ -155,7 +155,7 @@ export default function AchievementsPage() {
               ))}
             </div>
 
-            <div className="mt-4 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl flex items-start gap-3">
+            <div className="mt-4 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] flex items-start gap-3">
               <span className="material-symbols-outlined text-[#1D4ED8]">info</span>
               <p className="text-[11px] text-[#4B5563] font-medium leading-relaxed">
                 Points are awarded for completing modules, passing exams, and logging trades in your journal. Earn badges to display on your Trader Passport.

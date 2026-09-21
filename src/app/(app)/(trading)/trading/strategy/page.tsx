@@ -19,7 +19,7 @@ export default function StrategyPage() {
   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
   <div>
   <div className="flex items-center gap-2.5">
-  <h1 className="text-2xl lg:text-3xl font-display font-extrabold text-slate-900 tracking-tight">Trader Case Studies Showcase</h1>
+  <h1 className="text-2xl lg:text-2xl md:text-3xl font-display font-extrabold text-slate-900 tracking-tight">Trader Case Studies Showcase</h1>
   <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">84 Audited Dossiers</span>
   </div>
   <p className="text-sm text-slate-500 mt-1 max-w-3xl">
@@ -27,13 +27,13 @@ export default function StrategyPage() {
               </p>
   </div>
   <div className="flex items-center gap-2.5 flex-shrink-0">
-  <button className="inline-flex items-center gap-2 px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white text-xs font-semibold rounded-xl shadow-sm shadow-brand-700/20 transition" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="inline-flex items-center gap-2 px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white text-xs font-semibold rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] shadow-brand-700/20 transition" onClick={() => {}} /* openModal('modal-david') */>
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"></path>
   </svg>
   <span>Featured Reader Doc</span>
   </button>
-  <button className="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-xl shadow-sm transition">
+  <button className="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition">
   <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"></path>
   </svg>
@@ -43,7 +43,7 @@ export default function StrategyPage() {
   </div>
   </section>
   {/* Multi-Criteria Filters Bar */}
-  <section className="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm space-y-3">
+  <section className="bg-white border border-slate-200 p-4 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-3">
   <div className="flex items-center justify-between flex-wrap gap-2 text-xs font-medium text-slate-500 border-b border-slate-100 pb-3">
   <div className="flex items-center gap-2">
   <span className="font-bold text-slate-800 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
@@ -63,7 +63,7 @@ export default function StrategyPage() {
   <div>
   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Funded Account Size</label>
   <div className="flex items-center gap-1.5 flex-wrap">
-  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-sm">All Sizes</button>
+  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">All Sizes</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$50k Account</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$100k Account</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$200k+ Account</button>
@@ -73,7 +73,7 @@ export default function StrategyPage() {
   <div>
   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Verified Payout Range</label>
   <div className="flex items-center gap-1.5 flex-wrap">
-  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-sm">Any Payout</button>
+  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">Any Payout</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$10k – $30k</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$30k – $60k</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">$60k+ Club</button>
@@ -83,7 +83,7 @@ export default function StrategyPage() {
   <div>
   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Execution Strategy</label>
   <div className="flex items-center gap-1.5 flex-wrap">
-  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-sm">All Strategies</button>
+  <button className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-brand-700 text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">All Strategies</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">SMC &amp; Liquidity</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Gold Scalping</button>
   <button className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Macro Breakouts</button>
@@ -102,13 +102,13 @@ export default function StrategyPage() {
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
   {/* CARD 1: David K. */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   {/* Header with Trader & Account Badge */}
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 to-indigo-600 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 to-indigo-600 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         DK
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -126,7 +126,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Hero Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$46,250 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -147,7 +147,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">London Open</span>
   </div>
   {/* Metrics Pills */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">54.6%</span>
@@ -163,7 +163,7 @@ export default function StrategyPage() {
   </div>
   </div>
   {/* Card Action Button */}
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -171,12 +171,12 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 2: Sofia Mendez */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-700 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-700 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         SM
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -194,7 +194,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$92,400 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -215,7 +215,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Psychology Overhaul</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">59.2%</span>
@@ -230,7 +230,7 @@ export default function StrategyPage() {
   </div>
   </div>
   </div>
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-sofia') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-sofia') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -238,12 +238,12 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 3: Elena Rostova */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-600 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-600 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         ER
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -261,7 +261,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$34,800 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -282,7 +282,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">5m Breakers</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">54.0%</span>
@@ -297,7 +297,7 @@ export default function StrategyPage() {
   </div>
   </div>
   </div>
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -305,12 +305,12 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 4: Marcus Sterling */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-700 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-700 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         MS
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -328,7 +328,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$124,000 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -349,7 +349,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Post-News Retest</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">48.5%</span>
@@ -364,7 +364,7 @@ export default function StrategyPage() {
   </div>
   </div>
   </div>
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -372,12 +372,12 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 5: Tariq S. */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-700 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-700 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         TS
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -395,7 +395,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$18,500 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -416,7 +416,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">12-Week Run</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">62.0%</span>
@@ -431,7 +431,7 @@ export default function StrategyPage() {
   </div>
   </div>
   </div>
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -439,12 +439,12 @@ export default function StrategyPage() {
   </button>
   </div>
   {/* CARD 6: Liam Parker */}
-  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col justify-between group">
+  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-brand-300 transition-all flex flex-col justify-between group">
   <div>
   <div className="flex items-start justify-between gap-3 mb-4">
   <div className="flex items-center gap-3">
   <div className="relative">
-  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-800 text-white font-bold text-base flex items-center justify-center shadow-sm">
+  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-800 text-white font-bold text-base flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                         LP
                       </div>
   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-black">✓</span>
@@ -462,7 +462,7 @@ export default function StrategyPage() {
                   </span>
   </div>
   {/* Payout Callout */}
-  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-xl p-3.5 mb-4 flex items-center justify-between">
+  <div className="bg-gradient-to-r from-emerald-50 via-emerald-50/50 to-transparent border border-emerald-200/80 rounded-[24px] p-3.5 mb-4 flex items-center justify-between">
   <div>
   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Total Profit Payout</span>
   <p className="text-2xl font-display font-extrabold text-emerald-700 tracking-tight">+$26,900 <span className="text-xs font-bold text-emerald-600/80">USD</span></p>
@@ -483,7 +483,7 @@ export default function StrategyPage() {
   <span className="text-[10px] font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Asymmetric R:R</span>
   </div>
   {/* Metrics */}
-  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-xl border border-slate-100 text-center mb-5">
+  <div className="grid grid-cols-3 gap-2 py-2.5 px-3 bg-slate-50 rounded-[24px] border border-slate-100 text-center mb-5">
   <div>
   <span className="text-[10px] text-slate-400 font-medium block">Win Rate</span>
   <span className="text-xs font-bold text-slate-900">49.0%</span>
@@ -498,7 +498,7 @@ export default function StrategyPage() {
   </div>
   </div>
   </div>
-  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-xl text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
+  <button className="w-full py-2.5 px-4 bg-brand-50 hover:bg-brand-700 text-brand-700 hover:text-white rounded-[24px] text-xs font-bold border border-brand-200/80 hover:border-transparent transition-all flex items-center justify-center gap-2 group/btn shadow-xs" onClick={() => {}} /* openModal('modal-david') */>
   <span>Read Trader Story (Simple Note / Doc)</span>
   <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -509,7 +509,7 @@ export default function StrategyPage() {
   </section>
   {/* END: Showcase Cards Grid */}
   {/* Footer Callout / Submission */}
-  <section className="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 rounded-2xl p-7 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+  <section className="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 rounded-2xl p-7 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
   <div className="space-y-1.5">
   <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-200 text-xs font-bold rounded-full border border-blue-400/30">
               Open Submissions Cohort 2024
@@ -519,7 +519,7 @@ export default function StrategyPage() {
               Submit your audited trade history to be featured in the Elora Trader Case Studies Vault. Certified authors receive lifetime desk access and $1,200 mentor contribution stipends.
             </p>
   </div>
-  <button className="px-5 py-2.5 bg-white hover:bg-blue-50 text-brand-900 text-xs font-bold rounded-xl shadow-sm transition whitespace-nowrap">
+  <button className="px-5 py-2.5 bg-white hover:bg-blue-50 text-brand-900 text-xs font-bold rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition whitespace-nowrap">
             Submit Your Case Dossier →
           </button>
   </section>

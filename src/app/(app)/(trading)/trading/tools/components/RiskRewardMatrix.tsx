@@ -8,7 +8,7 @@ export function RiskRewardMatrix() {
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col h-full">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col h-full">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-lg bg-[#ECFDF5] flex items-center justify-center text-[#059669]">
           <span className="material-symbols-outlined text-[20px]">table_chart</span>
@@ -42,7 +42,7 @@ export function RiskRewardMatrix() {
       </div>
 
       <div className="mt-auto pt-6 border-t border-[#E5E7EB]">
-        <div className="bg-[#111827] rounded-xl p-5 text-white relative overflow-hidden">
+        <div className="bg-[#111827] rounded-[24px] p-5 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10">
             <span className="material-symbols-outlined text-[60px]">casino</span>
           </div>

@@ -3,7 +3,7 @@ export function VideoPlayerWidget() {
     <div className="w-full flex flex-col mt-6">
       
       {/* Mock Video Container */}
-      <div className="relative w-full aspect-video bg-[#111827] rounded-xl overflow-hidden shadow-lg border border-[#374151] group cursor-pointer">
+      <div className="relative w-full aspect-video bg-[#111827] rounded-[24px] overflow-hidden shadow-lg border border-[#374151] group cursor-pointer">
         {/* Mock Video Background Image (using a dark gradient placeholder) */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#1F2937] to-[#111827] flex items-center justify-center">
           {/* Faint Grid/Chart graphic overlay could go here */}
@@ -54,7 +54,7 @@ export function VideoPlayerWidget() {
               {/* Scrubber Line */}
               <div className="flex-1 h-1.5 bg-white/20 rounded-full cursor-pointer relative">
                 <div className="absolute left-0 top-0 bottom-0 bg-[#1D4ED8] rounded-full" style={{ width: '42%' }}></div>
-                <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-sm" style={{ left: '42%' }}></div>
+                <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)]" style={{ left: '42%' }}></div>
               </div>
             </div>
 
@@ -86,10 +86,10 @@ export function VideoPlayerWidget() {
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          <button className="flex items-center gap-2 text-[#4B5563] hover:text-[#111827] bg-white border border-[#E5E7EB] px-3 py-2 rounded-lg text-[12px] font-bold transition-colors shadow-sm">
+          <button className="flex items-center gap-2 text-[#4B5563] hover:text-[#111827] bg-white border border-[#E5E7EB] px-3 py-2 rounded-lg text-[12px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <span className="material-symbols-outlined text-[16px]">bookmark_add</span> Bookmark Stamp (10:12)
           </button>
-          <button className="flex items-center gap-2 text-[#4B5563] hover:text-[#111827] bg-white border border-[#E5E7EB] px-3 py-2 rounded-lg text-[12px] font-bold transition-colors shadow-sm">
+          <button className="flex items-center gap-2 text-[#4B5563] hover:text-[#111827] bg-white border border-[#E5E7EB] px-3 py-2 rounded-lg text-[12px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <span className="material-symbols-outlined text-[16px]">share</span> Share Segment
           </button>
         </div>

@@ -67,7 +67,7 @@ export function GatedContent({
           </p>
           
           {packageLocked && (
-            <div className="w-full mb-8 text-left bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl p-4 flex flex-col gap-3 shadow-inner">
+            <div className="w-full mb-8 text-left bg-[#F9FAFB] border border-[#E5E7EB] rounded-[24px] p-4 flex flex-col gap-3 shadow-inner">
               <div className="flex justify-between items-center pb-2 border-b border-[#E5E7EB]">
                  <span className="font-bold text-[11px] text-[#6B7280] uppercase tracking-wider">Package 2 (Mid)</span>
                  <span className="font-bold text-[11px] text-[#D97706] uppercase tracking-wider flex items-center gap-1">
@@ -122,11 +122,11 @@ export function GatedContent({
           )}
           
           {examLocked ? (
-            <button className="w-full bg-[#111827] hover:bg-[#374151] text-white py-3.5 rounded-xl font-bold text-[14px] shadow-lg transition-all flex items-center justify-center gap-2">
+            <button className="w-full bg-[#111827] hover:bg-[#374151] text-white py-3.5 rounded-[24px] font-bold text-[14px] shadow-lg transition-all flex items-center justify-center gap-2">
               Go to Exam Center <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
           ) : (
-            <button className="w-full bg-gradient-to-r from-[#F59E0B] to-[#D97706] hover:from-[#D97706] hover:to-[#B45309] text-white py-3.5 rounded-xl font-bold text-[14px] shadow-lg shadow-amber-500/30 transition-all flex items-center justify-center gap-2">
+            <button className="w-full bg-gradient-to-r from-[#F59E0B] to-[#D97706] hover:from-[#D97706] hover:to-[#B45309] text-white py-3.5 rounded-[24px] font-bold text-[14px] shadow-lg shadow-amber-500/30 transition-all flex items-center justify-center gap-2">
               Upgrade Subscription <span className="material-symbols-outlined text-[18px]">upgrade</span>
             </button>
           )}

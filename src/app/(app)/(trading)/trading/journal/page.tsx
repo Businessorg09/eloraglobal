@@ -49,7 +49,7 @@ export default function TradingJournalPage() {
             </h1>
             <p className="text-[13px] text-[#6B7280] mt-1">Log psychological telemetry and execution details to build consistency</p>
           </div>
-          <button className="flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#111827] px-4 py-2 rounded-lg text-[13px] font-bold transition-colors shadow-sm">
+          <button className="flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#111827] px-4 py-2 rounded-lg text-[13px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <span className="material-symbols-outlined text-[18px]">download</span> Export Ledger
           </button>
         </div>

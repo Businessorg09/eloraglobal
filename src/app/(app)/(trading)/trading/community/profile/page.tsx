@@ -98,7 +98,7 @@ export default function CommunityProfilePage() {
               <span className="text-on-surface-variant font-headline-xl">{displayName.substring(0,2).toUpperCase()}</span>
             </div>
           </div>
-          <button className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-primary border-2 border-surface-container-lowest text-white flex items-center justify-center shadow-sm hover:bg-primary/90 transition-colors">
+          <button className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-primary border-2 border-surface-container-lowest text-white flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-primary/90 transition-colors">
             <span className="material-symbols-outlined text-[16px]">add</span>
           </button>
         </div>

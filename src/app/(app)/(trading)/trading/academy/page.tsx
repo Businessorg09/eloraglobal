@@ -177,15 +177,15 @@ export default function AcademyPage() {
   if (!isLoading && userTier === 0) {
     return (
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center max-w-lg w-full">
+        <div className="bg-white p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-symbols-outlined text-[32px]">school</span>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Academy Access Locked</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-2">Academy Access Locked</h2>
           <p className="text-slate-500 mb-6 text-sm">
             You do not have a trading account assigned to you yet. Please request one from the terminal or purchase an affiliate package to unlock Academy curricula.
           </p>
-          <a href="/dashboard/business" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+          <a href="/dashboard/business" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-[24px] font-bold hover:bg-blue-700 transition-colors">
             <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
             View Packages
           </a>
@@ -200,13 +200,13 @@ export default function AcademyPage() {
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Video Library & Playlists</h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 tracking-tight">Video Library & Playlists</h1>
           <p className="text-slate-500 text-sm mt-1">Explore curated masterclass video series, on-demand playback vaults, strategy breakdowns, and track completed modules.</p>
         </div>
       </div>
 
       {/* --- PROGRESS TRACKER --- */}
-      <section className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm">
+      <section className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-5 border-slate-100 gap-4">
           <div>
             <div className="flex items-center gap-2.5">
@@ -218,7 +218,7 @@ export default function AcademyPage() {
             <h2 className="text-xl font-bold text-slate-900 mt-1">Curriculum Mastery: {completedModules} of {modules.length} Modules Cleared</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs">
-            <div className="bg-slate-50 px-3 py-2 rounded-xl border border-slate-200/70">
+            <div className="bg-slate-50 px-3 py-2 rounded-[24px] border border-slate-200/70">
               <span className="text-slate-400 font-medium block text-[10px] uppercase">Unlocked Vods</span>
               <span className="font-bold text-slate-800 text-sm">{totalEpisodesUnlocked} Videos</span>
             </div>
@@ -255,7 +255,7 @@ export default function AcademyPage() {
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 pt-3">
-                <button onClick={handleResumeHero} className="flex items-center gap-2.5 px-6 py-3 rounded-xl bg-white text-blue-900 font-bold text-sm hover:bg-blue-50 transition-colors shadow-lg shadow-black/10">
+                <button onClick={handleResumeHero} className="flex items-center gap-2.5 px-6 py-3 rounded-[24px] bg-white text-blue-900 font-bold text-sm hover:bg-blue-50 transition-colors shadow-lg shadow-black/10">
                   <span className="material-symbols-outlined text-[18px]">play_arrow</span>
                   <span>Resume Video</span>
                 </button>
@@ -284,11 +284,11 @@ export default function AcademyPage() {
               const isLocked = mod.isLocked;
               
               return (
-                <div key={mod.id} className={`group relative flex flex-col bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${isLocked ? 'border-slate-200 shadow-sm' : 'border-slate-200/80 shadow-md hover:border-blue-400'}`}>
+                <div key={mod.id} className={`group relative flex flex-col bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${isLocked ? 'border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)]' : 'border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-blue-400'}`}>
                   
                   {/* Thumbnail Area */}
                   <div className="p-3 relative">
-                    <div className={`aspect-video rounded-xl overflow-hidden flex items-center justify-center relative ${isLocked ? 'bg-slate-100' : 'bg-gradient-to-br from-slate-900 to-[#0e2a36]'}`}>
+                    <div className={`aspect-video rounded-[24px] overflow-hidden flex items-center justify-center relative ${isLocked ? 'bg-slate-100' : 'bg-gradient-to-br from-slate-900 to-[#0e2a36]'}`}>
                       
                       {!isLocked ? (
                         <>
@@ -298,16 +298,16 @@ export default function AcademyPage() {
                               {mod.episodes?.length || 0} Videos
                             </span>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-md transition transform group-hover:scale-110">
+                          <div className="w-10 h-10 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition transform group-hover:scale-110">
                             <span className="material-symbols-outlined text-[20px]">play_arrow</span>
                           </div>
                         </>
                       ) : (
                         <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-sm flex flex-col items-center justify-center gap-2">
-                          <div className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-slate-400">
+                          <div className="w-10 h-10 rounded-full bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex items-center justify-center text-slate-400">
                             <span className="material-symbols-outlined text-[20px]">lock</span>
                           </div>
-                          <span className="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-slate-600 uppercase tracking-wide shadow-sm">Tier {mod.package_tier_required} Required</span>
+                          <span className="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-slate-600 uppercase tracking-wide shadow-[0_4px_20px_rgba(0,0,0,0.03)]">Tier {mod.package_tier_required} Required</span>
                         </div>
                       )}
                     </div>
@@ -324,7 +324,7 @@ export default function AcademyPage() {
 
                     {isLocked ? (
                       <div className="mt-4 pt-3 border-t border-slate-100">
-                        <button className="w-full py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg text-xs font-bold shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-1.5">
+                        <button className="w-full py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg text-xs font-bold shadow-[0_8px_30px_rgba(0,0,0,0.04)] shadow-blue-500/20 transition-all flex items-center justify-center gap-1.5">
                           <span className="material-symbols-outlined text-[16px]">workspace_premium</span>
                           Upgrade to Tier {mod.package_tier_required}
                         </button>
@@ -347,7 +347,7 @@ export default function AcademyPage() {
 
       {/* --- ALL EPISODES LIST --- */}
       {!isLoading && modules.length > 0 && (
-        <section className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
+        <section className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
             <div>
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Granular Episode Breakdown</span>
@@ -398,7 +398,7 @@ export default function AcademyPage() {
                                 setStartSeconds(0); 
                                 setCurrentProgress(0);
                               }}
-                              className="text-[11px] font-bold text-white bg-blue-600 px-3 py-1 rounded shadow-sm hover:bg-blue-700 transition-colors flex items-center justify-center gap-1 ml-auto"
+                              className="text-[11px] font-bold text-white bg-blue-600 px-3 py-1 rounded shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-blue-700 transition-colors flex items-center justify-center gap-1 ml-auto"
                             >
                               <span className="material-symbols-outlined text-[14px]">play_circle</span> Watch Now
                             </button>
@@ -417,7 +417,7 @@ export default function AcademyPage() {
             {modules.map((mod) => {
               const isLocked = mod.isLocked;
               return mod.episodes?.map((ep) => (
-                <div key={ep.id} className={`p-4 rounded-xl border ${isLocked ? 'bg-slate-50 border-slate-100' : 'bg-white border-slate-200 shadow-sm'}`}>
+                <div key={ep.id} className={`p-4 rounded-[24px] border ${isLocked ? 'bg-slate-50 border-slate-100' : 'bg-white border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)]'}`}>
                   <div className="flex justify-between items-start mb-2">
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${isLocked ? 'bg-slate-200 text-slate-500' : 'bg-blue-50 text-blue-600'}`}>
                       {isLocked ? 'Locked' : mod.title}
@@ -441,7 +441,7 @@ export default function AcademyPage() {
                         setStartSeconds(0); 
                         setCurrentProgress(0);
                       }}
-                      className="w-full py-2 text-[11px] font-bold text-white bg-blue-600 rounded-lg shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full py-2 text-[11px] font-bold text-white bg-blue-600 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] shadow-blue-500/20 hover:bg-blue-700 transition-colors flex items-center justify-center gap-1.5"
                     >
                       <span className="material-symbols-outlined text-[16px]">play_circle</span> Watch Now
                     </button>

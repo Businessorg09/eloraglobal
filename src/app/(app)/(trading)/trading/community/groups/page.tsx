@@ -34,9 +34,9 @@ export default function GroupsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {groups.map((group, i) => (
-            <div key={i} className="bg-surface-container-lowest border border-surface-container-low rounded-2xl p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+            <div key={i} className="bg-surface-container-lowest border border-surface-container-low rounded-2xl p-6 flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow cursor-pointer group">
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-[24px] bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-[24px]">{group.icon}</span>
                 </div>
                 <span className="font-label-sm text-[11px] text-primary bg-primary/10 px-3 py-1 rounded-full uppercase tracking-wider">{group.category}</span>
@@ -47,7 +47,7 @@ export default function GroupsPage() {
                 <span className="font-body-sm text-[13px] text-on-surface-variant mt-1">{group.members} active traders</span>
               </div>
               
-              <button className="mt-4 w-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-[13px] font-bold py-2.5 rounded-xl transition-colors">
+              <button className="mt-4 w-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-[13px] font-bold py-2.5 rounded-[24px] transition-colors">
                 Join Group
               </button>
             </div>

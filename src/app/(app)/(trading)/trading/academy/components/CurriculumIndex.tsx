@@ -2,7 +2,7 @@ export function CurriculumIndex() {
   return (
     <div className="flex flex-col gap-4">
       {/* Index Header Panel */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-5 w-full flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col">
         <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-1">Institutional Blueprint</span>
         <h2 className="font-bold text-[18px] text-[#111827] leading-tight flex items-center justify-between">
           Curriculum Index
@@ -14,7 +14,7 @@ export function CurriculumIndex() {
       <div className="flex flex-col gap-3">
         
         {/* Cleared Module */}
-        <div className="bg-white rounded-xl shadow-sm border border-[#059669] p-4 relative overflow-hidden group cursor-pointer hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#059669] p-4 relative overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#059669]"></div>
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 rounded-full bg-[#ECFDF5] text-[#059669] flex items-center justify-center shrink-0">
@@ -34,7 +34,7 @@ export function CurriculumIndex() {
         </div>
 
         {/* Shortened Cleared Modules to save space (02-07) */}
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] hover:border-[#059669] p-4 relative overflow-hidden group cursor-pointer transition-colors">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] hover:border-[#059669] p-4 relative overflow-hidden group cursor-pointer transition-colors">
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 rounded-full bg-[#ECFDF5] text-[#059669] flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[14px] font-bold">check</span>
@@ -48,7 +48,7 @@ export function CurriculumIndex() {
         </div>
 
         {/* Milestone Banner */}
-        <div className="bg-[#111827] rounded-xl shadow-sm p-4 text-white flex items-center justify-between border border-[#374151]">
+        <div className="bg-[#111827] rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-4 text-white flex items-center justify-between border border-[#374151]">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-[#1D4ED8] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(29,78,216,0.5)]">
               <span className="material-symbols-outlined text-[16px]">emoji_events</span>
@@ -65,7 +65,7 @@ export function CurriculumIndex() {
         </div>
 
         {/* Active Module */}
-        <div className="bg-white rounded-xl shadow-sm border-2 border-[#1D4ED8] p-4 relative overflow-hidden">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-2 border-[#1D4ED8] p-4 relative overflow-hidden">
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
               <span className="flex items-center gap-1.5 text-[10px] font-bold text-[#1D4ED8] uppercase tracking-wider">
@@ -110,7 +110,7 @@ export function CurriculumIndex() {
         </div>
 
         {/* Locked Modules */}
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-4 relative overflow-hidden flex items-center justify-between opacity-70">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 relative overflow-hidden flex items-center justify-between opacity-70">
           <div className="flex flex-col">
             <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Module 09</span>
             <span className="font-bold text-[13px] text-[#6B7280] leading-tight mt-0.5">Entry, Stop Loss & Take Profit</span>
@@ -119,7 +119,7 @@ export function CurriculumIndex() {
           <span className="material-symbols-outlined text-[18px] text-[#D1D5DB]">lock</span>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-4 relative overflow-hidden flex items-center justify-between opacity-70">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 relative overflow-hidden flex items-center justify-between opacity-70">
           <div className="flex flex-col">
             <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Module 10</span>
             <span className="font-bold text-[13px] text-[#6B7280] leading-tight mt-0.5">Trading Psychology & Cognitive Bias</span>
@@ -131,15 +131,15 @@ export function CurriculumIndex() {
       </div>
 
       {/* Support Banner Bottom */}
-      <div className="bg-[#EFF6FF] rounded-xl border border-[#DBEAFE] p-4 flex flex-col items-center text-center mt-2">
-        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1D4ED8] shadow-sm mb-2">
+      <div className="bg-[#EFF6FF] rounded-[24px] border border-[#DBEAFE] p-4 flex flex-col items-center text-center mt-2">
+        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1D4ED8] shadow-[0_4px_20px_rgba(0,0,0,0.03)] mb-2">
           <span className="material-symbols-outlined text-[20px]">support_agent</span>
         </div>
         <h4 className="font-bold text-[13px] text-[#1D4ED8]">Institutional Mentor Desk</h4>
         <p className="text-[11px] text-[#1D4ED8]/80 mt-1 mb-3">
           Stuck on mathematical sizing derivations? Connect directly with an accredited quant supervisor in the Live Room.
         </p>
-        <button className="bg-white text-[#1D4ED8] font-bold text-[12px] px-4 py-2 rounded-lg shadow-sm border border-[#DBEAFE] w-full hover:bg-[#F8FAFC] transition-colors">
+        <button className="bg-white text-[#1D4ED8] font-bold text-[12px] px-4 py-2 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#DBEAFE] w-full hover:bg-[#F8FAFC] transition-colors">
           Request Desk Callback
         </button>
       </div>

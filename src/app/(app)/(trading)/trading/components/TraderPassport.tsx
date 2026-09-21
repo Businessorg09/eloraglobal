@@ -6,13 +6,13 @@ export function TraderPassport() {
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-5 w-full flex flex-col h-full">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col h-full">
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-[#1D4ED8]">badge</span>
           <h2 className="font-bold text-[14px] text-[#111827] leading-tight">Trader Passport<br/>Diagnostic</h2>
         </div>
-        <div className="bg-[#DBEAFE] text-[#1D4ED8] w-8 h-8 rounded flex items-center justify-center flex-col shadow-sm">
+        <div className="bg-[#DBEAFE] text-[#1D4ED8] w-8 h-8 rounded flex items-center justify-center flex-col shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <span className="text-[7px] font-bold tracking-widest uppercase">Tier</span>
           <span className="text-[12px] font-black leading-none mt-0.5">A</span>
         </div>
@@ -32,7 +32,7 @@ export function TraderPassport() {
         ))}
       </div>
 
-      <div className="mt-auto bg-[#EFF6FF] rounded-xl p-4 border border-[#D0DFFF]">
+      <div className="mt-auto bg-[#EFF6FF] rounded-[24px] p-4 border border-[#D0DFFF]">
         <div className="flex items-center gap-2 mb-2">
           <span className="material-symbols-outlined text-[16px] text-[#1D4ED8]">smart_toy</span>
           <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-wider">AI Copilot Feedback</span>

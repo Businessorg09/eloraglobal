@@ -23,7 +23,7 @@ export default function MarketIntelligencePage() {
           {/* Header */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 flex items-center gap-2 tracking-tight">
+              <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2 tracking-tight">
                 <span className="material-symbols-outlined text-[32px] text-blue-600">public</span>
                 Global Market Intelligence
               </h1>
@@ -44,7 +44,7 @@ export default function MarketIntelligencePage() {
                   </h2>
                   <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider">REAL-TIME</span>
                 </div>
-                <div className="flex-1 w-full rounded-xl overflow-hidden bg-slate-50 border border-slate-100">
+                <div className="flex-1 w-full rounded-[24px] overflow-hidden bg-slate-50 border border-slate-100">
                   <EconomicCalendarWidget />
                 </div>
               </div>
@@ -61,7 +61,7 @@ export default function MarketIntelligencePage() {
                     Currency Strength Matrix
                   </h2>
                 </div>
-                <div className="flex-1 w-full rounded-xl overflow-hidden bg-slate-50 border border-slate-100">
+                <div className="flex-1 w-full rounded-[24px] overflow-hidden bg-slate-50 border border-slate-100">
                   <ForexHeatmapWidget />
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function MarketIntelligencePage() {
                     <span className="text-xs font-bold text-red-500">LIVE</span>
                   </div>
                 </div>
-                <div className="flex-1 w-full rounded-xl overflow-hidden bg-slate-50 border border-slate-100">
+                <div className="flex-1 w-full rounded-[24px] overflow-hidden bg-slate-50 border border-slate-100">
                   <MarketNewsWidget />
                 </div>
               </div>

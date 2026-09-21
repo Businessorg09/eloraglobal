@@ -99,7 +99,7 @@ export default function LiveClassesPage() {
       </p>
 </div>
 <div className="flex items-center gap-gutter-sm shrink-0">
-<div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm border border-surface-container">
+<div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container">
 <span className="material-symbols-outlined text-[18px] text-secondary">public</span>
 <select className="bg-transparent border-none focus:outline-none cursor-pointer text-on-surface font-semibold text-label-md font-label-md">
 <option>(GMT+00:00) London / UTC</option>
@@ -108,7 +108,7 @@ export default function LiveClassesPage() {
 <option>(GMT+08:00) Singapore / SGT</option>
 </select>
 </div>
-<button className="flex items-center gap-gutter-xs px-gutter-md py-2 rounded-lg bg-primary-container text-on-primary shadow-sm hover:bg-secondary transition-all text-headline-md font-headline-md" onClick={() => {}}>
+<button className="flex items-center gap-gutter-xs px-gutter-md py-2 rounded-lg bg-primary-container text-on-primary shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-secondary transition-all text-headline-md font-headline-md" onClick={() => {}}>
 <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
 <span className="">Book 1-1 Zoom&nbsp;</span>
 </button>
@@ -117,7 +117,7 @@ export default function LiveClassesPage() {
 {/* SECTION 1: TOP SPLIT EXECUTIVE HERO BANNER */}
 <section className="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
 {/* Urgent Live Alert (7 Cols) */}
-<div className="lg:col-span-7 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container p-gutter-lg relative overflow-hidden flex flex-col justify-between gap-gutter-md">
+<div className="lg:col-span-7 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container p-gutter-lg relative overflow-hidden flex flex-col justify-between gap-gutter-md">
 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
 <div className="absolute -right-16 -top-16 w-60 h-60 rounded-full bg-secondary-fixed/25 blur-3xl pointer-events-none"></div>
 <div className="flex flex-col gap-gutter-sm relative">
@@ -180,7 +180,7 @@ export default function LiveClassesPage() {
 <span className="material-symbols-outlined text-[16px] text-secondary">description</span>
 <span className="">Chart Pack (.PDF)</span>
 </a>
-<a className="flex items-center justify-center gap-2 px-gutter-lg py-2 rounded-lg bg-primary-container text-on-primary font-headline-md text-headline-md shadow-sm hover:bg-secondary transition-all" href={loading ? '#' : (lz.joinLink || '#')} rel="noopener noreferrer" target="_blank">
+<a className="flex items-center justify-center gap-2 px-gutter-lg py-2 rounded-lg bg-primary-container text-on-primary font-headline-md text-headline-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-secondary transition-all" href={loading ? '#' : (lz.joinLink || '#')} rel="noopener noreferrer" target="_blank">
 <span className="material-symbols-outlined text-[18px]">videocam</span>
 <span className="">Join Zoom Masterclass</span>
 </a>
@@ -188,7 +188,7 @@ export default function LiveClassesPage() {
 </div>
 </div>
 {/* Right Side: My Upcoming 1-on-1 Session & Credits (5 Cols) */}
-<div className="lg:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container p-gutter-lg flex flex-col justify-between gap-gutter-md">
+<div className="lg:col-span-5 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container p-gutter-lg flex flex-col justify-between gap-gutter-md">
 <div className="flex items-center justify-between">
 <div className="flex items-center gap-2">
 {bookedSession ? (
@@ -245,10 +245,10 @@ export default function LiveClassesPage() {
     </div>
   </div>
 ) : (
-  <div className="flex flex-col items-center justify-center gap-3 py-6 h-full border-2 border-dashed border-slate-200 rounded-xl bg-slate-50">
+  <div className="flex flex-col items-center justify-center gap-3 py-6 h-full border-2 border-dashed border-slate-200 rounded-[24px] bg-slate-50">
     <span className="material-symbols-outlined text-[32px] text-slate-300">event_busy</span>
     <p className="text-[13px] text-slate-500 font-medium text-center max-w-[200px]">No upcoming 1-on-1 sessions booked. Select a mentor below to schedule.</p>
-    <button onClick={() => document.getElementById('tutorSection')?.scrollIntoView({ behavior: 'smooth' })} className="mt-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-[12px] shadow-sm hover:bg-slate-50">
+    <button onClick={() => document.getElementById('tutorSection')?.scrollIntoView({ behavior: 'smooth' })} className="mt-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-slate-50">
       Browse Mentors
     </button>
   </div>
@@ -256,7 +256,7 @@ export default function LiveClassesPage() {
 </div>
 </section>
 {/* SECTION 2: COMPREHENSIVE WEEKLY INTERACTIVE CALENDAR & CLASS GRID */}
-<section className="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container p-gutter-lg flex flex-col gap-gutter-md">
+<section className="bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container p-gutter-lg flex flex-col gap-gutter-md">
 {/* Calendar Header Controls */}
 <div className="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md pb-gutter-sm border-b border-surface-container">
 <div className="flex items-center gap-3">
@@ -275,7 +275,7 @@ export default function LiveClassesPage() {
 {/* Filter Chips & Quick Sync Button */}
 <div className="flex flex-wrap items-center gap-2">
 <div className="flex items-center bg-surface-container-low p-1 rounded-lg border border-surface-container">
-<button className="px-3 py-1 rounded text-label-sm font-label-sm font-semibold bg-primary-container text-on-primary shadow-sm">All Masterclasses</button>
+<button className="px-3 py-1 rounded text-label-sm font-label-sm font-semibold bg-primary-container text-on-primary shadow-[0_4px_20px_rgba(0,0,0,0.03)]">All Masterclasses</button>
 </div>
 <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors text-label-md font-label-md border border-surface-container" onClick={() => {}}>
 <span className="material-symbols-outlined text-[16px] text-secondary">sync</span>
@@ -288,7 +288,7 @@ export default function LiveClassesPage() {
 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => {
   const dayClasses = masterclasses.filter((c: any) => c.day === day);
   return (
-    <div key={day} className="flex flex-col gap-gutter-sm rounded-xl p-3 bg-surface-container-low/50 border border-surface-container">
+    <div key={day} className="flex flex-col gap-gutter-sm rounded-[24px] p-3 bg-surface-container-low/50 border border-surface-container">
       <div className="flex items-center justify-between pb-2 border-b border-surface-container">
         <div className="flex flex-col">
           <span className="font-headline-md text-headline-md text-on-surface font-bold">{day}</span>
@@ -304,7 +304,7 @@ export default function LiveClassesPage() {
         const pct = cls.seatsTotal > 0 ? Math.round((cls.seatsFilled / cls.seatsTotal) * 100) : 0;
         const isFirst = idx === 0 && day === 'Monday';
         return (
-          <div key={cls.id} className={`bg-surface-container-lowest p-3 rounded-lg ${isFirst ? 'border-2 border-primary-container' : 'border border-surface-container'} shadow-sm flex flex-col gap-2`}>
+          <div key={cls.id} className={`bg-surface-container-lowest p-3 rounded-lg ${isFirst ? 'border-2 border-primary-container' : 'border border-surface-container'} shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col gap-2`}>
             <div className="flex items-center justify-between">
               <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 ${isFirst ? 'bg-tertiary-fixed text-on-tertiary-fixed-variant' : 'bg-surface-container text-secondary'}`}>
                 {isFirst && <span className="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>}
@@ -374,13 +374,13 @@ export default function LiveClassesPage() {
 {tutors.map((tutor: any) => (
   <div
     key={tutor.id}
-    className={`tutor-card ${activeTutor === tutor.id ? 'active-card border-primary-container shadow-md' : 'border-surface-container'} bg-surface-container-lowest p-gutter-lg rounded-xl border-2 shadow-sm flex flex-col justify-between gap-gutter-md cursor-pointer transition-all hover:shadow-md`}
+    className={`tutor-card ${activeTutor === tutor.id ? 'active-card border-primary-container shadow-[0_8px_30px_rgba(0,0,0,0.04)]' : 'border-surface-container'} bg-surface-container-lowest p-gutter-lg rounded-[24px] border-2 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between gap-gutter-md cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]`}
     onClick={() => setActiveTutor(tutor.id)}
   >
     <div className="flex flex-col gap-gutter-sm">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-gutter-sm">
-          <img className="w-14 h-14 rounded-xl object-cover shadow-sm ring-2 ring-primary-container/20" data-alt={tutor.name} src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMvPkJ1mf9VIcTm_Du5zbD1YUMOs8CDd8x0QRDjtPVmWGekuPixbtLqjfAOlZeV63H7uE7AadbJx-HTi5AXm-UtTl7Tp8piRqqU2TrBwxyngXkCwOviI1EPZn-b0KNVZor3Ct6e5UsGEZwbv0A7avVVK8V8BbLRuv7zN5zouqd1YlACf3-qTNAJAZU1Tmohdli-K5TMwt0CZnJKVScEZpP2H5ZseJAYcZQsHEeABP-ahOkeOEmaFUhA" />
+          <img className="w-14 h-14 rounded-[24px] object-cover shadow-[0_4px_20px_rgba(0,0,0,0.03)] ring-2 ring-primary-container/20" data-alt={tutor.name} src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMvPkJ1mf9VIcTm_Du5zbD1YUMOs8CDd8x0QRDjtPVmWGekuPixbtLqjfAOlZeV63H7uE7AadbJx-HTi5AXm-UtTl7Tp8piRqqU2TrBwxyngXkCwOviI1EPZn-b0KNVZor3Ct6e5UsGEZwbv0A7avVVK8V8BbLRuv7zN5zouqd1YlACf3-qTNAJAZU1Tmohdli-K5TMwt0CZnJKVScEZpP2H5ZseJAYcZQsHEeABP-ahOkeOEmaFUhA" />
           <div className="flex flex-col">
             <span className="font-headline-md text-headline-md text-on-surface font-bold leading-tight">{tutor.name}</span>
             <span className="text-label-sm font-label-sm text-secondary font-semibold">{tutor.title}</span>
@@ -410,7 +410,7 @@ export default function LiveClassesPage() {
         </div>
       </div>
     </div>
-    <button className={`w-full py-2.5 rounded-lg font-headline-md text-headline-md shadow-sm transition-all flex items-center justify-center gap-2 ${activeTutor === tutor.id ? 'bg-primary-container text-on-primary hover:bg-secondary' : 'bg-surface-container text-primary hover:bg-surface-container-high'}`}>
+    <button className={`w-full py-2.5 rounded-lg font-headline-md text-headline-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all flex items-center justify-center gap-2 ${activeTutor === tutor.id ? 'bg-primary-container text-on-primary hover:bg-secondary' : 'bg-surface-container text-primary hover:bg-surface-container-high'}`}>
       <span className="material-symbols-outlined text-[18px]">{activeTutor === tutor.id ? 'check_circle' : 'person_add'}</span>
       <span className="">{activeTutor === tutor.id ? 'Selected for 1-on-1' : 'Select for 1-on-1'}</span>
     </button>
@@ -418,7 +418,7 @@ export default function LiveClassesPage() {
 ))}
 </div>
 {/* EXPANDING INSTANT BOOKING TRAY (Directly Below Selected Tutor) */}
-<div className="bg-surface-container-lowest p-gutter-lg rounded-xl shadow-sm border border-surface-container flex flex-col gap-gutter-md transition-all duration-300" id="bookingTray">
+<div className="bg-surface-container-lowest p-gutter-lg rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container flex flex-col gap-gutter-md transition-all duration-300" id="bookingTray">
 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-sm pb-gutter-sm bg-surface-container-low/70 -mx-gutter-lg -mt-gutter-lg p-gutter-md rounded-t-xl border-b border-surface-container">
 <div className="flex items-center gap-gutter-sm">
 <div className="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
@@ -498,7 +498,7 @@ export default function LiveClassesPage() {
         </label>
 <textarea className="w-full p-2.5 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm border border-surface-container focus:outline-none focus:ring-2 focus:ring-primary-container" id="bookingGoalInput" placeholder="Outline specific setup, pair (e.g. EUR/USD), or psychology block to dissect..." rows={2}></textarea>
 </div>
-<button disabled={isBooking} className="w-full py-2.5 rounded-lg bg-primary-container text-on-primary font-headline-md text-headline-md hover:bg-secondary transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-70" onClick={handleBookMeeting}>
+<button disabled={isBooking} className="w-full py-2.5 rounded-lg bg-primary-container text-on-primary font-headline-md text-headline-md hover:bg-secondary transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center gap-2 disabled:opacity-70" onClick={handleBookMeeting}>
 {isBooking ? (
   <span className="material-symbols-outlined text-[18px] animate-spin">refresh</span>
 ) : (

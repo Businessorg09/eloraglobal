@@ -78,12 +78,12 @@ export default function ExplorePage() {
           placeholder="Search for users..." 
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
-          className="w-full bg-surface-container-lowest border border-surface-container-high rounded-full pl-12 pr-6 py-4 font-body-lg text-[16px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm"
+          className="w-full bg-surface-container-lowest border border-surface-container-high rounded-full pl-12 pr-6 py-4 font-body-lg text-[16px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
         />
         
         {/* Search Results Dropdown */}
         {searchQuery && (
-          <div className="absolute top-full mt-2 left-4 md:left-0 right-4 md:right-0 bg-surface-container-lowest rounded-xl shadow-lg border border-surface-container-high overflow-hidden z-30">
+          <div className="absolute top-full mt-2 left-4 md:left-0 right-4 md:right-0 bg-surface-container-lowest rounded-[24px] shadow-lg border border-surface-container-high overflow-hidden z-30">
             {searchResults.length === 0 ? (
               <div className="p-4 text-center text-on-surface-variant font-body-sm">No users found</div>
             ) : (

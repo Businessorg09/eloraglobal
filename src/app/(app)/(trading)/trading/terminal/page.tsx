@@ -71,22 +71,22 @@ export default function PropDashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 w-full flex items-center justify-center bg-[#FAFAFA] min-h-screen">
-        <div className="animate-spin text-indigo-600 material-symbols-outlined text-4xl">refresh</div>
+      <div className="flex-1 w-full flex items-center justify-center ">
+        <div className="animate-spin text-indigo-600 material-symbols-outlined text-2xl md:text-4xl">refresh</div>
       </div>
     )
   }
 
   if (!account) {
     return (
-      <div className="flex-1 w-full flex flex-col items-center justify-center bg-[#FAFAFA] min-h-screen text-gray-900">
+      <div className="flex-1 w-full flex flex-col items-center justify-center text-gray-900">
         <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center max-w-lg text-center">
           <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
-            <span className="material-symbols-outlined text-4xl text-indigo-600">account_balance_wallet</span>
+            <span className="material-symbols-outlined text-2xl md:text-4xl text-indigo-600">account_balance_wallet</span>
           </div>
-          <h1 className="text-3xl font-black mb-3 tracking-tight">No Account Assigned</h1>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-3 tracking-tight">No Account Assigned</h1>
           <p className="text-gray-500 mb-8 leading-relaxed">Your institutional trading account has not been activated yet. Please wait for the risk desk to allocate your MT4/MT5 credentials.</p>
-          <Link href="/trading" className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)] hover:-translate-y-0.5">
+          <Link href="/trading" className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-4 rounded-[24px] font-bold transition-all shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)] hover:-translate-y-0.5">
             Return to Dashboard
           </Link>
         </div>
@@ -128,7 +128,7 @@ export default function PropDashboardPage() {
   const isProfitableTotal = totalNetProfit >= 0;
 
   return (
-    <div className="flex-1 flex flex-col bg-[#FAFAFA] min-h-screen text-gray-900 font-sans pb-16 relative overflow-x-hidden">
+    <div className="flex-1 flex flex-col text-gray-900 font-sans relative overflow-x-hidden">
       
       {/* Decorative Background Blur */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-indigo-50/50 to-transparent pointer-events-none -z-10"></div>
@@ -138,13 +138,13 @@ export default function PropDashboardPage() {
       {/* Top Banner */}
       <div className="pt-10 px-8 pb-6 max-w-[1400px] mx-auto w-full flex items-end justify-between">
         <div className="flex items-center gap-6">
-          <Link href="/trading" className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all hover:-translate-y-0.5">
+          <Link href="/trading" className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all hover:-translate-y-0.5">
             <span className="material-symbols-outlined text-[24px]">arrow_back</span>
           </Link>
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Prop Analytics</h1>
-              <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] uppercase font-black px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-sm">
+              <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 tracking-tight">Prop Analytics</h1>
+              <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] uppercase font-black px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
                 Funded Status
               </span>
@@ -173,9 +173,9 @@ export default function PropDashboardPage() {
           
           <button 
             onClick={() => setShowCredentials(true)}
-            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
-            <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center mb-3 group-hover:bg-indigo-600 transition-colors">
+            <div className="w-10 h-10 bg-indigo-50 rounded-[24px] flex items-center justify-center mb-3 group-hover:bg-indigo-600 transition-colors">
               <span className="material-symbols-outlined text-indigo-600 group-hover:text-white transition-colors">key</span>
             </div>
             <h3 className="text-gray-900 font-bold mb-1">Credentials</h3>
@@ -186,7 +186,7 @@ export default function PropDashboardPage() {
             onClick={() => alert('Deposit / Top Up functionality coming soon!')}
             className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-blue-600 border border-transparent rounded-2xl p-5 shadow-[0_4px_20px_rgb(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-3 backdrop-blur-sm">
+            <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">add_circle</span>
             </div>
             <h3 className="text-white font-bold mb-1">Top Up Account</h3>
@@ -200,7 +200,7 @@ export default function PropDashboardPage() {
             }}
             className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 border border-transparent rounded-2xl p-5 shadow-[0_4px_20px_rgb(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-3 backdrop-blur-sm">
+            <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">payments</span>
             </div>
             <h3 className="text-white font-bold mb-1">Request Payout</h3>
@@ -208,7 +208,7 @@ export default function PropDashboardPage() {
           </button>
 
           <div className="grid grid-rows-2 gap-4">
-             <button className="bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm hover:shadow-md hover:border-gray-300 transition-all flex items-center justify-between group hover:-translate-y-0.5">
+             <button className="bg-white border border-gray-200 rounded-[24px] px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-gray-300 transition-all flex items-center justify-between group hover:-translate-y-0.5">
                <div className="flex items-center gap-3">
                  <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center">
                     <span className="material-symbols-outlined text-amber-600 text-sm">workspace_premium</span>
@@ -218,7 +218,7 @@ export default function PropDashboardPage() {
                <span className="material-symbols-outlined text-gray-300 group-hover:text-gray-500 text-sm">arrow_forward</span>
              </button>
              
-             <button className="bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm hover:shadow-md hover:border-gray-300 transition-all flex items-center justify-between group hover:-translate-y-0.5">
+             <button className="bg-white border border-gray-200 rounded-[24px] px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-gray-300 transition-all flex items-center justify-between group hover:-translate-y-0.5">
                <div className="flex items-center gap-3">
                  <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center">
                     <span className="material-symbols-outlined text-gray-600 text-sm">support_agent</span>
@@ -237,7 +237,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">account_balance</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Balance</span>
-            <span className="text-3xl font-black text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
           </div>
 
           <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
@@ -245,7 +245,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">timeline</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Live Equity</span>
-            <span className={`text-3xl font-black font-mono tracking-tight z-10 ${equity > balance ? 'text-emerald-600' : equity < balance ? 'text-rose-600' : 'text-gray-900'}`}>
+            <span className={`text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${equity > balance ? 'text-emerald-600' : equity < balance ? 'text-rose-600' : 'text-gray-900'}`}>
               ${equity.toLocaleString('en-US', {minimumFractionDigits: 2})}
             </span>
           </div>
@@ -255,7 +255,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">payments</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Net Profit</span>
-            <span className={`text-3xl font-black font-mono tracking-tight z-10 ${totalNetProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+            <span className={`text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${totalNetProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
               {totalNetProfit >= 0 ? '+' : ''}${totalNetProfit.toLocaleString('en-US', {minimumFractionDigits: 2})}
             </span>
           </div>
@@ -265,7 +265,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">pie_chart</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Win Rate</span>
-            <span className="text-3xl font-black text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
+            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
           </div>
 
           <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
@@ -273,7 +273,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">tag</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Trades Taken</span>
-            <span className="text-3xl font-black text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
+            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
           </div>
         </div>
 
@@ -284,8 +284,8 @@ export default function PropDashboardPage() {
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Equity Curve</h2>
               <p className="text-sm text-gray-500 font-medium">Historical performance trajectory based on closed positions.</p>
             </div>
-            <div className="bg-gray-50 border border-gray-100 rounded-xl p-1.5 flex items-center text-xs font-bold text-gray-500">
-               <button className="px-4 py-1.5 bg-white shadow-sm rounded-lg text-gray-900">All Time</button>
+            <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-1.5 flex items-center text-xs font-bold text-gray-500">
+               <button className="px-4 py-1.5 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] rounded-lg text-gray-900">All Time</button>
                <button className="px-4 py-1.5 hover:text-gray-900 transition-colors">This Month</button>
             </div>
           </div>
@@ -407,7 +407,7 @@ export default function PropDashboardPage() {
                           {/* Expanded Distribution Breakdown */}
                           {isExpanded && (
                             <div className="px-8 pb-6 pt-2 bg-gray-50/30">
-                              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                              <div className="bg-white border border-gray-100 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col">
                                 <div className="bg-indigo-50/50 px-6 py-4 border-b border-indigo-100/50 flex items-center justify-between">
                                   <div className="flex items-center gap-2 text-indigo-900 font-bold text-sm">
                                     <span className="material-symbols-outlined text-[18px]">account_tree</span>
@@ -430,25 +430,25 @@ export default function PropDashboardPage() {
                                     <div className="flex flex-col p-6 gap-6 bg-white">
                                       {/* Top Row: Trader & Company */}
                                       <div className="grid grid-cols-2 gap-4">
-                                        <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-4 flex flex-col">
+                                        <div className="bg-emerald-50/50 border border-emerald-100 rounded-[24px] p-4 flex flex-col">
                                           <div className="flex items-center gap-2 mb-2 text-emerald-700">
                                             <span className="material-symbols-outlined text-sm">account_balance_wallet</span>
                                             <span className="text-xs font-black uppercase tracking-widest">Trader Payout (70%)</span>
                                           </div>
-                                          <span className="text-2xl font-black font-mono text-emerald-600">${sumUsd(traderTxs).toFixed(2)}</span>
+                                          <span className="text-2xl font-black tracking-tight font-mono text-emerald-600">${sumUsd(traderTxs).toFixed(2)}</span>
                                         </div>
-                                        <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 flex flex-col">
+                                        <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-4 flex flex-col">
                                           <div className="flex items-center gap-2 mb-2 text-gray-600">
                                             <span className="material-symbols-outlined text-sm">corporate_fare</span>
                                             <span className="text-xs font-black uppercase tracking-widest">Company Retained (10%)</span>
                                           </div>
-                                          <span className="text-2xl font-black font-mono text-gray-800">${sumUsd(companyTxs).toFixed(2)}</span>
+                                          <span className="text-2xl font-black tracking-tight font-mono text-gray-800">${sumUsd(companyTxs).toFixed(2)}</span>
                                         </div>
                                       </div>
 
                                       {/* Sponsor Income */}
                                       {sponsorTxs.length > 0 && (
-                                        <div className="flex flex-col border border-blue-100 rounded-xl overflow-hidden">
+                                        <div className="flex flex-col border border-blue-100 rounded-[24px] overflow-hidden">
                                           <div className="bg-blue-50/50 px-5 py-3 border-b border-blue-100 flex items-center justify-between">
                                             <div className="flex items-center gap-2 text-blue-800 font-bold text-sm">
                                               <span className="material-symbols-outlined text-[18px]">group</span>
@@ -486,7 +486,7 @@ export default function PropDashboardPage() {
 
                                       {/* Leadership Income */}
                                       {leadershipTxs.length > 0 && (
-                                        <div className="flex flex-col border border-amber-100 rounded-xl overflow-hidden">
+                                        <div className="flex flex-col border border-amber-100 rounded-[24px] overflow-hidden">
                                           <div className="bg-amber-50/50 px-5 py-3 border-b border-amber-100 flex items-center justify-between">
                                             <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
                                               <span className="material-symbols-outlined text-[18px]">account_tree</span>
@@ -599,7 +599,7 @@ export default function PropDashboardPage() {
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
             <div className="bg-indigo-600 p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-3xl">shield_person</span>
+                <span className="material-symbols-outlined text-2xl md:text-3xl">shield_person</span>
                 <h2 className="text-xl font-black tracking-tight">MT4/MT5 Credentials</h2>
               </div>
               <button onClick={() => setShowCredentials(false)} className="text-indigo-200 hover:text-white transition-colors">
@@ -610,7 +610,7 @@ export default function PropDashboardPage() {
               
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-gray-400 font-black uppercase tracking-widest">Login ID</label>
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 font-mono font-black text-xl text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.account_number)}>
+                <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-4 font-mono font-black text-xl text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.account_number)}>
                   {account.account_number}
                   <span className="material-symbols-outlined text-gray-400 group-hover:text-indigo-600 text-sm">content_copy</span>
                 </div>
@@ -618,7 +618,7 @@ export default function PropDashboardPage() {
               
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-gray-400 font-black uppercase tracking-widest">Master Password</label>
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 font-mono font-black text-xl text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.password)}>
+                <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-4 font-mono font-black text-xl text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.password)}>
                   {account.password}
                   <span className="material-symbols-outlined text-gray-400 group-hover:text-indigo-600 text-sm">content_copy</span>
                 </div>
@@ -626,13 +626,13 @@ export default function PropDashboardPage() {
 
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-gray-400 font-black uppercase tracking-widest">Broker Server</label>
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 font-bold text-base text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.broker_server)}>
+                <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-4 font-bold text-base text-gray-900 flex justify-between items-center group cursor-pointer" onClick={() => navigator.clipboard.writeText(account.broker_server)}>
                   {account.broker_server}
                   <span className="material-symbols-outlined text-gray-400 group-hover:text-indigo-600 text-sm">content_copy</span>
                 </div>
               </div>
 
-              <div className="mt-2 bg-blue-50 border border-blue-100 p-4 rounded-xl flex gap-3 text-blue-800">
+              <div className="mt-2 bg-blue-50 border border-blue-100 p-4 rounded-[24px] flex gap-3 text-blue-800">
                 <span className="material-symbols-outlined text-blue-600 text-xl">info</span>
                 <p className="text-sm font-medium leading-relaxed">Download MetaTrader and select "Login to an existing account". Search for your broker server and enter these exact credentials.</p>
               </div>
@@ -648,7 +648,7 @@ export default function PropDashboardPage() {
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
             <div className="bg-emerald-600 p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-3xl">payments</span>
+                <span className="material-symbols-outlined text-2xl md:text-3xl">payments</span>
                 <h2 className="text-xl font-black tracking-tight">Request Payout</h2>
               </div>
               <button onClick={() => setShowPayoutModal(false)} className="text-emerald-200 hover:text-white transition-colors">
@@ -662,14 +662,14 @@ export default function PropDashboardPage() {
                   <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
                     <span className="material-symbols-outlined text-emerald-600 text-5xl">check_circle</span>
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">Payout Processed!</h3>
+                  <h3 className="text-2xl font-black tracking-tight text-gray-900 mb-2">Payout Processed!</h3>
                   <p className="text-gray-500 font-medium">Your 70% share has been deposited into your internal wallet. Commissions have been distributed to the network.</p>
                 </div>
               ) : (
                 <>
                   <div className="flex flex-col items-center mb-6">
                     <span className="text-xs text-gray-400 font-black uppercase tracking-widest mb-1">Max Eligible Profit</span>
-                    <span className={`text-2xl font-black font-mono tracking-tight ${totalNetProfit > 0 ? 'text-emerald-600' : 'text-gray-400'}`}>
+                    <span className={`text-2xl font-black tracking-tight font-mono tracking-tight ${totalNetProfit > 0 ? 'text-emerald-600' : 'text-gray-400'}`}>
                       ${totalNetProfit > 0 ? totalNetProfit.toFixed(2) : '0.00'}
                     </span>
                   </div>
@@ -689,7 +689,7 @@ export default function PropDashboardPage() {
                           max={totalNetProfit}
                           min={0}
                           step={1}
-                          className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-lg font-mono font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          className="w-full px-4 py-3 rounded-[24px] bg-gray-50 border border-gray-200 text-gray-900 text-lg font-mono font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                         />
                         {payoutAmount > totalNetProfit && (
                           <span className="text-xs font-bold text-red-500">Amount exceeds eligible profit.</span>
@@ -717,7 +717,7 @@ export default function PropDashboardPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="bg-rose-50 border border-rose-100 p-4 rounded-xl flex gap-3 text-rose-800">
+                    <div className="bg-rose-50 border border-rose-100 p-4 rounded-[24px] flex gap-3 text-rose-800">
                       <span className="material-symbols-outlined text-rose-600 text-xl">error</span>
                       <p className="text-sm font-medium leading-relaxed">Your account must be in net profit to request a payout.</p>
                     </div>
@@ -727,7 +727,7 @@ export default function PropDashboardPage() {
                     <button 
                       onClick={handlePayoutRequest}
                       disabled={totalNetProfit <= 0 || payoutAmount <= 0 || payoutAmount > totalNetProfit || isProcessingPayout}
-                      className={`w-full py-4 rounded-xl font-black text-white transition-all shadow-md flex items-center justify-center gap-2 ${totalNetProfit > 0 && payoutAmount > 0 && payoutAmount <= totalNetProfit && !isProcessingPayout ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:shadow-lg hover:-translate-y-0.5' : 'bg-gray-300 cursor-not-allowed'}`}
+                      className={`w-full py-4 rounded-[24px] font-black text-white transition-all shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex items-center justify-center gap-2 ${totalNetProfit > 0 && payoutAmount > 0 && payoutAmount <= totalNetProfit && !isProcessingPayout ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:shadow-lg hover:-translate-y-0.5' : 'bg-gray-300 cursor-not-allowed'}`}
                     >
                       {isProcessingPayout ? (
                         <span className="material-symbols-outlined animate-spin">refresh</span>

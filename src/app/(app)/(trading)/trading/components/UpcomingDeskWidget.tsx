@@ -1,6 +1,6 @@
 export function UpcomingDeskWidget() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-5 w-full flex flex-col">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <span className="flex items-center gap-2 text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight">
           <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span> Upcoming Desk Session
@@ -23,7 +23,7 @@ export function UpcomingDeskWidget() {
           <span className="text-[9px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-0.5">STARTS IN</span>
           <span className="font-mono text-[14px] font-bold text-[#111827]">01h : 42m : 18s</span>
         </div>
-        <button className="bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-4 py-2 rounded-lg font-bold text-[12px] transition-colors shadow-sm">
+        <button className="bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-4 py-2 rounded-lg font-bold text-[12px] transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           Join Desk
         </button>
       </div>

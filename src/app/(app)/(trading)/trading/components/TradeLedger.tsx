@@ -6,7 +6,7 @@ export function TradeLedger() {
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 w-full flex flex-col">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-[#1D4ED8]">receipt_long</span>
@@ -22,7 +22,7 @@ export function TradeLedger() {
 
       <div className="flex flex-col gap-3">
         {trades.map((trade, idx) => (
-          <div key={idx} className={`flex items-stretch justify-between p-4 rounded-xl border ${trade.action === 'BUY' ? 'bg-[#ECFDF5]/30 border-[#DCFCE7]' : 'bg-[#FEF2F2]/30 border-[#FEE2E2]'}`}>
+          <div key={idx} className={`flex items-stretch justify-between p-4 rounded-[24px] border ${trade.action === 'BUY' ? 'bg-[#ECFDF5]/30 border-[#DCFCE7]' : 'bg-[#FEF2F2]/30 border-[#FEE2E2]'}`}>
             
             <div className="flex items-start gap-4">
               <div className={`mt-1 font-bold text-[10px] w-10 py-1 rounded text-center ${trade.action === 'BUY' ? 'bg-[#D1FAE5] text-[#059669]' : 'bg-[#FEE2E2] text-[#EF4444]'}`}>

@@ -1,6 +1,6 @@
 export function AcademyWidget() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-5 w-full flex flex-col">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 w-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider leading-tight">Academic Pathway</span>
         <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">In Progress</span>

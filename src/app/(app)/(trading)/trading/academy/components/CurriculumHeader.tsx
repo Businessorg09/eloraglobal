@@ -1,6 +1,6 @@
 export function CurriculumHeader() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 w-full flex items-center justify-between">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex items-center justify-between">
       <div className="flex flex-col">
         <div className="flex items-center gap-2 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">
           <span className="material-symbols-outlined text-[16px]">school</span>
@@ -43,7 +43,7 @@ export function CurriculumHeader() {
           </div>
         </div>
 
-        <button className="bg-[#1D4ED8] hover:bg-[#1E40AF] transition-colors text-white px-5 py-3 rounded-lg font-bold text-[13px] shadow-sm flex items-center gap-2">
+        <button className="bg-[#1D4ED8] hover:bg-[#1E40AF] transition-colors text-white px-5 py-3 rounded-lg font-bold text-[13px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">play_arrow</span>
           <div className="flex flex-col text-left leading-none">
             <span className="text-[9px] uppercase tracking-wider text-white/80">Resume</span>

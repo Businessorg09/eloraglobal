@@ -17,7 +17,7 @@ interface TradeLogTableProps {
 
 export function TradeLogTable({ trades }: TradeLogTableProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 w-full flex flex-col mt-8">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex flex-col mt-8">
       <div className="flex items-center justify-between mb-6 border-b border-[#F3F4F6] pb-4">
         <h2 className="text-[16px] font-bold text-[#111827] leading-tight flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">table_rows</span>

@@ -123,7 +123,7 @@ function MessagesContent() {
     <div className="flex h-[calc(100vh-140px)] max-w-[1200px] mx-auto w-full pt-4 pb-8 animate-in fade-in duration-300">
       
       {/* Left Sidebar - Chat List */}
-      <div className={`w-full md:w-[350px] flex flex-col bg-surface-container-lowest border border-surface-container-low rounded-l-2xl shadow-sm shrink-0 ${activeRoomId && !isNewMessageMode ? 'hidden md:flex' : 'flex'}`}>
+      <div className={`w-full md:w-[350px] flex flex-col bg-surface-container-lowest border border-surface-container-low rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] shrink-0 ${activeRoomId && !isNewMessageMode ? 'hidden md:flex' : 'flex'}`}>
         <div className="p-5 border-b border-surface-container-low flex justify-between items-center">
           <h2 className="font-headline-lg text-[18px] text-on-surface font-bold">
             {isNewMessageMode ? 'New Message' : 'Messages'}
@@ -136,7 +136,7 @@ function MessagesContent() {
           </button>
         </div>
         <div className="p-4 border-b border-surface-container-low">
-          <input type="text" placeholder={isNewMessageMode ? "Search followers..." : "Search messages..."} className="w-full bg-surface-container-low rounded-xl px-4 py-2.5 font-body-sm text-[13px] focus:outline-none focus:ring-1 focus:ring-primary" />
+          <input type="text" placeholder={isNewMessageMode ? "Search followers..." : "Search messages..."} className="w-full bg-surface-container-low rounded-[24px] px-4 py-2.5 font-body-sm text-[13px] focus:outline-none focus:ring-1 focus:ring-primary" />
         </div>
         
         <div className="flex-1 overflow-y-auto">
@@ -191,7 +191,7 @@ function MessagesContent() {
       </div>
 
       {/* Right Area - Active Chat */}
-      <div className={`flex-1 flex-col bg-surface-container-lowest border-y border-r border-surface-container-low rounded-r-2xl shadow-sm ${!activeRoomId ? 'hidden md:flex items-center justify-center' : 'flex'}`}>
+      <div className={`flex-1 flex-col bg-surface-container-lowest border-y border-r border-surface-container-low rounded-r-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] ${!activeRoomId ? 'hidden md:flex items-center justify-center' : 'flex'}`}>
         {!activeRoomId ? (
           <div className="flex flex-col items-center gap-4 text-on-surface-variant max-w-sm text-center">
             <span className="material-symbols-outlined text-[64px] opacity-20">forum</span>
@@ -231,7 +231,7 @@ function MessagesContent() {
                         {(msg.sender?.username || 'U').substring(0,2).toUpperCase()}
                       </div>
                     )}
-                    <div className={`rounded-2xl px-5 py-3 shadow-sm text-[14px] ${isMe ? 'bg-primary text-on-primary rounded-tr-sm' : 'bg-surface-container-lowest border border-surface-container rounded-tl-sm text-on-surface'}`}>
+                    <div className={`rounded-2xl px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-[14px] ${isMe ? 'bg-primary text-on-primary rounded-tr-sm' : 'bg-surface-container-lowest border border-surface-container rounded-tl-sm text-on-surface'}`}>
                       {msg.content}
                     </div>
                   </div>
@@ -253,7 +253,7 @@ function MessagesContent() {
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 className="flex-1 bg-surface-container-low border border-surface-container-high rounded-full px-5 py-3 font-body-md text-[14px] focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
               />
-              <button onClick={handleSendMessage} className="text-on-primary bg-primary hover:bg-primary/90 w-10 h-10 flex items-center justify-center rounded-full shadow-sm transition-colors disabled:opacity-50" disabled={!newMessage.trim()}>
+              <button onClick={handleSendMessage} className="text-on-primary bg-primary hover:bg-primary/90 w-10 h-10 flex items-center justify-center rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors disabled:opacity-50" disabled={!newMessage.trim()}>
                 <span className="material-symbols-outlined text-[20px] ml-1">send</span>
               </button>
             </div>

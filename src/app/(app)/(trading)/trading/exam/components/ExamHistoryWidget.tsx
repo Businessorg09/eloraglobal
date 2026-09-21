@@ -6,7 +6,7 @@ export function ExamHistoryWidget() {
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-bold text-[16px] text-[#111827] flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">history</span> Evaluation History
@@ -16,7 +16,7 @@ export function ExamHistoryWidget() {
 
       <div className="flex flex-col gap-3">
         {history.map((exam, idx) => (
-          <div key={idx} className="flex items-center justify-between p-4 rounded-xl border border-[#E5E7EB] hover:shadow-md transition-shadow cursor-pointer bg-[#F8FAFC]">
+          <div key={idx} className="flex items-center justify-between p-4 rounded-[24px] border border-[#E5E7EB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow cursor-pointer bg-[#F8FAFC]">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: exam.bg, color: exam.color, border: `1px solid ${exam.border}` }}>
                 <span className="material-symbols-outlined text-[20px]">{exam.icon}</span>
@@ -35,7 +35,7 @@ export function ExamHistoryWidget() {
         ))}
       </div>
       
-      <div className="mt-6 p-4 bg-[#EFF6FF] border border-[#DBEAFE] rounded-xl flex items-start gap-3">
+      <div className="mt-6 p-4 bg-[#EFF6FF] border border-[#DBEAFE] rounded-[24px] flex items-start gap-3">
         <span className="material-symbols-outlined text-[#1D4ED8]">info</span>
         <p className="text-[11px] text-[#1D4ED8] font-medium leading-relaxed">
           Elora Prop Firm strictly requires an 85% passing grade on all Phase Final Exams to maintain Tier Scholar status and unlock funding pathways.

@@ -44,7 +44,7 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
   };
 
   return (
-    <form action={handleAction} className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col h-full relative">
+    <form action={handleAction} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col h-full relative">
       <div className="flex items-center justify-between mb-6 border-b border-[#F3F4F6] pb-4">
         <h2 className="text-[16px] font-bold text-[#111827] leading-tight flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">edit_document</span>
@@ -162,7 +162,7 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
         <button 
           type="submit"
           disabled={!asset || !lots || !pnl || isPending}
-          className="flex-[2] bg-[#1D4ED8] hover:bg-[#1E40AF] disabled:bg-[#9CA3AF] disabled:cursor-not-allowed text-white py-2.5 rounded-lg font-bold text-[13px] shadow-sm transition-colors flex items-center justify-center gap-2"
+          className="flex-[2] bg-[#1D4ED8] hover:bg-[#1E40AF] disabled:bg-[#9CA3AF] disabled:cursor-not-allowed text-white py-2.5 rounded-lg font-bold text-[13px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors flex items-center justify-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">
             {isPending ? 'sync' : 'save'}

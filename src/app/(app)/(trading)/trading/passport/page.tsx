@@ -108,15 +108,15 @@ export default async function TraderPassportPage() {
   if (highestTier === 0) {
     return (
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center max-w-lg w-full">
+        <div className="bg-white p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="material-symbols-outlined text-[32px]">account_balance_wallet</span>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">No Trading Account Found</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-2">No Trading Account Found</h2>
           <p className="text-slate-500 mb-6 text-sm">
             You currently do not have an active trading account or purchased package. Please request an account from the terminal or wait for an admin to assign one to you.
           </p>
-          <a href="/dashboard/business" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+          <a href="/dashboard/business" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-[24px] font-bold hover:bg-blue-700 transition-colors">
             <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
             View Packages
           </a>
@@ -129,16 +129,16 @@ export default async function TraderPassportPage() {
     <div className="flex-1 w-full h-full">
       <div className="flex flex-col w-full h-full">
         <div className="flex flex-col gap-gutter-lg w-full max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-xl bg-surface-container-lowest p-gutter-lg shadow-md">
+          <div className="relative overflow-hidden rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
             <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
             <div className="absolute left-1/3 -bottom-20 w-80 h-80 rounded-full bg-tertiary/5 blur-3xl pointer-events-none"></div>
             <div className="relative z-10 flex flex-col xl:flex-row gap-gutter-xl items-start justify-between">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-gutter-md flex-1">
                 <div className="relative group">
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md relative flex items-center justify-center text-white text-4xl font-bold">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[24px] overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative flex items-center justify-center text-white text-2xl md:text-4xl font-bold tracking-tight">
                     {profile.full_name.substring(0, 1).toUpperCase()}
                   </div>
-                  <div className="absolute -bottom-2 -right-2 bg-primary-container text-on-primary rounded-full p-1 shadow-sm flex items-center justify-center">
+                  <div className="absolute -bottom-2 -right-2 bg-primary-container text-on-primary rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center">
                     <span className="material-symbols-outlined text-[18px]">
                       verified
                     </span>
@@ -182,7 +182,7 @@ export default async function TraderPassportPage() {
                 </div>
               </div>
               <div className="flex flex-wrap sm:flex-nowrap xl:flex-col gap-2 w-full xl:w-auto shrink-0 justify-end">
-                <button className="flex-1 xl:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary-container text-on-primary font-headline-md text-body-sm shadow-sm hover:bg-primary transition-all">
+                <button className="flex-1 xl:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary-container text-on-primary font-headline-md text-body-sm shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-primary transition-all">
                   <span className="material-symbols-outlined text-[18px]">
                     workspace_premium
                   </span>
@@ -204,7 +204,7 @@ export default async function TraderPassportPage() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 pt-6 bg-surface-container-low/60 p-4 rounded-xl">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 pt-6 bg-surface-container-low/60 p-4 rounded-[24px]">
               <div className="flex flex-col">
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                   Passport Score
@@ -283,7 +283,7 @@ export default async function TraderPassportPage() {
                 blurLevel="md"
                 customMessage="Quantitative profiling is unlocked in Package 2."
               >
-                <div className="flex flex-col rounded-xl bg-surface-container-lowest p-gutter-lg shadow-sm h-full">
+                <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] h-full">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex flex-col">
                       <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
@@ -550,7 +550,7 @@ export default async function TraderPassportPage() {
                 blurLevel="md"
                 customMessage="Behavioral auditing is unlocked in Package 2."
               >
-                <div className="flex flex-col rounded-xl bg-surface-container-lowest p-gutter-lg shadow-sm justify-between h-full">
+                <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] justify-between h-full">
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex flex-col">
@@ -629,7 +629,7 @@ export default async function TraderPassportPage() {
               </GatedContent>
             </div>
           </div>
-          <div className="flex flex-col rounded-xl bg-surface-container-lowest p-gutter-lg shadow-sm">
+          <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div>
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
@@ -664,7 +664,7 @@ export default async function TraderPassportPage() {
 
                 if (isCleared || isActive) {
                   return (
-                    <div key={tier.t} className={`flex flex-col p-3 rounded-lg ${isActive ? 'bg-primary text-on-primary shadow-sm relative overflow-hidden' : 'bg-surface-container-low'}`}>
+                    <div key={tier.t} className={`flex flex-col p-3 rounded-lg ${isActive ? 'bg-primary text-on-primary shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden' : 'bg-surface-container-low'}`}>
                       <div className="flex items-center justify-between mb-1">
                         <span className={`font-label-sm text-label-sm ${isActive ? 'text-primary-fixed uppercase tracking-wider' : 'text-outline'}`}>
                           Tier {tier.t}
@@ -713,7 +713,7 @@ export default async function TraderPassportPage() {
                 );
               })}
             </div>
-            <div className="bg-surface-container-low p-4 rounded-xl">
+            <div className="bg-surface-container-low p-4 rounded-[24px]">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-headline-md text-headline-md text-on-surface">
                   Criteria Checklist to $200k Allocation
@@ -798,7 +798,7 @@ export default async function TraderPassportPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col rounded-xl bg-surface-container-lowest p-gutter-lg shadow-sm">
+          <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
@@ -824,7 +824,7 @@ export default async function TraderPassportPage() {
                 </span>
               </a>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6 bg-surface-container-low/60 p-4 rounded-xl">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6 bg-surface-container-low/60 p-4 rounded-[24px]">
               <div className="flex flex-col">
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                   Total Study Time
@@ -904,7 +904,7 @@ export default async function TraderPassportPage() {
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="flex flex-col p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
+              <div className="flex flex-col p-4 rounded-[24px] bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
@@ -938,7 +938,7 @@ export default async function TraderPassportPage() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
+              <div className="flex flex-col p-4 rounded-[24px] bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
@@ -972,7 +972,7 @@ export default async function TraderPassportPage() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
+              <div className="flex flex-col p-4 rounded-[24px] bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0">
@@ -1006,7 +1006,7 @@ export default async function TraderPassportPage() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col p-4 rounded-xl bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
+              <div className="flex flex-col p-4 rounded-[24px] bg-surface-container-low hover:bg-surface-container-high/60 transition-all border-none">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
@@ -1041,7 +1041,7 @@ export default async function TraderPassportPage() {
                 </div>
               </div>
             </div>
-            <div className="p-4 rounded-xl bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="p-4 rounded-[24px] bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-[22px]">
@@ -1077,7 +1077,7 @@ export default async function TraderPassportPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col rounded-xl bg-surface-container-lowest p-gutter-lg shadow-sm">
+          <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div>
                 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
@@ -1176,7 +1176,7 @@ export default async function TraderPassportPage() {
 
                 if (unlockedBadges.length === 0) {
                   return (
-                    <div className="col-span-full p-6 text-center bg-surface-container-low rounded-xl border border-dashed border-outline-variant">
+                    <div className="col-span-full p-6 text-center bg-surface-container-low rounded-[24px] border border-dashed border-outline-variant">
                       <span className="material-symbols-outlined text-outline text-[32px] mb-2">
                         lock
                       </span>
@@ -1193,10 +1193,10 @@ export default async function TraderPassportPage() {
                 return unlockedBadges.map((badge, idx) => (
                   <div
                     key={idx}
-                    className={`flex flex-col p-4 rounded-xl ${badge.premium ? "bg-gradient-to-b from-[#FEF3C7] to-white border border-[#F59E0B] shadow-md" : "bg-surface-container-low hover:bg-surface-container-high transition-all border border-transparent"} cursor-default group relative`}
+                    className={`flex flex-col p-4 rounded-[24px] ${badge.premium ? "bg-gradient-to-b from-[#FEF3C7] to-white border border-[#F59E0B] shadow-[0_8px_30px_rgba(0,0,0,0.04)]" : "bg-surface-container-low hover:bg-surface-container-high transition-all border border-transparent"} cursor-default group relative`}
                   >
                     {badge.premium && (
-                      <div className="absolute inset-0 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.3)] pointer-events-none"></div>
+                      <div className="absolute inset-0 rounded-[24px] shadow-[0_0_15px_rgba(245,158,11,0.3)] pointer-events-none"></div>
                     )}
                     <div
                       className={`w-12 h-12 rounded-lg text-white flex items-center justify-center mb-3 group-hover:scale-105 transition-transform relative`}

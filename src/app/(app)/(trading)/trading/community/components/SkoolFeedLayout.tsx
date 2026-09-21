@@ -331,7 +331,7 @@ export function SkoolFeedLayout() {
       
       {/* --- Gated Access Overlay --- */}
       {!isPremiumMember && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-background/60 rounded-xl">
+        <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-background/60 rounded-[24px]">
           <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-xl border border-surface-container-low max-w-md text-center flex flex-col items-center animate-in zoom-in-95 duration-200">
             <div className="w-16 h-16 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-[32px]">lock</span>
@@ -340,7 +340,7 @@ export function SkoolFeedLayout() {
             <p className="font-body-md text-body-md text-on-surface-variant mb-6">
               The Institutional Trading Guild is an exclusive space for Premium and Elite members to share high-probability setups and network with desk instructors.
             </p>
-            <button className="bg-primary text-on-primary font-label-md text-label-md py-3 px-8 rounded-lg w-full shadow-sm hover:bg-primary/90 transition-all">
+            <button className="bg-primary text-on-primary font-label-md text-label-md py-3 px-8 rounded-lg w-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-primary/90 transition-all">
               Upgrade Package
             </button>
             <button onClick={() => setIsPremiumMember(true)} className="mt-4 font-label-sm text-[12px] text-outline hover:text-on-surface transition-colors">
@@ -352,7 +352,7 @@ export function SkoolFeedLayout() {
 
       {/* --- Generic Toast (Instagram Style) --- */}
       {toast && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 md:bottom-auto md:top-32 md:right-8 md:left-auto md:translate-x-0 z-50 bg-surface-container-lowest border border-surface-container-low rounded-xl shadow-lg p-3 flex items-center gap-4 animate-in slide-in-from-bottom-5 md:slide-in-from-right-5 fade-in duration-300 min-w-[280px]">
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 md:bottom-auto md:top-32 md:right-8 md:left-auto md:translate-x-0 z-50 bg-surface-container-lowest border border-surface-container-low rounded-[24px] shadow-lg p-3 flex items-center gap-4 animate-in slide-in-from-bottom-5 md:slide-in-from-right-5 fade-in duration-300 min-w-[280px]">
           {toast.img ? (
             <img src={toast.img} alt="Preview" className="w-10 h-10 object-cover rounded-md" />
           ) : (
@@ -397,9 +397,9 @@ export function SkoolFeedLayout() {
             
             {/* Story Author Info */}
             <div className="absolute top-8 left-4 flex items-center gap-3 z-10">
-               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[12px] shadow-sm">{activeStory.img}</div>
-               <span className="text-white font-headline-md text-[14px] font-bold drop-shadow-md">{activeStory.name}</span>
-               <span className="text-white/70 font-body-sm text-[12px] drop-shadow-md">2h</span>
+               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">{activeStory.img}</div>
+               <span className="text-white font-headline-md text-[14px] font-bold drop-shadow-[0_8px_30px_rgba(0,0,0,0.04)]">{activeStory.name}</span>
+               <span className="text-white/70 font-body-sm text-[12px] drop-shadow-[0_8px_30px_rgba(0,0,0,0.04)]">2h</span>
             </div>
             
             {/* Floating Emojis */}
@@ -462,7 +462,7 @@ export function SkoolFeedLayout() {
       <div className={`w-full max-w-[550px] flex flex-col gap-6 ${!isPremiumMember ? 'opacity-30 pointer-events-none filter blur-[2px]' : ''} transition-all duration-300`}>
         
         {/* Stories / Groups Bar */}
-        <div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container-low p-4 flex gap-4 overflow-x-auto hide-scrollbar">
+        <div className="bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container-low p-4 flex gap-4 overflow-x-auto hide-scrollbar">
           {/* Add Story Button */}
           <div className="flex flex-col items-center gap-1.5 cursor-pointer group relative">
             <input 
@@ -494,7 +494,7 @@ export function SkoolFeedLayout() {
         </div>
 
         {/* Create Post Input / Composer */}
-        <div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container-low p-4 flex flex-col gap-3">
+        <div className="bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container-low p-4 flex flex-col gap-3">
           <div className="flex gap-3 items-center">
             <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-[14px] shrink-0">
               ME
@@ -528,7 +528,7 @@ export function SkoolFeedLayout() {
             <button 
               onClick={handleCreatePost} 
               disabled={!newPostContent.trim() && !newPostPhoto}
-              className={`px-5 py-1.5 rounded-full font-label-md text-[13px] transition-colors shadow-sm ${(!newPostContent.trim() && !newPostPhoto) ? 'bg-surface-container-high text-on-surface-variant cursor-not-allowed' : 'bg-primary hover:bg-primary/90 text-on-primary'}`}
+              className={`px-5 py-1.5 rounded-full font-label-md text-[13px] transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)] ${(!newPostContent.trim() && !newPostPhoto) ? 'bg-surface-container-high text-on-surface-variant cursor-not-allowed' : 'bg-primary hover:bg-primary/90 text-on-primary'}`}
             >
               Share Post
             </button>
@@ -537,12 +537,12 @@ export function SkoolFeedLayout() {
 
         {/* Posts Feed */}
         {posts.map((post) => (
-          <div key={post.id} className="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container-low flex flex-col overflow-hidden group/post">
+          <div key={post.id} className="bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container-low flex flex-col overflow-hidden group/post">
             
             {/* Post Header */}
             <div className="flex items-center justify-between p-4">
               <div className="flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-headline-md text-[12px] shadow-sm ${post.role.includes('Chief') ? 'bg-gradient-to-tr from-primary to-secondary' : post.role.includes('Elite') ? 'bg-gradient-to-tr from-tertiary to-emerald-400' : 'bg-surface-tint'}`}>
+                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-headline-md text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] ${post.role.includes('Chief') ? 'bg-gradient-to-tr from-primary to-secondary' : post.role.includes('Elite') ? 'bg-gradient-to-tr from-tertiary to-emerald-400' : 'bg-surface-tint'}`}>
                   {post.avatar}
                 </div>
                 <div className="flex flex-col">
@@ -566,7 +566,7 @@ export function SkoolFeedLayout() {
                   <>
                     {/* Invisible overlay to close dropdown when clicking outside */}
                     <div className="fixed inset-0 z-40" onClick={() => setDropdownOpenPostId(null)}></div>
-                    <div className="absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-surface-container-low rounded-xl shadow-lg z-50 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+                    <div className="absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-surface-container-low rounded-[24px] shadow-lg z-50 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                       <button onClick={() => handleSavePost(post.id)} className="w-full text-left px-4 py-2.5 hover:bg-surface-container-low font-body-sm text-[14px] text-on-surface flex items-center gap-3 transition-colors">
                         <span className={`material-symbols-outlined text-[18px] ${savedPosts[post.id] ? 'text-primary' : 'text-outline'}`}>bookmark</span> 
                         {savedPosts[post.id] ? 'Unsave Post' : 'Save Post'}

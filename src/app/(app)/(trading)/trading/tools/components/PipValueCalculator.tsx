@@ -29,7 +29,7 @@ export function PipValueCalculator() {
   }
 
   return (
-    <div className="bg-[#ffffff] border border-[#E5E7EB] rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+    <div className="bg-[#ffffff] border border-[#E5E7EB] rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col h-full">
       <div className="bg-[#F8FAFC] border-b border-[#E5E7EB] px-5 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8] text-[20px]">calculate</span>
@@ -80,7 +80,7 @@ export function PipValueCalculator() {
           </div>
         </div>
 
-        <div className="mt-auto bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-4 flex items-center justify-between">
+        <div className="mt-auto bg-[#EFF6FF] border border-[#BFDBFE] rounded-[24px] p-4 flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-wider mb-1">Value Per Pip (1 Tick)</span>
             <span className="text-[12px] text-[#4B5563]">For {lotSize} Standard Lots</span>

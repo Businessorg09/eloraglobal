@@ -21,7 +21,7 @@ const data = [
 
 export function CapitalGrowthChart() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 w-full flex flex-col relative overflow-hidden">
+    <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 w-full flex flex-col relative overflow-hidden">
       
       <div className="flex items-start justify-between mb-8 relative z-10">
         <div>
@@ -34,7 +34,7 @@ export function CapitalGrowthChart() {
         <div className="flex bg-[#F3F4F6] p-1 rounded-lg">
           <button className="px-3 py-1.5 text-[12px] font-semibold text-[#6B7280] hover:text-[#111827]">1D</button>
           <button className="px-3 py-1.5 text-[12px] font-semibold text-[#6B7280] hover:text-[#111827]">1W</button>
-          <button className="bg-white text-[#1D4ED8] px-3 py-1.5 text-[12px] font-bold rounded-md shadow-sm border border-[#E5E7EB]">1M</button>
+          <button className="bg-white text-[#1D4ED8] px-3 py-1.5 text-[12px] font-bold rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">1M</button>
           <button className="px-3 py-1.5 text-[12px] font-semibold text-[#6B7280] hover:text-[#111827]">All</button>
         </div>
       </div>

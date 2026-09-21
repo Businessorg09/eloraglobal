@@ -23,7 +23,7 @@ export function CompoundingCalculator() {
   const roi = (totalProfit / balance) * 100;
 
   return (
-    <div className="bg-[#ffffff] border border-[#E5E7EB] rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+    <div className="bg-[#ffffff] border border-[#E5E7EB] rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col h-full">
       <div className="bg-[#F8FAFC] border-b border-[#E5E7EB] px-5 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8] text-[20px]">trending_up</span>
@@ -87,7 +87,7 @@ export function CompoundingCalculator() {
           </div>
         </div>
 
-        <div className="mt-auto bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-4 flex flex-col items-center text-center">
+        <div className="mt-auto bg-[#ECFDF5] border border-[#A7F3D0] rounded-[24px] p-4 flex flex-col items-center text-center">
           <span className="text-[11px] font-bold text-[#059669] uppercase tracking-wider mb-1">Projected Balance (Avg Expected)</span>
           <span className="text-[32px] font-black text-[#111827] tracking-tight leading-none mb-2">
             ${projectedBalance.toLocaleString(undefined, { maximumFractionDigits: 0 })}

@@ -164,7 +164,7 @@ export function CommandCenterWidget() {
         </p>
 
         {/* Video Player */}
-        <div className="relative w-full aspect-video bg-[#111827] rounded-[24px] overflow-hidden shadow-md group mb-5">
+        <div className="relative w-full aspect-video bg-[#111827] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] group mb-5">
           {episode && episode.video_url ? (
             isPlaying ? (
               <iframe 

@@ -20,21 +20,21 @@ export function LessonContentPanels() {
       <div className="py-6">
         {/* Rules Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#F8F9FA] rounded-xl p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 1: Hard Capital Exposure</span>
             <div className="text-[20px] font-bold text-[#1D4ED8] my-1">1.0% — 2.0%</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
               Never risk exceeding 2% of total qualified account equity on any singular market setup.
             </p>
           </div>
-          <div className="bg-[#F8F9FA] rounded-xl p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 2: Market Volatility Buffer</span>
             <div className="text-[20px] font-bold text-[#059669] my-1">1.5 × ATR</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
               Average True Range (14 period) spacing prevents micro stop-outs from broker spreads.
             </p>
           </div>
-          <div className="bg-[#F8F9FA] rounded-xl p-5 border border-[#E5E7EB]">
+          <div className="bg-[#F8F9FA] rounded-[24px] p-5 border border-[#E5E7EB]">
             <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Rule 3: Pip Value Uniformity</span>
             <div className="text-[20px] font-bold text-[#111827] my-1">$10.00 / lot</div>
             <p className="text-[11px] text-[#4B5563] leading-relaxed">
@@ -44,7 +44,7 @@ export function LessonContentPanels() {
         </div>
 
         {/* Formula Block */}
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 mb-6">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <span className="flex items-center gap-2 text-[14px] font-bold text-[#111827]">
               <span className="material-symbols-outlined text-[#1D4ED8]">functions</span> The Core Lot Sizing Formulation
@@ -73,7 +73,7 @@ export function LessonContentPanels() {
         <h3 className="font-bold text-[16px] text-[#111827] mb-4">Standard Operating Procedure For Every Execution</h3>
         <div className="flex flex-col gap-3 mb-8">
           
-          <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-[#E5E7EB]">
+          <div className="flex items-start gap-4 p-4 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
             <div className="w-8 h-8 rounded-full bg-[#1D4ED8] text-white font-bold flex items-center justify-center shrink-0">1</div>
             <div>
               <h4 className="font-bold text-[14px] text-[#111827]">Chart-Determined Stop Loss First</h4>
@@ -81,7 +81,7 @@ export function LessonContentPanels() {
             </div>
           </div>
 
-          <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-[#E5E7EB]">
+          <div className="flex items-start gap-4 p-4 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
             <div className="w-8 h-8 rounded-full bg-[#1D4ED8] text-white font-bold flex items-center justify-center shrink-0">2</div>
             <div>
               <h4 className="font-bold text-[14px] text-[#111827]">Determine Cash Risk Tolerance</h4>
@@ -89,7 +89,7 @@ export function LessonContentPanels() {
             </div>
           </div>
 
-          <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-[#E5E7EB]">
+          <div className="flex items-start gap-4 p-4 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
             <div className="w-8 h-8 rounded-full bg-[#1D4ED8] text-white font-bold flex items-center justify-center shrink-0">3</div>
             <div>
               <h4 className="font-bold text-[14px] text-[#111827]">Apply Leverage-Independent Fractional Sizing</h4>
@@ -104,7 +104,7 @@ export function LessonContentPanels() {
             <span className="material-symbols-outlined text-[18px]">arrow_back</span>
             Previous: Stop Loss Placement
           </button>
-          <button className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-lg font-bold text-[13px] shadow-sm transition-colors">
+          <button className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-6 py-3 rounded-lg font-bold text-[13px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors">
             <span className="material-symbols-outlined text-[18px]">check_circle</span>
             Mark as Complete & Next: Risk/Reward Ratios <span className="material-symbols-outlined text-[18px] ml-1">arrow_forward</span>
           </button>
