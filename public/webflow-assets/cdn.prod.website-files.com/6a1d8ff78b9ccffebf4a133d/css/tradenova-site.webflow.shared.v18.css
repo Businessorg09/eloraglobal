@@ -9406,7 +9406,7 @@ figcaption {
    HERO LOGO MARQUEE ANIMATION
 ───────────────────────────────────────── */
 .marquee_item-wrap {
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 12s linear infinite;
 }
 
 @keyframes scroll-left {
