@@ -173,7 +173,7 @@ export default function PropDashboardPage() {
           
           <button 
             onClick={() => setShowCredentials(true)}
-            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-3 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-indigo-50 rounded-[24px] flex items-center justify-center mb-3 group-hover:bg-indigo-600 transition-colors">
               <span className="material-symbols-outlined text-indigo-600 group-hover:text-white transition-colors">key</span>
@@ -184,7 +184,7 @@ export default function PropDashboardPage() {
 
           <button 
             onClick={() => alert('Deposit / Top Up functionality coming soon!')}
-            className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-blue-600 border border-transparent rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgb(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-blue-600 border border-transparent rounded-2xl p-3 md:p-5 shadow-[0_4px_20px_rgb(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">add_circle</span>
@@ -198,7 +198,7 @@ export default function PropDashboardPage() {
               setPayoutAmount(totalNetProfit > 0 ? totalNetProfit : 0);
               setShowPayoutModal(true);
             }}
-            className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 border border-transparent rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgb(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 border border-transparent rounded-2xl p-3 md:p-5 shadow-[0_4px_20px_rgb(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">payments</span>
@@ -540,7 +540,8 @@ export default function PropDashboardPage() {
                 )}
               </div>
             ) : (
-            <table className="w-full text-left border-collapse text-sm">
+            <>
+            <table className="hidden md:table w-full text-left border-collapse text-sm">
               <thead className="bg-white text-gray-400 uppercase tracking-widest font-black text-[10px] border-b border-gray-100">
                 <tr>
                   <th className="px-8 py-5 whitespace-nowrap">Order ID</th>
@@ -587,6 +588,45 @@ export default function PropDashboardPage() {
                 )}
               </tbody>
             </table>
+            {/* Mobile Trade Cards */}
+            <div className="flex md:hidden flex-col gap-3 mt-4">
+              {(activeTab === 'HISTORY' ? closedTrades : openTrades).length === 0 ? (
+                <div className="text-center py-12 text-gray-400 font-medium text-sm">
+                  {activeTab === 'HISTORY' ? 'No closed trade history.' : 'No active positions.'}
+                </div>
+              ) : (
+                (activeTab === 'HISTORY' ? closedTrades : openTrades).map((trade) => (
+                  <div key={trade.id} className="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[10px] px-2 py-1 rounded-full font-black uppercase tracking-widest ${trade.direction === 'BUY' ? 'bg-indigo-100 text-indigo-700' : 'bg-rose-100 text-rose-700'}`}>
+                          {trade.direction}
+                        </span>
+                        <span className="font-black text-gray-900">{trade.symbol}</span>
+                      </div>
+                      <span className={`font-black font-mono tracking-tight ${parseFloat(trade.pnl) >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                        {parseFloat(trade.pnl) >= 0 ? '+' : ''}${parseFloat(trade.pnl).toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs font-mono text-gray-500">
+                      <div className="flex flex-col">
+                        <span className="text-[9px] uppercase font-bold text-gray-400 tracking-wider">Open</span>
+                        {parseFloat(trade.open_price).toFixed(5)}
+                      </div>
+                      <div className="flex flex-col text-right">
+                        <span className="text-[9px] uppercase font-bold text-gray-400 tracking-wider">Close</span>
+                        {activeTab === 'HISTORY' ? (parseFloat(trade.close_price) || parseFloat(trade.open_price)).toFixed(5) : 'Active'}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px] text-gray-400 pt-2 border-t border-gray-200/60 mt-1">
+                      <span>Vol: {trade.lot_size.toFixed(2)}</span>
+                      <span>{new Date(trade.open_time).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            </>
             )}
           </div>
         </div>
@@ -646,9 +686,9 @@ export default function PropDashboardPage() {
       {showPayoutModal && (
         <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
-            <div className="bg-emerald-600 p-4 md:p-6 text-white flex items-center justify-between">
+            <div className="bg-emerald-600 p-5 md:p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-lg md:text-3xl">payments</span>
+                <span className="material-symbols-outlined text-2xl md:text-3xl">payments</span>
                 <h2 className="text-xl font-black tracking-tight">Request Payout</h2>
               </div>
               <button onClick={() => setShowPayoutModal(false)} className="text-emerald-200 hover:text-white transition-colors">
