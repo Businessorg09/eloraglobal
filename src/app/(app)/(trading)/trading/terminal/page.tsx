@@ -72,7 +72,7 @@ export default function PropDashboardPage() {
   if (isLoading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center ">
-        <div className="animate-spin text-indigo-600 material-symbols-outlined text-lg md:text-4xl">refresh</div>
+        <div className="animate-spin text-indigo-600 material-symbols-outlined text-lg md:text-3xl md:text-4xl">refresh</div>
       </div>
     )
   }
@@ -80,13 +80,13 @@ export default function PropDashboardPage() {
   if (!account) {
     return (
       <div className="flex-1 w-full flex flex-col items-center justify-center text-gray-900">
-        <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center max-w-lg text-center">
+        <div className="bg-white p-6 md:p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center max-w-lg text-center">
           <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
-            <span className="material-symbols-outlined text-lg md:text-4xl text-indigo-600">account_balance_wallet</span>
+            <span className="material-symbols-outlined text-lg md:text-3xl md:text-4xl text-indigo-600">account_balance_wallet</span>
           </div>
-          <h1 className="text-lg md:text-3xl font-black tracking-tight mb-3 tracking-tight">No Account Assigned</h1>
+          <h1 className="text-lg md:text-2xl md:text-3xl font-black tracking-tight mb-3 tracking-tight">No Account Assigned</h1>
           <p className="text-gray-500 mb-8 leading-relaxed">Your institutional trading account has not been activated yet. Please wait for the risk desk to allocate your MT4/MT5 credentials.</p>
-          <Link href="/trading" className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-4 rounded-[24px] font-bold transition-all shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)] hover:-translate-y-0.5">
+          <Link href="/trading" className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-4 md:px-8 py-4 rounded-[24px] font-bold transition-all shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)] hover:-translate-y-0.5">
             Return to Dashboard
           </Link>
         </div>
@@ -136,14 +136,14 @@ export default function PropDashboardPage() {
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[400px] bg-blue-400/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
 
       {/* Top Banner */}
-      <div className="pt-6 px-4 md:pt-10 md:px-8 pb-6 max-w-[1400px] mx-auto w-full flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-0">
+      <div className="pt-6 px-4 md:pt-10 md:px-4 md:px-8 pb-6 max-w-[1400px] mx-auto w-full flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-0">
         <div className="flex items-start md:items-center gap-4 md:gap-6">
           <Link href="/trading" className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all hover:-translate-y-0.5">
-            <span className="material-symbols-outlined text-[24px]">arrow_back</span>
+            <span className="material-symbols-outlined text-[20px] md:text-[24px]">arrow_back</span>
           </Link>
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-lg md:text-3xl font-black tracking-tight text-gray-900 tracking-tight">Prop Analytics</h1>
+              <h1 className="text-lg md:text-2xl md:text-3xl font-black tracking-tight text-gray-900 tracking-tight">Prop Analytics</h1>
               <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] uppercase font-black px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
                 Funded Status
@@ -166,7 +166,7 @@ export default function PropDashboardPage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full px-8 flex flex-col gap-4 md:p-8">
+      <div className="max-w-[1400px] mx-auto w-full px-4 md:px-8 flex flex-col gap-4 md:p-8">
         
         {/* Quick Actions Toolbar (Premium Cards) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -237,7 +237,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">account_balance</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Balance</span>
-            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+            <span className="text-lg md:text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
           </div>
 
           <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
@@ -245,7 +245,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">timeline</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Live Equity</span>
-            <span className={`text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${equity > balance ? 'text-emerald-600' : equity < balance ? 'text-rose-600' : 'text-gray-900'}`}>
+            <span className={`text-2xl md:text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${equity > balance ? 'text-emerald-600' : equity < balance ? 'text-rose-600' : 'text-gray-900'}`}>
               ${equity.toLocaleString('en-US', {minimumFractionDigits: 2})}
             </span>
           </div>
@@ -255,7 +255,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">payments</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Net Profit</span>
-            <span className={`text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${totalNetProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+            <span className={`text-2xl md:text-3xl font-black tracking-tight font-mono tracking-tight z-10 ${totalNetProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
               {totalNetProfit >= 0 ? '+' : ''}${totalNetProfit.toLocaleString('en-US', {minimumFractionDigits: 2})}
             </span>
           </div>
@@ -265,7 +265,7 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">pie_chart</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Win Rate</span>
-            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
+            <span className="text-lg md:text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
           </div>
 
           <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
@@ -273,13 +273,13 @@ export default function PropDashboardPage() {
               <span className="material-symbols-outlined text-6xl">tag</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Trades Taken</span>
-            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
+            <span className="text-lg md:text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
           </div>
         </div>
 
         {/* Equity Curve Graph */}
         <div className="bg-white border border-gray-100 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col p-4 md:p-8 overflow-hidden relative">
-          <div className="flex items-center justify-between mb-8 z-10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-8 z-10">
             <div className="flex flex-col">
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Equity Curve</h2>
               <p className="text-sm text-gray-500 font-medium">Historical performance trajectory based on closed positions.</p>
@@ -340,13 +340,13 @@ export default function PropDashboardPage() {
           <div className="flex items-center border-b border-gray-100 px-6 bg-gray-50/50">
             <button 
               onClick={() => setActiveTab('HISTORY')}
-              className={`px-8 py-5 text-sm font-black border-b-2 transition-colors tracking-wide ${activeTab === 'HISTORY' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
+              className={`px-4 md:px-8 py-5 text-sm font-black border-b-2 transition-colors tracking-wide ${activeTab === 'HISTORY' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
             >
               Trade History <span className="ml-1 opacity-50">({closedTrades.length})</span>
             </button>
             <button 
               onClick={() => setActiveTab('OPEN')}
-              className={`px-8 py-5 text-sm font-black border-b-2 transition-colors flex items-center gap-2 tracking-wide ${activeTab === 'OPEN' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
+              className={`px-4 md:px-8 py-5 text-sm font-black border-b-2 transition-colors flex items-center gap-2 tracking-wide ${activeTab === 'OPEN' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
             >
               Open Positions 
               <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeTab === 'OPEN' ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-200 text-gray-700'}`}>
@@ -355,7 +355,7 @@ export default function PropDashboardPage() {
             </button>
             <button 
               onClick={() => setActiveTab('PAYOUTS')}
-              className={`px-8 py-5 text-sm font-black border-b-2 transition-colors tracking-wide ${activeTab === 'PAYOUTS' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
+              className={`px-4 md:px-8 py-5 text-sm font-black border-b-2 transition-colors tracking-wide ${activeTab === 'PAYOUTS' ? 'text-indigo-600 border-indigo-600 bg-white' : 'text-gray-500 hover:text-gray-900 border-transparent'}`}
             >
               Payout History <span className="ml-1 opacity-50">({payoutHistory.length})</span>
             </button>
@@ -376,7 +376,7 @@ export default function PropDashboardPage() {
                         <div key={payout.id} className="flex flex-col border-b border-gray-50 last:border-0">
                           {/* Payout Summary Row */}
                           <div 
-                            className="flex items-center justify-between px-8 py-5 hover:bg-gray-50/50 cursor-pointer transition-colors"
+                            className="flex items-center justify-between px-4 md:px-8 py-5 hover:bg-gray-50/50 cursor-pointer transition-colors"
                             onClick={() => setExpandedPayoutId(isExpanded ? null : payout.id)}
                           >
                             <div className="flex items-center gap-4">
@@ -389,7 +389,7 @@ export default function PropDashboardPage() {
                               </div>
                             </div>
                             
-                            <div className="flex items-center gap-12">
+                            <div className="flex items-center gap-6 md:p-12">
                               <div className="flex flex-col items-end">
                                 <span className="text-[10px] uppercase font-black tracking-widest text-gray-400">Gross Profit</span>
                                 <span className="font-mono font-bold text-gray-900">${payout.gross_usd.toFixed(2)}</span>
@@ -406,7 +406,7 @@ export default function PropDashboardPage() {
 
                           {/* Expanded Distribution Breakdown */}
                           {isExpanded && (
-                            <div className="px-8 pb-6 pt-2 bg-gray-50/30">
+                            <div className="px-4 md:px-8 pb-6 pt-2 bg-gray-50/30">
                               <div className="bg-white border border-gray-100 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col">
                                 <div className="bg-indigo-50/50 px-6 py-4 border-b border-indigo-100/50 flex items-center justify-between">
                                   <div className="flex items-center gap-2 text-indigo-900 font-bold text-sm">
@@ -538,14 +538,14 @@ export default function PropDashboardPage() {
             <div className="overflow-x-auto w-full"><table className="hidden md:table w-full text-left border-collapse text-sm">
               <thead className="bg-white text-gray-400 uppercase tracking-widest font-black text-[10px] border-b border-gray-100">
                 <tr>
-                  <th className="px-8 py-5 whitespace-nowrap">Order ID</th>
-                  <th className="px-8 py-5 whitespace-nowrap">Open Time</th>
-                  <th className="px-8 py-5 whitespace-nowrap">Type</th>
-                  <th className="px-8 py-5 whitespace-nowrap">Volume</th>
-                  <th className="px-8 py-5 whitespace-nowrap">Symbol</th>
-                  <th className="px-8 py-5 whitespace-nowrap">Open Price</th>
-                  <th className="px-8 py-5 whitespace-nowrap">{activeTab === 'HISTORY' ? 'Close Time' : 'Current Price'}</th>
-                  <th className="px-8 py-5 whitespace-nowrap text-right">Profit / Loss</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Order ID</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Open Time</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Type</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Volume</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Symbol</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">Open Price</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap">{activeTab === 'HISTORY' ? 'Close Time' : 'Current Price'}</th>
+                  <th className="px-4 md:px-8 py-5 whitespace-nowrap text-right">Profit / Loss</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-50">
@@ -558,23 +558,23 @@ export default function PropDashboardPage() {
                 ) : (
                   (activeTab === 'HISTORY' ? closedTrades.slice().reverse() : openTrades).map(trade => (
                     <tr key={trade.id} className="hover:bg-gray-50/50 transition-colors group">
-                      <td className="px-8 py-5 text-gray-400 font-mono text-xs font-medium">{trade.ticket_id}</td>
-                      <td className="px-8 py-5 text-gray-700 font-medium">{new Date(trade.open_time).toLocaleString()}</td>
-                      <td className="px-8 py-5">
+                      <td className="px-4 md:px-8 py-5 text-gray-400 font-mono text-xs font-medium">{trade.ticket_id}</td>
+                      <td className="px-4 md:px-8 py-5 text-gray-700 font-medium">{new Date(trade.open_time).toLocaleString()}</td>
+                      <td className="px-4 md:px-8 py-5">
                         <span className={`px-2.5 py-1 rounded-md text-xs font-black tracking-wide ${trade.direction === 'BUY' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-rose-50 text-rose-700 border border-rose-100'}`}>
                           {trade.direction}
                         </span>
                       </td>
-                      <td className="px-8 py-5 text-gray-900 font-bold">{trade.lot_size.toFixed(2)}</td>
-                      <td className="px-8 py-5 font-black text-gray-900">{trade.symbol}</td>
-                      <td className="px-8 py-5 text-gray-500 font-mono text-xs">{parseFloat(trade.open_price).toFixed(5)}</td>
-                      <td className="px-8 py-5 text-gray-500 font-mono text-xs">
+                      <td className="px-4 md:px-8 py-5 text-gray-900 font-bold">{trade.lot_size.toFixed(2)}</td>
+                      <td className="px-4 md:px-8 py-5 font-black text-gray-900">{trade.symbol}</td>
+                      <td className="px-4 md:px-8 py-5 text-gray-500 font-mono text-xs">{parseFloat(trade.open_price).toFixed(5)}</td>
+                      <td className="px-4 md:px-8 py-5 text-gray-500 font-mono text-xs">
                         {activeTab === 'HISTORY' 
                           ? (trade.close_time ? new Date(trade.close_time).toLocaleString() : '-') 
                           : (parseFloat(trade.close_price) || parseFloat(trade.open_price)).toFixed(5)
                         }
                       </td>
-                      <td className={`px-8 py-5 text-right font-black font-mono tracking-tight text-base ${parseFloat(trade.pnl) >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                      <td className={`px-4 md:px-8 py-5 text-right font-black font-mono tracking-tight text-base ${parseFloat(trade.pnl) >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                         {parseFloat(trade.pnl) >= 0 ? '+' : ''}${parseFloat(trade.pnl).toFixed(2)}
                       </td>
                     </tr>
@@ -633,14 +633,14 @@ export default function PropDashboardPage() {
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
             <div className="bg-indigo-600 p-4 md:p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-lg md:text-3xl">shield_person</span>
+                <span className="material-symbols-outlined text-lg md:text-2xl md:text-3xl">shield_person</span>
                 <h2 className="text-xl font-black tracking-tight">MT4/MT5 Credentials</h2>
               </div>
               <button onClick={() => setShowCredentials(false)} className="text-indigo-200 hover:text-white transition-colors">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <div className="p-5 md:p-8 flex flex-col gap-4 md:gap-6">
+            <div className="p-5 md:p-4 md:p-8 flex flex-col gap-4 md:gap-6">
               
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-gray-400 font-black uppercase tracking-widest">Login ID</label>
@@ -692,7 +692,7 @@ export default function PropDashboardPage() {
             
             <div className="p-4 md:p-8 flex flex-col gap-4 md:gap-6">
               {payoutSuccess ? (
-                <div className="flex flex-col items-center justify-center py-8 text-center">
+                <div className="flex flex-col items-center justify-center py-4 md:py-8 text-center">
                   <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
                     <span className="material-symbols-outlined text-emerald-600 text-xl md:text-5xl">check_circle</span>
                   </div>

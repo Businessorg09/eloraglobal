@@ -48,10 +48,10 @@ export function IndicatorLibraryWidget() {
 
   return (
     <div className="flex flex-col mt-4">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
         <div className="flex flex-col">
           <h2 className="text-[20px] font-bold text-[#111827] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[24px] text-[#1D4ED8]">code_blocks</span>
+            <span className="material-symbols-outlined text-[20px] md:text-[24px] text-[#1D4ED8]">code_blocks</span>
             Proprietary PineScript Indicators
           </h2>
           <p className="text-[13px] text-[#6B7280] mt-1">Plug-and-play TradingView algorithms engineered by our desk.</p>

@@ -83,18 +83,18 @@ export default function CommunityProfilePage() {
       {/* Top Navigation Back */}
       <div className="flex items-center gap-4 mb-10">
         <Link href="/trading/community" className="text-on-surface hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center">
-          <span className="material-symbols-outlined text-[24px]">arrow_back</span>
+          <span className="material-symbols-outlined text-[20px] md:text-[24px]">arrow_back</span>
         </Link>
         <span className="font-headline-lg text-[20px] font-bold text-on-surface">{displayName}</span>
       </div>
 
       {/* Profile Header (Instagram Style) */}
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 md:gap-16 px-4 md:px-8 mb-10">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-4 md:p-8 md:gap-16 px-4 md:px-8 mb-10">
         
         {/* Avatar */}
         <div className="relative">
           <div className="w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full bg-gradient-to-tr from-primary to-secondary p-1">
-            <div className="w-full h-full rounded-full border-4 border-surface-container-lowest bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-[32px] shadow-inner overflow-hidden">
+            <div className="w-full h-full rounded-full border-4 border-surface-container-lowest bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-[24px] md:text-[32px] shadow-inner overflow-hidden">
               <span className="text-on-surface-variant font-headline-xl">{displayName.substring(0,2).toUpperCase()}</span>
             </div>
           </div>
@@ -106,8 +106,8 @@ export default function CommunityProfilePage() {
         {/* Stats & Actions */}
         <div className="flex flex-col flex-1 gap-4 md:p-5 w-full">
           
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 md:gap-8">
-            <h1 className="font-headline-xl text-[24px] text-on-surface flex items-center gap-2">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 md:gap-4 md:p-8">
+            <h1 className="font-headline-xl text-[20px] md:text-[24px] text-on-surface flex items-center gap-2">
               {displayName}
               {profileData?.is_verified && <span className="material-symbols-outlined text-primary text-[20px]">verified</span>}
             </h1>
@@ -124,7 +124,7 @@ export default function CommunityProfilePage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-8">
+          <div className="flex items-center gap-4 md:gap-4 md:p-8">
             <div className="flex gap-1.5 font-body-md text-[16px]">
               <span className="font-bold text-on-surface">{userPosts.length}</span>
               <span className="text-on-surface-variant">posts</span>
@@ -193,7 +193,7 @@ export default function CommunityProfilePage() {
         ].map((highlight, i) => (
           <div key={i} className="flex flex-col items-center gap-2 cursor-pointer group">
             <div className="w-[75px] h-[75px] rounded-full p-[2px] border border-surface-container-high bg-surface-container-lowest group-hover:border-outline transition-colors">
-              <div className="w-full h-full rounded-full bg-surface-container-low flex items-center justify-center text-[28px]">
+              <div className="w-full h-full rounded-full bg-surface-container-low flex items-center justify-center text-[24px] md:text-[28px]">
                 {highlight.img}
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function CommunityProfilePage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2">
         {userPosts.length === 0 && !isLoading && (
           <div className="col-span-3 py-20 flex flex-col items-center justify-center text-on-surface-variant">
-            <span className="material-symbols-outlined text-[48px] mb-2 opacity-50">photo_camera</span>
+            <span className="material-symbols-outlined text-[36px] md:text-[48px] mb-2 opacity-50">photo_camera</span>
             <span className="font-headline-md">No Posts Yet</span>
           </div>
         )}
@@ -258,7 +258,7 @@ export default function CommunityProfilePage() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200">
           <div className="absolute top-4 md:p-6 right-6">
             <button onClick={() => setActivePost(null)} className="text-white hover:text-white/70 transition-colors">
-              <span className="material-symbols-outlined text-[32px]">close</span>
+              <span className="material-symbols-outlined text-[24px] md:text-[32px]">close</span>
             </button>
           </div>
           
@@ -269,7 +269,7 @@ export default function CommunityProfilePage() {
                 <img src={activePost.image_url} alt="Post" className="w-full h-full object-contain" />
               ) : (
                 <div className="p-4 md:p-8 text-center flex flex-col items-center">
-                  <span className="material-symbols-outlined text-[48px] text-on-surface-variant/50 mb-4">article</span>
+                  <span className="material-symbols-outlined text-[36px] md:text-[48px] text-on-surface-variant/50 mb-4">article</span>
                   <p className="font-body-lg text-on-surface">{activePost.content}</p>
                 </div>
               )}
@@ -312,9 +312,9 @@ export default function CommunityProfilePage() {
                 </div>
               </div>
               <div className="p-4 border-t border-surface-container-low flex gap-4">
-                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[24px]">favorite</span></button>
-                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[24px]">chat_bubble</span></button>
-                <button className="text-on-surface hover:text-primary transition-colors ml-auto"><span className="material-symbols-outlined text-[24px]">bookmark</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px] md:text-[24px]">favorite</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px] md:text-[24px]">chat_bubble</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors ml-auto"><span className="material-symbols-outlined text-[20px] md:text-[24px]">bookmark</span></button>
               </div>
             </div>
           </div>

@@ -73,7 +73,7 @@ export default function LiveClassesPage() {
         </div>
       )}
 
-      <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-8 pb-10">
+      <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-4 md:p-8 pb-10">
         <GatedContent minPackageRequired={3} blurLevel="md" customMessage="The Live Institutional Trading Floor is reserved for Package 3 members. Upgrade to get real-time market access.">
         <div className="flex flex-col w-full gap-gutter-xl pb-margin-page">
 {/* Executive Breadcrumb & Header Title */}
@@ -246,7 +246,7 @@ export default function LiveClassesPage() {
   </div>
 ) : (
   <div className="flex flex-col items-center justify-center gap-3 py-6 h-full border-2 border-dashed border-slate-200 rounded-[24px] bg-slate-50">
-    <span className="material-symbols-outlined text-[32px] text-slate-300">event_busy</span>
+    <span className="material-symbols-outlined text-[24px] md:text-[32px] text-slate-300">event_busy</span>
     <p className="text-[13px] text-slate-500 font-medium text-center max-w-[200px]">No upcoming 1-on-1 sessions booked. Select a mentor below to schedule.</p>
     <button onClick={() => document.getElementById('tutorSection')?.scrollIntoView({ behavior: 'smooth' })} className="mt-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-slate-50">
       Browse Mentors
@@ -261,7 +261,7 @@ export default function LiveClassesPage() {
 <div className="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md pb-gutter-sm border-b border-surface-container">
 <div className="flex items-center gap-3">
 <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
-<span className="material-symbols-outlined text-[24px]">calendar_month</span>
+<span className="material-symbols-outlined text-[20px] md:text-[24px]">calendar_month</span>
 </div>
 <div className="flex flex-col">
 <h3 className="font-headline-lg text-headline-lg text-on-surface font-semibold">

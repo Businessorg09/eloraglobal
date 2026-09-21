@@ -89,7 +89,7 @@ export function CompoundingCalculator() {
 
         <div className="mt-auto bg-[#ECFDF5] border border-[#A7F3D0] rounded-[24px] p-4 flex flex-col items-center text-center">
           <span className="text-[11px] font-bold text-[#059669] uppercase tracking-wider mb-1">Projected Balance (Avg Expected)</span>
-          <span className="text-[32px] font-black text-[#111827] tracking-tight leading-none mb-2">
+          <span className="text-[24px] md:text-[32px] font-black text-[#111827] tracking-tight leading-none mb-2">
             ${projectedBalance.toLocaleString(undefined, { maximumFractionDigits: 0 })}
           </span>
           <div className="flex items-center gap-4 text-[12px] font-bold text-[#059669]">

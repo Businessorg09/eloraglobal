@@ -8,7 +8,7 @@ export function CurriculumHeader() {
           <span className="text-[#D1D5DB]">•</span>
           <span>Certified Quant & Risk Protocol</span>
         </div>
-        <h1 className="text-[24px] font-bold text-[#111827] leading-tight mb-1">
+        <h1 className="text-[20px] md:text-[24px] font-bold text-[#111827] leading-tight mb-1">
           Phase 2: Quantitative Risk Engine & Capital Preservation
         </h1>
         <p className="text-[13px] text-[#4B5563] max-w-[800px]">

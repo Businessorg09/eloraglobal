@@ -127,8 +127,8 @@ export function CommandCenterWidget() {
   // If there's no last watched video, show a nice default state
   if (isLoading) {
     return (
-      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-10 flex flex-col items-center justify-center min-h-[400px]">
-        <span className="material-symbols-outlined text-[32px] text-blue-500 animate-spin mb-4">refresh</span>
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-5 md:p-10 flex flex-col items-center justify-center min-h-[400px]">
+        <span className="material-symbols-outlined text-[24px] md:text-[32px] text-blue-500 animate-spin mb-4">refresh</span>
         <span className="text-sm font-bold text-slate-500">Syncing learning progress...</span>
       </div>
     );
@@ -179,7 +179,7 @@ export function CommandCenterWidget() {
                 onClick={() => setIsPlaying(true)}
               >
                 <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
-                  <span className="material-symbols-outlined text-white text-[32px] ml-1">play_arrow</span>
+                  <span className="material-symbols-outlined text-white text-[24px] md:text-[32px] ml-1">play_arrow</span>
                 </div>
                 <span className="text-white font-bold text-sm tracking-wide bg-black/40 px-4 py-1.5 rounded-full border border-white/10">Resume Video in Dashboard</span>
                 
@@ -286,7 +286,7 @@ export function CommandCenterWidget() {
         </div>
 
         <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center min-h-[200px] text-center">
-          <span className="material-symbols-outlined text-[#9CA3AF] text-[32px] mb-2">assignment_late</span>
+          <span className="material-symbols-outlined text-[#9CA3AF] text-[24px] md:text-[32px] mb-2">assignment_late</span>
           <span className="text-[13px] font-bold text-[#4B5563]">No Assignment Available</span>
           <p className="text-[11px] text-[#9CA3AF] mt-1 max-w-[250px]">Assignments will appear here when you unlock a new module.</p>
         </div>

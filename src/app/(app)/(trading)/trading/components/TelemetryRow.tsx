@@ -9,7 +9,7 @@ export function TelemetryRow() {
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Elite Tier</span>
         </div>
         <div>
-          <div className="text-[28px] font-bold text-[#111827] leading-none">$100,000</div>
+          <div className="text-[24px] md:text-[28px] font-bold text-[#111827] leading-none">$100,000</div>
           <div className="flex justify-between mt-3 text-[13px]">
             <span className="text-[#4B5563]">Profit Target:</span>
             <span className="font-bold text-[#059669]">$8,240</span>
@@ -39,7 +39,7 @@ export function TelemetryRow() {
           </span>
         </div>
         <div>
-          <div className="text-[28px] font-bold text-[#111827] leading-none">$108,240.50</div>
+          <div className="text-[24px] md:text-[28px] font-bold text-[#111827] leading-none">$108,240.50</div>
           <div className="flex justify-between mt-3 text-[13px]">
             <span className="text-[#4B5563]">Base Capital:</span>
             <span className="font-bold text-[#059669]">+$1,210.00</span>
@@ -68,7 +68,7 @@ export function TelemetryRow() {
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">100% Intact</span>
         </div>
         <div>
-          <div className="text-[28px] font-bold text-[#111827] leading-none">-$1,420.00</div>
+          <div className="text-[24px] md:text-[28px] font-bold text-[#111827] leading-none">-$1,420.00</div>
           <div className="flex justify-between mt-3 text-[13px]">
             <span className="text-[#4B5563]">Max Allowed:</span>
             <span className="font-bold text-[#059669]">85.8%</span>
@@ -96,12 +96,12 @@ export function TelemetryRow() {
         </div>
         <div className="flex items-center justify-between mt-2">
           <div className="flex flex-col">
-            <span className="text-[28px] font-bold text-[#111827] leading-none">64.2%</span>
+            <span className="text-[24px] md:text-[28px] font-bold text-[#111827] leading-none">64.2%</span>
             <span className="text-[12px] text-[#6B7280] mt-1">Win Rate (45 Trades)</span>
           </div>
           <div className="w-px h-10 bg-[#E5E7EB]"></div>
           <div className="flex flex-col text-right">
-            <span className="text-[28px] font-bold text-[#1D4ED8] leading-none">2.14</span>
+            <span className="text-[24px] md:text-[28px] font-bold text-[#1D4ED8] leading-none">2.14</span>
             <span className="text-[12px] text-[#6B7280] mt-1">Profit Factor</span>
           </div>
         </div>

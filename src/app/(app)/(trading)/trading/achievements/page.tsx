@@ -59,10 +59,10 @@ export default function AchievementsPage() {
     <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-4 md:gap-6">
       
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-2">
         <div className="flex flex-col">
-          <h1 className="text-[24px] font-bold text-[#111827] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[28px] text-[#1D4ED8]">military_tech</span>
+          <h1 className="text-[20px] md:text-[24px] font-bold text-[#111827] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[24px] md:text-[28px] text-[#1D4ED8]">military_tech</span>
             Achievements & Leaderboard
           </h1>
           <p className="text-[13px] text-[#6B7280] mt-1">Unlock gamified milestones across learning, execution, and networking</p>
@@ -97,7 +97,7 @@ export default function AchievementsPage() {
                   )}
 
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white mb-3 shadow-inner relative`} style={{ backgroundColor: badge.color }}>
-                    {badge.locked ? <span className="material-symbols-outlined text-[28px]">lock</span> : <span className="material-symbols-outlined text-[32px]">{badge.icon}</span>}
+                    {badge.locked ? <span className="material-symbols-outlined text-[24px] md:text-[28px]">lock</span> : <span className="material-symbols-outlined text-[24px] md:text-[32px]">{badge.icon}</span>}
                     
                     {!badge.locked && badge.premium && (
                       <span className="absolute -top-1 -right-1 text-[16px]">✨</span>
@@ -115,7 +115,7 @@ export default function AchievementsPage() {
         {/* Right: Leaderboard */}
         <div className="xl:col-span-5 flex flex-col gap-4">
           <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
               <h2 className="text-[16px] font-bold text-[#111827] flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#F59E0B]">emoji_events</span>
                 Cohort Top 100

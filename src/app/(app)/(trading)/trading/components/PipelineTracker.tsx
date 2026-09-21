@@ -13,7 +13,7 @@ export function PipelineTracker() {
 
   return (
     <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 w-full">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-[#1D4ED8]">account_tree</span>
           <h2 className="font-bold text-[16px] text-[#111827]">Institutional Trader Pipeline</h2>
@@ -43,7 +43,7 @@ export function PipelineTracker() {
                 stage.type === 'cleared' ? 'bg-white border-[#E5E7EB] hover:border-[#059669]' : 
                 'bg-white border-transparent'}
             `}>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-2">
                 <span className={`text-[12px] font-mono font-bold ${stage.type === 'active' ? 'text-white/80' : 'text-[#9CA3AF]'}`}>{stage.num}</span>
                 <span className={`material-symbols-outlined text-[14px] ${
                   stage.type === 'cleared' ? 'text-[#059669]' : 

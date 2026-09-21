@@ -21,7 +21,7 @@ export function TimezoneOverlapMatrix() {
         <div className="w-full relative h-[180px] bg-[#F8FAFC] rounded-[24px] border border-[#E5E7EB] p-4 flex flex-col justify-between">
           
           {/* Time axis header */}
-          <div className="flex items-center justify-between text-[10px] font-bold text-[#9CA3AF] px-1 border-b border-[#E5E7EB] pb-2 mb-2 relative z-10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 text-[10px] font-bold text-[#9CA3AF] px-1 border-b border-[#E5E7EB] pb-2 mb-2 relative z-10">
             <span>00:00</span>
             <span>04:00</span>
             <span>08:00</span>
@@ -42,13 +42,13 @@ export function TimezoneOverlapMatrix() {
             {/* Asian Session (00:00 - 09:00) */}
             <div className="absolute top-2 left-[0%] w-[37.5%] h-8 bg-gradient-to-r from-[#FEF3C7] to-[#FDE68A] border border-[#FCD34D] rounded-md flex items-center px-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group">
               <span className="text-[11px] font-bold text-[#D97706]">Tokyo / Sydney</span>
-              <div className="absolute hidden group-hover:block -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded">00:00 - 09:00 GMT</div>
+              <div className="absolute hidden group-hover:block -top-4 md:p-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded">00:00 - 09:00 GMT</div>
             </div>
 
             {/* London Session (08:00 - 16:00) */}
-            <div className="absolute top-12 left-[33.3%] w-[33.3%] h-8 bg-gradient-to-r from-[#E0E7FF] to-[#C7D2FE] border border-[#A5B4FC] rounded-md flex items-center px-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group z-20">
+            <div className="absolute top-6 md:p-12 left-[33.3%] w-[33.3%] h-8 bg-gradient-to-r from-[#E0E7FF] to-[#C7D2FE] border border-[#A5B4FC] rounded-md flex items-center px-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group z-20">
               <span className="text-[11px] font-bold text-[#4338CA]">London (LSE)</span>
-              <div className="absolute hidden group-hover:block -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded">08:00 - 16:00 GMT</div>
+              <div className="absolute hidden group-hover:block -top-4 md:p-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded">08:00 - 16:00 GMT</div>
             </div>
 
             {/* NY Session (13:00 - 22:00) */}
@@ -59,7 +59,7 @@ export function TimezoneOverlapMatrix() {
 
             {/* Overlap Highlights */}
             {/* London / NY Overlap (13:00 - 16:00) */}
-            <div className="absolute top-12 left-[54.1%] w-[12.5%] h-8 bg-[#818CF8] opacity-30 rounded-md border-2 border-[#4338CA] animate-pulse pointer-events-none"></div>
+            <div className="absolute top-6 md:p-12 left-[54.1%] w-[12.5%] h-8 bg-[#818CF8] opacity-30 rounded-md border-2 border-[#4338CA] animate-pulse pointer-events-none"></div>
           </div>
           
         </div>

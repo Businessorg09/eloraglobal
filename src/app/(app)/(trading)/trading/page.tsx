@@ -14,7 +14,7 @@ export default function NewTradingDashboardPage() {
         <div className="order-2 xl:order-1 xl:col-span-12 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-4 md:p-6 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[#EFF6FF] rounded-lg flex items-center justify-center text-[#1D4ED8]">
-              <span className="material-symbols-outlined text-[24px]">school</span>
+              <span className="material-symbols-outlined text-[20px] md:text-[24px]">school</span>
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg md:text-[22px] font-extrabold tracking-tight text-[#111827] leading-tight flex flex-wrap items-center gap-2 md:gap-3">

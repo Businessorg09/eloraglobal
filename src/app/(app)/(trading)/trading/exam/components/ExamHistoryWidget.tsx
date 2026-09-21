@@ -7,7 +7,7 @@ export function ExamHistoryWidget() {
 
   return (
     <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
         <h3 className="font-bold text-[16px] text-[#111827] flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">history</span> Evaluation History
         </h3>

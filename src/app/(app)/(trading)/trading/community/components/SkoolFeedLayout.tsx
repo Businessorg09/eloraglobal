@@ -334,13 +334,13 @@ export function SkoolFeedLayout() {
         <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-background/60 rounded-[24px]">
           <div className="bg-surface-container-lowest p-4 md:p-8 rounded-2xl shadow-xl border border-surface-container-low max-w-md text-center flex flex-col items-center animate-in zoom-in-95 duration-200">
             <div className="w-16 h-16 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
-              <span className="material-symbols-outlined text-[32px]">lock</span>
+              <span className="material-symbols-outlined text-[24px] md:text-[32px]">lock</span>
             </div>
             <h2 className="font-headline-xl text-headline-xl text-on-surface mb-2">Elite Access Required</h2>
             <p className="font-body-md text-body-md text-on-surface-variant mb-6">
               The Institutional Trading Guild is an exclusive space for Premium and Elite members to share high-probability setups and network with desk instructors.
             </p>
-            <button className="bg-primary text-on-primary font-label-md text-label-md py-3 px-8 rounded-lg w-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-primary/90 transition-all">
+            <button className="bg-primary text-on-primary font-label-md text-label-md py-3 px-4 md:px-8 rounded-lg w-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-primary/90 transition-all">
               Upgrade Package
             </button>
             <button onClick={() => setIsPremiumMember(true)} className="mt-4 font-label-sm text-[12px] text-outline hover:text-on-surface transition-colors">
@@ -383,7 +383,7 @@ export function SkoolFeedLayout() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 animate-in fade-in duration-200">
           <div className="absolute top-4 md:p-6 right-6 flex gap-4">
             <button onClick={() => setActiveStory(null)} className="text-white hover:text-white/70 transition-colors">
-              <span className="material-symbols-outlined text-[32px]">close</span>
+              <span className="material-symbols-outlined text-[24px] md:text-[32px]">close</span>
             </button>
           </div>
           
@@ -447,7 +447,7 @@ export function SkoolFeedLayout() {
                   <button 
                     key={emoji}
                     onClick={() => handleStoryReaction(emoji)}
-                    className="text-[24px] hover:scale-125 transition-transform"
+                    className="text-[20px] md:text-[24px] hover:scale-125 transition-transform"
                   >
                     {emoji}
                   </button>
@@ -608,17 +608,17 @@ export function SkoolFeedLayout() {
             <div className="flex items-center justify-between px-4 pt-3 pb-2">
               <div className="flex items-center gap-4 text-on-surface">
                 <button className="hover:text-primary transition-colors hover:scale-110 transform">
-                  <span className="material-symbols-outlined text-[24px]">favorite</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">favorite</span>
                 </button>
                 <button onClick={() => toggleComments(post.id)} className="hover:text-primary transition-colors hover:scale-110 transform">
-                  <span className="material-symbols-outlined text-[24px]">chat_bubble</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">chat_bubble</span>
                 </button>
                 <button className="hover:text-primary transition-colors hover:scale-110 transform">
-                  <span className="material-symbols-outlined text-[24px]">send</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">send</span>
                 </button>
               </div>
               <button className="text-on-surface hover:text-primary transition-colors hover:scale-110 transform">
-                <span className="material-symbols-outlined text-[24px]">bookmark</span>
+                <span className="material-symbols-outlined text-[20px] md:text-[24px]">bookmark</span>
               </button>
             </div>
 

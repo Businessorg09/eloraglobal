@@ -7,7 +7,7 @@ export default function StrategyPage() {
   return (
     <GatedContent minPackageRequired={3} blurLevel="md" customMessage="The Strategy Lab and Case Studies are reserved for Package 3. Upgrade your subscription for full access.">
       <div className="w-full h-full font-sans">
-        <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-8 pb-10">
+        <div className="flex flex-col w-full max-w-[1600px] mx-auto gap-4 md:gap-4 md:p-8 pb-10">
           
   {/* Header Banner & Showcase Title */}
   <section>

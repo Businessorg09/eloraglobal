@@ -8,10 +8,10 @@ export default function ExamCenterPage() {
     <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4">
       
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 mb-8">
         <div className="flex flex-col">
-          <h1 className="text-[24px] font-bold text-[#111827] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[28px] text-[#1D4ED8]">assignment</span>
+          <h1 className="text-[20px] md:text-[24px] font-bold text-[#111827] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[24px] md:text-[28px] text-[#1D4ED8]">assignment</span>
             Certification & Exam Center
           </h1>
           <p className="text-[13px] text-[#6B7280] mt-1">Accredited institutional evaluations to unlock advanced capital tiers</p>
@@ -27,7 +27,7 @@ export default function ExamCenterPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-4 md:p-8 items-start">
         
         {/* Left Column (8) */}
         <div className="xl:col-span-8 flex flex-col">

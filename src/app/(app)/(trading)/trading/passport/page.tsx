@@ -110,7 +110,7 @@ export default async function TraderPassportPage() {
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
         <div className="bg-white p-4 md:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="material-symbols-outlined text-[32px]">account_balance_wallet</span>
+            <span className="material-symbols-outlined text-[24px] md:text-[32px]">account_balance_wallet</span>
           </div>
           <h2 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 mb-2">No Trading Account Found</h2>
           <p className="text-slate-500 mb-6 text-sm">
@@ -135,7 +135,7 @@ export default async function TraderPassportPage() {
             <div className="relative z-10 flex flex-col xl:flex-row gap-gutter-xl items-start justify-between">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-gutter-md flex-1">
                 <div className="relative group">
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[24px] overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative flex items-center justify-center text-white text-2xl md:text-4xl font-bold tracking-tight">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[24px] overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative flex items-center justify-center text-white text-2xl md:text-3xl md:text-4xl font-bold tracking-tight">
                     {profile.full_name.substring(0, 1).toUpperCase()}
                   </div>
                   <div className="absolute -bottom-2 -right-2 bg-primary-container text-on-primary rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center">
@@ -284,7 +284,7 @@ export default async function TraderPassportPage() {
                 customMessage="Quantitative profiling is unlocked in Package 2."
               >
                 <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] h-full">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4">
                     <div className="flex flex-col">
                       <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                         Quantitative Profile
@@ -552,7 +552,7 @@ export default async function TraderPassportPage() {
               >
                 <div className="flex flex-col rounded-[24px] bg-surface-container-lowest p-gutter-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] justify-between h-full">
                   <div>
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4">
                       <div className="flex flex-col">
                         <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider">
                           AI Copilot Diagnostic
@@ -1177,7 +1177,7 @@ export default async function TraderPassportPage() {
                 if (unlockedBadges.length === 0) {
                   return (
                     <div className="col-span-full p-4 md:p-6 text-center bg-surface-container-low rounded-[24px] border border-dashed border-outline-variant">
-                      <span className="material-symbols-outlined text-outline text-[32px] mb-2">
+                      <span className="material-symbols-outlined text-outline text-[24px] md:text-[32px] mb-2">
                         lock
                       </span>
                       <p className="font-body-sm text-body-sm text-on-surface-variant">

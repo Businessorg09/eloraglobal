@@ -55,7 +55,7 @@ export function ProfilePathwayWidget() {
   if (isLoading) {
     return (
       <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex items-center justify-center min-h-[400px]">
-        <span className="material-symbols-outlined text-[24px] text-blue-500 animate-spin">refresh</span>
+        <span className="material-symbols-outlined text-[20px] md:text-[24px] text-blue-500 animate-spin">refresh</span>
       </div>
     );
   }
@@ -68,12 +68,12 @@ export function ProfilePathwayWidget() {
       <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 relative overflow-hidden">
         {/* Decorative background element for higher tiers */}
         {p.tier > 1 && (
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-full blur-2xl pointer-events-none"></div>
+          <div className="absolute -top-5 md:p-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-full blur-2xl pointer-events-none"></div>
         )}
         
         <div className="flex items-center gap-3 mb-4 relative z-10">
           <div className="w-12 h-12 rounded-full bg-[#E5E7EB] flex items-center justify-center text-[#9CA3AF] font-extrabold tracking-tight text-[18px] relative overflow-hidden border-2 border-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-            <span className="material-symbols-outlined text-[24px]">person</span>
+            <span className="material-symbols-outlined text-[20px] md:text-[24px]">person</span>
           </div>
           <div className="flex flex-col">
             <h3 className="font-bold text-sm md:text-[16px] text-[#111827] leading-tight truncate max-w-[140px] md:max-w-[180px]">{p.fullName}</h3>
@@ -147,7 +147,7 @@ export function ProfilePathwayWidget() {
           
           {playlist.length === 0 ? (
             <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col text-center items-center justify-center min-h-[150px]">
-              <span className="material-symbols-outlined text-[#9CA3AF] text-[32px] mb-2">school</span>
+              <span className="material-symbols-outlined text-[#9CA3AF] text-[24px] md:text-[32px] mb-2">school</span>
               <span className="text-[13px] font-bold text-[#4B5563]">No Modules Available</span>
             </div>
           ) : (

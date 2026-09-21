@@ -179,7 +179,7 @@ export default function AcademyPage() {
       <div className="flex-1 w-full h-full flex flex-col items-center justify-center py-20 px-4">
         <div className="bg-white p-4 md:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-200 text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="material-symbols-outlined text-[32px]">school</span>
+            <span className="material-symbols-outlined text-[24px] md:text-[32px]">school</span>
           </div>
           <h2 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 mb-2">Academy Access Locked</h2>
           <p className="text-slate-500 mb-6 text-sm">
@@ -231,20 +231,20 @@ export default function AcademyPage() {
         <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132c66] via-[#1a3d8c] to-[#1e4cb8] p-4 md:p-5 md:p-9 text-white shadow-xl">
           <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
           <div className="absolute -left-10 -bottom-10 w-60 h-60 rounded-full bg-indigo-500/15 blur-2xl pointer-events-none"></div>
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-8">
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-4 md:p-8">
             <div className="max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-xs font-semibold text-blue-200 tracking-wide backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                 Continue Watching
               </div>
-              <h2 className="text-xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              <h2 className="text-xl md:text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 {lastProgress.episode.module?.title || 'Academy Module'}
               </h2>
               <p className="text-xs md:text-base text-blue-100/80 leading-relaxed font-normal">
                 {lastProgress.episode.title}
               </p>
               <div className="pt-2">
-                <div className="flex items-center justify-between text-xs text-blue-200 mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 text-xs text-blue-200 mb-2">
                   <span className="font-semibold text-white">
                     Paused at {Math.floor(lastProgress.progress_seconds / 60)}:{(lastProgress.progress_seconds % 60).toString().padStart(2, '0')}
                   </span>

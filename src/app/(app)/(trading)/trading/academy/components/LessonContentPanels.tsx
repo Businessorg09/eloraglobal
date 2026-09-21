@@ -45,7 +45,7 @@ export function LessonContentPanels() {
 
         {/* Formula Block */}
         <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4">
             <span className="flex items-center gap-2 text-[14px] font-bold text-[#111827]">
               <span className="material-symbols-outlined text-[#1D4ED8]">functions</span> The Core Lot Sizing Formulation
             </span>
@@ -54,7 +54,7 @@ export function LessonContentPanels() {
 
           <div className="bg-[#F8F9FA] rounded-lg border border-[#E5E7EB] p-4 md:p-8 flex items-center justify-center font-serif text-[#1D4ED8]">
             {/* Styled Equation */}
-            <div className="flex items-center gap-4 text-[24px] font-bold">
+            <div className="flex items-center gap-4 text-[20px] md:text-[24px] font-bold">
               <span>Position Size (Lots)</span>
               <span>=</span>
               <div className="flex flex-col items-center">

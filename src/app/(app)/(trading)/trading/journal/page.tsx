@@ -41,10 +41,10 @@ export default function TradingJournalPage() {
       <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 mb-8">
           <div className="flex flex-col">
-            <h1 className="text-[24px] font-bold text-[#111827] flex items-center gap-2">
-              <span className="material-symbols-outlined text-[28px] text-[#1D4ED8]">menu_book</span>
+            <h1 className="text-[20px] md:text-[24px] font-bold text-[#111827] flex items-center gap-2">
+              <span className="material-symbols-outlined text-[24px] md:text-[28px] text-[#1D4ED8]">menu_book</span>
               Institutional Trading Journal
             </h1>
             <p className="text-[13px] text-[#6B7280] mt-1">Log psychological telemetry and execution details to build consistency</p>

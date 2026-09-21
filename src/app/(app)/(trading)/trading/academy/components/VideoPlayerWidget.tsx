@@ -10,7 +10,7 @@ export function VideoPlayerWidget() {
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#4B5563 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
           
           <div className="text-center z-10 flex flex-col items-center">
-             <h2 className="text-white/40 font-bold text-[24px] uppercase tracking-widest mb-4">Lot Sizing Formulation</h2>
+             <h2 className="text-white/40 font-bold text-[20px] md:text-[24px] uppercase tracking-widest mb-4">Lot Sizing Formulation</h2>
              <span className="text-white/20 text-[60px] material-symbols-outlined">monitoring</span>
           </div>
         </div>
@@ -32,7 +32,7 @@ export function VideoPlayerWidget() {
         {/* Big Play Button Center */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:scale-110 transition-transform duration-300">
           <div className="w-16 h-16 bg-[#1D4ED8] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(29,78,216,0.5)]">
-            <span className="material-symbols-outlined text-white text-[32px] ml-1">play_arrow</span>
+            <span className="material-symbols-outlined text-white text-[24px] md:text-[32px] ml-1">play_arrow</span>
           </div>
         </div>
 

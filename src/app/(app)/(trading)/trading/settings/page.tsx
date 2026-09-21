@@ -10,10 +10,10 @@ export default function SettingsPage() {
       <div className="flex flex-col gap-gutter-lg w-full max-w-[1200px] mx-auto pb-10">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-2">
           <div className="flex flex-col">
             <h1 className="font-headline-xl text-headline-xl text-on-surface flex items-center gap-2">
-              <span className="material-symbols-outlined text-[28px] text-primary">settings</span>
+              <span className="material-symbols-outlined text-[24px] md:text-[28px] text-primary">settings</span>
               Platform Settings
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant mt-1">Manage your institutional account, billing, and engine preferences</p>
@@ -49,17 +49,17 @@ export default function SettingsPage() {
           </div>
 
           {/* Right: Content Area */}
-          <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col p-4 md:p-6 sm:p-8 min-h-[500px]">
+          <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-none flex flex-col p-4 md:p-6 sm:p-4 md:p-8 min-h-[500px]">
             
             {activeTab === 'profile' && (
-              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-4 md:p-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Trader Identity</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your public persona and verified details.</p>
                 </div>
                 
                 <div className="flex items-center gap-4 md:gap-6 p-4 rounded-[24px] bg-surface-container-low border border-surface-container-high/50">
-                  <div className="w-20 h-20 rounded-[24px] bg-primary-container text-on-primary-container font-headline-xl text-[24px] flex items-center justify-center shadow-inner">
+                  <div className="w-20 h-20 rounded-[24px] bg-primary-container text-on-primary-container font-headline-xl text-[20px] md:text-[24px] flex items-center justify-center shadow-inner">
                     AV
                   </div>
                   <div className="flex flex-col gap-2">
@@ -100,7 +100,7 @@ export default function SettingsPage() {
             )}
 
             {activeTab === 'platform' && (
-              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-4 md:p-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Engine Preferences</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Customize your trading environment and telemetry alerts.</p>
@@ -165,14 +165,14 @@ export default function SettingsPage() {
             )}
 
             {activeTab === 'billing' && (
-              <div className="flex flex-col gap-4 md:gap-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex flex-col gap-4 md:gap-4 md:p-8 max-w-[650px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <div>
                   <h2 className="font-headline-lg text-headline-lg text-on-surface">Allocation & Subscription</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage your current trading tier and associated capital.</p>
                 </div>
                 
                 <div className="bg-primary/5 border border-primary/20 rounded-[24px] p-4 md:p-6 flex flex-col gap-4 relative overflow-hidden">
-                  <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+                  <div className="absolute -right-10 -top-5 md:p-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
                   
                   <div className="flex items-center justify-between relative z-10">
                     <span className="bg-primary text-on-primary px-2.5 py-1 rounded font-label-sm text-label-sm uppercase tracking-wider font-bold">Package 3 Active</span>

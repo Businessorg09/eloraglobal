@@ -45,7 +45,7 @@ export function NetworkSchedulingWidget() {
         </div>
 
         <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 flex flex-col items-center justify-center min-h-[150px] text-center gap-2">
-          <span className="material-symbols-outlined text-[#9CA3AF] text-[32px]">event_busy</span>
+          <span className="material-symbols-outlined text-[#9CA3AF] text-[24px] md:text-[32px]">event_busy</span>
           <span className="text-[13px] font-bold text-[#4B5563]">No Upcoming Sessions</span>
           <span className="text-[11px] text-[#9CA3AF]">Your schedule is clear. Check back later for new live classes.</span>
         </div>
@@ -134,7 +134,7 @@ export function NetworkSchedulingWidget() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center text-center gap-2 h-full">
-              <span className="material-symbols-outlined text-[#9CA3AF] text-[32px]">chat_bubble_outline</span>
+              <span className="material-symbols-outlined text-[#9CA3AF] text-[24px] md:text-[32px]">chat_bubble_outline</span>
               <span className="text-[13px] font-bold text-[#4B5563]">Guild Offline</span>
               <span className="text-[11px] text-[#9CA3AF]">No recent posts. Be the first to start a discussion!</span>
             </div>

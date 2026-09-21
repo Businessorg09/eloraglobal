@@ -19,12 +19,12 @@ export default function MarketIntelligencePage() {
           <TickerTapeWidget />
         </div>
 
-        <div className="max-w-[1600px] mx-auto w-full px-4 xl:px-8 space-y-6">
+        <div className="max-w-[1600px] mx-auto w-full px-4 xl:px-4 md:px-8 space-y-6">
           {/* Header */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex flex-col">
               <h1 className="text-lg md:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2 tracking-tight">
-                <span className="material-symbols-outlined text-[32px] text-blue-600">public</span>
+                <span className="material-symbols-outlined text-[24px] md:text-[32px] text-blue-600">public</span>
                 Global Market Intelligence
               </h1>
               <p className="text-sm text-slate-500 mt-1 font-medium">Macroeconomic telemetry, live sentiment analysis, and breaking news.</p>
@@ -37,7 +37,7 @@ export default function MarketIntelligencePage() {
             {/* Left Column: Economic Calendar */}
             <div className="xl:col-span-8 flex flex-col h-[600px] xl:h-full">
               <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 md:p-6 flex flex-col h-full overflow-hidden transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <div className="flex items-center justify-between mb-4 shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4 shrink-0">
                   <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span className="material-symbols-outlined text-blue-500">calendar_month</span>
                     Live Economic Calendar
@@ -55,7 +55,7 @@ export default function MarketIntelligencePage() {
               
               {/* Top Right: Heatmap */}
               <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 md:p-6 flex flex-col h-[380px] transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <div className="flex items-center justify-between mb-4 shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4 shrink-0">
                   <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span className="material-symbols-outlined text-indigo-500">grid_on</span>
                     Currency Strength Matrix
@@ -68,7 +68,7 @@ export default function MarketIntelligencePage() {
 
               {/* Bottom Right: News Timeline */}
               <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-4 md:p-6 flex flex-col flex-1 min-h-[380px] transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-                <div className="flex items-center justify-between mb-4 shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-4 shrink-0">
                   <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span className="material-symbols-outlined text-red-500">campaign</span>
                     Breaking News Feed

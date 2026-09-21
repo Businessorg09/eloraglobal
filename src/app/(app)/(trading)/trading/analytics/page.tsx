@@ -61,10 +61,10 @@ export default function AnalyticsPage() {
       <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4 gap-4 md:gap-8">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-2">
           <div className="flex flex-col">
-            <h1 className="text-[24px] font-bold text-[#111827] flex items-center gap-2">
-              <span className="material-symbols-outlined text-[28px] text-[#1D4ED8]">insights</span>
+            <h1 className="text-[20px] md:text-[24px] font-bold text-[#111827] flex items-center gap-2">
+              <span className="material-symbols-outlined text-[24px] md:text-[28px] text-[#1D4ED8]">insights</span>
               E-Learning Analytics
             </h1>
             <p className="text-[13px] text-[#6B7280] mt-1">Track your academy progress, study velocity, and syllabus completion</p>
@@ -122,10 +122,10 @@ export default function AnalyticsPage() {
               {/* Time Spent Learning */}
               <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#1D4ED8] mb-4">
-                  <span className="material-symbols-outlined text-[24px]">schedule</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">schedule</span>
                 </div>
                 <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Time Spent Learning</span>
-                <span className="text-[32px] font-black text-[#111827] leading-none">
+                <span className="text-[24px] md:text-[32px] font-black text-[#111827] leading-none">
                   {isLoading ? '-' : hoursSpent}
                   <span className="text-[16px] text-[#6B7280] font-medium"> Hrs</span>
                 </span>
@@ -135,10 +135,10 @@ export default function AnalyticsPage() {
               {/* Avg Completion Time */}
               <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#FEF2F2] flex items-center justify-center text-[#EF4444] mb-4">
-                  <span className="material-symbols-outlined text-[24px]">speed</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">speed</span>
                 </div>
                 <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Pace of Study</span>
-                <span className="text-[32px] font-black text-[#111827] leading-none">
+                <span className="text-[24px] md:text-[32px] font-black text-[#111827] leading-none">
                   {isLoading ? '-' : avgPace}
                   <span className="text-[16px] text-[#6B7280] font-medium"> Hrs</span>
                 </span>
@@ -148,10 +148,10 @@ export default function AnalyticsPage() {
               {/* Exam Readiness */}
               <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-center text-center items-center col-span-3 md:col-span-1">
                 <div className="w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#8B5CF6] mb-4">
-                  <span className="material-symbols-outlined text-[24px]">workspace_premium</span>
+                  <span className="material-symbols-outlined text-[20px] md:text-[24px]">workspace_premium</span>
                 </div>
                 <span className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Exam Readiness</span>
-                <span className="text-[32px] font-black text-[#111827] leading-none">
+                <span className="text-[24px] md:text-[32px] font-black text-[#111827] leading-none">
                   {completionPercentage > 90 ? 'High' : completionPercentage > 50 ? 'Med' : 'Low'}
                 </span>
                 <span className="text-[11px] text-[#8B5CF6] font-medium mt-2">Keep studying</span>
@@ -223,11 +223,11 @@ export default function AnalyticsPage() {
                           'bg-white border-[#E5E7EB] text-[#9CA3AF]'}`}
                       >
                         {chapterProgress === 100 ? (
-                          <span className="material-symbols-outlined text-[32px]">task_alt</span>
+                          <span className="material-symbols-outlined text-[24px] md:text-[32px]">task_alt</span>
                         ) : chapterProgress > 0 ? (
                           <span className="font-bold text-[18px]">{chapterProgress}%</span>
                         ) : (
-                          <span className="material-symbols-outlined text-[32px]">lock</span>
+                          <span className="material-symbols-outlined text-[24px] md:text-[32px]">lock</span>
                         )}
                       </div>
 

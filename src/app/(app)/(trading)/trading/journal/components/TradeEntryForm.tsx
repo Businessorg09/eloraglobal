@@ -45,7 +45,7 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
 
   return (
     <form action={handleAction} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-full relative">
-      <div className="flex items-center justify-between mb-6 border-b border-[#F3F4F6] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6 border-b border-[#F3F4F6] pb-4">
         <h2 className="text-[16px] font-bold text-[#111827] leading-tight flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">edit_document</span>
           Log New Execution

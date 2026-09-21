@@ -88,7 +88,7 @@ export function PositionSizeCalculator() {
         </div>
         <div className="flex items-center justify-between pt-1">
           <span className="text-[13px] font-bold text-[#1D4ED8]">Suggested Position Size</span>
-          <span className="text-[24px] font-black text-[#1D4ED8]">{standardLots} Lots</span>
+          <span className="text-[20px] md:text-[24px] font-black text-[#1D4ED8]">{standardLots} Lots</span>
         </div>
       </div>
     </div>

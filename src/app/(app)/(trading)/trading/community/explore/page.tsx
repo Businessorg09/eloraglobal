@@ -72,7 +72,7 @@ export default function ExplorePage() {
       
       {/* Search Header */}
       <div className="relative mb-8 max-w-[600px] w-full mx-auto px-4 md:px-0 z-20">
-        <span className="material-symbols-outlined absolute left-8 md:left-4 top-1/2 transform -translate-y-1/2 text-outline text-[24px]">search</span>
+        <span className="material-symbols-outlined absolute left-8 md:left-4 top-1/2 transform -translate-y-1/2 text-outline text-[20px] md:text-[24px]">search</span>
         <input 
           type="text" 
           placeholder="Search for users..." 
@@ -149,7 +149,7 @@ export default function ExplorePage() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200">
           <div className="absolute top-4 md:p-6 right-6">
             <button onClick={() => setActivePost(null)} className="text-white hover:text-white/70 transition-colors">
-              <span className="material-symbols-outlined text-[32px]">close</span>
+              <span className="material-symbols-outlined text-[24px] md:text-[32px]">close</span>
             </button>
           </div>
           <div className="w-full max-w-[800px] bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col md:flex-row max-h-[85vh]">
@@ -158,7 +158,7 @@ export default function ExplorePage() {
                 <img src={activePost.image_url} alt="Post" className="w-full h-full object-contain" />
               ) : (
                 <div className="p-4 md:p-8 text-center flex flex-col items-center">
-                  <span className="material-symbols-outlined text-[48px] text-on-surface-variant/50 mb-4">article</span>
+                  <span className="material-symbols-outlined text-[36px] md:text-[48px] text-on-surface-variant/50 mb-4">article</span>
                   <p className="font-body-lg text-on-surface">{activePost.content}</p>
                 </div>
               )}
@@ -182,9 +182,9 @@ export default function ExplorePage() {
                 </div>
               </div>
               <div className="p-4 border-t border-surface-container-low flex gap-4">
-                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[24px]">favorite</span></button>
-                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[24px]">chat_bubble</span></button>
-                <button className="text-on-surface hover:text-primary transition-colors ml-auto"><span className="material-symbols-outlined text-[24px]">bookmark</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px] md:text-[24px]">favorite</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px] md:text-[24px]">chat_bubble</span></button>
+                <button className="text-on-surface hover:text-primary transition-colors ml-auto"><span className="material-symbols-outlined text-[20px] md:text-[24px]">bookmark</span></button>
               </div>
             </div>
           </div>

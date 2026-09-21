@@ -58,7 +58,7 @@ export function GatedContent({
           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-inner ${
             examLocked ? 'bg-[#FEF2F2] text-[#EF4444]' : 'bg-gradient-to-br from-[#FEF3C7] to-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.4)]'
           }`}>
-            <span className="material-symbols-outlined text-[32px]">{lockIcon}</span>
+            <span className="material-symbols-outlined text-[24px] md:text-[32px]">{lockIcon}</span>
           </div>
           
           <h2 className="text-[22px] font-black text-[#111827] mb-2">{lockTitle}</h2>

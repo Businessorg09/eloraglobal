@@ -267,7 +267,7 @@ function MessagesContent() {
 
 export default function MessagesPage() {
   return (
-    <Suspense fallback={<div className="p-10 text-center">Loading Messages...</div>}>
+    <Suspense fallback={<div className="p-5 md:p-10 text-center">Loading Messages...</div>}>
       <MessagesContent />
     </Suspense>
   )

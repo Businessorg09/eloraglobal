@@ -85,7 +85,7 @@ export function PipValueCalculator() {
             <span className="text-[11px] font-bold text-[#1D4ED8] uppercase tracking-wider mb-1">Value Per Pip (1 Tick)</span>
             <span className="text-[12px] text-[#4B5563]">For {lotSize} Standard Lots</span>
           </div>
-          <span className="text-[32px] font-black text-[#1D4ED8] tracking-tight leading-none">
+          <span className="text-[24px] md:text-[32px] font-black text-[#1D4ED8] tracking-tight leading-none">
             ${pipValueAcct.toFixed(2)}
           </span>
         </div>
