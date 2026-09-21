@@ -36,7 +36,7 @@ export function NetworkSchedulingWidget() {
       {/* Live Class Timetable */}
       <div className="flex flex-col">
         <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="font-bold text-[16px] text-[#111827] flex items-center gap-2">
+          <h3 className="font-bold tracking-tight text-[16px] text-[#111827] flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#E5E7EB]"></span> Live Class Timetable
           </h3>
           <button className="text-[#9CA3AF] font-bold text-[11px] flex items-center gap-1 cursor-not-allowed">
@@ -44,7 +44,7 @@ export function NetworkSchedulingWidget() {
           </button>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-4 flex flex-col items-center justify-center min-h-[150px] text-center gap-2">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 flex flex-col items-center justify-center min-h-[150px] text-center gap-2">
           <span className="material-symbols-outlined text-[#9CA3AF] text-[32px]">event_busy</span>
           <span className="text-[13px] font-bold text-[#4B5563]">No Upcoming Sessions</span>
           <span className="text-[11px] text-[#9CA3AF]">Your schedule is clear. Check back later for new live classes.</span>
@@ -54,13 +54,13 @@ export function NetworkSchedulingWidget() {
       {/* Trader Passport Compact */}
       <div className="flex flex-col">
         <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="font-bold text-[16px] text-[#111827]">Trader Passport</h3>
+          <h3 className="font-bold tracking-tight text-[16px] text-[#111827]">Trader Passport</h3>
           <span className="bg-[#F3F4F6] text-[#9CA3AF] px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider">
             {profile ? `Tier ${profile.tier}` : 'No Tier'}
           </span>
         </div>
         
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-4 flex flex-col">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 flex flex-col">
           <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#F3F4F6]">
             <div className={`w-10 h-10 ${profile && profile.tier >= 3 ? 'bg-amber-100 text-amber-600' : 'bg-[#E5E7EB] text-[#9CA3AF]'} rounded flex items-center justify-center`}>
               <span className="material-symbols-outlined text-[20px]">badge</span>
@@ -113,7 +113,7 @@ export function NetworkSchedulingWidget() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-4 flex flex-col min-h-[150px]">
+        <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 flex flex-col min-h-[150px]">
           {isLoading ? (
             <div className="flex-1 flex items-center justify-center">
               <span className="material-symbols-outlined text-blue-500 animate-spin">refresh</span>

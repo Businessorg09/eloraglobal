@@ -14,7 +14,7 @@ export function ReferenceLibraryWidget() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         
         {/* Card 1 */}
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-4 flex items-center gap-3 cursor-not-allowed group">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 flex items-center gap-3 cursor-not-allowed group">
           <div className="w-12 h-12 rounded-lg bg-[#E5E7EB] flex items-center justify-center text-[#9CA3AF] shrink-0">
             <span className="material-symbols-outlined text-[24px]">menu_book</span>
           </div>
@@ -25,7 +25,7 @@ export function ReferenceLibraryWidget() {
         </div>
 
         {/* Card 2 */}
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-4 flex items-center gap-3 cursor-not-allowed group">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 flex items-center gap-3 cursor-not-allowed group">
           <div className="w-12 h-12 rounded-lg bg-[#E5E7EB] flex items-center justify-center text-[#9CA3AF] shrink-0">
             <span className="material-symbols-outlined text-[24px]">code</span>
           </div>
@@ -36,7 +36,7 @@ export function ReferenceLibraryWidget() {
         </div>
 
         {/* Card 3 */}
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-4 flex items-center gap-3 cursor-not-allowed group">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 flex items-center gap-3 cursor-not-allowed group">
           <div className="w-12 h-12 rounded-lg bg-[#E5E7EB] flex items-center justify-center text-[#9CA3AF] shrink-0">
             <span className="material-symbols-outlined text-[24px]">calculate</span>
           </div>
@@ -47,7 +47,7 @@ export function ReferenceLibraryWidget() {
         </div>
 
         {/* Card 4 */}
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-4 flex items-center gap-3 cursor-not-allowed group">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-4 flex items-center gap-3 cursor-not-allowed group">
           <div className="w-12 h-12 rounded-lg bg-[#E5E7EB] flex items-center justify-center text-[#9CA3AF] shrink-0">
             <span className="material-symbols-outlined text-[24px]">psychology</span>
           </div>

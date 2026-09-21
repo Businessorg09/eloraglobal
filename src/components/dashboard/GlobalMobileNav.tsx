@@ -38,7 +38,7 @@ export default function GlobalMobileNav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 100, scale: 0.95 }}
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              className="fixed bottom-[85px] left-4 right-4 bg-white p-5 rounded-3xl shadow-2xl z-[90] md:hidden border border-slate-100"
+              className="fixed bottom-[100px] left-5 right-5 bg-white p-6 rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-[90] md:hidden border border-white/60 backdrop-blur-xl"
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-sm font-bold text-slate-800">
@@ -164,7 +164,7 @@ export default function GlobalMobileNav() {
       </AnimatePresence>
 
       {/* FIXED BOTTOM NAVIGATION BAR */}
-      <nav className="fixed bottom-0 w-full bg-white/90 backdrop-blur-xl border-t border-slate-100 pb-safe pt-2 px-6 z-[70] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:hidden block">
+      <nav className="fixed bottom-0 w-full bg-white/85 backdrop-blur-2xl border-t border-white/50 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 px-6 z-[70] rounded-t-[32px] shadow-[0_-8px_30px_rgba(0,0,0,0.08)] md:hidden block">
         <div className="flex items-center justify-between pb-2">
           
           <Link href={isTrading ? "/trading" : "/dashboard"} className={`flex flex-col items-center justify-center gap-1 ${(pathname === '/dashboard' || pathname === '/trading') ? 'text-blue-600' : 'text-slate-400'}`}>
@@ -177,8 +177,8 @@ export default function GlobalMobileNav() {
             <span className="text-[9px] font-semibold">{isTrading ? 'Market' : 'E-Wallet'}</span>
           </Link>
 
-          <div className="relative -mt-6">
-            <button onClick={() => setShowQuickActions(!showQuickActions)} aria-label="Quick Action" className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-700 to-blue-500 text-white shadow-float flex items-center justify-center active:scale-95 transition-transform">
+          <div className="relative -mt-7">
+            <button onClick={() => setShowQuickActions(!showQuickActions)} aria-label="Quick Action" className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-blue-500 text-white shadow-[0_8px_20px_rgba(37,99,235,0.25)] flex items-center justify-center active:scale-95 transition-transform border-[3px] border-white/80">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
                 <line x1="12" x2="12" y1="5" y2="19"/>
                 <line x1="5" x2="19" y1="12" y2="12"/>

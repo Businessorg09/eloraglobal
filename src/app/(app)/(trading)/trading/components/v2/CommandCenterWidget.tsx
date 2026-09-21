@@ -127,7 +127,7 @@ export function CommandCenterWidget() {
   // If there's no last watched video, show a nice default state
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-10 flex flex-col items-center justify-center min-h-[400px]">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-10 flex flex-col items-center justify-center min-h-[400px]">
         <span className="material-symbols-outlined text-[32px] text-blue-500 animate-spin mb-4">refresh</span>
         <span className="text-sm font-bold text-slate-500">Syncing learning progress...</span>
       </div>
@@ -140,7 +140,7 @@ export function CommandCenterWidget() {
     <div id="command-center" className="flex flex-col gap-6">
       
       {/* Video Module */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">
           <span className="bg-[#DBEAFE] text-[#1D4ED8] px-2 py-0.5 rounded">Continue Watching</span>
           <span>{episode?.module?.title || "Active Module"}</span>
@@ -164,7 +164,7 @@ export function CommandCenterWidget() {
         </p>
 
         {/* Video Player */}
-        <div className="relative w-full aspect-video bg-[#111827] rounded-xl overflow-hidden shadow-md group mb-5">
+        <div className="relative w-full aspect-video bg-[#111827] rounded-[24px] overflow-hidden shadow-md group mb-5">
           {episode && episode.video_url ? (
             isPlaying ? (
               <iframe 
@@ -205,7 +205,7 @@ export function CommandCenterWidget() {
         {/* Action Buttons & Playlist */}
         <div className="flex flex-col gap-3">
           
-          <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl overflow-hidden mt-2">
+          <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] overflow-hidden mt-2">
             <div className="px-4 py-3 border-b border-[#E5E7EB] bg-white flex justify-between items-center">
               <span className="font-bold text-[13px] text-[#111827]">Curriculum Playlist</span>
               <a href="/trading/academy" className="text-[11px] text-blue-600 font-bold hover:underline">View Full Academy</a>
@@ -270,13 +270,13 @@ export function CommandCenterWidget() {
       </div>
 
       {/* Homework Drill Module */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6 flex flex-col">
+      <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-6 flex flex-col">
         <div className="flex items-start gap-3 mb-4">
           <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0 text-[#9CA3AF]">
             <span className="material-symbols-outlined text-[20px]">assignment</span>
           </div>
           <div className="flex flex-col">
-            <h3 className="font-bold text-[18px] text-[#111827] leading-tight">Module Assignment</h3>
+            <h3 className="font-extrabold tracking-tight text-[18px] text-[#111827] leading-tight">Module Assignment</h3>
             <span className="text-[11px] text-[#6B7280] mt-0.5">Practical Simulation</span>
           </div>
         </div>
@@ -285,7 +285,7 @@ export function CommandCenterWidget() {
           No active assignment
         </div>
 
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-5 flex flex-col items-center justify-center min-h-[200px] text-center">
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-[24px] p-6 flex flex-col items-center justify-center min-h-[200px] text-center">
           <span className="material-symbols-outlined text-[#9CA3AF] text-[32px] mb-2">assignment_late</span>
           <span className="text-[13px] font-bold text-[#4B5563]">No Assignment Available</span>
           <p className="text-[11px] text-[#9CA3AF] mt-1 max-w-[250px]">Assignments will appear here when you unlock a new module.</p>

@@ -246,7 +246,7 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto bg-[#F8F9FA] p-4 md:p-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto bg-[#F8F9FA] px-5 py-6 pb-[120px] md:p-8 custom-scrollbar">
           <div className="max-w-[1400px] mx-auto w-full">
             {children}
           </div>
