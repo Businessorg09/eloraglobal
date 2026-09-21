@@ -49,9 +49,7 @@ export function GatedContent({
 
   return (
     <div className={`relative ${!isComponent ? 'w-full h-full min-h-[600px]' : 'w-full h-full'}`}>
-      <div className={`pointer-events-none select-none filter blur-${blurLevel} opacity-40 transition-all duration-500`}>
-        {children}
-      </div>
+      <div className="hidden">{children}</div>
       
       <div className="absolute inset-0 z-50 flex items-center justify-center p-4 md:p-6">
         <div className="bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl p-4 md:p-8 max-w-md w-full flex flex-col items-center text-center transform transition-all">
