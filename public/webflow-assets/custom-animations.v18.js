@@ -77,67 +77,144 @@ mm.add('(min-width: 768px)', () => {
 
 
 /* ─────────────────────────────────────────
-   STEP 4: HERO SECTION ENTRANCE
+   STEP 4: HERO SECTION — EXACT WEBFLOW IX2 RECREATION
+   Reverse-engineered from webflow.a746f7be.0dfb77f68842956f.js
+   
+   Timeline (matching Webflow's IX2 timeline exactly):
+   t=0.73s → [hero-glow] image: opacity 0→1, y 40→0, scale 0.82→1, rotation -6→0, dur=1.4s
+   t=1.05s → hero_line: opacity 0→1, dur=0.6s
+   t=1.16s → [hero-title] heading: opacity 0→1, y 40→0
+   t=1.36s → [description] text: SplitText by lines, scaleY 0→1 mask reveal (Apple style)
+   t=1.59s → [hero-button]: opacity 0→1, y 2rem→0
+   card-1,2,3 → staggered slide up from bottom
 ───────────────────────────────────────── */
 (function heroAnimation() {
-  const heroHeading = document.querySelector('.hero_heading, .section_hero h1, .heading-style-h1');
-  const heroSub     = document.querySelector('.hero_description, .hero_content > p, .text-xl');
-  const heroButtons = document.querySelector('.hero_button-wrap, .button_wrap');
-  const heroImage   = document.querySelector('.hero_image-wrap, .hero_img, .hero_visual');
+  const heroGlow   = document.querySelector('[hero-glow]');
+  const heroTitle  = document.querySelector('[hero-title]');
+  const heroDesc   = document.querySelector('[description]');
+  const heroButton = document.querySelector('[hero-button]');
+  const heroLine   = document.querySelector('.section_hero .hero_line');
+  const card1      = document.querySelector('[card-1]');
+  const card2      = document.querySelector('[card-2]');
+  const card3      = document.querySelector('[card-3]');
 
-  const heroTl = gsap.timeline({ delay: 0.15 });
+  // Set initial states
+  if (heroGlow)   gsap.set(heroGlow,   { opacity: 0, y: 40, scale: 0.82, rotation: -6 });
+  if (heroLine)   gsap.set(heroLine,   { opacity: 0 });
+  if (heroTitle)  gsap.set(heroTitle,  { opacity: 0, y: 40 });
+  if (heroButton) gsap.set(heroButton, { opacity: 0, y: 32 });
+  if (card1) gsap.set(card1, { opacity: 0, y: '50%' });
+  if (card2) gsap.set(card2, { opacity: 0, y: '100%' });
+  if (card3) gsap.set(card3, { opacity: 0, y: '150%' });
 
-  if (heroHeading) {
-    heroTl.fromTo(heroHeading,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }
-    );
+  // Apple-style SplitText line mask reveal on description
+  let descLines = null;
+  if (heroDesc) {
+    try {
+      const split = new SplitText(heroDesc, { type: 'lines', linesClass: 'hero-desc-line' });
+      descLines = split.lines;
+      descLines.forEach(line => {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'overflow:hidden; display:block;';
+        line.parentNode.insertBefore(wrap, line);
+        wrap.appendChild(line);
+        gsap.set(line, { scaleY: 0, opacity: 0, transformOrigin: 'top center' });
+      });
+    } catch(e) {
+      gsap.set(heroDesc, { opacity: 0, y: 20 });
+      descLines = null;
+    }
   }
-  if (heroSub) {
-    heroTl.fromTo(heroSub,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-      '-=0.5'
-    );
+
+  // Master hero timeline
+  const tl = gsap.timeline({ delay: 0.15 });
+
+  // Hero glow image — scale + rotation + opacity (Webflow: pos=0.73, dur=1.4, ease=power3)
+  if (heroGlow) tl.to(heroGlow, { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 1.4, ease: 'power3.out' }, 0.58);
+
+  // Hero line
+  if (heroLine) tl.to(heroLine, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.9);
+
+  // Hero title
+  if (heroTitle) tl.to(heroTitle, { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, 1.0);
+
+  // Description — Apple line mask
+  if (descLines && descLines.length > 0) {
+    tl.to(descLines, { scaleY: 1, opacity: 1, duration: 0.6, ease: 'power3.out', stagger: 0.05 }, 1.2);
+  } else if (heroDesc) {
+    tl.to(heroDesc, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.2);
   }
-  if (heroButtons) {
-    heroTl.fromTo(heroButtons,
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
-      '-=0.4'
-    );
+
+  // CTA Button
+  if (heroButton) tl.to(heroButton, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 1.4);
+
+  // Floating cards
+  if (card1) tl.to(card1, { opacity: 1, y: '0%', duration: 0.5, ease: 'power3.out' }, 1.2);
+  if (card2) tl.to(card2, { opacity: 1, y: '0%', duration: 0.5, ease: 'power3.out' }, 1.53);
+  if (card3) tl.to(card3, { opacity: 1, y: '0%', duration: 0.5, ease: 'power3.out' }, 1.86);
+
+  // Continuous gentle float on hero image (Apple signature breathe)
+  if (heroGlow) {
+    tl.call(() => {
+      gsap.to(heroGlow, { y: -12, duration: 4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    }, [], 2.5);
   }
-  if (heroImage) {
-    heroTl.fromTo(heroImage,
-      { y: 40, opacity: 0, scale: 0.97 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' },
-      '-=0.7'
-    );
+
+  // Scroll parallax on hero section
+  const heroSection = document.querySelector('.section_hero');
+  if (heroSection && heroGlow) {
+    gsap.to(heroGlow, {
+      y: -60, ease: 'none',
+      scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 1.5 }
+    });
   }
 })();
 
 
 /* ─────────────────────────────────────────
-   STEP 5: SECTION HEADING REVEALS
-   Every major section heading fades up on scroll.
+   STEP 5: SECTION HEADING REVEALS — APPLE STYLE
+   Each h2 inside .section_heading gets split by words.
+   Words slide up from overflow:hidden masks — exactly
+   like Apple.com product page typography animations.
 ───────────────────────────────────────── */
 (function sectionHeadings() {
-  const headings = gsap.utils.toArray('.section_heading');
+  const headings = gsap.utils.toArray('.section_heading h2, .section_heading h3');
 
   headings.forEach(heading => {
-    gsap.fromTo(heading,
-      { y: 40, opacity: 0 },
-      {
-        y: 0, opacity: 1,
-        duration: 0.9,
+    let split;
+    try {
+      split = new SplitText(heading, { type: 'words,chars', wordsClass: 'split-word' });
+      // Wrap each word in an overflow:hidden mask
+      split.words.forEach(word => {
+        const mask = document.createElement('span');
+        mask.style.cssText = 'overflow:hidden; display:inline-block; vertical-align:bottom;';
+        word.parentNode.insertBefore(mask, word);
+        mask.appendChild(word);
+        gsap.set(word, { y: '110%', opacity: 0 });
+      });
+
+      gsap.to(split.words, {
+        y: '0%',
+        opacity: 1,
+        duration: 0.8,
         ease: 'power3.out',
+        stagger: 0.04,
         scrollTrigger: {
           trigger: heading,
-          start: 'top 88%',
+          start: 'top 90%',
           toggleActions: 'play none none none',
         }
-      }
-    );
+      });
+    } catch(e) {
+      // Fallback: simple fade-up
+      gsap.fromTo(heading,
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: heading, start: 'top 88%', toggleActions: 'play none none none' }
+        }
+      );
+    }
   });
 })();
 
