@@ -19,7 +19,12 @@ export default function GlobalMobileNav() {
     router.push('/login');
   };
 
+  
   const isTrading = pathname?.startsWith('/trading');
+  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname?.startsWith('/auth');
+
+  if (isAuthPage) return null;
+
 
   return (
     <>
