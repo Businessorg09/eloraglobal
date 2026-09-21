@@ -3,7 +3,7 @@
 import { signOutAction } from "@/app/auth/actions";
 
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +11,27 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function GlobalMobileNav() {
   const pathname = usePathname();
   const router = useRouter();
+  
   const [showQuickActions, setShowQuickActions] = useState(false);
+  const [userPackage, setUserPackage] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/user/profile')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.profile) {
+          const pkg = data.profile.package_name?.toLowerCase() || '';
+          if (pkg.includes('elite') || pkg.includes('executive')) setUserPackage(3);
+          else if (pkg.includes('pro') || pkg.includes('growth')) setUserPackage(2);
+          else if (pkg.includes('starter')) setUserPackage(1);
+          else setUserPackage(0);
+        } else {
+          setUserPackage(0);
+        }
+      })
+      .catch(() => setUserPackage(0));
+  }, []);
+
 
   const handleLogout = async () => {
     setShowQuickActions(false);
@@ -54,7 +74,25 @@ export default function GlobalMobileNav() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+              
+              {userPackage === 0 ? (
+                 <div className="flex flex-col items-center justify-center py-6 text-center">
+                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 text-amber-600 flex items-center justify-center mb-4 shadow-inner">
+                     <span className="material-symbols-outlined text-[32px]">workspace_premium</span>
+                   </div>
+                   <h4 className="font-bold text-slate-800 text-[18px] mb-2">Package Required</h4>
+                   <p className="text-[13px] text-slate-500 mb-6 px-4">Upgrade your package to unlock the full ecosystem of tools, insights, and trading capabilities.</p>
+                   <Link href="/dashboard/business" onClick={() => setShowQuickActions(false)} className="bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-sm px-8 py-3 rounded-full shadow-lg shadow-amber-500/30 active:scale-95 transition-all">
+                     View Packages
+                   </Link>
+                 </div>
+              ) : userPackage === null ? (
+                 <div className="py-12 flex justify-center">
+                   <div className="w-8 h-8 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin"></div>
+                 </div>
+              ) : (
+                <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+
                 {!isTrading ? (
                   // --- BUSINESS MENU ---
                   <>
@@ -163,6 +201,7 @@ export default function GlobalMobileNav() {
                   <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Logout</span>
                 </button>
               </div>
+              )}
             </motion.div>
           </>
         )}
