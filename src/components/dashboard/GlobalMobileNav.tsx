@@ -1,3 +1,4 @@
+import { signOutAction } from "@/app/auth/actions";
 'use client'
 
 import { useState } from 'react'
@@ -6,122 +7,152 @@ import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function GlobalMobileNav() {
-  const pathname = usePathname()
-  const [showQuickActions, setShowQuickActions] = useState(false)
+  const pathname = usePathname();
+  const router = useRouter();
+  const [showQuickActions, setShowQuickActions] = useState(false);
 
-  const router = useRouter()
   const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' })
-      router.push('/login')
-    } catch (err) {
-      console.error('Logout failed')
-    }
-  }
+    setShowQuickActions(false);
+    await signOutAction();
+    router.push('/login');
+  };
 
-
-  // Don't show on auth pages or landing page
-  if (pathname === '/' || pathname.includes('/login') || pathname.includes('/register')) {
-    return null
-  }
+  const isTrading = pathname?.startsWith('/trading');
 
   return (
     <>
-      {/* QUICK ACTIONS MODAL */}
+      {/* QUICK ACTIONS OVERLAY (The "Menu") */}
       <AnimatePresence>
         {showQuickActions && (
           <>
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setShowQuickActions(false)}
-              className="fixed inset-0 z-[80] bg-slate-900/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[80] md:hidden"
             />
-            <motion.div 
-              initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed bottom-0 left-0 right-0 z-[90] bg-white rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] p-6 pb-10 safe-bottom md:hidden"
+            
+            <motion.div
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 100, scale: 0.95 }}
+              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              className="fixed bottom-[85px] left-4 right-4 bg-white p-5 rounded-3xl shadow-2xl z-[90] md:hidden border border-slate-100"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-slate-900">App Navigation</h3>
-                <button onClick={() => setShowQuickActions(false)} className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[18px]">close</span>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-sm font-bold text-slate-800">
+                  {isTrading ? 'Trading Engine' : 'Business Engine'} Menu
+                </h3>
+                <button onClick={() => setShowQuickActions(false)} className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200">
+                  <i className="ph-bold ph-x text-sm"></i>
                 </button>
               </div>
-              
+
               <div className="grid grid-cols-4 gap-y-6 gap-x-2">
-                <Link href="/dashboard" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-lg shadow-sm border border-slate-200">
-                    <i className="ph-bold ph-squares-four"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Dashboard</span>
-                </Link>
+                {!isTrading ? (
+                  // --- BUSINESS MENU ---
+                  <>
+                    <Link href="/dashboard" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-lg shadow-sm border border-blue-100"><i className="ph-bold ph-squares-four"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Dashboard</span>
+                    </Link>
+                    <Link href="/tree" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shadow-sm border border-emerald-100"><i className="ph-bold ph-tree-structure"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Genealogy</span>
+                    </Link>
+                    <Link href="/dashboard/network" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-lg shadow-sm border border-blue-100"><i className="ph-bold ph-users-three"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Network</span>
+                    </Link>
+                    <Link href="/dashboard/business" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-lg shadow-sm border border-purple-100"><i className="ph-bold ph-briefcase"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Business</span>
+                    </Link>
+                    <Link href="/dashboard/ewallet" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-lg shadow-sm border border-amber-100"><i className="ph-bold ph-wallet"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">E-Wallet</span>
+                    </Link>
+                    <Link href="/dashboard/payout" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center text-lg shadow-sm border border-rose-100"><i className="ph-bold ph-bank"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Payout</span>
+                    </Link>
+                    <Link href="/dashboard/reports" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg shadow-sm border border-cyan-100"><i className="ph-bold ph-chart-bar"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Reports</span>
+                    </Link>
+                    <Link href="/dashboard/marketing" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center text-lg shadow-sm border border-pink-100"><i className="ph-bold ph-megaphone"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Marketing</span>
+                    </Link>
+                    <Link href="/dashboard/support" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg shadow-sm border border-indigo-100"><i className="ph-bold ph-headset"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Support</span>
+                    </Link>
+                    <Link href="/trading" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center text-lg shadow-sm border border-slate-700"><i className="ph-bold ph-swap"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Trading</span>
+                    </Link>
+                  </>
+                ) : (
+                  // --- TRADING MENU ---
+                  <>
+                    <Link href="/trading" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-lg shadow-sm border border-blue-100"><i className="ph-bold ph-squares-four"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Dashboard</span>
+                    </Link>
+                    <Link href="/trading/terminal" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg shadow-sm border border-indigo-100"><i className="ph-bold ph-chart-line-up"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Terminal</span>
+                    </Link>
+                    <Link href="/trading/tools" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-slate-50 text-slate-600 flex items-center justify-center text-lg shadow-sm border border-slate-200"><i className="ph-bold ph-wrench"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Tools</span>
+                    </Link>
+                    <Link href="/trading/live" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-lg shadow-sm border border-red-100"><i className="ph-bold ph-broadcast"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Live Room</span>
+                    </Link>
+                    <Link href="/trading/strategy" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-lg shadow-sm border border-amber-100"><i className="ph-bold ph-lightbulb"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Strategy</span>
+                    </Link>
+                    <Link href="/trading/journal" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shadow-sm border border-emerald-100"><i className="ph-bold ph-book-open"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Journal</span>
+                    </Link>
+                    <Link href="/trading/analytics" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg shadow-sm border border-cyan-100"><i className="ph-bold ph-chart-pie"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Analytics</span>
+                    </Link>
+                    <Link href="/trading/exam" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-lg shadow-sm border border-purple-100"><i className="ph-bold ph-certificate"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Exam</span>
+                    </Link>
+                    <Link href="/trading/passport" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center text-lg shadow-sm border border-pink-100"><i className="ph-bold ph-identification-badge"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Passport</span>
+                    </Link>
+                    <Link href="/trading/achievements" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-yellow-50 text-yellow-600 flex items-center justify-center text-lg shadow-sm border border-yellow-100"><i className="ph-bold ph-trophy"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Awards</span>
+                    </Link>
+                    <Link href="/trading/community" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center text-lg shadow-sm border border-teal-100"><i className="ph-bold ph-users"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Community</span>
+                    </Link>
+                    <Link href="/dashboard" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                      <div className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center text-lg shadow-sm border border-slate-700"><i className="ph-bold ph-swap"></i></div>
+                      <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Business</span>
+                    </Link>
+                  </>
+                )}
                 
-                <Link href="/tree" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shadow-sm border border-emerald-100">
-                    <i className="ph-bold ph-tree-structure"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Genealogy</span>
-                </Link>
-
-                <Link href="/dashboard/network" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-lg shadow-sm border border-blue-100">
-                    <i className="ph-bold ph-users-three"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Network</span>
-                </Link>
-                
-                <Link href="/dashboard/business" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-lg shadow-sm border border-purple-100">
-                    <i className="ph-bold ph-briefcase"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Business</span>
-                </Link>
-                
-                <Link href="/dashboard/ewallet" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-lg shadow-sm border border-amber-100">
-                    <i className="ph-bold ph-wallet"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">E-Wallet</span>
-                </Link>
-                
-                <Link href="/dashboard/payout" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center text-lg shadow-sm border border-rose-100">
-                    <i className="ph-bold ph-bank"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Payout</span>
-                </Link>
-
-                <Link href="/dashboard/reports" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg shadow-sm border border-cyan-100">
-                    <i className="ph-bold ph-chart-bar"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Reports</span>
-                </Link>
-                
-                <Link href="/dashboard/marketing" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center text-lg shadow-sm border border-pink-100">
-                    <i className="ph-bold ph-megaphone"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Marketing</span>
-                </Link>
-
-                <Link href="/dashboard/support" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg shadow-sm border border-indigo-100">
-                    <i className="ph-bold ph-headset"></i>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Support</span>
-                </Link>
-                
-                <Link href="/dashboard/settings" onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-slate-50 text-slate-600 flex items-center justify-center text-lg shadow-sm border border-slate-200">
-                    <i className="ph-bold ph-gear"></i>
-                  </div>
+                <Link href={isTrading ? "/trading/settings" : "/dashboard/settings"} onClick={() => setShowQuickActions(false)} className="flex flex-col items-center gap-1.5">
+                  <div className="w-12 h-12 rounded-full bg-slate-50 text-slate-600 flex items-center justify-center text-lg shadow-sm border border-slate-200"><i className="ph-bold ph-gear"></i></div>
                   <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Settings</span>
                 </Link>
               
                 <button onClick={handleLogout} className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-lg shadow-sm border border-red-100">
-                    <i className="ph-bold ph-sign-out"></i>
-                  </div>
+                  <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-lg shadow-sm border border-red-100"><i className="ph-bold ph-sign-out"></i></div>
                   <span className="text-[9px] font-bold text-slate-600 text-center leading-tight">Logout</span>
                 </button>
               </div>
@@ -134,14 +165,14 @@ export default function GlobalMobileNav() {
       <nav className="fixed bottom-0 w-full bg-white/90 backdrop-blur-xl border-t border-slate-100 pb-safe pt-2 px-6 z-[70] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:hidden block">
         <div className="flex items-center justify-between pb-2">
           
-          <Link href="/dashboard" className={`flex flex-col items-center justify-center gap-1 ${pathname === '/dashboard' ? 'text-blue-600' : 'text-slate-400'}`}>
-            <i className={`ph-fill ph-house text-2xl ${pathname === '/dashboard' ? 'drop-shadow-sm' : ''}`}></i>
+          <Link href={isTrading ? "/trading" : "/dashboard"} className={`flex flex-col items-center justify-center gap-1 ${(pathname === '/dashboard' || pathname === '/trading') ? 'text-blue-600' : 'text-slate-400'}`}>
+            <i className={`ph-fill ph-house text-2xl ${(pathname === '/dashboard' || pathname === '/trading') ? 'drop-shadow-sm' : ''}`}></i>
             <span className="text-[9px] font-semibold">Home</span>
           </Link>
           
-          <Link href="/dashboard/ewallet" className={`flex flex-col items-center justify-center gap-1 ${pathname.includes('ewallet') ? 'text-blue-600' : 'text-slate-400'}`}>
-            <i className="ph-fill ph-wallet text-2xl"></i>
-            <span className="text-[9px] font-semibold">E-Wallet</span>
+          <Link href={isTrading ? "/trading/market" : "/dashboard/ewallet"} className={`flex flex-col items-center justify-center gap-1 ${(pathname.includes('ewallet') || pathname.includes('market')) ? 'text-blue-600' : 'text-slate-400'}`}>
+            <i className={`ph-fill ${isTrading ? 'ph-globe' : 'ph-wallet'} text-2xl`}></i>
+            <span className="text-[9px] font-semibold">{isTrading ? 'Market' : 'E-Wallet'}</span>
           </Link>
 
           <div className="relative -mt-6">
@@ -154,14 +185,14 @@ export default function GlobalMobileNav() {
             <span className="text-[9px] font-semibold text-slate-500 mt-1 absolute left-1/2 -translate-x-1/2">Menu</span>
           </div>
 
-          <Link href="/tree" className={`flex flex-col items-center justify-center gap-1 ${pathname === '/tree' ? 'text-blue-600' : 'text-slate-400'}`}>
-            <i className="ph-fill ph-tree-structure text-2xl"></i>
-            <span className="text-[9px] font-semibold">Network</span>
+          <Link href={isTrading ? "/trading/academy" : "/tree"} className={`flex flex-col items-center justify-center gap-1 ${(pathname === '/tree' || pathname.includes('academy')) ? 'text-blue-600' : 'text-slate-400'}`}>
+            <i className={`ph-fill ${isTrading ? 'ph-graduation-cap' : 'ph-tree-structure'} text-2xl`}></i>
+            <span className="text-[9px] font-semibold">{isTrading ? 'Academy' : 'Network'}</span>
           </Link>
           
-          <Link href="/dashboard/settings" className={`flex flex-col items-center justify-center gap-1 ${pathname.includes('settings') ? 'text-blue-600' : 'text-slate-400'}`}>
-            <i className="ph-fill ph-gear text-2xl"></i>
-            <span className="text-[9px] font-semibold">Settings</span>
+          <Link href={isTrading ? "/trading/terminal" : "/dashboard/settings"} className={`flex flex-col items-center justify-center gap-1 ${(pathname.includes('settings') || pathname.includes('terminal')) ? 'text-blue-600' : 'text-slate-400'}`}>
+            <i className={`ph-fill ${isTrading ? 'ph-chart-line-up' : 'ph-gear'} text-2xl`}></i>
+            <span className="text-[9px] font-semibold">{isTrading ? 'Terminal' : 'Settings'}</span>
           </Link>
 
         </div>
