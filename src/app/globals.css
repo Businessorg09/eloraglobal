@@ -527,3 +527,13 @@ h1, h2, h3, h4, h5, h6 {
 .folder-tab {
   clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
 }
+
+/* Mobile Optimization */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overscroll-behavior-y: none;
+  scroll-behavior: smooth;
+}
