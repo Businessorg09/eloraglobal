@@ -101,8 +101,8 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
 </button>
 <div>
-<h2 className="text-sm font-black tracking-widest text-slate-900 leading-none">TDPF</h2>
-<p className="text-[9px] font-bold text-blue-600 tracking-widest mt-0.5 uppercase">FOUNDATION</p>
+<h2 className="text-sm font-black tracking-widest text-slate-900 leading-none">ELORA</h2>
+<p className="text-[9px] font-bold text-blue-600 tracking-widest mt-0.5 uppercase">GLOBAL</p>
 </div>
 </div>
 <div className="flex items-center gap-3">

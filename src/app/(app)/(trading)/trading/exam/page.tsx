@@ -5,7 +5,7 @@ import { ExamHistoryWidget } from './components/ExamHistoryWidget'
 
 export default function ExamCenterPage() {
   return (
-    <div className="flex flex-col max-w-[1400px] mx-auto w-full pb-10 pt-4">
+    <div className="flex flex-col max-w-[1400px] mx-auto w-full px-4 md:px-8 pb-10 pt-4">
       
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 mb-8">
@@ -27,7 +27,7 @@ export default function ExamCenterPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-4 md:p-8 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-8  items-start">
         
         {/* Left Column (8) */}
         <div className="xl:col-span-8 flex flex-col">

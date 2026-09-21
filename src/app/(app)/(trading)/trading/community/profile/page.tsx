@@ -89,7 +89,7 @@ export default function CommunityProfilePage() {
       </div>
 
       {/* Profile Header (Instagram Style) */}
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-4 md:p-8 md:gap-16 px-4 md:px-8 mb-10">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8  md:gap-16 px-4 md:px-8 mb-10">
         
         {/* Avatar */}
         <div className="relative">
@@ -106,7 +106,7 @@ export default function CommunityProfilePage() {
         {/* Stats & Actions */}
         <div className="flex flex-col flex-1 gap-4 md:p-5 w-full">
           
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 md:gap-4 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 md:gap-8 ">
             <h1 className="font-headline-xl text-[20px] md:text-[24px] text-on-surface flex items-center gap-2">
               {displayName}
               {profileData?.is_verified && <span className="material-symbols-outlined text-primary text-[20px]">verified</span>}
@@ -124,7 +124,7 @@ export default function CommunityProfilePage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-4 md:p-8">
+          <div className="flex items-center gap-4 md:gap-8 ">
             <div className="flex gap-1.5 font-body-md text-[16px]">
               <span className="font-bold text-on-surface">{userPosts.length}</span>
               <span className="text-on-surface-variant">posts</span>

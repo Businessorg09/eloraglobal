@@ -913,7 +913,7 @@ export default function BusinessCommandCenter() {
                     <div className="absolute -right-2 -bottom-8 w-36 h-36 rounded-full bg-white/10"></div>
                     <div className="relative z-10 flex flex-col h-full justify-between">
                       <div className="flex items-center justify-between">
-                        <span className="font-label-sm text-label-sm text-white/70 uppercase tracking-wider">TDPF Executive Card</span>
+                        <span className="font-label-sm text-label-sm text-white/70 uppercase tracking-wider">ELORA Executive Card</span>
                         <span className="material-symbols-outlined text-white text-[28px]">contactless</span>
                       </div>
                       <div>

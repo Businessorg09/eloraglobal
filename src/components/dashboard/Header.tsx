@@ -72,7 +72,7 @@ export default function Header() {
       transition={{ duration: 0.4 }}
       className="h-header-height bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-4 md:px-gutter-lg sticky top-0"
     >
-      <div className="md:hidden flex items-center font-bold text-lg text-primary">TDPF</div>
+      <div className="md:hidden flex items-center font-bold text-lg text-primary">ELORA GLOBAL</div>
       <div className="hidden md:flex items-center gap-gutter-md flex-1 max-w-lg">
         <div className="relative w-full">
           <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">search</span>
