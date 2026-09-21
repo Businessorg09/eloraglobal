@@ -4,22 +4,33 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function CommunityModerationPage() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [users, setUsers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'FEED' | 'CHATS' | 'USERS' | 'SHIELD'>('FEED');
+  const [data, setData] = useState<{
+    posts: any[];
+    chats: any[];
+    users: any[];
+    settings: any;
+    blacklist: any[];
+  }>({ posts: [], chats: [], users: [], settings: {}, blacklist: [] });
   
+  const [loading, setLoading] = useState(true);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState('');
-  
+  const [newKeyword, setNewKeyword] = useState('');
   const [toast, setToast] = useState<string | null>(null);
 
   const fetchModerationData = async () => {
     try {
       const res = await fetch('/api/admin/community');
       if (res.ok) {
-        const data = await res.json();
-        setPosts(data.posts || []);
-        setUsers(data.users || []);
+        const json = await res.json();
+        setData({
+          posts: json.posts || [],
+          chats: json.chats || [],
+          users: json.users || [],
+          settings: json.settings || {},
+          blacklist: json.blacklist || [],
+        });
       }
     } catch (e) {
       console.error(e);
@@ -37,27 +48,22 @@ export default function CommunityModerationPage() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const handleAction = async (action: string, targetId: string, value?: any) => {
+  const handleAction = async (action: string, targetId: string, value?: any, metadata?: any) => {
     try {
       const res = await fetch('/api/admin/community', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, targetId, value })
+        body: JSON.stringify({ action, targetId, value, metadata })
       });
       if (res.ok) {
-        showToast(`Action ${action} completed successfully.`);
-        fetchModerationData(); // Refresh UI
+        showToast(`Action completed successfully.`);
+        fetchModerationData();
       } else {
         showToast('Failed to perform action.');
       }
     } catch (e) {
       console.error(e);
     }
-  };
-
-  const saveEdit = async (postId: string) => {
-    await handleAction('EDIT_POST', postId, editContent);
-    setEditingPostId(null);
   };
 
   return (
@@ -69,116 +75,220 @@ export default function CommunityModerationPage() {
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Community Moderation Hub</h1>
-            <p className="text-slate-500 text-sm">Manage live community feeds, edit/delete posts, and ban users.</p>
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Community God-Mode</h1>
+            <p className="text-slate-500 text-sm">Surveillance, auto-mod shields, and platform-wide lockdown controls.</p>
           </div>
-          <button onClick={fetchModerationData} className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-sm font-semibold flex items-center gap-2 transition-colors">
-            <span className="material-symbols-outlined text-[18px]">refresh</span> Refresh
-          </button>
+          <div className="flex gap-2">
+            <button onClick={fetchModerationData} className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 rounded-lg text-sm font-semibold flex items-center gap-2 transition-colors">
+              <span className="material-symbols-outlined text-[18px]">refresh</span> Refresh
+            </button>
+            {data.settings?.global_chat_locked ? (
+              <button onClick={() => handleAction('UPDATE_SETTINGS', '1', { global_chat_locked: false })} className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors">
+                <span className="material-symbols-outlined text-[18px]">lock_open</span> Unlock Platform
+              </button>
+            ) : (
+              <button onClick={() => { if(confirm('FREEZE ENTIRE PLATFORM CHAT?')) handleAction('UPDATE_SETTINGS', '1', { global_chat_locked: true }) }} className="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors shadow-sm">
+                <span className="material-symbols-outlined text-[18px]">lock</span> Master Lockdown
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex overflow-x-auto gap-2 border-b border-slate-200 pb-2">
+          {[
+            { id: 'FEED', label: 'Global Feed', icon: 'public' },
+            { id: 'CHATS', label: 'Chat Surveillance', icon: 'chat' },
+            { id: 'USERS', label: 'User Database', icon: 'shield_person' },
+            { id: 'SHIELD', label: 'Auto-Mod Shield', icon: 'security' },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`px-4 py-2.5 rounded-t-lg font-bold text-sm flex items-center gap-2 transition-colors border-b-2 ${
+                activeTab === tab.id ? 'border-blue-600 text-blue-700 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[18px]">{tab.icon}</span> {tab.label}
+            </button>
+          ))}
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 md:p-6 min-h-[500px]">
             
-            {/* Posts Feed */}
-            <div className="lg:col-span-2 space-y-4">
-              <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <span className="material-symbols-outlined text-blue-600">forum</span> Live Global Feed
-              </h2>
-              {posts.length === 0 ? (
-                <div className="p-8 text-center text-slate-500 bg-white rounded-xl border border-slate-200">No posts available.</div>
-              ) : (
-                posts.map((post) => (
-                  <div key={post.id} className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex flex-col gap-3">
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
-                          {post.users?.full_name?.[0] || 'U'}
+            {/* TAB: FEED */}
+            {activeTab === 'FEED' && (
+              <div className="space-y-4">
+                <h2 className="text-lg font-bold text-slate-800">Global Feed Moderation</h2>
+                <div className="grid gap-4">
+                  {data.posts.map((post) => (
+                    <div key={post.id} className={`border rounded-xl p-4 shadow-sm flex flex-col gap-3 ${post.is_pinned ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
+                      <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
+                            {post.users?.full_name?.[0] || 'U'}
+                          </div>
+                          <div>
+                            <p className="font-bold text-slate-900 text-[14px]">
+                              {post.users?.full_name} 
+                              {post.is_pinned && <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-[10px] font-bold rounded-full uppercase">Pinned</span>}
+                            </p>
+                            <p className="text-[12px] text-slate-500">@{post.users?.username} • {new Date(post.created_at).toLocaleString()}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-bold text-slate-900 text-[14px]">
-                            {post.users?.full_name} 
-                            {post.users?.is_shadowbanned && <span className="ml-2 px-2 py-0.5 bg-red-100 text-red-700 text-[10px] rounded-full">BANNED</span>}
-                          </p>
-                          <p className="text-[12px] text-slate-500">@{post.users?.username} • {new Date(post.created_at).toLocaleString()}</p>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        {editingPostId === post.id ? (
-                          <div className="flex gap-1">
-                            <button onClick={() => saveEdit(post.id)} className="p-1.5 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition" title="Save Edit">
+                        <div className="flex gap-2">
+                          <button onClick={() => handleAction('PIN_POST', post.id, !post.is_pinned)} className="p-1.5 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 transition" title="Toggle Pin">
+                            <span className="material-symbols-outlined text-[16px]">keep</span>
+                          </button>
+                          {editingPostId === post.id ? (
+                            <button onClick={() => { handleAction('EDIT_POST', post.id, editContent); setEditingPostId(null); }} className="p-1.5 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition" title="Save Edit">
                               <span className="material-symbols-outlined text-[16px]">check</span>
                             </button>
-                            <button onClick={() => setEditingPostId(null)} className="p-1.5 bg-slate-100 text-slate-700 rounded hover:bg-slate-200 transition" title="Cancel">
-                              <span className="material-symbols-outlined text-[16px]">close</span>
-                            </button>
-                          </div>
-                        ) : (
-                          <>
+                          ) : (
                             <button onClick={() => { setEditingPostId(post.id); setEditContent(post.content); }} className="p-1.5 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition" title="Edit Post">
                               <span className="material-symbols-outlined text-[16px]">edit</span>
                             </button>
-                            <button onClick={() => { if(confirm('Are you sure you want to delete this post?')) handleAction('DELETE_POST', post.id) }} className="p-1.5 bg-red-50 text-red-600 rounded hover:bg-red-100 transition" title="Delete Post">
-                              <span className="material-symbols-outlined text-[16px]">delete</span>
-                            </button>
-                          </>
-                        )}
+                          )}
+                          <button onClick={() => { if(confirm('Delete post?')) handleAction('DELETE_POST', post.id) }} className="p-1.5 bg-red-50 text-red-600 rounded hover:bg-red-100 transition" title="Delete Post">
+                            <span className="material-symbols-outlined text-[16px]">delete</span>
+                          </button>
+                        </div>
                       </div>
+                      {editingPostId === post.id ? (
+                        <textarea
+                          value={editContent}
+                          onChange={(e) => setEditContent(e.target.value)}
+                          className="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                          rows={3}
+                        />
+                      ) : (
+                        <p className="text-sm text-slate-700 whitespace-pre-wrap">{post.content}</p>
+                      )}
                     </div>
-                    
-                    {editingPostId === post.id ? (
-                      <textarea
-                        value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                        rows={3}
-                      />
-                    ) : (
-                      <p className="text-sm text-slate-700 whitespace-pre-wrap">{post.content}</p>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-
-            {/* Users Sidebar */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <span className="material-symbols-outlined text-purple-600">group</span> User Controls
-              </h2>
-              <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-4 max-h-[800px] overflow-y-auto">
-                {users.map(u => (
-                  <div key={u.id} className="flex flex-col gap-2 p-3 bg-slate-50 border border-slate-100 rounded-lg">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-sm font-bold text-slate-900">{u.full_name}</p>
-                        <p className="text-xs text-slate-500">@{u.username}</p>
-                      </div>
-                      {u.is_shadowbanned && <span className="px-2 py-0.5 bg-red-100 text-red-700 text-[10px] rounded border border-red-200">Shadowbanned</span>}
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                      <button 
-                        onClick={() => handleAction('SHADOWBAN_USER', u.id, !u.is_shadowbanned)}
-                        className={`py-1.5 text-xs font-bold rounded transition ${u.is_shadowbanned ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-red-100 text-red-700 hover:bg-red-200'}`}
-                      >
-                        {u.is_shadowbanned ? 'Unban User' : 'Shadowban'}
-                      </button>
-                      <button 
-                        onClick={() => handleAction('SET_VERIFIED', u.id, !u.is_verified)}
-                        className={`py-1.5 text-xs font-bold rounded transition ${u.is_verified ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}`}
-                      >
-                        {u.is_verified ? 'Remove Badge' : 'Give Badge'}
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* TAB: CHATS */}
+            {activeTab === 'CHATS' && (
+              <div className="space-y-4">
+                <h2 className="text-lg font-bold text-slate-800">Private Chat Surveillance</h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm text-slate-600">
+                    <thead className="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
+                      <tr>
+                        <th className="px-4 py-3">Timestamp</th>
+                        <th className="px-4 py-3">Sender</th>
+                        <th className="px-4 py-3">Room ID</th>
+                        <th className="px-4 py-3">Message Content</th>
+                        <th className="px-4 py-3 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {data.chats.map((chat) => (
+                        <tr key={chat.id} className="hover:bg-slate-50">
+                          <td className="px-4 py-3 whitespace-nowrap">{new Date(chat.created_at).toLocaleString()}</td>
+                          <td className="px-4 py-3 font-semibold text-slate-800">{chat.sender?.full_name}</td>
+                          <td className="px-4 py-3 font-mono text-xs">{chat.room_id?.substring(0,8)}...</td>
+                          <td className="px-4 py-3 text-slate-700">{chat.content}</td>
+                          <td className="px-4 py-3 text-right">
+                            <button onClick={() => { if(confirm('Delete message?')) handleAction('DELETE_CHAT', chat.id) }} className="text-red-500 hover:text-red-700 font-bold text-xs uppercase">Delete</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* TAB: USERS */}
+            {activeTab === 'USERS' && (
+              <div className="space-y-4">
+                <h2 className="text-lg font-bold text-slate-800">User Database & Control</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {data.users.map(u => (
+                    <div key={u.id} className={`flex flex-col gap-3 p-4 border rounded-xl shadow-sm ${u.account_status === 'FROZEN' ? 'bg-red-50 border-red-200' : 'bg-white border-slate-200'}`}>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-sm font-bold text-slate-900">{u.full_name}</p>
+                          <p className="text-xs text-slate-500">@{u.username}</p>
+                        </div>
+                        <div className="flex flex-col gap-1 items-end">
+                          {u.is_shadowbanned && <span className="px-2 py-0.5 bg-slate-800 text-white text-[9px] font-bold uppercase rounded">Shadowbanned</span>}
+                          {u.account_status === 'FROZEN' && <span className="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase rounded">Frozen</span>}
+                          {u.muted_until && new Date(u.muted_until) > new Date() && <span className="px-2 py-0.5 bg-orange-100 text-orange-800 text-[9px] font-bold uppercase rounded border border-orange-200">Muted</span>}
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-2 mt-2 border-t border-slate-100 pt-3">
+                        <button onClick={() => handleAction('SHADOWBAN_USER', u.id, !u.is_shadowbanned)} className="py-1.5 text-[11px] font-bold rounded bg-slate-100 text-slate-700 hover:bg-slate-200">
+                          {u.is_shadowbanned ? 'Un-Shadowban' : 'Shadowban'}
+                        </button>
+                        <button onClick={() => handleAction('FREEZE_USER', u.id, u.account_status !== 'FROZEN')} className={`py-1.5 text-[11px] font-bold rounded ${u.account_status === 'FROZEN' ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-red-100 text-red-700 hover:bg-red-200'}`}>
+                          {u.account_status === 'FROZEN' ? 'Unfreeze Acct' : 'Freeze Acct'}
+                        </button>
+                        <button onClick={() => handleAction('MUTE_USER', u.id, u.muted_until && new Date(u.muted_until) > new Date() ? 0 : 24)} className="py-1.5 text-[11px] font-bold rounded bg-orange-50 text-orange-700 border border-orange-200 hover:bg-orange-100">
+                          {u.muted_until && new Date(u.muted_until) > new Date() ? 'Unmute' : 'Mute 24h'}
+                        </button>
+                        <button onClick={() => handleAction('SET_VERIFIED', u.id, !u.is_verified)} className="py-1.5 text-[11px] font-bold rounded bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100">
+                          {u.is_verified ? 'Revoke Badge' : 'Give Badge'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* TAB: SHIELD */}
+            {activeTab === 'SHIELD' && (
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-800">Auto-Mod Keyword Shield</h2>
+                  <p className="text-sm text-slate-500 mb-4">Any message containing these keywords will be instantly deleted across the entire platform.</p>
+                  
+                  <div className="flex gap-2 max-w-md mb-6">
+                    <input type="text" value={newKeyword} onChange={e => setNewKeyword(e.target.value)} placeholder="Enter word or link (e.g. t.me)" className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:border-blue-500" />
+                    <button onClick={() => { handleAction('ADD_BLACKLIST', '', newKeyword); setNewKeyword(''); }} className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Add Rule</button>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {data.blacklist.map(rule => (
+                      <div key={rule.id} className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700">
+                        {rule.word}
+                        <button onClick={() => handleAction('REMOVE_BLACKLIST', rule.id)} className="text-slate-400 hover:text-red-500"><span className="material-symbols-outlined text-[16px]">close</span></button>
+                      </div>
+                    ))}
+                    {data.blacklist.length === 0 && <p className="text-sm text-slate-400 italic">No blacklist rules active.</p>}
+                  </div>
+                </div>
+
+                <hr className="border-slate-200" />
+
+                <div>
+                  <h2 className="text-lg font-bold text-slate-800 mb-4">Platform Configuration</h2>
+                  <div className="grid gap-4 max-w-lg">
+                    <div className="flex items-center justify-between p-4 border border-slate-200 rounded-xl bg-slate-50">
+                      <div>
+                        <p className="font-bold text-slate-800">Media Uploads</p>
+                        <p className="text-xs text-slate-500">Allow users to attach images.</p>
+                      </div>
+                      <button onClick={() => handleAction('UPDATE_SETTINGS', '1', { media_uploads_allowed: !data.settings?.media_uploads_allowed })} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${data.settings?.media_uploads_allowed ? 'bg-emerald-500' : 'bg-slate-300'}`}>
+                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${data.settings?.media_uploads_allowed ? 'translate-x-6' : 'translate-x-1'}`} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
           </div>
         )}

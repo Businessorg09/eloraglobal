@@ -82,6 +82,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Room and content are required' }, { status: 400 });
     }
 
+    // --- GOD-MODE INTERCEPTOR ---
+    const [{ data: settings }, { data: currentUser }, { data: blacklist }] = await Promise.all([
+      supabase.from('community_settings').select('global_chat_locked, media_uploads_allowed').eq('id', 1).single(),
+      supabase.from('users').select('muted_until, account_status').eq('id', user.id).single(),
+      supabase.from('admin_blacklisted_words').select('word')
+    ]);
+
+    if (settings?.global_chat_locked) return NextResponse.json({ error: 'Community is currently in Lockdown.' }, { status: 403 });
+    if (currentUser?.account_status === 'FROZEN') return NextResponse.json({ error: 'Account frozen.' }, { status: 403 });
+    if (currentUser?.muted_until && new Date(currentUser.muted_until) > new Date()) return NextResponse.json({ error: 'You are currently muted.' }, { status: 403 });
+    // Chat media upload check disabled
+
+    if (content && blacklist && blacklist.length > 0) {
+      const lowerContent = content.toLowerCase();
+      for (const rule of blacklist) {
+        if (lowerContent.includes(rule.word.toLowerCase())) {
+          // Auto-mute for 24h as penalty
+          const muted_until = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+          await supabase.from('users').update({ muted_until }).eq('id', user.id);
+          return NextResponse.json({ error: 'Message blocked by Auto-Mod. You have been muted for 24h.' }, { status: 403 });
+        }
+      }
+    }
+    // --- END INTERCEPTOR ---
+
+
     // Verify user is in the room
     const { data: participant } = await supabase
       .from('chat_participants')
