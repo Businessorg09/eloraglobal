@@ -35,7 +35,7 @@ export default function GlobalMobileNav() {
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setShowQuickActions(false)}
-              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[80] md:hidden"
+              className="fixed inset-0 bg-slate-900/80 backdrop-blur-[24px] z-[80] md:hidden"
             />
             
             <motion.div
