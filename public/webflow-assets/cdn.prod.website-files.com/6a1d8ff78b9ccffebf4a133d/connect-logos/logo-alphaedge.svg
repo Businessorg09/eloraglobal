@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
+  <polygon points="20,10 32,36 8,36" fill="none" stroke="#A78BFA" stroke-width="2.5"/>
+  <line x1="14" y1="30" x2="26" y2="30" stroke="#A78BFA" stroke-width="2.5"/>
+  <text x="40" y="30" font-family="Arial, sans-serif" font-weight="700" font-size="18" fill="white">AlphaEdge</text>
+</svg>

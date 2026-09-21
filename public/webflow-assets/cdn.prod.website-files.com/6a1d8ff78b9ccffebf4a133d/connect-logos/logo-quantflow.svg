@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
+  <path d="M8 32 Q16 12 24 24 Q32 36 40 16" stroke="url(#qf1)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="qf1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <text x="48" y="30" font-family="Arial, sans-serif" font-weight="700" font-size="18" fill="white">QuantFlow</text>
+</svg>
