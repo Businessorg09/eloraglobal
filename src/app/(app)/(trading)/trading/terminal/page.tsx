@@ -72,7 +72,7 @@ export default function PropDashboardPage() {
   if (isLoading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center ">
-        <div className="animate-spin text-indigo-600 material-symbols-outlined text-2xl md:text-4xl">refresh</div>
+        <div className="animate-spin text-indigo-600 material-symbols-outlined text-lg md:text-4xl">refresh</div>
       </div>
     )
   }
@@ -82,9 +82,9 @@ export default function PropDashboardPage() {
       <div className="flex-1 w-full flex flex-col items-center justify-center text-gray-900">
         <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center max-w-lg text-center">
           <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
-            <span className="material-symbols-outlined text-2xl md:text-4xl text-indigo-600">account_balance_wallet</span>
+            <span className="material-symbols-outlined text-lg md:text-4xl text-indigo-600">account_balance_wallet</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-3 tracking-tight">No Account Assigned</h1>
+          <h1 className="text-lg md:text-3xl font-black tracking-tight mb-3 tracking-tight">No Account Assigned</h1>
           <p className="text-gray-500 mb-8 leading-relaxed">Your institutional trading account has not been activated yet. Please wait for the risk desk to allocate your MT4/MT5 credentials.</p>
           <Link href="/trading" className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-4 rounded-[24px] font-bold transition-all shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)] hover:-translate-y-0.5">
             Return to Dashboard
@@ -137,13 +137,13 @@ export default function PropDashboardPage() {
 
       {/* Top Banner */}
       <div className="pt-10 px-8 pb-6 max-w-[1400px] mx-auto w-full flex items-end justify-between">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 md:p-6">
           <Link href="/trading" className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all hover:-translate-y-0.5">
             <span className="material-symbols-outlined text-[24px]">arrow_back</span>
           </Link>
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 tracking-tight">Prop Analytics</h1>
+              <h1 className="text-lg md:text-3xl font-black tracking-tight text-gray-900 tracking-tight">Prop Analytics</h1>
               <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] uppercase font-black px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
                 Funded Status
@@ -153,7 +153,7 @@ export default function PropDashboardPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-6 bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <div className="flex items-center gap-4 md:p-6 bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="flex flex-col">
             <span className="text-[10px] text-gray-400 uppercase font-black tracking-widest mb-0.5">MT4/MT5 Account ID</span>
             <span className="text-base font-black font-mono text-gray-900 tracking-tight">{account.account_number}</span>
@@ -166,14 +166,14 @@ export default function PropDashboardPage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full px-8 flex flex-col gap-8">
+      <div className="max-w-[1400px] mx-auto w-full px-8 flex flex-col gap-4 md:p-8">
         
         {/* Quick Actions Toolbar (Premium Cards) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           
           <button 
             onClick={() => setShowCredentials(true)}
-            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-indigo-200 transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-indigo-50 rounded-[24px] flex items-center justify-center mb-3 group-hover:bg-indigo-600 transition-colors">
               <span className="material-symbols-outlined text-indigo-600 group-hover:text-white transition-colors">key</span>
@@ -184,7 +184,7 @@ export default function PropDashboardPage() {
 
           <button 
             onClick={() => alert('Deposit / Top Up functionality coming soon!')}
-            className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-blue-600 border border-transparent rounded-2xl p-5 shadow-[0_4px_20px_rgb(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-blue-600 border border-transparent rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgb(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">add_circle</span>
@@ -198,7 +198,7 @@ export default function PropDashboardPage() {
               setPayoutAmount(totalNetProfit > 0 ? totalNetProfit : 0);
               setShowPayoutModal(true);
             }}
-            className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 border border-transparent rounded-2xl p-5 shadow-[0_4px_20px_rgb(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
+            className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 border border-transparent rounded-2xl p-4 md:p-5 shadow-[0_4px_20px_rgb(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.3)] transition-all text-left flex flex-col hover:-translate-y-0.5"
           >
             <div className="w-10 h-10 bg-white/20 rounded-[24px] flex items-center justify-center mb-3 backdrop-blur-sm">
               <span className="material-symbols-outlined text-white">payments</span>
@@ -232,16 +232,16 @@ export default function PropDashboardPage() {
         
         {/* Metrics Row (Sleek Glassmorphic) */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
-            <div className="absolute top-0 right-0 p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
+          <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
+            <div className="absolute top-0 right-0 p-4 md:p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
               <span className="material-symbols-outlined text-6xl">account_balance</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Balance</span>
-            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">${balance.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
-            <div className="absolute top-0 right-0 p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
+          <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
+            <div className="absolute top-0 right-0 p-4 md:p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
               <span className="material-symbols-outlined text-6xl">timeline</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Live Equity</span>
@@ -250,8 +250,8 @@ export default function PropDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
-            <div className="absolute top-0 right-0 p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
+          <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
+            <div className="absolute top-0 right-0 p-4 md:p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
               <span className="material-symbols-outlined text-6xl">payments</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Net Profit</span>
@@ -260,25 +260,25 @@ export default function PropDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
-            <div className="absolute top-0 right-0 p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
+          <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
+            <div className="absolute top-0 right-0 p-4 md:p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
               <span className="material-symbols-outlined text-6xl">pie_chart</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Win Rate</span>
-            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
+            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{winRate}%</span>
           </div>
 
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
-            <div className="absolute top-0 right-0 p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
+          <div className="bg-white border border-gray-100 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden group hover:border-indigo-100 transition-colors">
+            <div className="absolute top-0 right-0 p-4 md:p-5 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity group-hover:scale-110 duration-500">
               <span className="material-symbols-outlined text-6xl">tag</span>
             </div>
             <span className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-2 z-10">Trades Taken</span>
-            <span className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
+            <span className="text-lg md:text-3xl font-black tracking-tight text-gray-900 font-mono tracking-tight z-10">{closedTrades.length}</span>
           </div>
         </div>
 
         {/* Equity Curve Graph */}
-        <div className="bg-white border border-gray-100 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col p-8 overflow-hidden relative">
+        <div className="bg-white border border-gray-100 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col p-4 md:p-8 overflow-hidden relative">
           <div className="flex items-center justify-between mb-8 z-10">
             <div className="flex flex-col">
               <h2 className="text-xl font-black text-gray-900 tracking-tight">Equity Curve</h2>
@@ -427,22 +427,22 @@ export default function PropDashboardPage() {
                                   const sumUsd = (txs: any[]) => txs.reduce((sum, t) => sum + t.amount_usd, 0);
 
                                   return (
-                                    <div className="flex flex-col p-6 gap-6 bg-white">
+                                    <div className="flex flex-col p-6 gap-4 md:p-6 bg-white">
                                       {/* Top Row: Trader & Company */}
-                                      <div className="grid grid-cols-2 gap-4">
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-emerald-50/50 border border-emerald-100 rounded-[24px] p-4 flex flex-col">
                                           <div className="flex items-center gap-2 mb-2 text-emerald-700">
                                             <span className="material-symbols-outlined text-sm">account_balance_wallet</span>
                                             <span className="text-xs font-black uppercase tracking-widest">Trader Payout (70%)</span>
                                           </div>
-                                          <span className="text-2xl font-black tracking-tight font-mono text-emerald-600">${sumUsd(traderTxs).toFixed(2)}</span>
+                                          <span className="text-lg md:text-2xl font-black tracking-tight font-mono text-emerald-600">${sumUsd(traderTxs).toFixed(2)}</span>
                                         </div>
                                         <div className="bg-gray-50 border border-gray-100 rounded-[24px] p-4 flex flex-col">
                                           <div className="flex items-center gap-2 mb-2 text-gray-600">
                                             <span className="material-symbols-outlined text-sm">corporate_fare</span>
                                             <span className="text-xs font-black uppercase tracking-widest">Company Retained (10%)</span>
                                           </div>
-                                          <span className="text-2xl font-black tracking-tight font-mono text-gray-800">${sumUsd(companyTxs).toFixed(2)}</span>
+                                          <span className="text-lg md:text-2xl font-black tracking-tight font-mono text-gray-800">${sumUsd(companyTxs).toFixed(2)}</span>
                                         </div>
                                       </div>
 
@@ -597,16 +597,16 @@ export default function PropDashboardPage() {
       {showCredentials && (
         <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
-            <div className="bg-indigo-600 p-6 text-white flex items-center justify-between">
+            <div className="bg-indigo-600 p-4 md:p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-2xl md:text-3xl">shield_person</span>
+                <span className="material-symbols-outlined text-lg md:text-3xl">shield_person</span>
                 <h2 className="text-xl font-black tracking-tight">MT4/MT5 Credentials</h2>
               </div>
               <button onClick={() => setShowCredentials(false)} className="text-indigo-200 hover:text-white transition-colors">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <div className="p-8 flex flex-col gap-6">
+            <div className="p-5 md:p-8 flex flex-col gap-4 md:gap-6">
               
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-gray-400 font-black uppercase tracking-widest">Login ID</label>
@@ -646,9 +646,9 @@ export default function PropDashboardPage() {
       {showPayoutModal && (
         <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
-            <div className="bg-emerald-600 p-6 text-white flex items-center justify-between">
+            <div className="bg-emerald-600 p-4 md:p-6 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-2xl md:text-3xl">payments</span>
+                <span className="material-symbols-outlined text-lg md:text-3xl">payments</span>
                 <h2 className="text-xl font-black tracking-tight">Request Payout</h2>
               </div>
               <button onClick={() => setShowPayoutModal(false)} className="text-emerald-200 hover:text-white transition-colors">
@@ -656,13 +656,13 @@ export default function PropDashboardPage() {
               </button>
             </div>
             
-            <div className="p-8 flex flex-col gap-6">
+            <div className="p-4 md:p-8 flex flex-col gap-4 md:p-6">
               {payoutSuccess ? (
                 <div className="flex flex-col items-center justify-center py-8 text-center">
                   <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-                    <span className="material-symbols-outlined text-emerald-600 text-5xl">check_circle</span>
+                    <span className="material-symbols-outlined text-emerald-600 text-xl md:text-5xl">check_circle</span>
                   </div>
-                  <h3 className="text-2xl font-black tracking-tight text-gray-900 mb-2">Payout Processed!</h3>
+                  <h3 className="text-lg md:text-2xl font-black tracking-tight text-gray-900 mb-2">Payout Processed!</h3>
                   <p className="text-gray-500 font-medium">Your 70% share has been deposited into your internal wallet. Commissions have been distributed to the network.</p>
                 </div>
               ) : (
@@ -675,7 +675,7 @@ export default function PropDashboardPage() {
                   </div>
 
                   {totalNetProfit > 0 ? (
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-4 md:p-5">
                       <div className="flex flex-col gap-2">
                         <label className="text-xs font-bold text-gray-700 uppercase tracking-wide">Amount to Withdraw ($)</label>
                         <input 
@@ -696,7 +696,7 @@ export default function PropDashboardPage() {
                         )}
                       </div>
 
-                      <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5 flex flex-col gap-3">
+                      <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 md:p-5 flex flex-col gap-3">
                         <div className="flex justify-between items-center text-sm font-bold text-gray-900">
                           <span>Trader Share (70%)</span>
                           <span className="text-emerald-600 font-mono">+${(payoutAmount * 0.70).toFixed(2)}</span>
