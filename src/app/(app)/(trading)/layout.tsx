@@ -92,7 +92,17 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 flex items-center justify-between">
-            <div className="hidden md:flex items-center gap-3">
+            
+          {/* Mobile Logo (Visible only when sidebar is hidden) */}
+          <div className="md:hidden flex items-center gap-2">
+            <div className="w-8 h-8 bg-[#1D4ED8] rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-sm">E</div>
+            <div className="flex flex-col">
+              <span className="text-[12px] font-black text-[#111827] leading-none">ELORA</span>
+              <span className="text-[8px] font-bold text-[#1D4ED8] uppercase tracking-wider">Trading</span>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-3">
               <div className="w-8 h-8 bg-[#1D4ED8] rounded-lg flex items-center justify-center text-white font-bold text-lg">E</div>
               <div>
                 <h2 className="font-bold text-[18px] leading-tight tracking-tight text-[#111827]">ELORA</h2>
@@ -226,7 +236,7 @@ function InnerTradingLayout({ children }: { children: React.ReactNode }) {
               <div className="w-8 h-8 rounded-full bg-[#E5E7EB] border-2 border-white shadow-sm overflow-hidden flex items-center justify-center">
                 <span className="material-symbols-outlined text-[20px] text-[#9CA3AF]">person</span>
               </div>
-              <div className="flex flex-col text-left">
+              <div className="hidden sm:flex flex-col text-left">
                 <span className="text-[13px] font-bold text-[#111827] leading-tight">Trader Profile</span>
                 <span className="text-[10px] font-semibold text-[#9CA3AF] leading-tight">Unranked</span>
               </div>

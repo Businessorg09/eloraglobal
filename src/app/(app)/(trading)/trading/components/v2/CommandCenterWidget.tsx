@@ -156,10 +156,10 @@ export function CommandCenterWidget() {
           )}
         </div>
         
-        <h2 className="text-[22px] font-bold text-[#111827] leading-tight mb-2">
+        <h2 className="text-lg md:text-[22px] font-bold text-[#111827] leading-tight mb-2">
           {episode ? episode.title : "Welcome to the Academy"}
         </h2>
-        <p className="text-[13px] text-[#4B5563] mb-5 leading-relaxed max-w-[650px] line-clamp-2">
+        <p className="text-xs md:text-[13px] text-[#4B5563] mb-5 leading-relaxed max-w-[650px] line-clamp-2">
           {episode ? episode.description : "You haven't started any masterclasses yet. Visit the Academy to begin your curriculum."}
         </p>
 

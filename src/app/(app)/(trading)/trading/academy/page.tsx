@@ -228,7 +228,7 @@ export default function AcademyPage() {
 
       {/* --- HERO PLAYLIST (CONTINUE WATCHING) --- */}
       {lastProgress && lastProgress.episode && (
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132c66] via-[#1a3d8c] to-[#1e4cb8] p-7 md:p-9 text-white shadow-xl">
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132c66] via-[#1a3d8c] to-[#1e4cb8] p-5 md:p-9 text-white shadow-xl">
           <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
           <div className="absolute -left-10 -bottom-10 w-60 h-60 rounded-full bg-indigo-500/15 blur-2xl pointer-events-none"></div>
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
@@ -237,10 +237,10 @@ export default function AcademyPage() {
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                 Continue Watching
               </div>
-              <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              <h2 className="text-xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 {lastProgress.episode.module?.title || 'Academy Module'}
               </h2>
-              <p className="text-sm md:text-base text-blue-100/80 leading-relaxed font-normal">
+              <p className="text-xs md:text-base text-blue-100/80 leading-relaxed font-normal">
                 {lastProgress.episode.title}
               </p>
               <div className="pt-2">
@@ -279,7 +279,7 @@ export default function AcademyPage() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {modules.map((mod) => {
               const isLocked = mod.isLocked;
               

@@ -76,7 +76,7 @@ export function ProfilePathwayWidget() {
             <span className="material-symbols-outlined text-[24px]">person</span>
           </div>
           <div className="flex flex-col">
-            <h3 className="font-bold text-[16px] text-[#111827] leading-tight truncate max-w-[140px]">{p.fullName}</h3>
+            <h3 className="font-bold text-sm md:text-[16px] text-[#111827] leading-tight truncate max-w-[140px] md:max-w-[180px]">{p.fullName}</h3>
             <span className="text-[11px] text-[#6B7280]">Tier {p.tier} • {p.packageName}</span>
           </div>
           <div className="ml-auto bg-[#F3F4F6] text-[#6B7280] text-[9px] font-bold px-2 py-1 rounded flex flex-col items-center shadow-sm">
@@ -105,7 +105,7 @@ export function ProfilePathwayWidget() {
               Streak <span className="material-symbols-outlined text-[#F59E0B] text-[12px]">local_fire_department</span>
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="text-[20px] font-black text-[#111827] leading-none">{p.streak}</span>
+              <span className="text-lg md:text-[20px] font-black text-[#111827] leading-none">{p.streak}</span>
               <span className="text-[11px] font-bold text-[#9CA3AF]">Days</span>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function ProfilePathwayWidget() {
             <div className="flex items-center gap-1 text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-0.5">
               Package <span className="material-symbols-outlined text-[#1D4ED8] text-[12px]">workspace_premium</span>
             </div>
-            <span className="text-[14px] font-black text-[#111827] leading-tight truncate">{p.packageName}</span>
+            <span className="text-sm md:text-[14px] font-black text-[#111827] leading-tight truncate">{p.packageName}</span>
             <span className="text-[10px] text-[#059669] font-bold mt-0.5">Active</span>
           </div>
         </div>
@@ -122,7 +122,7 @@ export function ProfilePathwayWidget() {
         <div className="flex items-center justify-between relative z-10">
           <div className="flex flex-col">
             <span className="text-[9px] font-bold text-[#6B7280] uppercase tracking-wider">PROP ALLOCATION TRACK</span>
-            <span className="text-[14px] font-black text-[#10B981]">{p.propAllocation} <span className="text-[10px] text-[#9CA3AF] font-bold">Liquid</span></span>
+            <span className="text-sm md:text-[14px] font-black text-[#10B981]">{p.propAllocation} <span className="text-[10px] text-[#9CA3AF] font-bold">Liquid</span></span>
           </div>
           <div className="flex flex-col text-right">
             <span className="text-[10px] font-bold text-[#9CA3AF] flex items-center justify-end gap-1">
