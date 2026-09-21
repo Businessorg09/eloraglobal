@@ -14,8 +14,12 @@ export default function GlobalMobileNav() {
   
   const [showQuickActions, setShowQuickActions] = useState(false);
   const [userPackage, setUserPackage] = useState<number | null>(null);
+  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname?.startsWith('/auth');
+
 
   useEffect(() => {
+    if (isAuthPage) return;
+    
     fetch('/api/user/profile')
       .then(res => res.json())
       .then(data => {
@@ -30,7 +34,7 @@ export default function GlobalMobileNav() {
         }
       })
       .catch(() => setUserPackage(0));
-  }, []);
+  }, [pathname, isAuthPage]);
 
 
   const handleLogout = async () => {
@@ -41,7 +45,6 @@ export default function GlobalMobileNav() {
 
   
   const isTrading = pathname?.startsWith('/trading');
-  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname?.startsWith('/auth');
 
   if (isAuthPage) return null;
 
