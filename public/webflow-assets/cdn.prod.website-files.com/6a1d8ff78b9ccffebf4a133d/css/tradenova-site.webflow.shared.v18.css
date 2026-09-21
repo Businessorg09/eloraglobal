@@ -9401,3 +9401,22 @@ figcaption {
 /* After GSAP runs, the above elements will have opacity set by JS.
    This ensures no flash of visible content before animation runs,
    but also no permanent invisible state if JS fails. */
+
+/* ─────────────────────────────────────────
+   HERO LOGO MARQUEE ANIMATION
+───────────────────────────────────────── */
+.marquee_item-wrap {
+  animation: scroll-left 25s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.marquee:hover .marquee_item-wrap {
+  animation-play-state: paused;
+}
