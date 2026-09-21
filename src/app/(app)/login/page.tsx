@@ -21,6 +21,7 @@ const initialState = {
 
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState('business');
+  const [showPassword, setShowPassword] = useState(false);
   const [state, formAction] = useFormState(signInAction, initialState);
 
   return (
@@ -137,9 +138,9 @@ export default function LoginPage() {
 </div>
 <div className="relative flex items-center">
 <span className="material-symbols-outlined absolute left-gutter-sm text-outline-variant text-[20px] pointer-events-none">lock</span>
-<input className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-[16px] placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="password-input" placeholder="••••••••••••" required type="password" name="password" />
-<button className="absolute right-gutter-sm text-outline-variant hover:text-on-surface flex items-center" type="button">
-<span className="material-symbols-outlined text-[18px]" id="pass-visibility-icon">visibility</span>
+<input className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-[16px] placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="password-input" placeholder="••••••••••••" required type={showPassword ? "text" : "password"} name="password" />
+<button className="absolute right-gutter-sm text-outline-variant hover:text-on-surface flex items-center" type="button" onClick={() => setShowPassword(!showPassword)}>
+<span className="material-symbols-outlined text-[18px]" id="pass-visibility-icon">{showPassword ? "visibility_off" : "visibility"}</span>
 </button>
 </div>
 </div>
