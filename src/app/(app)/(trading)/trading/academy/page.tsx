@@ -355,7 +355,7 @@ export default function AcademyPage() {
             </div>
           </div>
           
-          <div className="overflow-x-auto">
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-600">
               <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
@@ -411,6 +411,46 @@ export default function AcademyPage() {
               </tbody>
             </table>
           </div>
+
+          {/* MOBILE EPISODES LIST (Stack of Cards) */}
+          <div className="flex flex-col gap-3 md:hidden">
+            {modules.map((mod) => {
+              const isLocked = mod.isLocked;
+              return mod.episodes?.map((ep) => (
+                <div key={ep.id} className={`p-4 rounded-xl border ${isLocked ? 'bg-slate-50 border-slate-100' : 'bg-white border-slate-200 shadow-sm'}`}>
+                  <div className="flex justify-between items-start mb-2">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${isLocked ? 'bg-slate-200 text-slate-500' : 'bg-blue-50 text-blue-600'}`}>
+                      {isLocked ? 'Locked' : mod.title}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">Ep {mod.order_index}.{ep.order_index}</span>
+                  </div>
+                  <h4 className={`text-sm font-bold mb-1 ${isLocked ? 'text-slate-400 blur-[2px] select-none' : 'text-slate-800'}`}>
+                    {isLocked ? 'Hidden Restricted Content ' : ep.title}
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mb-3">Duration: {ep.duration_seconds}s</p>
+                  
+                  {isLocked ? (
+                    <button className="w-full py-2 text-[11px] font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-1">
+                      <span className="material-symbols-outlined text-[14px]">lock</span>
+                      Upgrade Tier {mod.package_tier_required}
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={() => { 
+                        setActiveEpisode(ep); 
+                        setStartSeconds(0); 
+                        setCurrentProgress(0);
+                      }}
+                      className="w-full py-2 text-[11px] font-bold text-white bg-blue-600 rounded-lg shadow-sm shadow-blue-500/20 hover:bg-blue-700 transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">play_circle</span> Watch Now
+                    </button>
+                  )}
+                </div>
+              ));
+            })}
+          </div>
+  
         </section>
       )}
 
@@ -454,6 +494,25 @@ export default function AcademyPage() {
         </div>
       )}
 
-    </div>
+    
+
+      {/* --- MOBILE QUICK ACTION BAR (STICKY BOTTOM NAV) --- */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-3 pb-safe-bottom flex items-center justify-between md:hidden shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
+        <a href="/trading" className="flex flex-col items-center gap-1 px-2 text-slate-500 hover:text-blue-600">
+          <span className="material-symbols-outlined text-[20px]">dashboard</span>
+          <span className="text-[9px] font-bold uppercase tracking-wider">Dashboard</span>
+        </a>
+        
+        <button onClick={handleResumeHero} className="flex-1 max-w-[200px] flex items-center justify-center gap-2 mx-2 py-2.5 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-600/20 font-bold text-xs hover:bg-blue-700 active:scale-95 transition-all">
+          <span className="material-symbols-outlined text-[18px]">play_arrow</span>
+          Resume Learning
+        </button>
+        
+        <a href="/trading/market" className="flex flex-col items-center gap-1 px-2 text-slate-500 hover:text-blue-600">
+          <span className="material-symbols-outlined text-[20px]">candlestick_chart</span>
+          <span className="text-[9px] font-bold uppercase tracking-wider">Trade</span>
+        </a>
+      </div>
+  </div>
   )
 }
