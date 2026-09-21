@@ -77,42 +77,43 @@ export default function LiveClassesPage() {
         <GatedContent minPackageRequired={3} blurLevel="md" customMessage="The Live Institutional Trading Floor is reserved for Package 3 members. Upgrade to get real-time market access.">
         <div className="flex flex-col w-full gap-8 pb-10">
 {/* Executive Breadcrumb & Header Title */}
-<div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-<div className="flex flex-col gap-1">
-<nav className="flex items-center gap-1 text-[#9CA3AF] font-bold text-[13px]">
-<span className="hover:text-[#1D4ED8] transition-colors cursor-pointer">Elora Academy</span>
-<span className="material-symbols-outlined text-[14px]">chevron_right</span>
-<span className="hover:text-[#1D4ED8] transition-colors cursor-pointer">Live Learning</span>
-<span className="material-symbols-outlined text-[14px]">chevron_right</span>
-<span className="text-[#111827] font-semibold">Executive Calendar &amp; Mentorship</span>
-</nav>
-<div className="flex items-center gap-3">
-<h1 className="font-display-lg text-display-lg text-[#111827] tracking-tight">
+<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+  <div className="flex flex-col gap-2 w-full lg:w-auto">
+    <nav className="flex flex-wrap items-center gap-1.5 text-[#9CA3AF] font-bold text-[10px] md:text-[12px] uppercase tracking-wider mb-1">
+      <span className="hover:text-[#1D4ED8] transition-colors cursor-pointer">Elora Academy</span>
+      <span className="material-symbols-outlined text-[14px]">chevron_right</span>
+      <span className="hover:text-[#1D4ED8] transition-colors cursor-pointer">Live Learning</span>
+      <span className="material-symbols-outlined text-[14px]">chevron_right</span>
+      <span className="text-[#111827]">Executive Calendar & Mentorship</span>
+    </nav>
+    <div className="flex flex-col sm:flex-row sm:items-center gap-2 md:gap-3">
+      <h1 className="font-extrabold text-[24px] md:text-[32px] text-[#111827] tracking-tight leading-tight">
         {loading ? 'Loading...' : (config?.pageTitle || 'Live Classes & 1-on-1 Mentorship')}
       </h1>
-<span className="px-2.5 py-0.5 rounded-full bg-primary-fixed text-white-fixed font-bold text-[11px] font-semibold tracking-wide uppercase">
-        {loading ? '...' : (config?.pageVariant || 'Variant B • Executive Calendar')}
+      <span className="px-3 py-1 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] font-bold text-[10px] md:text-[11px] tracking-wide uppercase whitespace-nowrap w-max">
+        {loading ? '...' : (config?.pageVariant || 'Executive Calendar')}
       </span>
-</div>
-<p className="font-medium text-[14px] text-[#6B7280] max-w-3xl">
-        {loading ? 'Loading description...' : (config?.pageSubtitle || 'High-frequency institutional masterclasses, interactive weekly timetable, and direct reservation of senior desk strategy clinics.')}
-      </p>
-</div>
-<div className="flex items-center gap-2 shrink-0">
-<div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB]">
-<span className="material-symbols-outlined text-[18px] text-[#6B7280]">public</span>
-<select className="bg-transparent border-none focus:outline-none cursor-pointer text-[#111827] font-semibold text-label-md font-label-md">
-<option>(GMT+00:00) London / UTC</option>
-<option>(GMT-05:00) New York / EST</option>
-<option>(GMT+04:00) Dubai / GST</option>
-<option>(GMT+08:00) Singapore / SGT</option>
-</select>
-</div>
-<button className="flex items-center gap-1 px-4 py-2 rounded-lg bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all text-[16px] font-bold" onClick={() => {}}>
-<span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
-<span className="">Book 1-1 Zoom&nbsp;</span>
-</button>
-</div>
+    </div>
+    <p className="font-medium text-[13px] md:text-[14px] text-[#6B7280] max-w-2xl leading-relaxed">
+      {loading ? 'Loading description...' : (config?.pageSubtitle || 'High-frequency institutional masterclasses, interactive weekly timetable, and direct reservation of senior desk strategy clinics.')}
+    </p>
+  </div>
+  
+  <div className="flex flex-col sm:flex-row items-stretch gap-3 shrink-0 w-full lg:w-auto mt-2 lg:mt-0">
+    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] w-full sm:w-auto">
+      <span className="material-symbols-outlined text-[18px] text-[#6B7280]">public</span>
+      <select className="bg-transparent border-none focus:outline-none cursor-pointer text-[#111827] font-bold text-[12px] md:text-[13px] w-full max-w-[200px] truncate">
+        <option>London / UTC</option>
+        <option>New York / EST</option>
+        <option>Dubai / GST</option>
+        <option>Singapore / SGT</option>
+      </select>
+    </div>
+    <button className="flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all text-[14px] font-bold w-full sm:w-auto" onClick={() => {}}>
+      <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
+      <span className="whitespace-nowrap">Book 1-1 Zoom</span>
+    </button>
+  </div>
 </div>
 {/* SECTION 1: TOP SPLIT EXECUTIVE HERO BANNER */}
 <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -142,7 +143,7 @@ export default function LiveClassesPage() {
 <div className="flex items-center gap-2">
 <img className="w-8 h-8 rounded-full object-cover ring-2 ring-surface" data-alt="Host" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI4W3ChzS0WhedFj1xzcHi7mzt2hFGX4nTvjt2PCDDGBdGleE-6_zMmY_cbsz9ppGp5cCQZbTBfzkxX8gkuTb7fKp4g-Y5CGoQFswJYgiNNIgIQIi2Qn0VygH1Pb4cuj2CGzxcEO0AQuUtrtUfhnLAMQxLbVfM_b408jzDNIwokRRCny9vLJ-vgBSoNUIe6OM8aPNJAd3GvUKkxl-tKnbwT3cf5OwmGDbsmBoCVXEaRgLTRYPLC1Kpdg" />
 <div className="flex flex-col leading-tight">
-<span className="font-semibold text-[#111827] text-label-md">{loading ? '—' : (lz.hostName || '—')}</span>
+<span className="font-semibold text-[#111827] text-[12px]">{loading ? '—' : (lz.hostName || '—')}</span>
 <span className="text-[11px] text-[#6B7280]">{loading ? '—' : (lz.hostTitle || '—')}</span>
 </div>
 </div>
@@ -152,7 +153,7 @@ export default function LiveClassesPage() {
     <div className="flex items-center gap-2">
       <img className="w-8 h-8 rounded-full object-cover ring-2 ring-surface" data-alt="Co-host" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9MFEs2IXrLO5f3SijGIHqD6PeOl1NWaAUKswEElJ2XPYI6RZvqt52RHhanO3P01iUzSvVYXigX8TUaHOa5ptONObkzcnCiWxvrWSS99Q46rfSuy6LscJLMwZGmaKl-4q3IMYUjNNkrt3LKNiPJDfqiHmRdZ8N3IpDNrz9KDORafKcCZXrcwDyC-cK8ekmNQkxEqRdJMBoyMauQBISqvDtX8HACCPO8JH7Pl2gcoTCQ8elskKw6Tu7Tw" />
       <div className="flex flex-col leading-tight">
-        <span className="font-semibold text-[#111827] text-label-md">{lz.coHostName}</span>
+        <span className="font-semibold text-[#111827] text-[12px]">{lz.coHostName}</span>
         <span className="text-[11px] text-[#9CA3AF]">{lz.coHostTitle}</span>
       </div>
     </div>
@@ -175,12 +176,12 @@ export default function LiveClassesPage() {
             Only {loading ? '—' : (lz.seatsLeft ?? '—')} Seats Left
           </span>
 </div>
-<div className="flex items-center gap-2">
-<a className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#F8FAFC] text-[#111827] font-bold text-[13px] hover:bg-[#F3F4F6] transition-colors" href={loading ? '#' : (lz.chartPackUrl || '#')} target="_blank">
+<div className="flex flex-col sm:flex-row items-stretch gap-2 w-full md:w-auto mt-4 md:mt-0">
+<a className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#F8FAFC] w-full sm:w-auto text-[#111827] font-bold text-[13px] hover:bg-[#F3F4F6] transition-colors" href={loading ? '#' : (lz.chartPackUrl || '#')} target="_blank">
 <span className="material-symbols-outlined text-[16px] text-[#6B7280]">description</span>
 <span className="">Chart Pack (.PDF)</span>
 </a>
-<a className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-[#1D4ED8] text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all" href={loading ? '#' : (lz.joinLink || '#')} rel="noopener noreferrer" target="_blank">
+<a className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-[#1D4ED8] w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all" href={loading ? '#' : (lz.joinLink || '#')} rel="noopener noreferrer" target="_blank">
 <span className="material-symbols-outlined text-[18px]">videocam</span>
 <span className="">Join Zoom Masterclass</span>
 </a>
@@ -189,16 +190,16 @@ export default function LiveClassesPage() {
 </div>
 {/* Right Side: My Upcoming 1-on-1 Session & Credits (5 Cols) */}
 <div className="lg:col-span-5 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-between gap-4">
-<div className="flex items-center justify-between">
+<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div className="flex items-center gap-2">
 {bookedSession ? (
-  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
 ) : (
-  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse"></span>
+  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse shrink-0"></span>
 )}
-<h3 className="font-bold text-[16px] text-[#111827] font-semibold">My Upcoming 1-on-1 Session</h3>
+<h3 className="font-bold text-[16px] text-[#111827] font-semibold leading-tight">My Upcoming 1-on-1 Session</h3>
 </div>
-<span className="px-2.5 py-0.5 rounded-full bg-[#F3F4F6] text-[#6B7280] font-bold text-[11px] font-bold">
+<span className="px-3 py-1 rounded-full bg-[#F3F4F6] text-[#6B7280] font-bold text-[10px] uppercase tracking-wider w-max">
           {loading ? '— / —' : `${bookedSession ? (oo.creditsAvailable ?? 2) - 1 : (oo.creditsAvailable ?? 2)} / ${oo.creditsTotal ?? 3} Credits Available`}
         </span>
 </div>
@@ -213,10 +214,10 @@ export default function LiveClassesPage() {
         <span className="font-bold text-[16px] text-emerald-900 font-semibold truncate">
           {tutors.find((t: any) => t.id === bookedSession.tutorId)?.name || 'Mentor'}
         </span>
-        <span className="text-label-sm text-emerald-700 font-medium">
+        <span className="text-[12px] text-emerald-700 font-medium">
           {tutors.find((t: any) => t.id === bookedSession.tutorId)?.title || '1-on-1 Clinic'}
         </span>
-        <div className="flex items-center gap-1.5 text-label-sm font-label-sm text-emerald-800 font-semibold pt-1">
+        <div className="flex items-center gap-1.5 text-[12px] font-bold text-emerald-800 font-semibold pt-1">
           <span className="material-symbols-outlined text-[15px]">calendar_today</span>
           <span className="">{bookedSession.date} at {bookedSession.time}</span>
         </div>
@@ -275,9 +276,9 @@ export default function LiveClassesPage() {
 {/* Filter Chips & Quick Sync Button */}
 <div className="flex flex-wrap items-center gap-2">
 <div className="flex items-center bg-[#F8FAFC] p-1 rounded-lg border border-[#E5E7EB]">
-<button className="px-3 py-1 rounded text-label-sm font-label-sm font-semibold bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">All Masterclasses</button>
+<button className="px-3 py-1 rounded text-[12px] font-bold font-semibold bg-[#1D4ED8] text-white shadow-[0_4px_20px_rgba(0,0,0,0.03)]">All Masterclasses</button>
 </div>
-<button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F8FAFC] text-[#111827] hover:bg-[#F3F4F6] transition-colors text-label-md font-label-md border border-[#E5E7EB]" onClick={() => {}}>
+<button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F8FAFC] text-[#111827] hover:bg-[#F3F4F6] transition-colors text-[12px] font-bold border border-[#E5E7EB]" onClick={() => {}}>
 <span className="material-symbols-outlined text-[16px] text-[#6B7280]">sync</span>
 <span className="">1-Click Sync Calendar</span>
 </button>
@@ -294,9 +295,9 @@ export default function LiveClassesPage() {
           <span className="font-bold text-[16px] text-[#111827] font-bold">{day}</span>
         </div>
         {dayClasses.length > 0 ? (
-          <span className="text-[11px] font-label-sm text-[#9CA3AF] font-semibold">{dayClasses.length} Class{dayClasses.length > 1 ? 'es' : ''}</span>
+          <span className="text-[11px] font-bold text-[#9CA3AF] font-semibold">{dayClasses.length} Class{dayClasses.length > 1 ? 'es' : ''}</span>
         ) : (
-          <span className="text-[11px] font-label-sm text-[#9CA3AF] font-semibold">No Classes</span>
+          <span className="text-[11px] font-bold text-[#9CA3AF] font-semibold">No Classes</span>
         )}
       </div>
 
@@ -365,7 +366,7 @@ export default function LiveClassesPage() {
         Select an accredited institutional leader to book your direct 45-minute bespoke strategy clinic.
       </p>
 </div>
-<span className="px-3 py-1 rounded-full bg-primary-fixed text-white-fixed font-bold text-[11px] font-semibold self-start sm:self-auto">
+<span className="px-3 py-1 rounded-full bg-[#1D4ED8] text-white font-bold text-[11px] font-semibold self-start sm:self-auto">
       Tier-1 PRO: 1 Credit per Clinic
     </span>
 </div>
@@ -383,7 +384,7 @@ export default function LiveClassesPage() {
           <img className="w-14 h-14 rounded-[24px] object-cover shadow-[0_4px_20px_rgba(0,0,0,0.03)] ring-2 ring-primary-container/20" data-alt={tutor.name} src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMvPkJ1mf9VIcTm_Du5zbD1YUMOs8CDd8x0QRDjtPVmWGekuPixbtLqjfAOlZeV63H7uE7AadbJx-HTi5AXm-UtTl7Tp8piRqqU2TrBwxyngXkCwOviI1EPZn-b0KNVZor3Ct6e5UsGEZwbv0A7avVVK8V8BbLRuv7zN5zouqd1YlACf3-qTNAJAZU1Tmohdli-K5TMwt0CZnJKVScEZpP2H5ZseJAYcZQsHEeABP-ahOkeOEmaFUhA" />
           <div className="flex flex-col">
             <span className="font-bold text-[16px] text-[#111827] font-bold leading-tight">{tutor.name}</span>
-            <span className="text-label-sm font-label-sm text-[#6B7280] font-semibold">{tutor.title}</span>
+            <span className="text-[12px] font-bold text-[#6B7280] font-semibold">{tutor.title}</span>
             <span className="text-[11px] text-[#9CA3AF]">{tutor.subtitle}</span>
           </div>
         </div>
@@ -391,7 +392,7 @@ export default function LiveClassesPage() {
           {tutor.isOnline ? 'Online' : 'Offline'}
         </span>
       </div>
-      <div className="flex items-center gap-1.5 text-label-md font-label-md">
+      <div className="flex items-center gap-1.5 text-[12px] font-bold">
         <span className="material-symbols-outlined text-[18px] text-amber-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
         <span className="font-bold text-[#111827]">{tutor.rating}</span>
         <span className="text-[#9CA3AF] font-normal">({tutor.reviews} completed 1-on-1 reviews)</span>
@@ -399,10 +400,10 @@ export default function LiveClassesPage() {
       {/* Specialties Badges */}
       <div className="flex flex-wrap gap-1.5">
         {(tutor.tags || []).map((tag: string) => (
-          <span key={tag} className="px-2 py-0.5 rounded bg-[#F3F4F6] text-[#111827] font-label-sm text-[11px]">{tag}</span>
+          <span key={tag} className="px-2 py-0.5 rounded bg-[#F3F4F6] text-[#111827] font-bold text-[11px]">{tag}</span>
         ))}
       </div>
-      <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E5E7EB] text-label-sm font-label-sm flex flex-col gap-1">
+      <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E5E7EB] text-[12px] font-bold flex flex-col gap-1">
         <span className="text-[#9CA3AF] uppercase font-semibold text-[10px] tracking-wider">Next Available Window</span>
         <div className="flex items-center gap-2 text-[#111827] font-semibold">
           <span className="material-symbols-outlined text-[15px] text-[#6B7280]">event_available</span>
