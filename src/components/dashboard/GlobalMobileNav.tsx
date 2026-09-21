@@ -1,5 +1,7 @@
-import { signOutAction } from "@/app/auth/actions";
 'use client'
+
+import { signOutAction } from "@/app/auth/actions";
+
 
 import { useState } from 'react'
 import Link from 'next/link'
