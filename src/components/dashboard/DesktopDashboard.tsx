@@ -1,11 +1,14 @@
 'use client'
 import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import CountUp from 'react-countup'
+import NotificationBell from './NotificationBell'
 import Link from 'next/link'
 import Sidebar from '@/components/dashboard/Sidebar'
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function DesktopDashboard({ profile, wallet, rank, treeStats, team, loading, handleLogout }: any) {
+  const router = useRouter();
   const leftVol = treeStats?.volumes?.leftBv || 0
   const rightVol = treeStats?.volumes?.rightBv || 0
   const totalVol = leftVol + rightVol
@@ -79,10 +82,7 @@ export default function DesktopDashboard({ profile, wallet, rank, treeStats, tea
 {/* Right Profile & Utilities */}
 <div className="flex items-center gap-4">
 {/* Notification Bell with Count */}
-<button aria-label="Notifications" className="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition">
-<i className="ph ph-bell text-xl"></i>
-<span className="absolute top-1.5 right-1.5 bg-rose-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">3</span>
-</button>
+<NotificationBell />
 {/* User profile summary */}
 <div className="flex items-center gap-3 pl-2 border-l border-slate-200 cursor-pointer group">
 <img alt={profile?.full_name || "User"} className="w-9 h-9 rounded-full object-cover border border-slate-200 shadow-2xs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDReeYWLlD5TaldYdDHsGfN8OGQROgXVXL2UKpARpJKYtqWNug4DzzCGWdg35s9PvOABIf8Oo0TWWfLkDsuEodtiFb031UuNg4Ez3YcWqHpT18-Fqvtis5R0hnFLLhaMnNZIj7aiAuTjQVosEnw7GJ1eZMURLjS-5gIgcQKWu6Uuhjx82wmZ9lDFJo30qhmaKidHFwVZt4ln-IlF6vsQ_uT6XDRcMr6lpuFTgF4tD4oILdo204n_Bd6jQ"/>
@@ -608,10 +608,10 @@ export default function DesktopDashboard({ profile, wallet, rank, treeStats, tea
 </div>
 {/* Action CTA Buttons */}
 <div className="grid grid-cols-2 gap-2 w-full mt-4">
-<button onClick={() => window.location.href = "/dashboard/business"} className="py-2 px-3 bg-[#0a2046] hover:bg-slate-900 text-white text-xs font-semibold rounded-xl shadow transition">
+<button onClick={() => router.push('/dashboard/business')} className="py-2 px-3 bg-[#0a2046] hover:bg-slate-900 text-white text-xs font-semibold rounded-xl shadow transition">
                   Upgrade
                 </button>
-<button onClick={() => window.location.href = "/dashboard/business"} className="py-2 px-3 bg-white text-brand-700 hover:bg-blue-50 text-xs font-bold rounded-xl shadow transition">
+<button onClick={() => router.push('/dashboard/business')} className="py-2 px-3 bg-white text-brand-700 hover:bg-blue-50 text-xs font-bold rounded-xl shadow transition">
                   Renew
                 </button>
 </div>
