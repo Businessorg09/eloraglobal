@@ -40,6 +40,7 @@ export async function GET(request: Request) {
         comments:community_comments(id),
         likes:community_likes(user_id)
       `)
+      .lte('created_at', new Date().toISOString())
       .order('created_at', { ascending: false });
 
     if (error) throw error;

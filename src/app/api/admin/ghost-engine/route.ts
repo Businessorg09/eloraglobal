@@ -193,13 +193,26 @@ export async function POST(request: Request) {
       // 2. Pick a scenario
       const scenario = SCENARIOS[Math.floor(Math.random() * SCENARIOS.length)];
 
-      // 3. Shuffle ghosts to pick a random author and commenters
+      // 3. Shuffle ghosts
       const shuffledGhosts = ghosts.sort(() => 0.5 - Math.random());
       const authorId = shuffledGhosts[0].id;
       
-      // 4. Create Main Post (pretend it happened 10-30 mins ago)
-      const postMinutesAgo = Math.floor(Math.random() * 20) + 10;
-      const postDate = new Date(Date.now() - postMinutesAgo * 60000).toISOString();
+      // 4. Time Calculation (Queue system)
+      const { data: latestGhostPost } = await supabaseAdmin
+        .from('community_posts')
+        .select('created_at')
+        .eq('is_mock', true)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+        
+      let baseTime = Date.now();
+      if (latestGhostPost && new Date(latestGhostPost.created_at).getTime() > baseTime) {
+        baseTime = new Date(latestGhostPost.created_at).getTime();
+      }
+      
+      const gapMinutes = Math.floor(Math.random() * 3) + 2; // 2 to 4 minutes gap
+      const postDate = new Date(baseTime + gapMinutes * 60000).toISOString();
 
       const { data: newPost, error: postError } = await supabaseAdmin.from('community_posts').insert({
         author_id: authorId,
@@ -213,19 +226,18 @@ export async function POST(request: Request) {
 
       if (postError) throw postError;
 
-      // 5. Create Comments (if community_comments exists)
-      // Check if community_comments table exists
+      // 5. Create Comments
       const { error: checkTableError } = await supabaseAdmin.from('community_comments').select('id').limit(1);
       
       if (!checkTableError || checkTableError.code !== '42P01') {
-        // Table exists, inject comments
-        let commentTime = postMinutesAgo - 2; // first comment 2 mins after post
+        let currentCommentTime = new Date(postDate).getTime();
         
         for (let i = 0; i < scenario.comments.length; i++) {
-          if (commentTime < 1) commentTime = 1; // don't go into the future
+          const commentGap = Math.floor(Math.random() * 3) + 1; // 1 to 3 mins after previous action
+          currentCommentTime += commentGap * 60000;
           
           const commenterId = shuffledGhosts[(i % (shuffledGhosts.length - 1)) + 1].id;
-          const commentDate = new Date(Date.now() - commentTime * 60000).toISOString();
+          const commentDate = new Date(currentCommentTime).toISOString();
           
           await supabaseAdmin.from('community_comments').insert({
             post_id: newPost.id,
@@ -235,8 +247,6 @@ export async function POST(request: Request) {
             created_at: commentDate,
             updated_at: commentDate
           });
-          
-          commentTime -= Math.floor(Math.random() * 4) + 1; // subtract 1-4 minutes for next comment
         }
       }
 
