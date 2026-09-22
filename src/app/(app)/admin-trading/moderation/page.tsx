@@ -17,11 +17,14 @@ export default function CommunityModerationPage() {
     setIsGhostLoading(false);
   };
 
-  const injectThread = async () => {
+  const [commentPostId, setCommentPostId] = useState('');
+  const [commentContent, setCommentContent] = useState('');
+
+  const injectThread = async (type: 'RANDOM' | 'NORMAL' | 'IMAGE') => {
     setIsGhostLoading(true);
     setGhostStatus(null);
     try {
-      const res = await fetch('/api/admin/ghost-engine', { method: 'POST', body: JSON.stringify({ action: 'INJECT_THREAD' }) });
+      const res = await fetch('/api/admin/ghost-engine', { method: 'POST', body: JSON.stringify({ action: 'INJECT_THREAD', type }) });
       const data = await res.json();
       if (res.ok) {
         setGhostStatus(`Success! Injected scenario: ${data.scenario}`);
@@ -29,6 +32,22 @@ export default function CommunityModerationPage() {
       }
       else alert(data.error || 'Failed to inject thread');
     } catch (e) { alert('Error injecting thread'); }
+    setIsGhostLoading(false);
+  };
+
+  const injectComment = async () => {
+    if (!commentPostId) return alert('Enter a Post ID');
+    setIsGhostLoading(true);
+    try {
+      const res = await fetch('/api/admin/ghost-engine', { method: 'POST', body: JSON.stringify({ action: 'INJECT_COMMENT', postId: commentPostId, content: commentContent }) });
+      const data = await res.json();
+      if (res.ok) {
+        setGhostStatus('Comment injected successfully!');
+        setCommentPostId('');
+        setCommentContent('');
+        fetchModerationData();
+      } else alert(data.error);
+    } catch(e) { alert('Error injecting comment'); }
     setIsGhostLoading(false);
   };
 
@@ -163,14 +182,14 @@ export default function CommunityModerationPage() {
                       <div className="flex justify-between items-start">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
-                            {post.users?.full_name?.[0] || 'U'}
+                            {post.author?.full_name?.[0] || 'U'}
                           </div>
                           <div>
                             <p className="font-bold text-slate-900 text-[14px]">
-                              {post.users?.full_name} 
+                              {post.author?.full_name} {post.is_mock && <span className="ml-1 text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">[🤖 MOCK]</span>}
                               {post.is_pinned && <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-[10px] font-bold rounded-full uppercase">Pinned</span>}
                             </p>
-                            <p className="text-[12px] text-slate-500">@{post.users?.username} • {new Date(post.created_at).toLocaleString()}</p>
+                            <p className="text-[12px] text-slate-500">@{post.author?.username} • {new Date(post.created_at).toLocaleString()}</p>
                           </div>
                         </div>
                         <div className="flex gap-2">
@@ -288,13 +307,9 @@ export default function CommunityModerationPage() {
                     <h2 className="text-lg font-bold text-slate-800">Ghost Engine Dashboard</h2>
                     <p className="text-sm text-slate-500">Inject automated mock conversations to simulate community activity.</p>
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col gap-2">
                     <button onClick={seedGhosts} disabled={isGhostLoading} className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium disabled:opacity-50 border border-slate-300">
-                      1. Seed 35 Ghost Users
-                    </button>
-                    <button onClick={injectThread} disabled={isGhostLoading} className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm flex items-center gap-2">
-                      <i className="ph-magic-wand"></i>
-                      2. Inject Random Thread Now
+                      Seed 35 Ghost Users
                     </button>
                   </div>
                 </div>
@@ -336,6 +351,50 @@ export default function CommunityModerationPage() {
                     <p className="text-sm text-slate-600">
                       Instead of single posts, the engine selects a main author and 2-3 commenters, spacing them out to simulate real-time conversations.
                     </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                  {/* Thread Injection Controls */}
+                  <div className="p-5 border border-slate-200 rounded-xl bg-white shadow-sm flex flex-col gap-4">
+                    <h3 className="font-bold text-slate-800">Inject New Threads</h3>
+                    <p className="text-sm text-slate-500">Inject a full conversation thread (post + comments) directly into the feed. It will be scheduled with a 2-4 min delay queue.</p>
+                    <div className="flex flex-col gap-2">
+                      <button onClick={() => injectThread('RANDOM')} disabled={isGhostLoading} className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left">
+                        ✨ Inject Random Thread (Mixed)
+                      </button>
+                      <button onClick={() => injectThread('NORMAL')} disabled={isGhostLoading} className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left">
+                        📝 Inject Text-Only Thread
+                      </button>
+                      <button onClick={() => injectThread('IMAGE')} disabled={isGhostLoading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left">
+                        🖼️ Inject Thread w/ Chart & Photo
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Comment Injection Controls */}
+                  <div className="p-5 border border-slate-200 rounded-xl bg-white shadow-sm flex flex-col gap-4">
+                    <h3 className="font-bold text-slate-800">Inject Target Comment</h3>
+                    <p className="text-sm text-slate-500">Force a random Ghost User to comment on a specific post ID (great for boosting real users' posts).</p>
+                    <div className="flex flex-col gap-3">
+                      <input 
+                        type="text" 
+                        placeholder="Paste Post ID (UUID) here..." 
+                        value={commentPostId}
+                        onChange={e => setCommentPostId(e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-900"
+                      />
+                      <input 
+                        type="text" 
+                        placeholder="Custom Comment Content (Optional)" 
+                        value={commentContent}
+                        onChange={e => setCommentContent(e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-900"
+                      />
+                      <button onClick={injectComment} disabled={isGhostLoading} className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left">
+                        💬 Inject Comment Now
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

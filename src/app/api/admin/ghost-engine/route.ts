@@ -185,13 +185,46 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, message: `Seeded/Updated ghosts.` });
     }
 
+    
+    if (action === 'INJECT_COMMENT') {
+      const { postId, content } = await request.clone().json().catch(() => ({}));
+      if (!postId) return NextResponse.json({ error: 'Post ID required' }, { status: 400 });
+
+      const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
+      if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found' }, { status: 400 });
+
+      const randomGhost = ghosts[Math.floor(Math.random() * ghosts.length)];
+      
+      const { error } = await supabaseAdmin.from('community_comments').insert({
+        post_id: postId,
+        author_id: randomGhost.id,
+        content: content || "Great insight, following this!",
+        is_mock: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+
+      if (error) throw error;
+      return NextResponse.json({ success: true, message: 'Comment injected' });
+    }
+
     if (action === 'INJECT_THREAD') {
       // 1. Get all ghosts
       const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
       if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found. Seed first.' }, { status: 400 });
 
       // 2. Pick a scenario
-      const scenario = SCENARIOS[Math.floor(Math.random() * SCENARIOS.length)];
+      const { type } = await request.clone().json().catch(() => ({}));
+      let validScenarios = SCENARIOS;
+      
+      if (type === 'IMAGE') {
+        validScenarios = SCENARIOS.filter(s => s.imageUrl);
+      } else if (type === 'NORMAL') {
+        validScenarios = SCENARIOS.filter(s => !s.imageUrl);
+      }
+      
+      if (validScenarios.length === 0) validScenarios = SCENARIOS; // Fallback
+      const scenario = validScenarios[Math.floor(Math.random() * validScenarios.length)];
 
       // 3. Shuffle ghosts
       const shuffledGhosts = ghosts.sort(() => 0.5 - Math.random());

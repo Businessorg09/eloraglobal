@@ -129,7 +129,7 @@ export async function GET(request: Request) {
     // Fetch posts
     const { data: posts } = await supabase
       .from('community_posts')
-      .select('id, content, created_at, is_pinned, users:user_id (id, full_name, username, is_verified, is_shadowbanned)')
+      .select('id, content, created_at, is_pinned, is_mock, author:users!community_posts_author_id_fkey(id, full_name, username, is_verified, is_shadowbanned)')
       .order('is_pinned', { ascending: false })
       .order('created_at', { ascending: false })
       .limit(50);
