@@ -221,39 +221,43 @@ export async function POST(request: Request) {
         
         let allPosts = [];
         
-        for (const feedUrl of feeds) {
-          try {
-            const feed = await parser.parseURL(feedUrl);
-            const valid = feed.items.map(item => {
-              // Extract Image
-              let imageUrl = null;
-              const contentRaw = item['content:encoded'] || item.content || '';
-              const imgMatches = [...contentRaw.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)];
-              for (const match of imgMatches) {
-                const src = match[1];
-                if (src && !src.includes('userpics') && !src.includes('avatar')) {
-                  imageUrl = src;
-                  break;
-                }
-              }
-              if (!imageUrl && imgMatches.length > 0) {
-                 imageUrl = imgMatches[0][1];
-              }
-
-              // Extract description text safely
-              let text = item.title || 'Market Update';
-              let description = item.description ? item.description.replace(/<[^>]+>/g, '').trim() : '';
-              
-              if (description && description.length > 10 && description.length < 500) {
-                text += `\n\n${description}`;
-              }
-
-              return { text, imageUrl };
-            });
-            allPosts = allPosts.concat(valid);
-          } catch (e) {
+        const feedPromises = feeds.map(feedUrl => parser.parseURL(feedUrl).catch(e => {
             console.error(`Failed to fetch ${feedUrl}:`, e);
-          }
+            return null;
+        }));
+        
+        const results = await Promise.all(feedPromises);
+        
+        for (const feed of results) {
+          if (!feed || !feed.items) continue;
+          
+          const valid = feed.items.map(item => {
+            // Extract Image
+            let imageUrl = null;
+            const contentRaw = item['content:encoded'] || item.content || '';
+            const imgMatches = [...contentRaw.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)];
+            for (const match of imgMatches) {
+              const src = match[1];
+              if (src && !src.includes('userpics') && !src.includes('avatar')) {
+                imageUrl = src;
+                break;
+              }
+            }
+            if (!imageUrl && imgMatches.length > 0) {
+               imageUrl = imgMatches[0][1];
+            }
+
+            // Extract description text safely
+            let text = item.title || 'Market Update';
+            let description = item.description ? item.description.replace(/<[^>]+>/g, '').trim() : '';
+            
+            if (description && description.length > 10 && description.length < 500) {
+              text += `\n\n${description}`;
+            }
+
+            return { text, imageUrl };
+          });
+          allPosts = allPosts.concat(valid);
         }
 
         if (allPosts.length === 0) {
