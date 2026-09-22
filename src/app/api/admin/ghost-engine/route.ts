@@ -267,27 +267,18 @@ export async function POST(request: Request) {
         // Shuffle posts
         allPosts = allPosts.sort(() => 0.5 - Math.random()).slice(0, count);
 
-        // Calculate baseline time
-        const { data: latestGhostPost } = await supabaseAdmin
-          .from('community_posts')
-          .select('created_at')
-          .eq('is_mock', true)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
-          
-        let baseTime = Date.now();
-        if (latestGhostPost && new Date(latestGhostPost.created_at).getTime() > baseTime) {
-          baseTime = new Date(latestGhostPost.created_at).getTime();
-        }
-
+        // Distribute posts randomly over the last 24 hours so they appear immediately in the feed
+        const now = Date.now();
+        const oneDayMs = 24 * 60 * 60 * 1000;
 
         const postInserts = [];
-        for (const post of allPosts) {
+        for (let i = 0; i < allPosts.length; i++) {
+          const post = allPosts[i];
           const authorId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
-          const gapMinutes = Math.floor(Math.random() * 30) + 15;
-          baseTime += gapMinutes * 60000;
-          const postDate = new Date(baseTime).toISOString();
+          
+          // Generate a random time in the past 24 hours
+          const randomPastTime = now - Math.floor(Math.random() * oneDayMs);
+          const postDate = new Date(randomPastTime).toISOString();
           
           postInserts.push({
             author_id: authorId,
