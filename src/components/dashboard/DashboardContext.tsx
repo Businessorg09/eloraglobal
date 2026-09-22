@@ -41,8 +41,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         ])
 
         if (walletRes.status === 401 && profileRes.status === 401 && rankRes.status === 401) {
-          // Only redirect if MULTIPLE core APIs fail with 401, to avoid flaky network logouts
-          window.location.href = '/login';
+          // If token is genuinely expired, SessionKeeper will handle the redirect.
+          // Don't forcefully redirect here to avoid "website crashed" experience during brief network drops.
           return
         }
 

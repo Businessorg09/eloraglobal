@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
     const { data: { user } } = await Promise.race([
       supabase.auth.getUser(),
       new Promise<any>((_, reject) =>
-        setTimeout(() => reject(new Error('Auth timeout')), 5000)
+        setTimeout(() => reject(new Error('Auth timeout')), 10000)
       ),
     ])
 
@@ -70,11 +70,9 @@ export async function middleware(request: NextRequest) {
     }
 
   } catch (_err) {
-    // If Supabase times out or fails, allow the page to load anyway
-    // The page itself will handle auth errors gracefully
-    if (isProtected) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
+    // If Supabase times out (10s), DO NOT forcefully log the user out.
+    // Allow the page to load, and the client-side SessionKeeper will handle the auth state.
+    // This prevents the "website crashed" experience for users on slow connections.
   }
 
   return supabaseResponse
