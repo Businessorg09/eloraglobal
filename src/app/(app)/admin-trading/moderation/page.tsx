@@ -134,6 +134,7 @@ export default function CommunityModerationPage() {
             { id: 'CHATS', label: 'Chat Surveillance', icon: 'chat' },
             { id: 'USERS', label: 'User Database', icon: 'shield_person' },
             { id: 'SHIELD', label: 'Auto-Mod Shield', icon: 'security' },
+            { id: 'GHOST', label: 'Ghost Engine', icon: 'smart_toy' },
           ].map(tab => (
             <button
               key={tab.id}
