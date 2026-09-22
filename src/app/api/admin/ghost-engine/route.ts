@@ -48,62 +48,64 @@ const GHOST_USERS = [
 ];
 
 const SCENARIOS = [
-  
   {
-    topic: 'Technical - TradingView Analysis',
-    mainPost: "Just marked up my TradingView for the week. Looking at this massive liquidity grab on US30. If we break this structure, I'm swinging it all week.",
-    imageUrl: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80",
+    topic: 'Technical - SMC/ICT on XAUUSD',
+    mainPost: "XAUUSD sweeping Asian highs right now. Found a pristine 15m FVG (Fair Value Gap) overlapping with a bearish order block. Taking shorts if we get a 1m CHoCH (Change of Character) here. Stop loss strictly above the wick.",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80",
     comments: [
-      "That divergence on the RSI looks solid too. Good spot.",
-      "I'd wait for a 4H close below that wick, otherwise it's just a trap.",
-      "What indicators are you using on the bottom pane?"
+      "Careful, DXY is looking weak and might push gold higher into the 4H premium zone.",
+      "I took the exact same entry! The liquidity void below is massive. Target is yesterday's low.",
+      "What's your invalidation level? Above the OB?"
     ]
   },
   {
-topic: 'Psychology - Blown Account',
+    topic: 'Technical - Wyckoff on BTC',
+    mainPost: "BTC printing a textbook Wyckoff Accumulation phase on the 4H. We just had the Spring and are testing the supply line now. Macro structure looks incredibly bullish if we clear this liquidity.",
+    imageUrl: "https://images.unsplash.com/photo-1621252179027-9ec45b0a3598?auto=format&fit=crop&q=80",
+    comments: [
+      "Volume signature on the Spring was perfect. Huge effort, no result.",
+      "I'm waiting for a clean breakout of the Creek before scaling in on leverage.",
+      "Still think we could see one more shakeout to grab late longs before the real markup phase."
+    ]
+  },
+  {
+    topic: 'Technical - EURUSD Break & Retest',
+    mainPost: "EURUSD finally broke out of this 3-day consolidation range. Classic break and retest of previous resistance turned support. Volume profile shows a clear high volume node holding price up.",
+    imageUrl: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80",
+    comments: [
+      "London session volume is backing this up. Good R:R on this setup.",
+      "I'm long from 1.0820, targeting the weekly highs.",
+      "Watch out for the ECB speakers later today, could spike the spread and hit stop losses."
+    ]
+  },
+  {
+    topic: 'Technical - BankNifty Options',
+    mainPost: "BankNifty forming a symmetrical triangle on the 5-minute chart. RSI divergence on the lower timeframe suggests a breakdown. Keeping 45000 PE in watchlist.",
+    imageUrl: "https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&q=80",
+    comments: [
+      "Bro IV crush will kill you if it doesn't break out before 1 PM.",
+      "I'm seeing strong put writing at 44800, so downside might be limited.",
+      "Wait for a 15-minute candle close below the trendline to avoid a fakeout."
+    ],
+    indianTarget: true
+  },
+  {
+    topic: 'Technical - NASDAQ 100 Supply Zone',
+    mainPost: "NDX (US100) tapping into the daily supply zone. Tech earnings might be the catalyst for a pullback here. Look at the bearish divergence on the MACD.",
+    imageUrl: "https://images.unsplash.com/photo-1612178991541-b48cc8e92a4d?auto=format&fit=crop&q=80",
+    comments: [
+      "Agreed, but never short a dull market. Bulls are stubbornly holding this up.",
+      "I scaled in some short positions here. Stop loss tight above the wick.",
+      "Wait for cash open. Pre-market price action on indices is mostly noise."
+    ]
+  },
+  {
+    topic: 'Psychology - Blown Account',
     mainPost: "Just blew my 50k funded challenge on a stupid Gold news candle. I feel sick. Should I take a week off or dive back in?",
     comments: [
       "Bro, take a walk. Revenge trading will only make you blow another one. We've all been there.",
       "Market was brutal today. Step away from the screens. Gold during NY session was entirely unpredictable.",
       "Take at least 3 days off. Set a rule: no charts. Reset your mind."
-    ]
-  },
-  {
-    topic: 'Lifestyle - Travel NYC',
-    mainPost: "Heading to New York next week for a quick vacation. Do any of you know good trader lounges or cafes with solid wifi in Manhattan?",
-    comments: [
-      "Check out the Blank Street cafes, wifi is elite and it's quiet.",
-      "NY is great but too distracting for me to trade. I stick to swinging HTF when traveling.",
-      "If you're in Soho, try Devocion. But honestly I just trade from my hotel if I have to."
-    ]
-  },
-  {
-    topic: 'Indian Market - Nifty',
-    mainPost: "Are you guys trading Gold tonight or just sticking to BankNifty options tomorrow morning?",
-    comments: [
-      "BankNifty has been way too choppy lately. I'm focusing completely on Forex NY sessions now.",
-      "Bhai, stick to one. If you are doing options, don't mix it with XAUUSD. Different psychology.",
-      "I made decent points on BankNifty today but missed the entire Gold move."
-    ],
-    indianTarget: true
-  },
-  {
-    topic: 'Technical - EURUSD',
-    mainPost: "EUR/USD is tapping a massive daily supply zone. Anyone looking for shorts going into London session?",
-    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80",
-    comments: [
-      "I have an alert set there too, but waiting for a 15m change of character first.",
-      "Careful, DXY is looking weak. It might just blast through that supply.",
-      "I'm already in from 1.0850. Let's see how London volume treats it."
-    ]
-  },
-  {
-    topic: 'Platform - Elora Academy',
-    mainPost: "Just finished week 2 of the Elora Academy modules. The way they explain liquidity concepts finally made it click for me.",
-    comments: [
-      "Week 3 gets even better, especially the volume profiling stuff.",
-      "Same here! I used to trade retail support/resistance and always got stopped out.",
-      "Are you guys using the simulator while doing the modules?"
     ]
   },
   {
@@ -113,16 +115,6 @@ topic: 'Psychology - Blown Account',
       "Lower your risk by half next week. You are emotionally compromised right now even if it feels good.",
       "Withdraw half the profits immediately. Make it real.",
       "Classic euphoria. Take tomorrow off."
-    ]
-  },
-  {
-    topic: 'Lifestyle - Setup Upgrade',
-    mainPost: "Finally upgraded to a 3-monitor setup. Used to trade on a single 13-inch laptop for 2 years. Feels like a spaceship now.",
-    imageUrl: "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80",
-    comments: [
-      "Congrats! Just don't fall into the trap of watching 12 pairs at once now.",
-      "Post a pic! I'm still on a laptop and dreaming of a proper desk.",
-      "Best investment you can make. Reduces eye strain so much."
     ]
   },
   {
