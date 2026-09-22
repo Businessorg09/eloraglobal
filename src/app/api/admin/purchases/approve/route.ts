@@ -57,7 +57,7 @@ export async function POST(request: Request) {
         .maybeSingle()
 
       if (existingNode && existingNode.is_active) {
-        // Do not return early. We still need to update limits and propagate BV.
+        return NextResponse.json({ error: 'User already has an active package. Please reject this duplicate INITIAL request.' }, { status: 400 })
       }
 
       // 4. Fetch user's profile to find their sponsor and placement position
@@ -227,7 +227,10 @@ export async function POST(request: Request) {
     const { error: updateError } = await adminDb
       .from('package_purchases')
       .update({
-        payment_gateway_id: JSON.stringify(meta)
+        payment_gateway_id: JSON.stringify(meta),
+        status: 'APPROVED',
+        approved_by: user.id,
+        approved_at: new Date().toISOString()
       })
       .eq('id', purchaseId)
 

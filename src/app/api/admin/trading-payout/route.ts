@@ -121,10 +121,12 @@ export async function POST(req: Request) {
           });
 
           await adminClient.from('sponsor_income_history').insert({
-            user_id: dist.userId,
-            from_user_id: trader.id,
-            level: dist.level,
-            amount_paise: dist.amountPaise,
+            recipient_user_id: dist.userId,
+            trader_user_id: trader.id,
+            sponsor_level: dist.level,
+            income_amount_paise: dist.amountPaise,
+            trading_payout_amount_usd: payoutAmountUsdCents,
+            exchange_rate_snapshot: exchangeRateUsdToInr
           });
           sponsorDistributionsCount++;
         }
@@ -187,9 +189,12 @@ export async function POST(req: Request) {
               });
 
               await adminClient.from('leadership_income_history').insert({
-                user_id: dist.userId,
-                from_user_id: trader.id,
-                amount_paise: dist.amountPaise,
+                recipient_user_id: dist.userId,
+                trader_user_id: trader.id,
+                upline_level: dist.level,
+                income_amount_paise: dist.amountPaise,
+                trading_payout_amount_usd: payoutAmountUsdCents,
+                exchange_rate_snapshot: exchangeRateUsdToInr
               });
               leadershipDistributionsCount++;
             }
