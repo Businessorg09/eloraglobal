@@ -281,61 +281,70 @@ export async function POST(request: Request) {
           baseTime = new Date(latestGhostPost.created_at).getTime();
         }
 
-        let injectedCount = 0;
 
+        const postInserts = [];
         for (const post of allPosts) {
-          // Data already extracted from RSS
-          let imageUrl = post.imageUrl;
-          let text = post.text;
-
           const authorId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
-          
-          // Space posts by 15-45 minutes
           const gapMinutes = Math.floor(Math.random() * 30) + 15;
           baseTime += gapMinutes * 60000;
           const postDate = new Date(baseTime).toISOString();
-
-          const { data: newPost, error: postError } = await supabaseAdmin.from('community_posts').insert({
+          
+          postInserts.push({
             author_id: authorId,
-            content: text,
+            content: post.text,
             category: 'General',
-            image_url: imageUrl,
+            image_url: post.imageUrl,
             is_mock: true,
             created_at: postDate,
             updated_at: postDate
-          }).select().single();
+          });
+        }
 
-          if (!postError) {
-            injectedCount++;
+        // Bulk insert posts (one fast network call)
+        const { data: newPosts, error: postError } = await supabaseAdmin
+          .from('community_posts')
+          .insert(postInserts)
+          .select();
 
-            // Add 1-2 generic comments
-            const GENERIC_COMMENTS = [
-              "Interesting perspective.", "I saw something similar earlier.", 
-              "Following this.", "What timeframe is this?", 
-              "Volume confirms it.", "Be careful with upcoming news though.", 
-              "Great spot!", "I totally agree with this.", "Tough market right now."
-            ];
+        if (postError) throw postError;
+
+        // Generate comments for the newly inserted posts
+        const GENERIC_COMMENTS = [
+          "Interesting perspective.", "I saw something similar earlier.", 
+          "Following this.", "What timeframe is this?", 
+          "Volume confirms it.", "Be careful with upcoming news though.", 
+          "Great spot!", "I totally agree with this.", "Tough market right now."
+        ];
+        
+        const commentInserts = [];
+        for (const newPost of newPosts) {
+          const numComments = Math.floor(Math.random() * 2) + 1; // 1 to 2 comments
+          let commentTime = new Date(newPost.created_at).getTime();
+          
+          for (let i = 0; i < numComments; i++) {
+            commentTime += (Math.floor(Math.random() * 5) + 1) * 60000; // 1-5 mins after post
+            const commenterId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
             
-            const numComments = Math.floor(Math.random() * 2) + 1; // 1 to 2 comments
-            let commentTime = baseTime;
-            
-            for (let i = 0; i < numComments; i++) {
-              commentTime += (Math.floor(Math.random() * 5) + 1) * 60000; // 1-5 mins after post
-              const commenterId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
-              
-              await supabaseAdmin.from('community_comments').insert({
-                post_id: newPost.id,
-                author_id: commenterId,
-                content: GENERIC_COMMENTS[Math.floor(Math.random() * GENERIC_COMMENTS.length)],
-                is_mock: true,
-                created_at: new Date(commentTime).toISOString(),
-                updated_at: new Date(commentTime).toISOString()
-              });
-            }
+            commentInserts.push({
+              post_id: newPost.id,
+              author_id: commenterId,
+              content: GENERIC_COMMENTS[Math.floor(Math.random() * GENERIC_COMMENTS.length)],
+              is_mock: true,
+              created_at: new Date(commentTime).toISOString(),
+              updated_at: new Date(commentTime).toISOString()
+            });
           }
         }
 
-        return NextResponse.json({ success: true, message: `Successfully queued ${injectedCount} real social posts into the future.` });
+        // Bulk insert comments
+        if (commentInserts.length > 0) {
+          const { error: commentError } = await supabaseAdmin
+            .from('community_comments')
+            .insert(commentInserts);
+          if (commentError) throw commentError;
+        }
+
+        return NextResponse.json({ success: true, message: `Successfully queued ${newPosts.length} real social posts into the future.` });
       } catch (err) {
         return NextResponse.json({ error: err.message }, { status: 500 });
       }
