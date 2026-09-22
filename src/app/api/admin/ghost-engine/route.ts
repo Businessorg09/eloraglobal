@@ -202,6 +202,122 @@ export async function POST(request: Request) {
     }
 
     
+    
+    if (action === 'QUEUE_SOCIAL_BATCH') {
+      try {
+        const { count = 10 } = body;
+        
+        const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
+        if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found. Seed first.' }, { status: 400 });
+
+        // Scrape from various real trading communities via public JSON feeds
+        const subreddits = ['Daytrading', 'Forex', 'IndianStreetBets', 'Trading', 'wallstreetbets'];
+        let allPosts = [];
+        
+        for (const sub of subreddits) {
+          try {
+            const res = await fetch(`https://www.reddit.com/r/${sub}/hot.json?limit=25`, {
+              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 EloraGlobal/1.0' }
+            });
+            if (res.ok) {
+              const json = await res.json();
+              const valid = json.data.children
+                .filter((c) => !c.data.stickied && !c.data.over_18 && !c.data.is_video)
+                .map((c) => c.data);
+              allPosts = allPosts.concat(valid);
+            }
+          } catch (e) { console.error(`Failed to fetch ${sub}`); }
+        }
+
+        if (allPosts.length === 0) {
+          return NextResponse.json({ error: 'Failed to scrape social feeds' }, { status: 500 });
+        }
+
+        // Shuffle posts
+        allPosts = allPosts.sort(() => 0.5 - Math.random()).slice(0, count);
+
+        // Calculate baseline time
+        const { data: latestGhostPost } = await supabaseAdmin
+          .from('community_posts')
+          .select('created_at')
+          .eq('is_mock', true)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+          
+        let baseTime = Date.now();
+        if (latestGhostPost && new Date(latestGhostPost.created_at).getTime() > baseTime) {
+          baseTime = new Date(latestGhostPost.created_at).getTime();
+        }
+
+        let injectedCount = 0;
+
+        for (const post of allPosts) {
+          // Extract Image
+          let imageUrl = null;
+          if (post.url && (post.url.endsWith('.jpg') || post.url.endsWith('.png') || post.url.includes('i.redd.it'))) {
+            imageUrl = post.url;
+          }
+
+          // Clean text
+          let text = post.title;
+          if (post.selftext && post.selftext.length > 10 && post.selftext.length < 1000) {
+            text += `\n\n${post.selftext}`;
+          }
+
+          const authorId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
+          
+          // Space posts by 15-45 minutes
+          const gapMinutes = Math.floor(Math.random() * 30) + 15;
+          baseTime += gapMinutes * 60000;
+          const postDate = new Date(baseTime).toISOString();
+
+          const { data: newPost, error: postError } = await supabaseAdmin.from('community_posts').insert({
+            author_id: authorId,
+            content: text,
+            category: 'General',
+            image_url: imageUrl,
+            is_mock: true,
+            created_at: postDate,
+            updated_at: postDate
+          }).select().single();
+
+          if (!postError) {
+            injectedCount++;
+
+            // Add 1-2 generic comments
+            const GENERIC_COMMENTS = [
+              "Interesting perspective.", "I saw something similar earlier.", 
+              "Following this.", "What timeframe is this?", 
+              "Volume confirms it.", "Be careful with upcoming news though.", 
+              "Great spot!", "I totally agree with this.", "Tough market right now."
+            ];
+            
+            const numComments = Math.floor(Math.random() * 2) + 1; // 1 to 2 comments
+            let commentTime = baseTime;
+            
+            for (let i = 0; i < numComments; i++) {
+              commentTime += (Math.floor(Math.random() * 5) + 1) * 60000; // 1-5 mins after post
+              const commenterId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
+              
+              await supabaseAdmin.from('community_comments').insert({
+                post_id: newPost.id,
+                author_id: commenterId,
+                content: GENERIC_COMMENTS[Math.floor(Math.random() * GENERIC_COMMENTS.length)],
+                is_mock: true,
+                created_at: new Date(commentTime).toISOString(),
+                updated_at: new Date(commentTime).toISOString()
+              });
+            }
+          }
+        }
+
+        return NextResponse.json({ success: true, message: `Successfully queued ${injectedCount} real social posts into the future.` });
+      } catch (err) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+      }
+    }
+
     if (action === 'SCRAPE_TRADINGVIEW') {
       try {
         const Parser = require('rss-parser');

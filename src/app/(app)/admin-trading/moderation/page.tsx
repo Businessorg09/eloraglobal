@@ -21,6 +21,23 @@ export default function CommunityModerationPage() {
   const [commentContent, setCommentContent] = useState('');
 
   
+  
+  const queueSocialBatch = async () => {
+    setIsGhostLoading(true);
+    setGhostStatus(null);
+    try {
+      const res = await fetch('/api/admin/ghost-engine', { method: 'POST', body: JSON.stringify({ action: 'QUEUE_SOCIAL_BATCH', count: 50 }) });
+      const data = await res.json();
+      if (res.ok) {
+        setGhostStatus(data.message);
+        fetchModerationData();
+      } else {
+        alert(data.error || 'Failed to queue social posts');
+      }
+    } catch(e) { alert('Error queuing social posts'); }
+    setIsGhostLoading(false);
+  };
+
   const scrapeTradingView = async () => {
     setIsGhostLoading(true);
     setGhostStatus(null);
@@ -246,9 +263,22 @@ export default function CommunityModerationPage() {
                       )}
                     </div>
                   ))}
+                
+                  {/* Automated Social Queue */}
+                  <div className="p-5 border border-slate-200 rounded-xl bg-white shadow-sm flex flex-col gap-4 md:col-span-2">
+                    <h3 className="font-bold text-slate-800">Automated Social Engine (100+ Posts Queue)</h3>
+                    <p className="text-sm text-slate-500">Scrapes massive amounts of 100% real, authentic posts, PNL screenshots, and charts directly from Daytrading, Forex, and IndianStreetBets communities. Automatically assigns them to your Ghost accounts and schedules them over the next few days to run your feed on autopilot.</p>
+                    <div className="flex flex-col gap-2">
+                      <button onClick={queueSocialBatch} disabled={isGhostLoading} className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-bold shadow-md flex items-center justify-center gap-2">
+                        <span className="material-symbols-outlined">rocket_launch</span>
+                        Scrape & Queue 50 Authentic Social Posts Now
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
+
 
             {/* TAB: CHATS */}
             {activeTab === 'CHATS' && (
