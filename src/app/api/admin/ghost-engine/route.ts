@@ -210,23 +210,50 @@ export async function POST(request: Request) {
         const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
         if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found. Seed first.' }, { status: 400 });
 
-        // Scrape from various real trading communities via public JSON feeds
-        const subreddits = ['Daytrading', 'Forex', 'IndianStreetBets', 'Trading', 'wallstreetbets'];
+        // Scrape from reliable Trading/Crypto RSS feeds (bypassing Reddit's 429/403 blocks)
+        const Parser = require('rss-parser');
+        const parser = new Parser();
+        const feeds = [
+          'https://www.tradingview.com/feed/',
+          'https://cointelegraph.com/rss',
+          'https://dailyhodl.com/feed/'
+        ];
+        
         let allPosts = [];
         
-        for (const sub of subreddits) {
+        for (const feedUrl of feeds) {
           try {
-            const res = await fetch(`https://www.reddit.com/r/${sub}/hot.json?limit=25`, {
-              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 EloraGlobal/1.0' }
+            const feed = await parser.parseURL(feedUrl);
+            const valid = feed.items.map(item => {
+              // Extract Image
+              let imageUrl = null;
+              const contentRaw = item['content:encoded'] || item.content || '';
+              const imgMatches = [...contentRaw.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)];
+              for (const match of imgMatches) {
+                const src = match[1];
+                if (src && !src.includes('userpics') && !src.includes('avatar')) {
+                  imageUrl = src;
+                  break;
+                }
+              }
+              if (!imageUrl && imgMatches.length > 0) {
+                 imageUrl = imgMatches[0][1];
+              }
+
+              // Extract description text safely
+              let text = item.title || 'Market Update';
+              let description = item.description ? item.description.replace(/<[^>]+>/g, '').trim() : '';
+              
+              if (description && description.length > 10 && description.length < 500) {
+                text += `\n\n${description}`;
+              }
+
+              return { text, imageUrl };
             });
-            if (res.ok) {
-              const json = await res.json();
-              const valid = json.data.children
-                .filter((c) => !c.data.stickied && !c.data.over_18 && !c.data.is_video)
-                .map((c) => c.data);
-              allPosts = allPosts.concat(valid);
-            }
-          } catch (e) { console.error(`Failed to fetch ${sub}`); }
+            allPosts = allPosts.concat(valid);
+          } catch (e) {
+            console.error(`Failed to fetch ${feedUrl}:`, e);
+          }
         }
 
         if (allPosts.length === 0) {
@@ -253,17 +280,9 @@ export async function POST(request: Request) {
         let injectedCount = 0;
 
         for (const post of allPosts) {
-          // Extract Image
-          let imageUrl = null;
-          if (post.url && (post.url.endsWith('.jpg') || post.url.endsWith('.png') || post.url.includes('i.redd.it'))) {
-            imageUrl = post.url;
-          }
-
-          // Clean text
-          let text = post.title;
-          if (post.selftext && post.selftext.length > 10 && post.selftext.length < 1000) {
-            text += `\n\n${post.selftext}`;
-          }
+          // Data already extracted from RSS
+          let imageUrl = post.imageUrl;
+          let text = post.text;
 
           const authorId = ghosts[Math.floor(Math.random() * ghosts.length)].id;
           
