@@ -48,8 +48,19 @@ const GHOST_USERS = [
 ];
 
 const SCENARIOS = [
+  
   {
-    topic: 'Psychology - Blown Account',
+    topic: 'Technical - TradingView Analysis',
+    mainPost: "Just marked up my TradingView for the week. Looking at this massive liquidity grab on US30. If we break this structure, I'm swinging it all week.",
+    imageUrl: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80",
+    comments: [
+      "That divergence on the RSI looks solid too. Good spot.",
+      "I'd wait for a 4H close below that wick, otherwise it's just a trap.",
+      "What indicators are you using on the bottom pane?"
+    ]
+  },
+  {
+topic: 'Psychology - Blown Account',
     mainPost: "Just blew my 50k funded challenge on a stupid Gold news candle. I feel sick. Should I take a week off or dive back in?",
     comments: [
       "Bro, take a walk. Revenge trading will only make you blow another one. We've all been there.",
@@ -79,6 +90,7 @@ const SCENARIOS = [
   {
     topic: 'Technical - EURUSD',
     mainPost: "EUR/USD is tapping a massive daily supply zone. Anyone looking for shorts going into London session?",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80",
     comments: [
       "I have an alert set there too, but waiting for a 15m change of character first.",
       "Careful, DXY is looking weak. It might just blast through that supply.",
@@ -106,6 +118,7 @@ const SCENARIOS = [
   {
     topic: 'Lifestyle - Setup Upgrade',
     mainPost: "Finally upgraded to a 3-monitor setup. Used to trade on a single 13-inch laptop for 2 years. Feels like a spaceship now.",
+    imageUrl: "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80",
     comments: [
       "Congrats! Just don't fall into the trap of watching 12 pairs at once now.",
       "Post a pic! I'm still on a laptop and dreaming of a proper desk.",
@@ -192,6 +205,7 @@ export async function POST(request: Request) {
         author_id: authorId,
         content: scenario.mainPost,
         category: 'General',
+        image_url: scenario.imageUrl || null,
         is_mock: true,
         created_at: postDate,
         updated_at: postDate
