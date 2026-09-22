@@ -25,7 +25,7 @@ export default function CommunityModerationPage() {
       const data = await res.json();
       if (res.ok) {
         setGhostStatus(`Success! Injected scenario: ${data.scenario}`);
-        fetchModerationData();
+        fetchData();
       }
       else alert(data.error || 'Failed to inject thread');
     } catch (e) { alert('Error injecting thread'); }
