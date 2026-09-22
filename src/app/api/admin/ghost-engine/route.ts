@@ -139,7 +139,8 @@ topic: 'Psychology - Blown Account',
 
 export async function POST(request: Request) {
   try {
-    const { action } = await request.json();
+    const body = await request.json();
+    const { action, postId, content, type } = body;
 
     if (action === 'SEED_GHOSTS') {
       let created = 0;
@@ -187,7 +188,7 @@ export async function POST(request: Request) {
 
     
     if (action === 'INJECT_COMMENT') {
-      const { postId, content } = await request.clone().json().catch(() => ({}));
+      // Used postId and content from parsed body
       if (!postId) return NextResponse.json({ error: 'Post ID required' }, { status: 400 });
 
       const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
@@ -214,7 +215,7 @@ export async function POST(request: Request) {
       if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found. Seed first.' }, { status: 400 });
 
       // 2. Pick a scenario
-      const { type } = await request.clone().json().catch(() => ({}));
+      // Used type from parsed body
       let validScenarios = SCENARIOS;
       
       if (type === 'IMAGE') {
