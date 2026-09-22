@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 export type PackageTier = 0 | 1 | 2 | 3;
 
 interface PackageContextProps {
@@ -8,6 +8,7 @@ interface PackageContextProps {
   setCurrentPackage: (tier: PackageTier) => void;
   hasPassedExam: boolean;
   setHasPassedExam: (passed: boolean) => void;
+  isLoadingPackage: boolean;
 }
 
 const PackageContext = createContext<PackageContextProps | undefined>(undefined);
@@ -15,8 +16,10 @@ const PackageContext = createContext<PackageContextProps | undefined>(undefined)
 export function PackageProvider({ children }: { children: ReactNode }) {
   const [currentPackage, setCurrentPackage] = useState<PackageTier>(0 as any);
   const [hasPassedExam, setHasPassedExam] = useState<boolean>(false);
+  const [isLoadingPackage, setIsLoadingPackage] = useState<boolean>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setIsLoadingPackage(true);
     fetch('/api/user/profile')
       .then(res => res.json())
       .then(data => {
@@ -28,11 +31,14 @@ export function PackageProvider({ children }: { children: ReactNode }) {
           else setCurrentPackage(0 as any);
         }
       })
-      .catch(err => console.error("Failed to fetch package tier:", err));
+      .catch(err => console.error("Failed to fetch package tier:", err))
+      .finally(() => {
+        setIsLoadingPackage(false);
+      });
   }, []);
 
   return (
-    <PackageContext.Provider value={{ currentPackage, setCurrentPackage, hasPassedExam, setHasPassedExam }}>
+    <PackageContext.Provider value={{ currentPackage, setCurrentPackage, hasPassedExam, setHasPassedExam, isLoadingPackage }}>
       {children}
     </PackageContext.Provider>
   );

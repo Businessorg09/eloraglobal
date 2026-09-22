@@ -20,13 +20,21 @@ export function GatedContent({
   customMessage,
   isComponent = false
 }: GatedContentProps) {
-  const { currentPackage, hasPassedExam } = usePackage();
+  const { currentPackage, hasPassedExam, isLoadingPackage } = usePackage();
 
   // Elite Package (3) gets unrestricted access to everything
   const packageLocked = currentPackage < minPackageRequired;
   const examLocked = examRequired && !hasPassedExam && currentPackage !== 3;
   
   const isLocked = packageLocked || examLocked;
+
+  if (isLoadingPackage) {
+    return (
+      <div className={`flex items-center justify-center bg-white ${!isComponent ? 'min-h-[600px] w-full' : 'w-full h-full min-h-[300px]'}`}>
+        <div className="w-8 h-8 border-4 border-[#F59E0B] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   if (!isLocked || currentPackage === 3) {
     return <>{children}</>;
@@ -48,11 +56,8 @@ export function GatedContent({
   }
 
   return (
-    <div className={`relative ${!isComponent ? 'w-full h-full min-h-[600px]' : 'w-full h-full'}`}>
-      <div className="hidden">{children}</div>
-      
-      <div className="absolute inset-0 z-50 flex items-center justify-center p-4 md:p-6">
-        <div className="bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl p-4 md:p-8 max-w-md w-full flex flex-col items-center text-center transform transition-all">
+    <div className={`flex items-center justify-center bg-white ${!isComponent ? 'w-full min-h-[600px]' : 'w-full h-full min-h-[300px]'}`}>
+      <div className="bg-white border border-gray-200 shadow-xl rounded-2xl p-6 md:p-8 max-w-md w-full flex flex-col items-center text-center">
           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-inner ${
             examLocked ? 'bg-[#FEF2F2] text-[#EF4444]' : 'bg-gradient-to-br from-[#FEF3C7] to-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.4)]'
           }`}>
@@ -130,6 +135,5 @@ export function GatedContent({
           )}
         </div>
       </div>
-    </div>
   );
 }
