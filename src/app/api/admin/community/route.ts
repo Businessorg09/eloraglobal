@@ -32,6 +32,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, message: 'Post edited successfully' });
     }
 
+    if (action === 'DELETE_COMMENT') {
+      const { error } = await supabase.from('community_comments').delete().eq('id', targetId);
+      if (error) throw error;
+      return NextResponse.json({ success: true, message: 'Comment deleted' });
+    }
+    
     if (action === 'DELETE_POST') {
       const { error } = await supabase.from('community_posts').delete().eq('id', targetId);
       if (error) throw error;
@@ -129,7 +135,7 @@ export async function GET(request: Request) {
     // Fetch posts
     const { data: posts } = await supabase
       .from('community_posts')
-      .select('id, content, created_at, is_pinned, is_mock, author:users!community_posts_author_id_fkey(id, full_name, username, is_verified, is_shadowbanned)')
+      .select('id, content, category, created_at, is_pinned, is_mock, image_url, author:users!community_posts_author_id_fkey(id, full_name, username, custom_title, is_verified, is_shadowbanned), comments:community_comments(id, content, created_at, author:users!community_comments_author_id_fkey(id, full_name, username, custom_title))')
       .order('is_pinned', { ascending: false })
       .order('created_at', { ascending: false })
       .limit(50);

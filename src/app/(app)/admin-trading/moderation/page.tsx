@@ -208,67 +208,119 @@ export default function CommunityModerationPage() {
             
             {/* TAB: FEED */}
             {activeTab === 'FEED' && (
-              <div className="space-y-4">
-                <h2 className="text-lg font-bold text-slate-800">Global Feed Moderation</h2>
-                <div className="grid gap-4">
+              <div className="space-y-4 max-w-[800px] mx-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-slate-900">Global Feed Moderation</h2>
+                    <p className="text-slate-500 text-sm mt-1">This is an exact replica of what your users see. You can edit and moderate directly from here.</p>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col gap-4">
                   {data.posts.map((post) => (
-                    <div key={post.id} className={`border rounded-xl p-4 shadow-sm flex flex-col gap-3 ${post.is_pinned ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
-                      <div className="flex justify-between items-start">
+                    <div key={post.id} className={`bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] border flex flex-col overflow-hidden ${post.is_pinned ? 'border-amber-300 ring-1 ring-amber-100' : 'border-slate-200'}`}>
+                      
+                      {/* Post Header */}
+                      <div className="flex items-center justify-between p-4 bg-slate-50/50">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
-                            {post.author?.full_name?.[0] || 'U'}
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                            {post.author?.full_name?.[0]?.toUpperCase() || 'U'}
                           </div>
-                          <div>
-                            <p className="font-bold text-slate-900 text-[14px]">
-                              {post.author?.full_name} {post.is_mock && <span className="ml-1 text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">[🤖 MOCK]</span>}
-                              {post.is_pinned && <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-[10px] font-bold rounded-full uppercase">Pinned</span>}
-                            </p>
-                            <p className="text-[12px] text-slate-500">@{post.author?.username} • {new Date(post.created_at).toLocaleString()}</p>
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[15px] text-slate-900 font-bold leading-none">{post.author?.full_name}</span>
+                              {post.author?.is_verified && <span className="material-symbols-outlined text-[14px] text-blue-500">verified</span>}
+                              <span className="text-slate-400 text-[13px] leading-none ml-1">• {new Date(post.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-[11px] font-medium text-slate-500">{post.author?.custom_title || 'Member'}</span>
+                              <span className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{post.category || 'General'}</span>
+                              {post.is_mock && <span className="text-[9px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Mock/Bot</span>}
+                            </div>
                           </div>
                         </div>
+                        
+                        {/* Admin Controls */}
                         <div className="flex gap-2">
-                          <button onClick={() => handleAction('PIN_POST', post.id, !post.is_pinned)} className="p-1.5 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 transition" title="Toggle Pin">
-                            <span className="material-symbols-outlined text-[16px]">keep</span>
+                          <button onClick={() => handleAction('PIN_POST', post.id, !post.is_pinned)} className={`p-2 rounded-lg transition-colors ${post.is_pinned ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`} title={post.is_pinned ? "Unpin Post" : "Pin Post"}>
+                            <span className="material-symbols-outlined text-[18px]">keep</span>
                           </button>
+                          
                           {editingPostId === post.id ? (
-                            <button onClick={() => { handleAction('EDIT_POST', post.id, editContent); setEditingPostId(null); }} className="p-1.5 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition" title="Save Edit">
-                              <span className="material-symbols-outlined text-[16px]">check</span>
+                            <button onClick={() => { handleAction('EDIT_POST', post.id, editContent); setEditingPostId(null); }} className="p-2 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-colors" title="Save Edit">
+                              <span className="material-symbols-outlined text-[18px]">check</span>
                             </button>
                           ) : (
-                            <button onClick={() => { setEditingPostId(post.id); setEditContent(post.content); }} className="p-1.5 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition" title="Edit Post">
-                              <span className="material-symbols-outlined text-[16px]">edit</span>
+                            <button onClick={() => { setEditingPostId(post.id); setEditContent(post.content); }} className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors" title="Edit Post">
+                              <span className="material-symbols-outlined text-[18px]">edit</span>
                             </button>
                           )}
-                          <button onClick={() => { if(confirm('Delete post?')) handleAction('DELETE_POST', post.id) }} className="p-1.5 bg-red-50 text-red-600 rounded hover:bg-red-100 transition" title="Delete Post">
-                            <span className="material-symbols-outlined text-[16px]">delete</span>
+                          
+                          <button onClick={() => { if(confirm('Are you sure you want to delete this post?')) handleAction('DELETE_POST', post.id) }} className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors" title="Delete Post">
+                            <span className="material-symbols-outlined text-[18px]">delete</span>
                           </button>
                         </div>
                       </div>
-                      {editingPostId === post.id ? (
-                        <textarea
-                          value={editContent}
-                          onChange={(e) => setEditContent(e.target.value)}
-                          className="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                          rows={3}
-                        />
-                      ) : (
-                        <>
-                          <p className="text-sm text-slate-700 whitespace-pre-wrap">{post.content}</p>
-                          {post.image_url && (
-                            <div className="mt-2 rounded-lg overflow-hidden border border-slate-200">
-                              <img src={post.image_url} alt="Post attachment" className="max-w-full h-auto max-h-64 object-cover" />
+
+                      {/* Post Content */}
+                      <div className="p-4 pt-2">
+                        {editingPostId === post.id ? (
+                          <textarea
+                            value={editContent}
+                            onChange={(e) => setEditContent(e.target.value)}
+                            className="w-full p-4 bg-slate-50 border border-blue-300 rounded-xl text-[15px] focus:ring-2 focus:ring-blue-500 outline-none text-slate-800 shadow-inner min-h-[120px]"
+                            placeholder="Edit post content..."
+                          />
+                        ) : (
+                          <div className="text-[15px] text-slate-800 whitespace-pre-wrap leading-relaxed">{post.content}</div>
+                        )}
+
+                        {post.image_url && !editingPostId && (
+                          <div className="mt-4 rounded-xl overflow-hidden border border-slate-200">
+                            <img src={post.image_url} alt="Post attachment" className="w-full h-auto object-cover max-h-[500px]" />
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Comments Section */}
+                      <div className="border-t border-slate-100 bg-slate-50/30 p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="material-symbols-outlined text-[18px] text-slate-400">chat_bubble</span>
+                          <h4 className="text-sm font-semibold text-slate-700">{post.comments?.length || 0} Comments</h4>
+                        </div>
+                        
+                        <div className="flex flex-col gap-3">
+                          {post.comments?.map((comment: any) => (
+                            <div key={comment.id} className="flex gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm relative group">
+                              <div className="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center text-slate-600 font-bold text-xs">
+                                {comment.author?.full_name?.[0]?.toUpperCase() || 'U'}
+                              </div>
+                              <div className="flex flex-col flex-grow">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-[13px] font-bold text-slate-900">{comment.author?.full_name}</span>
+                                  <span className="text-[11px] text-slate-400">• {new Date(comment.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                                </div>
+                                <p className="text-[13px] text-slate-700 mt-0.5">{comment.content}</p>
+                              </div>
+                              
+                              {/* Comment Admin Controls */}
+                              <button onClick={() => { if(confirm('Delete this comment?')) handleAction('DELETE_COMMENT', comment.id) }} className="absolute top-2 right-2 p-1.5 bg-red-50 text-red-600 rounded opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-100" title="Delete Comment">
+                                <span className="material-symbols-outlined text-[14px]">delete</span>
+                              </button>
                             </div>
+                          ))}
+                          
+                          {(!post.comments || post.comments.length === 0) && (
+                            <p className="text-xs text-slate-400 italic">No comments on this post yet.</p>
                           )}
-                        </>
-                      )}
+                        </div>
+                      </div>
+
                     </div>
                   ))}
-                
-
                 </div>
               </div>
             )}
-
 
             {/* TAB: CHATS */}
             {activeTab === 'CHATS' && (
