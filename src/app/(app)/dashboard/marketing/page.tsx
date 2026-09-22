@@ -38,7 +38,7 @@ export default function MarketingPage() {
     fetchLeads()
   }, [router])
 
-  const referralLink = `${typeof window !== 'undefined' ? window.location.origin : ''}/register?ref=${profile?.username || profile?.referral_code || 'GUEST'}&pl=${activeLeg === 'left' ? '1' : '2'}`
+  const referralLink = `${typeof window !== 'undefined' ? window.location.origin : ''}/register?ref=${profile?.referral_code || profile?.username || 'GUEST'}&pl=${activeLeg === 'left' ? '1' : '2'}`
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink)
@@ -356,7 +356,7 @@ export default function MarketingPage() {
                           className="w-32 h-32 text-on-surface" 
                         />
                         <div className="mt-2 text-primary font-label-sm text-[10px] uppercase font-bold tracking-widest flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[12px]">verified</span> Sponsor: {profile?.username || profile?.referral_code || 'GUEST'}
+                          <span className="material-symbols-outlined text-[12px]">verified</span> Sponsor: {profile?.referral_code || profile?.username || 'GUEST'}
                         </div>
                       </div>
                       <div className="w-full mt-3 flex items-center gap-1.5">
@@ -582,7 +582,7 @@ export default function MarketingPage() {
                   <div className="pt-2 border-t border-surface-container-low space-y-2">
                     <div className="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Active Share Script – 100% Legal Compliant</div>
                     <div className="bg-surface-container-low rounded-lg p-3 font-body-sm text-body-sm text-on-surface-variant font-mono text-[11px] leading-relaxed">
-                      &quot;Unlock and multiply business scanning with a top-driven Telegram. Regulate the 2026 ROI &amp; binary compensation jobs here: {typeof window !== 'undefined' ? window.location.origin : ''}/register?ref={profile?.username || profile?.referral_code || 'GUEST'}&amp;pl={activeLeg === 'left' ? '1' : '2'}&amp;src=wsp&quot;
+                      &quot;Unlock and multiply business scanning with a top-driven Telegram. Regulate the 2026 ROI &amp; binary compensation jobs here: {typeof window !== 'undefined' ? window.location.origin : ''}/register?ref={profile?.referral_code || profile?.username || 'GUEST'}&amp;pl={activeLeg === 'left' ? '1' : '2'}&amp;src=wsp&quot;
                     </div>
                     <button className="w-full py-2 rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container transition-colors" type="button">
                       <span className="material-symbols-outlined text-[18px]">content_copy</span>

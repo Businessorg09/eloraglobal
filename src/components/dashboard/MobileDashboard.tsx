@@ -21,7 +21,7 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
 
   
   const handleNativeShare = async () => {
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://localhost:3000'
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://eloraglobal.vercel.app'
     const link = `${origin}/register?ref=${profile?.referral_code || profile?.username || "username"}&pl=${activeLeg === 'left' ? '1' : '2'}`
     
     if (navigator.share) {
@@ -40,7 +40,7 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
   }
 
   const handleCopyLink = () => {
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://localhost:3000'
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://eloraglobal.vercel.app'
     const link = `${origin}/register?ref=${profile?.referral_code || profile?.username || "username"}&pl=${activeLeg === 'left' ? '1' : '2'}`
     
     try {

@@ -49,7 +49,7 @@ export default function TeamPage() {
 
   const copyLink = (pos: string) => {
     if(!profile) return
-    const link = `${window.location.origin}/register?ref=${profile.username || profile.referral_code}&pl=${pos === 'L' ? '1' : '2'}`
+    const link = `${window.location.origin}/register?ref=${profile.referral_code || profile.username}&pl=${pos === 'L' ? '1' : '2'}`
     navigator.clipboard.writeText(link)
     setToast(`${pos === 'L' ? 'Left' : 'Right'} link copied!`)
     setTimeout(() => setToast(''), 3000)

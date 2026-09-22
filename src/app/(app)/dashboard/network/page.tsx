@@ -229,7 +229,7 @@ export default function NetworkGenerationsPage() {
                   </div>
                 </div>
                 <div className="pt-1">
-                  <button onClick={() => {navigator.clipboard.writeText(`https://tdpf.com/register?ref=${rootNode?.referralCode}`); alert('Copied referral link!')}} className="w-full py-1.5 px-3 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-all">
+                  <button onClick={() => {navigator.clipboard.writeText(`${window.location.origin}/register?ref=${rootNode?.referralCode}`); alert('Copied referral link!')}} className="w-full py-1.5 px-3 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-all">
                     <span>Copy Link</span>
                     <span className="material-symbols-outlined text-[16px]">content_copy</span>
                   </button>
