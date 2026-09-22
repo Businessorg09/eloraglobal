@@ -115,7 +115,7 @@ function SettingsContent() {
                 <div className="flex items-center gap-3">
                   <h1 className="font-headline-xl text-headline-xl font-bold text-on-surface tracking-tight">Settings &amp; Account Governance</h1>
                   <span className="px-2.5 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-[10px] font-bold flex items-center gap-1 uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Enterprise Node: {profile?.referral_code || 'GUEST'}
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Enterprise Node: {profile?.referral_code || '...'}
                   </span>
                 </div>
                 <p className="font-body-sm text-body-sm text-on-surface-variant">Configure placement automation, direct-selling KYC compliance, multi-factor security, and payout disbursement protocols.</p>
@@ -269,7 +269,7 @@ function SettingsContent() {
                     <div>
                       <span className="font-label-sm text-[10px] text-outline uppercase tracking-wider block font-bold">Affiliate Node ID</span>
                       <span className="font-headline-md text-headline-md font-bold text-primary flex items-center gap-1 mt-0.5">
-                        {profile?.referral_code || 'GUEST'} <span className="material-symbols-outlined text-[16px] text-tertiary" title="Verified Node Key">verified</span>
+                        {profile?.referral_code || '...'} <span className="material-symbols-outlined text-[16px] text-tertiary" title="Verified Node Key">verified</span>
                       </span>
                     </div>
                     <div>

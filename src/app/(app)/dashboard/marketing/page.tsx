@@ -38,9 +38,10 @@ export default function MarketingPage() {
     fetchLeads()
   }, [router])
 
-  const referralLink = `${typeof window !== 'undefined' ? window.location.origin : ''}/register?ref=${profile?.referral_code || profile?.username || 'GUEST'}&pl=${activeLeg === 'left' ? '1' : '2'}`
+  const referralLink = profile ? `${typeof window !== 'undefined' ? window.location.origin : ''}/register?ref=${profile.referral_code || profile.username}&pl=${activeLeg === 'left' ? '1' : '2'}` : 'Loading...';
 
   const handleCopy = () => {
+    if (!profile) return;
     navigator.clipboard.writeText(referralLink)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
@@ -315,7 +316,7 @@ export default function MarketingPage() {
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">link</span>
                             <input className="w-full pl-9 pr-3 py-2 bg-surface-container-low font-body-sm text-body-sm font-semibold text-primary rounded-lg focus:outline-none select-all" readOnly type="text" value={referralLink} />
                           </div>
-                          <button onClick={handleCopy} className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-white font-body-sm flex items-center gap-1.5 shadow-sm transition-all" type="button">
+                          <button onClick={handleCopy} disabled={!profile} className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-white font-body-sm flex items-center gap-1.5 shadow-sm transition-all" type="button">
                             <span className="material-symbols-outlined text-[18px]">{copied ? 'check' : 'content_copy'}</span>
                             <span>{copied ? 'Copied!' : 'Copy Link'}</span>
                           </button>
@@ -356,7 +357,7 @@ export default function MarketingPage() {
                           className="w-32 h-32 text-on-surface" 
                         />
                         <div className="mt-2 text-primary font-label-sm text-[10px] uppercase font-bold tracking-widest flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[12px]">verified</span> Sponsor: {profile?.referral_code || profile?.username || 'GUEST'}
+                          <span className="material-symbols-outlined text-[12px]">verified</span> Sponsor: {profile?.referral_code || profile?.username || 'Loading...'}
                         </div>
                       </div>
                       <div className="w-full mt-3 flex items-center gap-1.5">
@@ -581,10 +582,10 @@ export default function MarketingPage() {
 
                   <div className="pt-2 border-t border-surface-container-low space-y-2">
                     <div className="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Active Share Script – 100% Legal Compliant</div>
-                    <div className="bg-surface-container-low rounded-lg p-3 font-body-sm text-body-sm text-on-surface-variant font-mono text-[11px] leading-relaxed">
-                      &quot;Unlock and multiply business scanning with a top-driven Telegram. Regulate the 2026 ROI &amp; binary compensation jobs here: {typeof window !== 'undefined' ? window.location.origin : ''}/register?ref={profile?.referral_code || profile?.username || 'GUEST'}&amp;pl={activeLeg === 'left' ? '1' : '2'}&amp;src=wsp&quot;
+                    <div className="bg-surface-container-low rounded-lg p-3 font-body-sm text-body-sm text-on-surface-variant font-mono text-[11px] leading-relaxed" id="script-text">
+                      &quot;Unlock and multiply business scanning with a top-driven Telegram. Regulate the 2026 ROI &amp; binary compensation jobs here: {typeof window !== 'undefined' ? window.location.origin : ''}/register?ref={profile?.referral_code || profile?.username || 'Loading...'}&amp;pl={activeLeg === 'left' ? '1' : '2'}&amp;src=wsp&quot;
                     </div>
-                    <button className="w-full py-2 rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container transition-colors" type="button">
+                    <button onClick={() => {if(profile) navigator.clipboard.writeText(document.getElementById('script-text')?.innerText || '')}} className="w-full py-2 rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container transition-colors" type="button">
                       <span className="material-symbols-outlined text-[18px]">content_copy</span>
                       <span>Copy Full Script to Clipboard</span>
                     </button>

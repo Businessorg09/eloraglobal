@@ -25,7 +25,8 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
   
   const handleNativeShare = async () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://eloraglobal.vercel.app'
-    const link = `${origin}/register?ref=${profile?.referral_code || profile?.username || "username"}&pl=${activeLeg === 'left' ? '1' : '2'}`
+    if (!profile) return; // Prevent copying empty profile
+    const link = `${origin}/register?ref=${profile.referral_code || profile.username}&pl=${activeLeg === 'left' ? '1' : '2'}`
     
     if (navigator.share) {
       try {
@@ -44,7 +45,8 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
 
   const handleCopyLink = () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://eloraglobal.vercel.app'
-    const link = `${origin}/register?ref=${profile?.referral_code || profile?.username || "username"}&pl=${activeLeg === 'left' ? '1' : '2'}`
+    if (!profile) return;
+    const link = `${origin}/register?ref=${profile.referral_code || profile.username}&pl=${activeLeg === 'left' ? '1' : '2'}`
     
     try {
       if (navigator.clipboard && window.isSecureContext) {
@@ -203,7 +205,7 @@ Renew
 <svg className="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
 <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
-<span className="text-xs font-mono text-slate-700 truncate select-all">https://.../register?ref={profile?.referral_code || "user"}&amp;pl={activeLeg === 'left' ? '1' : '2'}</span>
+<span className="text-xs font-mono text-slate-700 truncate select-all">https://.../register?ref={profile?.referral_code || "..."}&amp;pl={activeLeg === 'left' ? '1' : '2'}</span>
 </div>
 <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 shrink-0">{activeLeg === 'left' ? 'Left' : 'Right'}</span>
 </div>
