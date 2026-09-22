@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function AdminTradingPayouts() {
   const [traderUsername, setTraderUsername] = useState('');
   const [amountUsd, setAmountUsd] = useState('');
-  const [exchangeRate, setExchangeRate] = useState('83.50');
+  const [exchangeRate, setExchangeRate] = useState('95.00');
   
   const [preview, setPreview] = useState<{
     trader: number;

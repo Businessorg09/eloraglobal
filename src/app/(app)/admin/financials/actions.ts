@@ -25,11 +25,11 @@ export async function approveTradingPayoutAction(transactionId: string) {
     payload = JSON.parse(tx.description);
   } catch (e) {
     // If not valid JSON, fallback or throw
-    payload = { usdCents: tx.amount_paise, exchangeRate: 83.50 } // Fallback to amount as USD cents
+    payload = { usdCents: tx.amount_paise, exchangeRate: 95.00 } // Fallback to amount as USD cents
   }
 
   const payoutAmountUsdCents = payload.usdCents || tx.amount_paise;
-  const exchangeRateUsdToInr = payload.exchangeRate || 83.50;
+  const exchangeRateUsdToInr = payload.exchangeRate || 95.00;
 
   // 2. Fetch trader node
   const { data: traderNode } = await adminClient

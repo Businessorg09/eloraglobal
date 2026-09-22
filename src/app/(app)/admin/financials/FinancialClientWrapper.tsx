@@ -376,10 +376,10 @@ export default function FinancialClientWrapper({
               </thead>
               <tbody className="divide-y divide-surface-container font-body-sm text-body-sm text-on-surface">
                 {pendingRequests.map((req: any) => {
-                  let payload: any = { usdCents: req.amount_paise, exchangeRate: 83.50 };
+                  let payload: any = { usdCents: req.amount_paise, exchangeRate: 95.00 };
                   try { payload = JSON.parse(req.description); } catch(e){}
                   const usdAmount = (payload.usdCents || req.amount_paise) / 100;
-                  const inrTotal = usdAmount * (payload.exchangeRate || 83.50);
+                  const inrTotal = usdAmount * (payload.exchangeRate || 95.00);
                   const traderShare = inrTotal * 0.70;
                   const mlmShare = inrTotal * 0.20;
 

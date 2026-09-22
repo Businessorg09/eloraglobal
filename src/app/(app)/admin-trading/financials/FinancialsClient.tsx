@@ -35,7 +35,7 @@ export default function FinancialsClient({
 }: FinancialsClientProps) {
   // State
   const [activeTab, setActiveTab] = useState<'queue' | 'trading' | 'exchange' | 'sponsor' | 'leadership' | 'company'>('queue');
-  const [usdRate, setUsdRate] = useState<number>(83.50);
+  const [usdRate, setUsdRate] = useState<number>(95.00);
   const [isRateLoading, setIsRateLoading] = useState(false);
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   
