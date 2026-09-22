@@ -23,19 +23,20 @@ export async function GET(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    // 1. Get Profile Details
-    const { data: profile } = await supabase
-      .from('users')
-      .select('full_name')
-      .eq('id', user.id)
-      .single();
+    // 1. Execute DB Queries in Parallel to dramatically improve load times
+    const [
+      { data: profile },
+      { data: purchases },
+      { data: allModules },
+      { data: userProgress }
+    ] = await Promise.all([
+      supabase.from('users').select('full_name').eq('id', user.id).single(),
+      supabase.from('package_purchases').select('package:packages!package_id(id, name, funded_account_size, display_order)').eq('user_id', user.id),
+      supabase.from('academy_modules').select(`id, title, description, instructor, package_tier_required, order_index, episodes:academy_episodes(id, title, description, video_url, duration_seconds, pdf_url, order_index)`).order('order_index', { ascending: true }),
+      supabase.from('academy_progress').select('*').eq('user_id', user.id)
+    ]);
 
-    // 2. Get Package Purchases (Highest Tier)
-    const { data: purchases } = await supabase
-      .from('package_purchases')
-      .select('package:packages!package_id(id, name, funded_account_size, display_order)')
-      .eq('user_id', user.id);
-
+    // 2. Process Package Purchases
     let highestTier = 1; // Default
     let packageName = 'None';
     let propAllocation = '$0';
@@ -59,22 +60,6 @@ export async function GET(request: Request) {
         else if (activePackage.funded_account_size === 'SIZE_100K') propAllocation = '$100,000';
       }
     }
-
-    // 3. Get Academy Progress
-    const { data: allModules } = await supabase
-      .from('academy_modules')
-      .select(`
-        id, title, description, instructor, package_tier_required, order_index,
-        episodes:academy_episodes(
-          id, title, description, video_url, duration_seconds, pdf_url, order_index
-        )
-      `)
-      .order('order_index', { ascending: true });
-
-    const { data: userProgress } = await supabase
-      .from('academy_progress')
-      .select('*')
-      .eq('user_id', user.id);
 
     // Calculate completion metrics
     let totalEpisodes = 0;

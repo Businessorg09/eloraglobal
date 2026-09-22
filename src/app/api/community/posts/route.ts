@@ -41,7 +41,8 @@ export async function GET(request: Request) {
         likes:community_likes(user_id)
       `)
       .lte('created_at', new Date().toISOString())
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .limit(50);
 
     if (error) throw error;
 

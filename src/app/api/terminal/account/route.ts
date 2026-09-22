@@ -46,7 +46,8 @@ export async function GET(request: Request) {
       .from('broker_trades')
       .select('*')
       .eq('account_id', account.id)
-      .order('open_time', { ascending: false });
+      .order('open_time', { ascending: false })
+      .limit(100);
 
     if (tradesError) throw tradesError;
 

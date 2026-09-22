@@ -40,7 +40,8 @@ export async function GET(req: Request) {
       .from('payout_exchange_ledger')
       .select('*')
       .eq('trader_user_id', user.id)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .limit(50);
 
     if (payoutsError) throw new Error(payoutsError.message);
 
