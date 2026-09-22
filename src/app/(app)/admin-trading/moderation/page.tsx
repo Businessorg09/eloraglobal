@@ -20,6 +20,23 @@ export default function CommunityModerationPage() {
   const [commentPostId, setCommentPostId] = useState('');
   const [commentContent, setCommentContent] = useState('');
 
+  
+  const scrapeTradingView = async () => {
+    setIsGhostLoading(true);
+    setGhostStatus(null);
+    try {
+      const res = await fetch('/api/admin/ghost-engine', { method: 'POST', body: JSON.stringify({ action: 'SCRAPE_TRADINGVIEW' }) });
+      const data = await res.json();
+      if (res.ok) {
+        setGhostStatus(data.message);
+        fetchModerationData();
+      } else {
+        alert(data.error || 'Failed to scrape TradingView');
+      }
+    } catch(e) { alert('Error scraping TradingView'); }
+    setIsGhostLoading(false);
+  };
+
   const injectThread = async (type: 'RANDOM' | 'NORMAL' | 'IMAGE') => {
     setIsGhostLoading(true);
     setGhostStatus(null);
@@ -218,7 +235,14 @@ export default function CommunityModerationPage() {
                           rows={3}
                         />
                       ) : (
-                        <p className="text-sm text-slate-700 whitespace-pre-wrap">{post.content}</p>
+                        <>
+                          <p className="text-sm text-slate-700 whitespace-pre-wrap">{post.content}</p>
+                          {post.image_url && (
+                            <div className="mt-2 rounded-lg overflow-hidden border border-slate-200">
+                              <img src={post.image_url} alt="Post attachment" className="max-w-full h-auto max-h-64 object-cover" />
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                   ))}
@@ -368,6 +392,11 @@ export default function CommunityModerationPage() {
                       </button>
                       <button onClick={() => injectThread('IMAGE')} disabled={isGhostLoading} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left">
                         🖼️ Inject Thread w/ Chart & Photo
+                      </button>
+
+                      <button onClick={scrapeTradingView} disabled={isGhostLoading} className="px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-600 text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium disabled:opacity-50 shadow-sm text-left flex items-center justify-between">
+                        <span>📡 Live Scrape from TradingView</span>
+                        <span className="text-[10px] bg-black/20 px-1.5 py-0.5 rounded uppercase tracking-wider">Auto</span>
                       </button>
                     </div>
                   </div>

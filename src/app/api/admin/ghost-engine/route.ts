@@ -201,6 +201,108 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, message: 'Comment injected' });
     }
 
+    
+    if (action === 'SCRAPE_TRADINGVIEW') {
+      try {
+        const Parser = require('rss-parser');
+        const parser = new Parser();
+        const feed = await parser.parseURL('https://www.tradingview.com/feed/');
+        
+        if (!feed.items || feed.items.length === 0) {
+          return NextResponse.json({ error: 'No items in TradingView feed' }, { status: 400 });
+        }
+
+        const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
+        if (!ghosts || ghosts.length === 0) return NextResponse.json({ error: 'No ghosts found. Seed first.' }, { status: 400 });
+
+        const shuffledItems = feed.items.sort(() => 0.5 - Math.random());
+        const item = shuffledItems[0];
+
+        const contentRaw = item['content:encoded'] || item.content || '';
+        let imageUrl = null;
+        const imgMatches = [...contentRaw.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)];
+        for (const match of imgMatches) {
+          const src = match[1];
+          if (src && !src.includes('userpics')) {
+            imageUrl = src;
+            break;
+          }
+        }
+        if (!imageUrl && imgMatches.length > 0) {
+           imageUrl = imgMatches[0][1];
+        }
+
+        const title = item.title || 'Market Update';
+        const description = item.description ? item.description.replace(/<[^>]+>/g, '') : '';
+        const mainPostText = `${title}\n\n${description}`.trim();
+
+        const shuffledGhosts = ghosts.sort(() => 0.5 - Math.random());
+        const authorId = shuffledGhosts[0].id;
+
+        const { data: latestGhostPost } = await supabaseAdmin
+          .from('community_posts')
+          .select('created_at')
+          .eq('is_mock', true)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+          
+        let baseTime = Date.now();
+        if (latestGhostPost && new Date(latestGhostPost.created_at).getTime() > baseTime) {
+          baseTime = new Date(latestGhostPost.created_at).getTime();
+        }
+        
+        const gapMinutes = Math.floor(Math.random() * 3) + 2; 
+        const postDate = new Date(baseTime + gapMinutes * 60000).toISOString();
+
+        const { data: newPost, error: postError } = await supabaseAdmin.from('community_posts').insert({
+          author_id: authorId,
+          content: mainPostText,
+          category: 'General',
+          image_url: imageUrl,
+          is_mock: true,
+          created_at: postDate,
+          updated_at: postDate
+        }).select().single();
+
+        if (postError) throw postError;
+
+        const GENERIC_COMMENTS = [
+          "Great analysis! I'm watching this exact level closely.",
+          "What indicator are you using for this?",
+          "Agreed, but watch out for the upcoming news data.",
+          "I took a similar position yesterday, let's see how it plays out.",
+          "This is exactly what I was looking for, thanks!",
+          "Interesting perspective. I have a slightly different view on the 4H but this makes sense.",
+          "Volume profile confirms this as well.",
+          "Good risk to reward ratio here."
+        ];
+        
+        const selectedComments = GENERIC_COMMENTS.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 1);
+
+        let currentCommentTime = new Date(postDate).getTime();
+        for (let i = 0; i < selectedComments.length; i++) {
+          const commentGap = Math.floor(Math.random() * 3) + 1;
+          currentCommentTime += commentGap * 60000;
+          const commenterId = shuffledGhosts[(i % (shuffledGhosts.length - 1)) + 1].id;
+          const commentDate = new Date(currentCommentTime).toISOString();
+          
+          await supabaseAdmin.from('community_comments').insert({
+            post_id: newPost.id,
+            author_id: commenterId,
+            content: selectedComments[i],
+            is_mock: true,
+            created_at: commentDate,
+            updated_at: commentDate
+          });
+        }
+
+        return NextResponse.json({ success: true, message: `Successfully scraped and injected: "${title}"` });
+      } catch (err: any) {
+        return NextResponse.json({ error: err.message || 'Scraping failed' }, { status: 500 });
+      }
+    }
+
     if (action === 'INJECT_THREAD') {
       // 1. Get all ghosts
       const { data: ghosts } = await supabaseAdmin.from('users').select('id').eq('is_ghost', true);
