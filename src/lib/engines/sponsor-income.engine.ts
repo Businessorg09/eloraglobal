@@ -44,7 +44,8 @@ export function calculateSponsorIncome(input: SponsorIncomeInput): SponsorIncome
     if (!percentage) continue;
 
     // Calculate amount using proportion of the pool
-    const amountPaise = Math.floor((input.sponsorPoolPaise * percentage) / TOTAL_SPONSOR_POOL_PERCENT);
+    // Calculate amount using proportion of the pool (percentage sums to 100)
+    const amountPaise = Math.floor((input.sponsorPoolPaise * percentage) / 100);
     
     distributions.push({
       userId: member.userId,
