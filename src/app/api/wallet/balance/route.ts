@@ -61,10 +61,11 @@ export async function GET() {
         sponsorIncome: Number(wallet.sponsor_income_paise || 0) / 100,
         leadershipIncome: Number(wallet.leadership_income_paise || 0) / 100,
         rankBonus: Number(wallet.rank_bonus_paise || 0) / 100,
+        milestoneBonus: Number(wallet.milestone_bonus_paise || 0) / 100,
         totalWithdrawn: Number(wallet.total_withdrawn_paise || 0) / 100,
         totalBalance: Number(wallet.total_balance_paise || 0) / 100,
         depositBalance: (manualTopups - topupUsed) / 100,
-        totalEarned: (Number(wallet.binary_income_paise || 0) + Number(wallet.trading_income_paise || 0) + Number(wallet.sponsor_income_paise || 0) + Number(wallet.leadership_income_paise || 0) + Number(wallet.rank_bonus_paise || 0)) / 100,
+        totalEarned: (Number(wallet.binary_income_paise || 0) + Number(wallet.trading_income_paise || 0) + Number(wallet.sponsor_income_paise || 0) + Number(wallet.leadership_income_paise || 0) + Number(wallet.rank_bonus_paise || 0) + Number(wallet.milestone_bonus_paise || 0)) / 100,
       },
       transactions: (transactions || []).map((tx: any) => ({
         id: tx.id,

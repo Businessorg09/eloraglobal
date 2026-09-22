@@ -183,7 +183,7 @@ export default function EWalletPage() {
   const totalBalance = wallet?.balances?.totalBalance || 0 // Available commission for payout
   const depositBalance = wallet?.balances?.depositBalance || 0 // Activation funds (Topups)
   const totalWithdrawn = wallet?.balances?.totalWithdrawn || 0
-  const totalEarned = (wallet?.balances?.binaryIncome || 0) + (wallet?.balances?.sponsorIncome || 0) + (wallet?.balances?.leadershipIncome || 0) + (wallet?.balances?.rankBonus || 0) + (wallet?.balances?.repurchaseBonus || 0) + (wallet?.balances?.tradingIncome || 0)
+  const totalEarned = (wallet?.balances?.binaryIncome || 0) + (wallet?.balances?.sponsorIncome || 0) + (wallet?.balances?.leadershipIncome || 0) + (wallet?.balances?.rankBonus || 0) + (wallet?.balances?.milestoneBonus || 0) + (wallet?.balances?.tradingIncome || 0)
 
   // Derived Dynamic Metrics
   const daysSinceJoin = profile?.created_at ? Math.max(1, (new Date().getTime() - new Date(profile.created_at).getTime()) / (1000 * 3600 * 24)) : 1
@@ -194,7 +194,7 @@ export default function EWalletPage() {
   const sponsorPct = ((wallet?.balances?.sponsorIncome || 0) / totalEarningForChart) * 100
   const leadershipPct = ((wallet?.balances?.leadershipIncome || 0) / totalEarningForChart) * 100
   const rankPct = ((wallet?.balances?.rankBonus || 0) / totalEarningForChart) * 100
-  const repurchasePct = ((wallet?.balances?.repurchaseBonus || 0) / totalEarningForChart) * 100
+  const milestonePct = ((wallet?.balances?.milestoneBonus || 0) / totalEarningForChart) * 100
 
   const activeDirects = treeStats?.memberCount?.activeDirects || 0
   const totalDirects = treeStats?.memberCount?.totalDirects || 1
@@ -858,9 +858,9 @@ export default function EWalletPage() {
                     <div className="flex items-center justify-between text-body-sm">
                       <div className="flex items-center gap-2">
                         <span className="w-3 h-3 rounded-full bg-[#e0e4ef]"></span>
-                        <span className="text-on-surface font-medium">Repurchase Bonus ({repurchasePct.toFixed(1)}%)</span>
+                        <span className="text-on-surface font-medium">Matching Milestone Bonus ({milestonePct.toFixed(1)}%)</span>
                       </div>
-                      <span className="font-semibold text-on-surface">₹ {wallet?.balances?.repurchaseBonus?.toLocaleString() || 0}</span>
+                      <span className="font-semibold text-on-surface">₹ {wallet?.balances?.milestoneBonus?.toLocaleString() || 0}</span>
                     </div>
                   </div>
                 </motion.div>
