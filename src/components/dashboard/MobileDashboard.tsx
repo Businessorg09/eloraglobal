@@ -157,10 +157,10 @@ export default function MobileDashboard({ profile, wallet, rank, treeStats, load
 </div>
 
 <div className="mt-3.5 grid grid-cols-2 gap-2.5">
-<button className="w-full py-2 px-3 text-xs font-bold rounded-xl bg-white text-blue-800 shadow-sm active:scale-[0.98] transition" onClick={() => setPurchaseModal({ type: "UPGRADE", pkgId: "", name: "Upgrade Package", price: 0 })}>
+<button className="w-full py-2 px-3 text-xs font-bold rounded-xl bg-white text-blue-800 shadow-sm active:scale-[0.98] transition" onClick={() => window.location.href = "/dashboard/business"}>
 Upgrade
 </button>
-<button className="w-full py-2 px-3 text-xs font-bold rounded-xl bg-blue-500/40 hover:bg-blue-500/50 border border-white/25 text-white active:scale-[0.98] transition" onClick={() => setPurchaseModal({ type: "REACTIVATE", pkgId: "", name: "Renew Package", price: 0 })}>
+<button className="w-full py-2 px-3 text-xs font-bold rounded-xl bg-blue-500/40 hover:bg-blue-500/50 border border-white/25 text-white active:scale-[0.98] transition" onClick={() => window.location.href = "/dashboard/business"}>
 Renew
 </button>
 </div>

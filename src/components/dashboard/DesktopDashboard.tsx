@@ -608,10 +608,10 @@ export default function DesktopDashboard({ profile, wallet, rank, treeStats, tea
 </div>
 {/* Action CTA Buttons */}
 <div className="grid grid-cols-2 gap-2 w-full mt-4">
-<button className="py-2 px-3 bg-[#0a2046] hover:bg-slate-900 text-white text-xs font-semibold rounded-xl shadow transition">
+<button onClick={() => window.location.href = "/dashboard/business"} className="py-2 px-3 bg-[#0a2046] hover:bg-slate-900 text-white text-xs font-semibold rounded-xl shadow transition">
                   Upgrade
                 </button>
-<button className="py-2 px-3 bg-white text-brand-700 hover:bg-blue-50 text-xs font-bold rounded-xl shadow transition">
+<button onClick={() => window.location.href = "/dashboard/business"} className="py-2 px-3 bg-white text-brand-700 hover:bg-blue-50 text-xs font-bold rounded-xl shadow transition">
                   Renew
                 </button>
 </div>
