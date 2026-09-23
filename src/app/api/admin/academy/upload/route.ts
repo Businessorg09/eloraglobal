@@ -4,14 +4,9 @@ import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
-
-// This is critical - tells Next.js to NOT pre-parse the request body
-export const runtime = 'nodejs';
 
 const BUCKET_NAME = 'academy-videos';
 
-// Admin-level client for storage operations (bypasses RLS)
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -29,9 +24,10 @@ async function ensureBucket() {
   }
 }
 
+// This route generates a signed upload URL so the browser can upload directly to Supabase Storage
+// This bypasses Vercel's 4.5MB payload limit entirely
 export async function POST(request: Request) {
   try {
-    // Auth check
     const cookieStore = await cookies();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -52,68 +48,45 @@ export async function POST(request: Request) {
     const { data: profile } = await supabase.from('users').select('role').eq('id', user.id).single();
     if (profile?.role !== 'ADMIN') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-    // Parse FormData from the request
-    let formData: FormData;
-    try {
-      formData = await request.formData();
-    } catch (parseError: any) {
-      console.error('FormData parse error:', parseError);
-      return NextResponse.json({ error: 'Request Entity Too Large or invalid form data. Max file size: 500MB.' }, { status: 413 });
+    const { fileName, fileType, type } = await request.json();
+    
+    if (!fileName) {
+      return NextResponse.json({ error: 'fileName is required' }, { status: 400 });
     }
 
-    const file = formData.get('file') as File | null;
-    const type = (formData.get('type') as string) || 'video';
-
-    if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
-    }
-
-    // Validate file size (500MB max)
-    if (file.size > 524288000) {
-      return NextResponse.json({ error: 'File too large. Maximum size is 500MB.' }, { status: 413 });
-    }
-
-    // Ensure bucket exists
     await ensureBucket();
 
-    // Generate unique filename
-    const ext = file.name.split('.').pop()?.toLowerCase() || 'mp4';
+    // Generate unique file path
     const timestamp = Date.now();
-    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_').substring(0, 50);
-    const filePath = type + '/' + timestamp + '_' + safeName;
+    const safeName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_').substring(0, 50);
+    const folder = type === 'thumbnail' ? 'thumbnail' : 'video';
+    const filePath = folder + '/' + timestamp + '_' + safeName;
 
-    // Convert File to Buffer for upload
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
-
-    const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+    // Create a signed upload URL (valid for 10 minutes)
+    const { data: signedData, error: signedError } = await supabaseAdmin.storage
       .from(BUCKET_NAME)
-      .upload(filePath, buffer, {
-        contentType: file.type,
-        cacheControl: '31536000',
-        upsert: false
-      });
+      .createSignedUploadUrl(filePath);
 
-    if (uploadError) {
-      console.error('Storage upload error:', uploadError);
-      return NextResponse.json({ error: 'Upload failed: ' + uploadError.message }, { status: 500 });
+    if (signedError) {
+      console.error('Signed URL error:', signedError);
+      return NextResponse.json({ error: 'Failed to create upload URL: ' + signedError.message }, { status: 500 });
     }
 
-    // Get public URL
+    // Get the public URL for after upload completes
     const { data: urlData } = supabaseAdmin.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
 
-    return NextResponse.json({ 
-      success: true, 
-      url: urlData.publicUrl,
-      path: filePath,
-      size: file.size,
-      name: file.name
+    return NextResponse.json({
+      signedUrl: signedData.signedUrl,
+      token: signedData.token,
+      path: signedData.path,
+      publicUrl: urlData.publicUrl,
+      filePath: filePath
     });
 
   } catch (error: any) {
-    console.error('Upload handler error:', error);
-    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
+    console.error('Upload URL error:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

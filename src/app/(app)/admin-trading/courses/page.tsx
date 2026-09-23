@@ -125,52 +125,47 @@ export default function AcademyAdminCMS() {
       let finalVideoUrl = epForm.video_url;
       let finalThumbnailUrl = epForm.thumbnail_url;
 
-      // Upload video file if selected
-      if (videoFile) {
-        setUploadProgress(`Uploading video (${(videoFile.size / 1024 / 1024).toFixed(1)} MB)...`);
-        const videoFormData = new FormData();
-        videoFormData.append('file', videoFile);
-        videoFormData.append('type', 'video');
-        
-        const uploadRes = await fetch('/api/admin/academy/upload', {
+      // Helper: upload a file directly to Supabase via signed URL
+      const uploadToStorage = async (file: File, type: 'video' | 'thumbnail'): Promise<string> => {
+        // Step 1: Get a signed upload URL from our API (tiny JSON request, no file)
+        const signRes = await fetch('/api/admin/academy/upload', {
           method: 'POST',
-          body: videoFormData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName: file.name, fileType: file.type, type })
         });
         
-        const uploadText = await uploadRes.text();
-        
-        if (!uploadRes.ok) {
-          let errMsg = 'Video upload failed';
-          try {
-            const errData = JSON.parse(uploadText);
-            errMsg = errData.error || errMsg;
-          } catch {
-            errMsg = uploadText.includes('Entity Too Large') ? 'File is too large. Max 500MB.' : uploadText || errMsg;
-          }
-          throw new Error(errMsg);
+        if (!signRes.ok) {
+          const errData = await signRes.json();
+          throw new Error(errData.error || 'Failed to get upload URL');
         }
         
-        const uploadData = JSON.parse(uploadText);
-        finalVideoUrl = uploadData.url;
+        const { signedUrl, token, publicUrl } = await signRes.json();
+        
+        // Step 2: Upload the file directly to Supabase Storage (browser → Supabase, bypasses Vercel)
+        const uploadRes = await fetch(signedUrl, {
+          method: 'PUT',
+          headers: { 'Content-Type': file.type },
+          body: file
+        });
+        
+        if (!uploadRes.ok) {
+          throw new Error('Direct upload to storage failed (status ' + uploadRes.status + ')');
+        }
+        
+        return publicUrl;
+      };
+
+      // Upload video file if selected
+      if (videoFile) {
+        setUploadProgress('Uploading video (' + (videoFile.size / 1024 / 1024).toFixed(1) + ' MB)...');
+        finalVideoUrl = await uploadToStorage(videoFile, 'video');
         setUploadProgress('Video uploaded! Saving...');
       }
 
       // Upload thumbnail file if selected
       if (thumbnailFile) {
         setUploadProgress('Uploading thumbnail...');
-        const thumbFormData = new FormData();
-        thumbFormData.append('file', thumbnailFile);
-        thumbFormData.append('type', 'thumbnail');
-        
-        const thumbRes = await fetch('/api/admin/academy/upload', {
-          method: 'POST',
-          body: thumbFormData
-        });
-        
-        if (thumbRes.ok) {
-          const thumbData = await thumbRes.json();
-          finalThumbnailUrl = thumbData.url;
-        }
+        finalThumbnailUrl = await uploadToStorage(thumbnailFile, 'thumbnail');
       }
 
       // Save episode to database
