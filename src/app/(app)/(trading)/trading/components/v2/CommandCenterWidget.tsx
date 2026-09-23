@@ -167,12 +167,25 @@ export function CommandCenterWidget() {
         <div className="relative w-full aspect-video bg-[#111827] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] group mb-5">
           {episode && episode.video_url ? (
             isPlaying ? (
-              <iframe 
-                src={getEmbedUrl(episode.video_url, lastProgress.progress_seconds) + '&autoplay=1'} 
-                className="w-full h-full border-0 absolute inset-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-              ></iframe>
+              (episode.video_url.includes('supabase.co/storage') || episode.video_url.match(/\.(mp4|webm|ogg)$/i)) ? (
+                <video 
+                  src={episode.video_url + (lastProgress.progress_seconds > 0 ? `#t=${lastProgress.progress_seconds}` : '')}
+                  controls
+                  autoPlay
+                  controlsList="nodownload"
+                  className="w-full h-full absolute inset-0 outline-none"
+                  onTimeUpdate={(e) => {
+                    setCurrentProgress(Math.floor(e.currentTarget.currentTime));
+                  }}
+                ></video>
+              ) : (
+                <iframe 
+                  src={getEmbedUrl(episode.video_url, lastProgress.progress_seconds) + '&autoplay=1'} 
+                  className="w-full h-full border-0 absolute inset-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              )
             ) : (
               <div 
                 className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900"
