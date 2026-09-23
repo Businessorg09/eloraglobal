@@ -138,8 +138,15 @@ export default function AcademyAdminCMS() {
         });
         
         if (!uploadRes.ok) {
-          const errData = await uploadRes.json();
-          throw new Error(errData.error || 'Video upload failed');
+          let errMsg = 'Video upload failed';
+          try {
+            const errData = await uploadRes.json();
+            errMsg = errData.error || errMsg;
+          } catch {
+            const errText = await uploadRes.text();
+            errMsg = errText.includes('Entity Too Large') ? 'File is too large. Max 500MB.' : errText || errMsg;
+          }
+          throw new Error(errMsg);
         }
         
         const uploadData = await uploadRes.json();

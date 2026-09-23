@@ -4,7 +4,10 @@ import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60; // Allow large uploads
+export const maxDuration = 60;
+
+// This is critical - tells Next.js to NOT pre-parse the request body
+export const runtime = 'nodejs';
 
 const BUCKET_NAME = 'academy-videos';
 
@@ -49,13 +52,25 @@ export async function POST(request: Request) {
     const { data: profile } = await supabase.from('users').select('role').eq('id', user.id).single();
     if (profile?.role !== 'ADMIN') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-    // Parse FormData
-    const formData = await request.formData();
+    // Parse FormData from the request
+    let formData: FormData;
+    try {
+      formData = await request.formData();
+    } catch (parseError: any) {
+      console.error('FormData parse error:', parseError);
+      return NextResponse.json({ error: 'Request Entity Too Large or invalid form data. Max file size: 500MB.' }, { status: 413 });
+    }
+
     const file = formData.get('file') as File | null;
-    const type = formData.get('type') as string; // 'video' or 'thumbnail'
+    const type = (formData.get('type') as string) || 'video';
 
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+    }
+
+    // Validate file size (500MB max)
+    if (file.size > 524288000) {
+      return NextResponse.json({ error: 'File too large. Maximum size is 500MB.' }, { status: 413 });
     }
 
     // Ensure bucket exists
@@ -65,9 +80,9 @@ export async function POST(request: Request) {
     const ext = file.name.split('.').pop()?.toLowerCase() || 'mp4';
     const timestamp = Date.now();
     const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_').substring(0, 50);
-    const filePath = `${type}/${timestamp}_${safeName}`;
+    const filePath = type + '/' + timestamp + '_' + safeName;
 
-    // Upload to Supabase Storage
+    // Convert File to Buffer for upload
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
@@ -75,12 +90,12 @@ export async function POST(request: Request) {
       .from(BUCKET_NAME)
       .upload(filePath, buffer, {
         contentType: file.type,
-        cacheControl: '31536000', // 1 year cache
+        cacheControl: '31536000',
         upsert: false
       });
 
     if (uploadError) {
-      console.error('Upload error:', uploadError);
+      console.error('Storage upload error:', uploadError);
       return NextResponse.json({ error: 'Upload failed: ' + uploadError.message }, { status: 500 });
     }
 
@@ -99,6 +114,6 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.error('Upload handler error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }
