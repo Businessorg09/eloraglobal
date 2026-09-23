@@ -18,7 +18,6 @@ async function ensureBucket() {
   if (!exists) {
     await supabaseAdmin.storage.createBucket(BUCKET_NAME, {
       public: true,
-      fileSizeLimit: 524288000, // 500MB
       allowedMimeTypes: ['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo', 'image/png', 'image/jpeg', 'image/webp']
     });
   }
