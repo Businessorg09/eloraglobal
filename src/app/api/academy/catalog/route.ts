@@ -52,7 +52,7 @@ export async function GET(request: Request) {
       .from('academy_modules')
       .select(`
         *,
-        episodes:academy_episodes(id, title, description, duration_seconds, order_index, pdf_url, video_url)
+        episodes:academy_episodes(id, title, description, duration_seconds, order_index, pdf_url, video_url, thumbnail_url, video_type)
       `)
       .order('order_index', { ascending: true });
 

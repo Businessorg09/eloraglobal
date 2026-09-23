@@ -7,6 +7,8 @@ type Episode = {
   title: string;
   description: string;
   video_url: string;
+  video_type?: 'youtube' | 'upload';
+  thumbnail_url?: string;
   duration_seconds: number;
   pdf_url: string;
   order_index: number;
@@ -39,6 +41,9 @@ export default function AcademyPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [lastProgress, setLastProgress] = useState<Progress | null>(null);
   
+  // Accordion State
+  const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null);
+  
   // Video Player Modal State
   const [activeEpisode, setActiveEpisode] = useState<Episode | null>(null);
   const [startSeconds, setStartSeconds] = useState<number>(0);
@@ -46,13 +51,19 @@ export default function AcademyPage() {
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const lastSavedTime = useRef<number>(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // When modal opens, start a timer to track progress
+  // When modal opens (for iframe videos), start a timer to track progress.
+  // Native videos update `currentProgress` via onTimeUpdate.
   useEffect(() => {
     if (activeEpisode) {
-      timerRef.current = setInterval(() => {
-        setCurrentProgress(prev => prev + 1);
-      }, 1000);
+      const isDirect = activeEpisode.video_type === 'upload' || activeEpisode.video_url.includes('supabase.co/storage') || activeEpisode.video_url.match(/\.(mp4|webm|ogg)$/i);
+      
+      if (!isDirect) {
+        timerRef.current = setInterval(() => {
+          setCurrentProgress(prev => prev + 1);
+        }, 1000);
+      }
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
     }
@@ -69,6 +80,9 @@ export default function AcademyPage() {
         if (data.modules) {
           setModules(data.modules);
           setUserTier(data.userTier);
+          // Auto-expand first unlocked module
+          const firstUnlocked = data.modules.find((m: Module) => !m.isLocked);
+          if (firstUnlocked) setExpandedModuleId(firstUnlocked.id);
         }
       } catch (err) {
         console.error("Failed to load catalog", err);
@@ -95,7 +109,6 @@ export default function AcademyPage() {
   const handleSaveProgress = async (playedSeconds: number, isCompleted: boolean = false) => {
     if (!activeEpisode) return;
     
-    // Only save if progress changed by more than 5 seconds to avoid spamming API
     if (Math.abs(playedSeconds - lastSavedTime.current) > 5 || isCompleted) {
       lastSavedTime.current = playedSeconds;
       try {
@@ -115,11 +128,14 @@ export default function AcademyPage() {
   };
 
   const handleClosePlayer = () => {
-    handleSaveProgress(currentProgress);
+    if (videoRef.current) {
+      handleSaveProgress(videoRef.current.currentTime);
+    } else {
+      handleSaveProgress(currentProgress);
+    }
     setActiveEpisode(null);
     setStartSeconds(0);
     setCurrentProgress(0);
-    // Refetch progress to update Hero section
     fetch('/api/academy/progress').then(r => r.json()).then(data => setLastProgress(data.progress || null));
   };
 
@@ -127,48 +143,35 @@ export default function AcademyPage() {
     if (lastProgress && lastProgress.episode) {
       setActiveEpisode(lastProgress.episode);
       setStartSeconds(lastProgress.progress_seconds);
+      setCurrentProgress(lastProgress.progress_seconds);
     }
   };
 
   const totalEpisodesUnlocked = modules.filter(m => !m.isLocked).reduce((acc, m) => acc + (m.episodes?.length || 0), 0);
-  const completedModules = 0; // Will be driven by tracking DB in future
+  const completedModules = 0; 
 
-  // We must use Native iframes for guaranteed playback
-  // This converts standard YouTube links INTO embed links, and handles iframe tags
   const getEmbedUrl = (url: string, startAt: number) => {
     if (!url) return '';
     let cleanUrl = url;
     
-    // If iframe, extract src
     const iframeMatch = url.match(/src=["']([^"']+)["']/i);
-    if (iframeMatch && iframeMatch[1]) {
-      cleanUrl = iframeMatch[1];
-    }
+    if (iframeMatch && iframeMatch[1]) cleanUrl = iframeMatch[1];
     
-    // If standard watch url, convert to embed
     const watchRegex = /youtube\.com\/watch\?v=([^"&?]+)/i;
     const watchMatch = cleanUrl.match(watchRegex);
-    if (watchMatch && watchMatch[1]) {
-      cleanUrl = `https://www.youtube.com/embed/${watchMatch[1]}`;
-    }
+    if (watchMatch && watchMatch[1]) cleanUrl = `https://www.youtube.com/embed/${watchMatch[1]}`;
 
-    // If youtu.be, convert to embed
     const shortRegex = /youtu\.be\/([^"&?]+)/i;
     const shortMatch = cleanUrl.match(shortRegex);
-    if (shortMatch && shortMatch[1]) {
-      cleanUrl = `https://www.youtube.com/embed/${shortMatch[1]}`;
-    }
+    if (shortMatch && shortMatch[1]) cleanUrl = `https://www.youtube.com/embed/${shortMatch[1]}`;
     
-    // Append start time if needed
     if (startAt > 0) {
       const separator = cleanUrl.includes('?') ? '&' : '?';
       cleanUrl += `${separator}start=${Math.floor(startAt)}&autoplay=1`;
     }
-    
     return cleanUrl;
   };
 
-  // We must ensure the modal only renders on client
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
 
@@ -200,14 +203,14 @@ export default function AcademyPage() {
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg md:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 tracking-tight">Video Library & Playlists</h1>
-          <p className="text-slate-500 text-sm mt-1">Explore curated masterclass video series, on-demand playback vaults, strategy breakdowns, and track completed modules.</p>
+          <h1 className="text-lg md:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">Video Library & Playlists</h1>
+          <p className="text-slate-500 text-sm mt-1">Explore curated masterclass video series, on-demand playback vaults, and strategy breakdowns.</p>
         </div>
       </div>
 
       {/* --- PROGRESS TRACKER --- */}
       <section className="bg-white border border-slate-200/90 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-5 border-slate-100 gap-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
@@ -265,9 +268,9 @@ export default function AcademyPage() {
         </section>
       )}
 
-      {/* --- CURATED PLAYLISTS GRID --- */}
+      {/* --- ACCORDION PLAYLISTS --- */}
       {isLoading ? (
-        <div className="py-20 text-center text-slate-500 font-bold">Loading Live Masterclasses...</div>
+        <div className="py-20 text-center text-slate-500 font-bold">Loading Curated Playlists...</div>
       ) : modules.length === 0 ? (
         <div className="py-20 text-center text-slate-500">The Academy is currently empty.</div>
       ) : (
@@ -275,69 +278,95 @@ export default function AcademyPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">Curated Academy Playlists</h2>
-              <p className="text-xs sm:text-sm text-slate-500">Comprehensive structured series arranged into sequential track playlists.</p>
+              <p className="text-xs sm:text-sm text-slate-500">Select a module to view its episodes.</p>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="flex flex-col gap-4">
             {modules.map((mod) => {
               const isLocked = mod.isLocked;
+              const isExpanded = expandedModuleId === mod.id;
               
               return (
-                <div key={mod.id} className={`group relative flex flex-col bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${isLocked ? 'border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)]' : 'border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-blue-400'}`}>
+                <div key={mod.id} className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${isLocked ? 'border-slate-200 opacity-70' : 'border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-blue-400'}`}>
                   
-                  {/* Thumbnail Area */}
-                  <div className="p-3 relative">
-                    <div className={`aspect-video rounded-[24px] overflow-hidden flex items-center justify-center relative ${isLocked ? 'bg-slate-100' : 'bg-gradient-to-br from-slate-900 to-[#0e2a36]'}`}>
-                      
-                      {!isLocked ? (
-                        <>
-                          <div className="absolute top-2.5 right-2.5">
-                            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-black/60 text-slate-200 backdrop-blur-sm flex items-center gap-1">
-                              <span className="material-symbols-outlined text-[12px]">video_library</span>
-                              {mod.episodes?.length || 0} Videos
-                            </span>
-                          </div>
-                          <div className="w-10 h-10 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition transform group-hover:scale-110">
-                            <span className="material-symbols-outlined text-[20px]">play_arrow</span>
-                          </div>
-                        </>
-                      ) : (
-                        <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-sm flex flex-col items-center justify-center gap-2">
-                          <div className="w-10 h-10 rounded-full bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex items-center justify-center text-slate-400">
-                            <span className="material-symbols-outlined text-[20px]">lock</span>
-                          </div>
-                          <span className="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-slate-600 uppercase tracking-wide shadow-[0_4px_20px_rgba(0,0,0,0.03)]">Tier {mod.package_tier_required} Required</span>
-                        </div>
-                      )}
+                  {/* Module Header (Clickable) */}
+                  <div 
+                    onClick={() => !isLocked && setExpandedModuleId(isExpanded ? null : mod.id)}
+                    className={`p-4 md:p-6 flex items-center justify-between ${!isLocked ? 'cursor-pointer hover:bg-slate-50' : ''}`}
+                  >
+                    <div className="flex items-center gap-4 md:gap-6">
+                       <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[#132c66] to-[#1e4cb8] text-white flex items-center justify-center font-bold text-xl md:text-2xl shadow-inner flex-shrink-0">
+                          {mod.order_index}
+                       </div>
+                       <div>
+                         <h3 className="font-bold text-base md:text-lg text-slate-900">
+                           {isLocked ? `Restricted Module (Tier ${mod.package_tier_required})` : mod.title}
+                         </h3>
+                         <p className="text-xs md:text-sm text-slate-500 mt-1 line-clamp-2 md:line-clamp-1">{!isLocked && mod.description}</p>
+                       </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 pl-4">
+                       {!isLocked && (
+                         <div className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full whitespace-nowrap">
+                            <span className="material-symbols-outlined text-[14px]">video_library</span>
+                            {mod.episodes?.length || 0} Episodes
+                         </div>
+                       )}
+                       {isLocked ? (
+                         <div className="bg-slate-100 w-10 h-10 rounded-full flex items-center justify-center">
+                           <span className="material-symbols-outlined text-[18px] text-slate-400">lock</span>
+                         </div>
+                       ) : (
+                         <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
+                           <span className={`material-symbols-outlined text-[24px] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
+                         </div>
+                       )}
                     </div>
                   </div>
-
-                  {/* Details Area */}
-                  <div className="px-4 pb-4 flex-1 flex flex-col justify-between relative">
-                    <div className={`transition-opacity ${isLocked ? 'opacity-40' : 'opacity-100'}`}>
-                      <h3 className="font-bold text-sm text-slate-900 line-clamp-2 leading-snug">
-                        {isLocked ? `Module: [ Restricted Content ]` : mod.title}
-                      </h3>
-                      <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{!isLocked && mod.description}</p>
+                  
+                  {/* Episodes Grid (Expanded) */}
+                  {isExpanded && !isLocked && (
+                    <div className="border-t border-slate-100 bg-slate-50/50 p-4 md:p-6">
+                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                         {mod.episodes?.map(ep => (
+                           <div key={ep.id} className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-blue-400 transition-all group flex flex-col">
+                             <div className="aspect-video bg-slate-900 relative">
+                               {ep.thumbnail_url ? (
+                                 <img src={ep.thumbnail_url} alt={ep.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                               ) : (
+                                 <div className="w-full h-full flex items-center justify-center text-slate-700 bg-gradient-to-br from-slate-800 to-slate-900">
+                                   <span className="material-symbols-outlined text-[48px] opacity-20">movie</span>
+                                 </div>
+                               )}
+                               <div className="absolute inset-0 flex items-center justify-center">
+                                  <button 
+                                    onClick={() => { setActiveEpisode(ep); setStartSeconds(0); setCurrentProgress(0); }}
+                                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-all hover:bg-blue-600"
+                                  >
+                                    <span className="material-symbols-outlined text-[28px]">play_arrow</span>
+                                  </button>
+                               </div>
+                               <div className="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">
+                                 {Math.floor(ep.duration_seconds / 60)}:{(ep.duration_seconds % 60).toString().padStart(2, '0')}
+                               </div>
+                             </div>
+                             <div className="p-4 flex-1 flex flex-col">
+                               <div className="text-[10px] font-bold text-blue-600 mb-1 uppercase tracking-wider">Episode {mod.order_index}.{ep.order_index}</div>
+                               <h4 className="font-bold text-sm text-slate-900 line-clamp-2 leading-tight">{ep.title}</h4>
+                               {ep.description && <p className="text-[11px] text-slate-500 mt-2 line-clamp-2">{ep.description}</p>}
+                             </div>
+                           </div>
+                         ))}
+                         {(!mod.episodes || mod.episodes.length === 0) && (
+                           <div className="col-span-full py-8 text-center text-slate-500 text-sm font-medium">
+                             No episodes available in this module yet.
+                           </div>
+                         )}
+                       </div>
                     </div>
-
-                    {isLocked ? (
-                      <div className="mt-4 pt-3 border-t border-slate-100">
-                        <button className="w-full py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg text-xs font-bold shadow-[0_8px_30px_rgba(0,0,0,0.04)] shadow-blue-500/20 transition-all flex items-center justify-center gap-1.5">
-                          <span className="material-symbols-outlined text-[16px]">workspace_premium</span>
-                          Upgrade to Tier {mod.package_tier_required}
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-5 h-5 rounded-full bg-slate-100 text-[10px] font-bold text-slate-700 flex items-center justify-center">{mod.instructor ? mod.instructor.substring(0,2).toUpperCase() : 'AI'}</span>
-                          <span className="text-slate-600 font-medium">{mod.instructor || 'Unknown'}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
               );
             })}
@@ -345,147 +374,56 @@ export default function AcademyPage() {
         </section>
       )}
 
-      {/* --- ALL EPISODES LIST --- */}
-      {!isLoading && modules.length > 0 && (
-        <section className="bg-white border border-slate-200/80 rounded-2xl p-4 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
-            <div>
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Granular Episode Breakdown</span>
-              <h3 className="text-base font-bold text-slate-900 mt-0.5">All Academy Content</h3>
-            </div>
-          </div>
-          
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-600">
-              <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider">
-                <tr>
-                  <th className="px-4 py-3 rounded-l-lg">Episode</th>
-                  <th className="px-4 py-3">Topic & Description</th>
-                  <th className="px-4 py-3">Module</th>
-                  <th className="px-4 py-3 text-right rounded-r-lg">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {modules.map((mod) => {
-                  const isLocked = mod.isLocked;
-                  
-                  return mod.episodes?.map((ep) => {
-                    return (
-                      <tr key={ep.id} className={`${isLocked ? 'bg-slate-50/50' : 'hover:bg-slate-50/70'} transition-colors`}>
-                        <td className={`px-4 py-3.5 font-bold ${isLocked ? 'text-slate-400' : 'text-slate-900'}`}>
-                          {mod.order_index}.{ep.order_index}
-                        </td>
-                        <td className="px-4 py-3.5">
-                          <div className={`font-medium ${isLocked ? 'text-slate-400 blur-[2px] select-none' : 'text-slate-800'}`}>
-                            {isLocked ? 'Hidden Restricted Content ' : ep.title}
-                          </div>
-                          <span className="text-[10px] text-slate-400">Duration: {ep.duration_seconds}s</span>
-                        </td>
-                        <td className="px-4 py-3.5">
-                          <span className={`text-[11px] ${isLocked ? 'text-slate-400' : 'font-semibold text-blue-600'}`}>
-                            {isLocked ? 'Locked' : mod.title}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3.5 text-right">
-                          {isLocked ? (
-                            <button className="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded hover:bg-blue-100 transition-colors">
-                              Upgrade Tier {mod.package_tier_required}
-                            </button>
-                          ) : (
-                            <button 
-                              onClick={() => { 
-                                setActiveEpisode(ep); 
-                                setStartSeconds(0); 
-                                setCurrentProgress(0);
-                              }}
-                              className="text-[11px] font-bold text-white bg-blue-600 px-3 py-1 rounded shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-blue-700 transition-colors flex items-center justify-center gap-1 ml-auto"
-                            >
-                              <span className="material-symbols-outlined text-[14px]">play_circle</span> Watch Now
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  });
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          {/* MOBILE EPISODES LIST (Stack of Cards) */}
-          <div className="flex flex-col gap-3 md:hidden">
-            {modules.map((mod) => {
-              const isLocked = mod.isLocked;
-              return mod.episodes?.map((ep) => (
-                <div key={ep.id} className={`p-4 rounded-[24px] border ${isLocked ? 'bg-slate-50 border-slate-100' : 'bg-white border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.03)]'}`}>
-                  <div className="flex justify-between items-start mb-2">
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${isLocked ? 'bg-slate-200 text-slate-500' : 'bg-blue-50 text-blue-600'}`}>
-                      {isLocked ? 'Locked' : mod.title}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-medium">Ep {mod.order_index}.{ep.order_index}</span>
-                  </div>
-                  <h4 className={`text-sm font-bold mb-1 ${isLocked ? 'text-slate-400 blur-[2px] select-none' : 'text-slate-800'}`}>
-                    {isLocked ? 'Hidden Restricted Content ' : ep.title}
-                  </h4>
-                  <p className="text-[11px] text-slate-400 mb-3">Duration: {ep.duration_seconds}s</p>
-                  
-                  {isLocked ? (
-                    <button className="w-full py-2 text-[11px] font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors flex items-center justify-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">lock</span>
-                      Upgrade Tier {mod.package_tier_required}
-                    </button>
-                  ) : (
-                    <button 
-                      onClick={() => { 
-                        setActiveEpisode(ep); 
-                        setStartSeconds(0); 
-                        setCurrentProgress(0);
-                      }}
-                      className="w-full py-2 text-[11px] font-bold text-white bg-blue-600 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] shadow-blue-500/20 hover:bg-blue-700 transition-colors flex items-center justify-center gap-1.5"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">play_circle</span> Watch Now
-                    </button>
-                  )}
-                </div>
-              ));
-            })}
-          </div>
-  
-        </section>
-      )}
-
       {/* --- VIDEO PLAYER MODAL --- */}
       {activeEpisode && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-slate-900/90 backdrop-blur-md">
-          <div className="bg-black w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl relative flex flex-col">
-            <div className="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
-              <h2 className="text-white font-bold text-lg">{activeEpisode.title}</h2>
-              <button onClick={handleClosePlayer} className="text-slate-400 hover:text-white">
-                <span className="material-symbols-outlined">close</span>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-slate-900/95 backdrop-blur-md">
+          <div className="bg-black w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[100vh]">
+            <div className="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800 shrink-0">
+              <h2 className="text-white font-bold text-lg line-clamp-1 pr-4">{activeEpisode.title}</h2>
+              <button onClick={handleClosePlayer} className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-[20px]">close</span>
               </button>
             </div>
             
-            <div className="aspect-video w-full bg-black relative flex items-center justify-center">
+            <div className="aspect-video w-full bg-black relative flex items-center justify-center shrink-0">
               {activeEpisode.video_url ? (
-                <iframe 
-                  src={getEmbedUrl(activeEpisode.video_url, startSeconds)} 
-                  className="w-full h-full border-0 absolute inset-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                ></iframe>
+                (activeEpisode.video_type === 'upload' || activeEpisode.video_url.includes('supabase.co/storage') || activeEpisode.video_url.match(/\.(mp4|webm|ogg)$/i)) ? (
+                  <video 
+                    ref={videoRef}
+                    src={activeEpisode.video_url + (startSeconds > 0 ? `#t=${startSeconds}` : '')}
+                    controls
+                    autoPlay
+                    controlsList="nodownload"
+                    className="w-full h-full absolute inset-0 outline-none"
+                    onTimeUpdate={(e) => {
+                      setCurrentProgress(Math.floor(e.currentTarget.currentTime));
+                      // Save periodically every 10s directly from video
+                      if (Math.floor(e.currentTarget.currentTime) % 10 === 0) {
+                        handleSaveProgress(e.currentTarget.currentTime);
+                      }
+                    }}
+                  ></video>
+                ) : (
+                  <iframe 
+                    src={getEmbedUrl(activeEpisode.video_url, startSeconds)} 
+                    className="w-full h-full border-0 absolute inset-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                )
               ) : (
-                <div className="text-slate-500">
+                <div className="text-slate-500 font-medium">
                   Video URL not provided for this episode.
                 </div>
               )}
             </div>
             
             {(activeEpisode.description || activeEpisode.pdf_url) && (
-              <div className="p-4 md:p-6 bg-slate-900 border-t border-slate-800 text-slate-300">
-                {activeEpisode.description && <p className="text-sm mb-4">{activeEpisode.description}</p>}
+              <div className="p-4 md:p-6 bg-slate-900 border-t border-slate-800 text-slate-300 overflow-y-auto">
+                {activeEpisode.description && <p className="text-sm mb-4 leading-relaxed text-slate-400">{activeEpisode.description}</p>}
                 {activeEpisode.pdf_url && (
-                  <a href={activeEpisode.pdf_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-white font-bold text-xs transition-colors">
-                    <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span> Download Resource
+                  <a href={activeEpisode.pdf_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-bold text-sm transition-colors shadow-lg shadow-blue-500/20">
+                    <span className="material-symbols-outlined text-[20px]">picture_as_pdf</span> Download Attached Resource
                   </a>
                 )}
               </div>
@@ -494,9 +432,6 @@ export default function AcademyPage() {
         </div>
       )}
 
-    
-
-      
-  </div>
+    </div>
   )
 }
