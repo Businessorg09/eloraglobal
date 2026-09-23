@@ -30,7 +30,7 @@ export async function GET(request: Request) {
         progress_seconds,
         is_completed,
         episode:academy_episodes(
-          id, title, duration_seconds, video_url, order_index, pdf_url,
+          id, title, duration_seconds, video_url, video_type, thumbnail_url, order_index, pdf_url,
           module:academy_modules(id, title, package_tier_required)
         )
       `)

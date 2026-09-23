@@ -7,6 +7,8 @@ type Episode = {
   title: string;
   description: string;
   video_url: string;
+  video_type?: string;
+  thumbnail_url?: string;
   duration_seconds: number;
   pdf_url: string;
   order_index: number;
@@ -209,16 +211,28 @@ export function CommandCenterWidget() {
               )
             ) : (
               <div 
-                className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900"
+                className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 group"
                 onClick={() => setIsPlaying(true)}
               >
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
-                  <span className="material-symbols-outlined text-white text-[24px] md:text-[32px] ml-1">play_arrow</span>
+                {/* Background Thumbnail Image */}
+                {episode.thumbnail_url && (
+                  <img 
+                    src={episode.thumbnail_url} 
+                    alt={episode.title} 
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"
+                  />
+                )}
+                
+                {/* Overlay Controls */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-4">
+                    <span className="material-symbols-outlined text-white text-[24px] md:text-[32px] ml-1">play_arrow</span>
+                  </div>
+                  <span className="text-white font-bold text-sm tracking-wide bg-black/60 px-4 py-1.5 rounded-full border border-white/20 backdrop-blur-sm">Resume Video in Dashboard</span>
                 </div>
-                <span className="text-white font-bold text-sm tracking-wide bg-black/40 px-4 py-1.5 rounded-full border border-white/10">Resume Video in Dashboard</span>
                 
                 {/* Progress Bar preview */}
-                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800/80">
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800/80 z-10">
                   <div 
                     className="h-full bg-blue-500" 
                     style={{ width: `${Math.min(100, (lastProgress.progress_seconds / (episode.duration_seconds || 1)) * 100)}%` }}

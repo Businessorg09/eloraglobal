@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     ] = await Promise.all([
       supabase.from('users').select('full_name').eq('id', user.id).single(),
       supabase.from('package_purchases').select('package:packages!package_id(id, name, funded_account_size, display_order)').eq('user_id', user.id),
-      supabase.from('academy_modules').select(`id, title, description, instructor, package_tier_required, order_index, episodes:academy_episodes(id, title, description, video_url, duration_seconds, pdf_url, order_index)`).order('order_index', { ascending: true }),
+      supabase.from('academy_modules').select(`id, title, description, instructor, package_tier_required, order_index, episodes:academy_episodes(id, title, description, video_url, video_type, thumbnail_url, duration_seconds, pdf_url, order_index)`).order('order_index', { ascending: true }),
       supabase.from('academy_progress').select('*').eq('user_id', user.id)
     ]);
 
