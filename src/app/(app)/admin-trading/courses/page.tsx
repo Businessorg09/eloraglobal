@@ -6,6 +6,7 @@ type Episode = {
   id: string;
   title: string;
   video_url: string;
+  video_type: 'youtube' | 'upload';
   thumbnail_url: string;
   duration_seconds: number;
   order_index: number;
@@ -35,7 +36,13 @@ export default function AcademyAdminCMS() {
 
   // Form States
   const [modForm, setModForm] = useState({ title: '', description: '', instructor: '', package_tier_required: 1, order_index: 0 });
-  const [epForm, setEpForm] = useState({ title: '', video_url: '', thumbnail_url: '', duration_seconds: 0, order_index: 0 });
+  const [epForm, setEpForm] = useState({ title: '', video_url: '', video_type: 'upload' as 'youtube' | 'upload', thumbnail_url: '', duration_seconds: 0, order_index: 0 });
+  
+  // Upload States
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState('');
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
 
   useEffect(() => {
     fetchModules();
@@ -95,37 +102,98 @@ export default function AcademyAdminCMS() {
   // --- Episode Handlers ---
   const handleOpenEpisodeModal = (moduleId: string, ep?: Episode) => {
     setSelectedModuleId(moduleId);
+    setVideoFile(null);
+    setThumbnailFile(null);
+    setUploadProgress('');
     if (ep) {
       setEditingEpisode(ep);
-      setEpForm({ title: ep.title, video_url: ep.video_url, thumbnail_url: ep.thumbnail_url || '', duration_seconds: ep.duration_seconds, order_index: ep.order_index });
+      setEpForm({ title: ep.title, video_url: ep.video_url, video_type: ep.video_type || 'upload', thumbnail_url: ep.thumbnail_url || '', duration_seconds: ep.duration_seconds, order_index: ep.order_index });
     } else {
       setEditingEpisode(null);
       const mod = modules.find(m => m.id === moduleId);
-      setEpForm({ title: '', video_url: '', thumbnail_url: '', duration_seconds: 0, order_index: mod?.episodes.length || 0 });
+      setEpForm({ title: '', video_url: '', video_type: 'upload', thumbnail_url: '', duration_seconds: 0, order_index: mod?.episodes.length || 0 });
     }
     setShowEpisodeModal(true);
   };
 
   const handleSaveEpisode = async (e: React.FormEvent) => {
     e.preventDefault();
-    const isEditing = !!editingEpisode;
-    const method = isEditing ? 'PUT' : 'POST';
-    const body = isEditing 
-      ? { id: editingEpisode.id, ...epForm } 
-      : { module_id: selectedModuleId, ...epForm };
+    setIsUploading(true);
+    setUploadProgress('Preparing...');
+    
+    try {
+      let finalVideoUrl = epForm.video_url;
+      let finalThumbnailUrl = epForm.thumbnail_url;
 
-    const res = await fetch('/api/admin/academy/episodes', {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+      // Upload video file if selected
+      if (videoFile) {
+        setUploadProgress(`Uploading video (${(videoFile.size / 1024 / 1024).toFixed(1)} MB)...`);
+        const videoFormData = new FormData();
+        videoFormData.append('file', videoFile);
+        videoFormData.append('type', 'video');
+        
+        const uploadRes = await fetch('/api/admin/academy/upload', {
+          method: 'POST',
+          body: videoFormData
+        });
+        
+        if (!uploadRes.ok) {
+          const errData = await uploadRes.json();
+          throw new Error(errData.error || 'Video upload failed');
+        }
+        
+        const uploadData = await uploadRes.json();
+        finalVideoUrl = uploadData.url;
+        setUploadProgress('Video uploaded! Saving...');
+      }
 
-    if (res.ok) {
-      setShowEpisodeModal(false);
-      fetchModules();
-    } else {
-      alert("Error saving episode");
+      // Upload thumbnail file if selected
+      if (thumbnailFile) {
+        setUploadProgress('Uploading thumbnail...');
+        const thumbFormData = new FormData();
+        thumbFormData.append('file', thumbnailFile);
+        thumbFormData.append('type', 'thumbnail');
+        
+        const thumbRes = await fetch('/api/admin/academy/upload', {
+          method: 'POST',
+          body: thumbFormData
+        });
+        
+        if (thumbRes.ok) {
+          const thumbData = await thumbRes.json();
+          finalThumbnailUrl = thumbData.url;
+        }
+      }
+
+      // Save episode to database
+      setUploadProgress('Saving episode...');
+      const isEditing = !!editingEpisode;
+      const method = isEditing ? 'PUT' : 'POST';
+      const body = isEditing 
+        ? { id: editingEpisode.id, ...epForm, video_url: finalVideoUrl, thumbnail_url: finalThumbnailUrl } 
+        : { module_id: selectedModuleId, ...epForm, video_url: finalVideoUrl, thumbnail_url: finalThumbnailUrl };
+
+      const res = await fetch('/api/admin/academy/episodes', {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (res.ok) {
+        setShowEpisodeModal(false);
+        setVideoFile(null);
+        setThumbnailFile(null);
+        fetchModules();
+      } else {
+        const errData = await res.json();
+        alert("Error saving episode: " + (errData.error || 'Unknown'));
+      }
+    } catch (err: any) {
+      alert('Error: ' + err.message);
     }
+    
+    setIsUploading(false);
+    setUploadProgress('');
   };
 
   const handleDeleteEpisode = async (id: string) => {
@@ -267,7 +335,7 @@ export default function AcademyAdminCMS() {
       {/* Episode Modal */}
       {showEpisodeModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
               <h3 className="font-bold text-lg">{editingEpisode ? 'Edit Episode' : 'Create Episode'}</h3>
               <button onClick={() => setShowEpisodeModal(false)} className="text-slate-400"><span className="material-symbols-outlined">close</span></button>
@@ -275,28 +343,135 @@ export default function AcademyAdminCMS() {
             <form onSubmit={handleSaveEpisode} className="p-6 flex flex-col gap-4">
               <div>
                 <label className="text-xs font-bold text-slate-700 block mb-1">Episode Title</label>
-                <input required type="text" className="w-full p-2 border border-slate-200 rounded-lg text-sm" value={epForm.title} onChange={e => setEpForm({...epForm, title: e.target.value})} />
+                <input required type="text" className="w-full p-2.5 border border-slate-200 rounded-lg text-sm" value={epForm.title} onChange={e => setEpForm({...epForm, title: e.target.value})} />
               </div>
-              <div className="mb-4">
-                <label className="block text-xs font-bold text-slate-700 mb-1">Video URL (YouTube embed or watch link)</label>
-                <input required type="text" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" className="w-full p-2 border border-slate-200 rounded-lg text-sm" value={epForm.video_url} onChange={e => setEpForm({...epForm, video_url: e.target.value})} />
+
+              {/* Video Source Toggle */}
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-2">Video Source</label>
+                <div className="flex rounded-lg border border-slate-200 overflow-hidden">
+                  <button type="button" onClick={() => setEpForm({...epForm, video_type: 'upload'})} className={`flex-1 py-2.5 text-sm font-bold transition-colors flex items-center justify-center gap-2 ${epForm.video_type === 'upload' ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}>
+                    <span className="material-symbols-outlined text-[18px]">upload_file</span>
+                    Upload from Computer
+                  </button>
+                  <button type="button" onClick={() => setEpForm({...epForm, video_type: 'youtube'})} className={`flex-1 py-2.5 text-sm font-bold transition-colors flex items-center justify-center gap-2 ${epForm.video_type === 'youtube' ? 'bg-red-600 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}>
+                    <span className="material-symbols-outlined text-[18px]">smart_display</span>
+                    YouTube Link
+                  </button>
+                </div>
               </div>
-              <div className="mb-4">
-                <label className="block text-xs font-bold text-slate-700 mb-1">Thumbnail URL (Optional)</label>
-                <input type="text" placeholder="https://example.com/thumbnail.png" className="w-full p-2 border border-slate-200 rounded-lg text-sm" value={epForm.thumbnail_url} onChange={e => setEpForm({...epForm, thumbnail_url: e.target.value})} />
+
+              {/* Upload Mode */}
+              {epForm.video_type === 'upload' && (
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Video File</label>
+                  <div className="relative border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:border-blue-400 transition-colors bg-slate-50">
+                    <input 
+                      type="file" 
+                      accept="video/mp4,video/webm,video/quicktime,video/x-msvideo"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      onChange={e => {
+                        const f = e.target.files?.[0];
+                        if (f) setVideoFile(f);
+                      }}
+                    />
+                    {videoFile ? (
+                      <div className="flex items-center justify-center gap-3">
+                        <span className="material-symbols-outlined text-[32px] text-blue-600">movie</span>
+                        <div className="text-left">
+                          <p className="text-sm font-bold text-slate-900">{videoFile.name}</p>
+                          <p className="text-xs text-slate-500">{(videoFile.size / 1024 / 1024).toFixed(1)} MB</p>
+                        </div>
+                        <button type="button" onClick={(e) => { e.stopPropagation(); setVideoFile(null); }} className="ml-2 p-1 bg-red-100 text-red-600 rounded-full hover:bg-red-200">
+                          <span className="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                      </div>
+                    ) : epForm.video_url ? (
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="material-symbols-outlined text-[32px] text-emerald-500">check_circle</span>
+                        <p className="text-sm font-bold text-emerald-700">Video already uploaded</p>
+                        <p className="text-[10px] text-slate-400 truncate max-w-[300px]">{epForm.video_url}</p>
+                        <p className="text-xs text-blue-500 mt-1">Click to replace with new file</p>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="material-symbols-outlined text-[40px] text-slate-300">cloud_upload</span>
+                        <p className="text-sm font-bold text-slate-700">Drop your video here or click to browse</p>
+                        <p className="text-xs text-slate-400">Supports MP4, WebM, MOV (up to 500MB)</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* YouTube Mode */}
+              {epForm.video_type === 'youtube' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">YouTube Video URL</label>
+                  <input type="text" placeholder="https://www.youtube.com/watch?v=..." className="w-full p-2.5 border border-slate-200 rounded-lg text-sm" value={epForm.video_url} onChange={e => setEpForm({...epForm, video_url: e.target.value})} />
+                  <p className="text-[10px] text-slate-400 mt-1">Paste the YouTube watch or embed link.</p>
+                </div>
+              )}
+
+              {/* Thumbnail Upload */}
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Thumbnail (Optional)</label>
+                <div className="flex items-center gap-3">
+                  <div className="relative border border-slate-200 rounded-lg overflow-hidden bg-slate-50 flex-1">
+                    <input 
+                      type="file" 
+                      accept="image/png,image/jpeg,image/webp"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      onChange={e => {
+                        const f = e.target.files?.[0];
+                        if (f) setThumbnailFile(f);
+                      }}
+                    />
+                    <div className="flex items-center gap-2 p-2.5">
+                      <span className="material-symbols-outlined text-[18px] text-slate-400">image</span>
+                      <span className="text-sm text-slate-500 truncate">
+                        {thumbnailFile ? thumbnailFile.name : epForm.thumbnail_url ? 'Thumbnail already set (click to replace)' : 'Click to upload thumbnail image'}
+                      </span>
+                    </div>
+                  </div>
+                  {(thumbnailFile || epForm.thumbnail_url) && (
+                    <button type="button" onClick={() => { setThumbnailFile(null); setEpForm({...epForm, thumbnail_url: ''}); }} className="p-1.5 text-red-500 hover:bg-red-50 rounded">
+                      <span className="material-symbols-outlined text-[16px]">delete</span>
+                    </button>
+                  )}
+                </div>
               </div>
-              <p className="text-[10px] text-slate-500 mt-1">Make sure to use the EMBED link, not the normal watch link.</p>
+
               <div className="flex gap-4">
                 <div className="flex-1">
                   <label className="text-xs font-bold text-slate-700 block mb-1">Duration (Seconds)</label>
-                  <input type="number" className="w-full p-2 border border-slate-200 rounded-lg text-sm" value={epForm.duration_seconds} onChange={e => setEpForm({...epForm, duration_seconds: parseInt(e.target.value)})} />
+                  <input type="number" className="w-full p-2.5 border border-slate-200 rounded-lg text-sm" value={epForm.duration_seconds} onChange={e => setEpForm({...epForm, duration_seconds: parseInt(e.target.value) || 0})} />
                 </div>
                 <div className="flex-1">
                   <label className="text-xs font-bold text-slate-700 block mb-1">Order Index</label>
-                  <input type="number" className="w-full p-2 border border-slate-200 rounded-lg text-sm" value={epForm.order_index} onChange={e => setEpForm({...epForm, order_index: parseInt(e.target.value)})} />
+                  <input type="number" className="w-full p-2.5 border border-slate-200 rounded-lg text-sm" value={epForm.order_index} onChange={e => setEpForm({...epForm, order_index: parseInt(e.target.value) || 0})} />
                 </div>
               </div>
-              <button type="submit" className="mt-2 w-full py-2.5 bg-blue-600 text-white font-bold rounded-lg">Save Episode</button>
+              
+              {/* Upload Progress */}
+              {uploadProgress && (
+                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                  <span className="text-sm font-bold text-blue-700">{uploadProgress}</span>
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={isUploading || (epForm.video_type === 'upload' && !videoFile && !epForm.video_url) || (epForm.video_type === 'youtube' && !epForm.video_url)} 
+                className="mt-2 w-full py-3 bg-blue-600 text-white font-bold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isUploading ? (
+                  <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Uploading...</>
+                ) : (
+                  <><span className="material-symbols-outlined text-[18px]">save</span> Save Episode</>
+                )}
+              </button>
             </form>
           </div>
         </div>
