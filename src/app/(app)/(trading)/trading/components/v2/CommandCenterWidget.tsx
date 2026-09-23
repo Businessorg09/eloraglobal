@@ -75,12 +75,33 @@ export function CommandCenterWidget() {
         ]);
         
         const progData = await progRes.json();
+        const overData = await overRes.json();
+
+        let initialProgress = null;
+
         if (progData.progress) {
-          setLastProgress(progData.progress);
-          setCurrentProgress(progData.progress.progress_seconds);
+          initialProgress = progData.progress;
+        } else if (overData.playlist && overData.playlist.length > 0) {
+          // If no history, find the very first unlocked module that has episodes
+          const firstUnlockedMod = overData.playlist.find((m: any) => !m.isLocked && m.episodes && m.episodes.length > 0);
+          if (firstUnlockedMod) {
+            const firstEp = firstUnlockedMod.episodes[0];
+            initialProgress = {
+              progress_seconds: 0,
+              is_completed: false,
+              episode: {
+                ...firstEp,
+                module: { id: firstUnlockedMod.id, title: firstUnlockedMod.title }
+              }
+            };
+          }
         }
 
-        const overData = await overRes.json();
+        if (initialProgress) {
+          setLastProgress(initialProgress);
+          setCurrentProgress(initialProgress.progress_seconds);
+        }
+
         if (overData.playlist) {
           setPlaylist(overData.playlist);
         }
