@@ -60,9 +60,6 @@ const mm = gsap.matchMedia();
 mm.add('(min-width: 1024px) and (hover: hover) and (pointer: fine)', () => {
 
 
-
-// MOBILE GSAP DISABLE
-if (window.innerWidth > 991) {
 /* ─────────────────────────────────────────
    STEP 4: HERO SECTION — EXACT WEBFLOW IX2 RECREATION
    Reverse-engineered from webflow.a746f7be.0dfb77f68842956f.js
@@ -509,5 +506,3 @@ if (window.innerWidth > 991) {
     );
   });
 })();
-
-} // END MOBILE GSAP DISABLE
