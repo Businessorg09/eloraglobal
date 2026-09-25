@@ -34,16 +34,9 @@ export async function GET() {
       return NextResponse.json({ fired: false, reason: `Today is ${todayName}, scheduled for ${schedule.closingDay}` })
     }
 
-    // Check if current time is within the execution window
-    const [schedHr, schedMin] = schedule.closingTime.split(':').map(Number)
-    const [currHr, currMin] = currentTime.split(':').map(Number)
-    const schedTotalMins = schedHr * 60 + schedMin
-    const currTotalMins = currHr * 60 + currMin
-    const diff = currTotalMins - schedTotalMins
-
-    if (diff < 0 || diff > 5) {
-      return NextResponse.json({ fired: false, reason: `Time mismatch. Current: ${currentTime}, Scheduled: ${schedule.closingTime}` })
-    }
+    // Note: Vercel Cron hits this exactly once a day based on vercel.json (18:00 UTC / 23:30 IST).
+    // We ignore the specific configured time from the DB because Vercel's free tier only permits daily crons.
+    // As long as the DAY matches, we execute the payout.
 
     // ✅ Fire the binary matching cron
     console.log('[CheckSchedule] Firing binary matching cron...')

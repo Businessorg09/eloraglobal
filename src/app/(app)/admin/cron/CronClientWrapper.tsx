@@ -552,14 +552,14 @@ export default function CronClientWrapper({
             </div>
           </div>
 
-          {/* Time Picker */}
-          <div>
+          {/* Time Picker Disabled */}
+          <div className="opacity-50 pointer-events-none">
             <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-2">Closing Time (IST)</span>
             <input
               type="time"
-              value={selTime}
-              onChange={e => setSelTime(e.target.value)}
-              className="px-3 py-2 rounded-lg bg-surface-container text-on-surface text-sm border border-surface-container-high outline-none focus:border-primary w-full"
+              value="23:30"
+              readOnly
+              className="px-3 py-2 rounded-lg bg-surface-container text-on-surface text-sm border border-surface-container-high outline-none w-full"
             />
           </div>
 
@@ -570,13 +570,13 @@ export default function CronClientWrapper({
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-secondary text-on-secondary font-bold text-sm transition-all hover:opacity-90 disabled:opacity-50"
           >
             <span className="material-symbols-outlined text-[16px]">save</span>
-            {scheduleSaving ? 'Saving...' : `Save Schedule (${selDay.slice(0,3)} ${selTime} IST)`}
+            {scheduleSaving ? 'Saving...' : `Save Schedule (${selDay.slice(0,3)} 23:30 IST)`}
           </button>
 
           <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-container text-xs">
             <span className="material-symbols-outlined text-[16px] text-tertiary">info</span>
             <span className="text-on-surface-variant">
-              The system checks daily at midnight IST. When the selected closing day/time matches, the cron auto-executes. Manual override always works.
+              Vercel Free Tier limits crons to once daily. The cron is hardcoded to fire at 11:30 PM IST (18:00 UTC). When the current day matches your Closing Day, it will execute exactly at that time.
             </span>
           </div>
         </div>
