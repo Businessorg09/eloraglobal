@@ -26,9 +26,9 @@ export default function NewTradingDashboardPage() {
           </div>
           
           <div className="flex flex-wrap items-center gap-3 mt-2 lg:mt-0">
-            <button className="flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#4B5563] hover:text-[#111827] px-4 py-2.5 rounded-[24px] text-[13px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              <span className="material-symbols-outlined text-[18px]">tune</span> Curriculum Filter
-            </button>
+            <a href="/trading/academy" className="flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#4B5563] hover:text-[#111827] px-4 py-2.5 rounded-[24px] text-[13px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+              <span className="material-symbols-outlined text-[18px]">menu_book</span> Browse Full Curriculum
+            </a>
             <a href="#command-center" className="flex items-center gap-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white px-5 py-2.5 rounded-[24px] text-[13px] font-bold transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
               <span className="material-symbols-outlined text-[18px]">play_arrow</span> Jump to Active Class
             </a>
