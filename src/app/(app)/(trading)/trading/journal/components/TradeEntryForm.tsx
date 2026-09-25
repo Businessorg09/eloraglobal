@@ -17,10 +17,19 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleAction = (formData: FormData) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isBusy = isPending || isSubmitting;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isBusy) return;
+    setIsSubmitting(true);
     setErrorMsg('');
-    startTransition(async () => {
+    
+    try {
+      const formData = new FormData(e.currentTarget);
       const result = await addTrade(formData);
+      
       if (result.error) {
         setErrorMsg(result.error);
       } else if (result.success && result.trade) {
@@ -40,11 +49,15 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
         setPnl('');
         setNotes('');
       }
-    });
+    } catch (err: any) {
+      setErrorMsg(err.message || 'An error occurred while saving.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <form action={handleAction} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-full relative">
+    <form onSubmit={handleSubmit} className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col h-full relative">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6 border-b border-[#F3F4F6] pb-4">
         <h2 className="text-[16px] font-bold text-[#111827] leading-tight flex items-center gap-2">
           <span className="material-symbols-outlined text-[#1D4ED8]">edit_document</span>
@@ -161,13 +174,13 @@ export function TradeEntryForm({ onSave }: TradeEntryFormProps) {
         </button>
         <button 
           type="submit"
-          disabled={!asset || !lots || !pnl || isPending}
+          disabled={!asset || !lots || !pnl || isBusy}
           className="flex-[2] bg-[#1D4ED8] hover:bg-[#1E40AF] disabled:bg-[#9CA3AF] disabled:cursor-not-allowed text-white py-2.5 rounded-lg font-bold text-[13px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-colors flex items-center justify-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">
             {isPending ? 'sync' : 'save'}
           </span> 
-          {isPending ? 'Saving...' : 'Save to Ledger'}
+          {isBusy ? 'Saving...' : 'Save to Ledger'}
         </button>
       </div>
     </form>

@@ -37,7 +37,7 @@ export default function TradingJournalPage() {
   };
 
   return (
-    <GatedContent minPackageRequired={2} blurLevel="md" customMessage="The Trading Journal is available for Package 2 and above. Upgrade to track your performance and psychological metrics.">
+    <GatedContent minPackageRequired={1} blurLevel="md" customMessage="The Trading Journal is available for Package 2 and above. Upgrade to track your performance and psychological metrics.">
       <div className="flex flex-col max-w-[1400px] mx-auto w-full px-4 md:px-8 pb-10 pt-4">
         
         {/* Header */}
