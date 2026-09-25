@@ -57,7 +57,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText, Flip, MotionPathPlugin, CustomEase
 ───────────────────────────────────────── */
 const mm = gsap.matchMedia();
 
-mm.add('(min-width: 768px)', () => {
+mm.add('(min-width: 1024px) and (hover: hover) and (pointer: fine)', () => {
   const lenis = new Lenis({
     duration: 1.1,
     smoothWheel: true,
