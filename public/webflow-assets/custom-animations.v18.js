@@ -58,22 +58,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText, Flip, MotionPathPlugin, CustomEase
 const mm = gsap.matchMedia();
 
 mm.add('(min-width: 1024px) and (hover: hover) and (pointer: fine)', () => {
-  const lenis = new Lenis({
-    duration: 1.1,
-    smoothWheel: true,
-    smoothTouch: false,
-    allowNestedScroll: true,
-    easing: (t) => 1 - Math.pow(1 - t, 3),
-  });
-
-  const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
-  requestAnimationFrame(raf);
-
-  // Sync Lenis with GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
-
-  return () => lenis.destroy();
-});
 
 
 /* ─────────────────────────────────────────

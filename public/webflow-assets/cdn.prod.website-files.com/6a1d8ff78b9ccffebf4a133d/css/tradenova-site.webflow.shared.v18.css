@@ -3023,7 +3023,7 @@ figcaption {
   margin-top: var(--_sizes---fixed--size-14);
   margin-bottom: var(--_sizes---fixed--size-14);
   border-radius: var(--_sizes---border-radius--large);
-  overflow: clip;
+  overflow: hidden;
 }
 
 .pointer-events-auto {
@@ -3307,7 +3307,7 @@ figcaption {
 }
 
 .page-wrapper {
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 .fs-styleguide_label {
@@ -3545,7 +3545,7 @@ figcaption {
 .fs-styleuide_img {
   width: 100%;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .img {
@@ -3718,7 +3718,7 @@ figcaption {
 .name_img {
   width: 100%;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .fs-styleguide_empty-spacer {
@@ -3944,7 +3944,7 @@ figcaption {
   height: var(--_sizes---fixed--size-26);
   border-radius: var(--_sizes---border-radius--rounded);
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .avatar_img.is-margin {
@@ -3982,7 +3982,7 @@ figcaption {
   align-items: center;
   display: flex;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .marquee_item-wrap {
@@ -4563,7 +4563,7 @@ figcaption {
   border: 1.5px solid var(--base--black);
   border-radius: var(--_sizes---border-radius--rounded);
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .review_avatar.is-margin {
@@ -5368,7 +5368,7 @@ figcaption {
   max-height: 738.594px;
   padding-top: 60%;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .job_banner-text-content {
@@ -5492,7 +5492,7 @@ figcaption {
 
 .about_img-wrap {
   border-radius: var(--_sizes---border-radius--large);
-  overflow: clip;
+  overflow: hidden;
 }
 
 .about_details-wrap {
@@ -5506,7 +5506,7 @@ figcaption {
   border-radius: var(--_sizes---border-radius--large);
   width: 100%;
   max-width: 100%;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .client_main {
@@ -5548,7 +5548,7 @@ figcaption {
 
 .client_card-img-wrap {
   border-radius: var(--_sizes---border-radius--large);
-  overflow: clip;
+  overflow: hidden;
 }
 
 .client_card-back-inner {
@@ -5824,7 +5824,7 @@ figcaption {
   transform-origin: 50% 0;
   padding-top: 70%;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .license_img-main {
@@ -6849,14 +6849,14 @@ figcaption {
   border-radius: inherit;
   width: 100%;
   height: 100%;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .banner_secondary-img-wrap {
   border-radius: var(--_sizes---border-radius--large);
   width: 100%;
   height: 100%;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .submit_button-wrap {
@@ -6878,7 +6878,7 @@ figcaption {
   justify-content: center;
   align-items: center;
   display: flex;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .section_about-story {
@@ -6975,7 +6975,7 @@ figcaption {
   line-height: 1.2;
   font-weight: var(--_typography---font-weight--medium);
   transition: color .4s ease-out;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .nav_dropdown-page-list {
@@ -6998,7 +6998,7 @@ figcaption {
   margin-top: 1.25rem;
   padding-top: 1px;
   padding-left: 1px;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .nav_dropdown-links {
@@ -7021,7 +7021,7 @@ figcaption {
   background-color: #0000;
   width: 100%;
   left: 0%;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .nav_dropdown-content {
