@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 export async function GET(request: Request) {
   try {
@@ -31,13 +32,14 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Determine the user's purchased package tier
-    // In our system, the highest package purchased determines access level.
-    const { data: purchases } = await supabase
-      .from('package_purchases')
-      .select('package:packages!package_id(slug)')
-      .eq('user_id', user.id);
-      
+    // Parallelize the next two queries
+    const [ { data: purchases }, { data: modules, error } ] = await Promise.all([
+      supabase.from('package_purchases').select('package:packages!package_id(slug)').eq('user_id', user.id),
+      supabase.from('academy_modules').select(`*, episodes:academy_episodes(id, title, description, duration_seconds, order_index, pdf_url, video_url, thumbnail_url, video_type)`).order('order_index', { ascending: true })
+    ]);
+
+    if (error) throw error;
+
     let userTier = 0; // Default to 0 (No package/Trading Account)
     
     if (purchases && purchases.length > 0) {
@@ -46,17 +48,6 @@ export async function GET(request: Request) {
       else if (slugs.includes('pro')) userTier = 2;
       else userTier = 1; // Starter
     }
-
-    // Get all modules and episodes
-    const { data: modules, error } = await supabase
-      .from('academy_modules')
-      .select(`
-        *,
-        episodes:academy_episodes(id, title, description, duration_seconds, order_index, pdf_url, video_url, thumbnail_url, video_type)
-      `)
-      .order('order_index', { ascending: true });
-
-    if (error) throw error;
 
     // Secure the data: If the user doesn't have the required tier, strip the video_url!
     modules.forEach(mod => {
