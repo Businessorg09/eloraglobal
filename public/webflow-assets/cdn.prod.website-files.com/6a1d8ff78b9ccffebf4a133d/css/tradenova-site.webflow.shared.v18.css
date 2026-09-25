@@ -3307,7 +3307,7 @@ figcaption {
 }
 
 .page-wrapper {
-  overflow: clip;
+  overflow-x: clip;
 }
 
 .fs-styleguide_label {
