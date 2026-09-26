@@ -14,6 +14,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/cron', label: 'Cron & Settlement', icon: 'schedule_send' },
     { href: '/admin/rules', label: 'Compensation Rules', icon: 'account_tree' },
     { href: '/admin/financials', label: 'Financial & Approvals', icon: 'payments' },
+    { href: '/admin/support', label: 'Support Tickets', icon: 'support_agent' },
     { href: '/admin/audit', label: 'System Audit & Log', icon: 'security' },
   ];
 

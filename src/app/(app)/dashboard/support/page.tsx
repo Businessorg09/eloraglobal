@@ -258,7 +258,7 @@ export default function SupportPage() {
                     </div>
                   </div>
 
-                  <form className="space-y-gutter-md" onSubmit={e => e.preventDefault()}>
+                  <form className="space-y-gutter-md" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
                       <div className="md:col-span-2 space-y-1.5">
                         <label className="font-label-md text-label-md text-on-surface font-bold flex items-center justify-between">
@@ -350,7 +350,7 @@ export default function SupportPage() {
                       </label>
                       <div className="flex items-center gap-3">
                         <button className="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md hover:bg-surface-container transition-all font-bold" type="reset" onClick={() => {setSubject(''); setDescription(''); setNodeContext('');}}>Clear Form</button>
-                        <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-label-md shadow-sm hover:bg-primary-container transition-all font-bold disabled:opacity-50" type="button" disabled={isSubmitting} onClick={handleSubmit}>
+                        <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-label-md shadow-sm hover:bg-primary-container transition-all font-bold disabled:opacity-50" type="submit" disabled={isSubmitting}>
                           <span className="material-symbols-outlined text-[18px]">send</span>
                           <span>{isSubmitting ? 'Submitting...' : 'Submit Support Ticket'}</span>
                         </button>
