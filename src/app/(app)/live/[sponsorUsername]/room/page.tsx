@@ -53,6 +53,26 @@ export default function WebinarRoom() {
       })
   }, [sponsorUsername, router])
 
+  // Helper to convert standard YouTube links to stealth embeds
+  const getStealthYouTubeUrl = (url: string) => {
+    if (!url) return '';
+    let videoId = '';
+    
+    // Parse watch?v= or youtu.be/ or embed/
+    if (url.includes('youtube.com/watch?v=')) {
+      videoId = url.split('v=')[1].split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/embed/')) {
+      videoId = url.split('embed/')[1].split('?')[0];
+    } else {
+      return url; // fallback
+    }
+
+    // Return the ultimate stealth URL
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&fs=0&playsinline=1`;
+  }
+
   // 3. Time Sync Logic (Only for SIMULATED mode)
   useEffect(() => {
     if (!webinar || webinar.broadcast_mode !== 'SIMULATED' || !webinar.scheduled_start_time) return
@@ -149,13 +169,30 @@ export default function WebinarRoom() {
         
         {webinar.broadcast_mode === 'TRUE_LIVE' ? (
           // TRUE LIVE MODE (YouTube Embed)
-          <div className="w-full max-w-6xl aspect-video bg-gray-900 shadow-2xl relative">
+          <div className="w-full max-w-6xl aspect-video bg-gray-900 shadow-2xl relative overflow-hidden">
+            {/* The Invisible Shield: Blocks all clicks on the YouTube iframe */}
+            <div className="absolute inset-0 z-20 cursor-default" onContextMenu={e => e.preventDefault()}></div>
+            
             <iframe 
-              src={webinar.youtube_live_url} 
-              className="absolute inset-0 w-full h-full border-0"
+              src={getStealthYouTubeUrl(webinar.youtube_live_url)} 
+              className="absolute inset-0 w-full h-full border-0 z-10 pointer-events-none transform scale-[1.02]"
               allow="autoplay; encrypted-media; picture-in-picture" 
-              allowFullScreen
+              allowFullScreen={false}
             ></iframe>
+            
+            {/* Fake Overlay Controls */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/90 to-transparent flex items-end px-6 py-4 z-30 pointer-events-none">
+              <div className="w-full flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                  <span className="material-symbols-outlined text-white text-2xl">volume_up</span>
+                  <span className="text-white font-mono text-sm">LIVE BROADCAST</span>
+                </div>
+                <div className="flex gap-2 items-center bg-red-600 px-3 py-1 rounded text-white text-xs font-bold shadow-lg">
+                  <span className="material-symbols-outlined text-[14px]">visibility</span>
+                  Live
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           // SIMULATED LIVE MODE

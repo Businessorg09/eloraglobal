@@ -1,12 +1,56 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function AdminWebinarPage() {
   const [webinar, setWebinar] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState('')
+
+  const [uploading, setUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    setUploadProgress(10)
+    
+    try {
+      const supabase = createClient()
+      const fileExt = file.name.split('.').pop()
+      const fileName = `masterclass-${Date.now()}.${fileExt}`
+
+      setUploadProgress(30)
+      const { data, error } = await supabase.storage
+        .from('webinars')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      setUploadProgress(80)
+
+      if (error) throw error
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('webinars')
+        .getPublicUrl(fileName)
+
+      handleChange('video_url', publicUrl)
+      setToast('Video uploaded successfully!')
+      setTimeout(() => setToast(''), 3000)
+    } catch (err: any) {
+      console.error(err)
+      alert(`Upload failed: ${err.message}. Did you run the SQL to create the bucket?`)
+    } finally {
+      setUploading(false)
+      setUploadProgress(0)
+    }
+  }
 
   useEffect(() => {
     fetch('/api/admin/webinars')
@@ -140,13 +184,24 @@ export default function AdminWebinarPage() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Pre-recorded Video URL (MP4)</label>
-              <input 
-                type="url" 
-                value={webinar?.video_url || ''} 
-                onChange={e => handleChange('video_url', e.target.value)} 
-                placeholder="https://your-server.com/video.mp4"
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" 
-              />
+              <div className="flex gap-2">
+                <input 
+                  type="url" 
+                  value={webinar?.video_url || ''} 
+                  onChange={e => handleChange('video_url', e.target.value)} 
+                  placeholder="https://your-server.com/video.mp4"
+                  className="flex-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" 
+                />
+                <label className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded font-semibold cursor-pointer flex items-center gap-2 transition-colors whitespace-nowrap">
+                  {uploading ? (
+                    <><span className="material-symbols-outlined animate-spin text-[18px]">sync</span> Uploading {uploadProgress}%</>
+                  ) : (
+                    <><span className="material-symbols-outlined text-[18px]">upload</span> Upload MP4</>
+                  )}
+                  <input type="file" accept="video/mp4" className="hidden" onChange={handleFileUpload} disabled={uploading} />
+                </label>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">Upload an MP4 directly from your computer, or paste an external link.</p>
             </div>
           </div>
         ) : (
