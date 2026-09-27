@@ -9,7 +9,7 @@ import { useDashboardContext } from './DashboardContext'
 export default function Sidebar() {
   const pathname = usePathname()
   const router = useRouter()
-  const { rank } = useDashboardContext()
+  const { profile, rank } = useDashboardContext()
 
   const handleLogout = async () => {
     await signOutAction()
