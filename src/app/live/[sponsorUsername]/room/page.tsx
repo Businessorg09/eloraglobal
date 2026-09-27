@@ -21,13 +21,19 @@ export default function WebinarRoom() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    // 1. Security Check: Did they register?
+    // 1. Security Check: Are they logged in OR did they register?
     const name = sessionStorage.getItem('webinar_guest_name')
     if (!name) {
-      router.replace(`/live/${sponsorUsername}`)
-      return
+      // Check if they have a cookie/token for supabase
+      const hasSupabaseCookie = document.cookie.includes('sb-') || document.cookie.includes('supabase')
+      if (!hasSupabaseCookie) {
+        router.replace(`/live/${sponsorUsername}`)
+        return
+      }
+      setGuestName('Member')
+    } else {
+      setGuestName(name)
     }
-    setGuestName(name)
 
     // 2. Fetch Webinar Details
     fetch('/api/webinar/room')
