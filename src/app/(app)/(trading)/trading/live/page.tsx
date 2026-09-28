@@ -165,18 +165,18 @@ export default function LiveClassesPage() {
 <h2 className="font-extrabold text-[20px] md:text-[20px] md:text-[24px] text-[#111827] font-semibold tracking-tight">
   {loading ? 'Loading…' : (webinar?.title || 'Daily Wealth Masterclass')}
 </h2>
-<div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-body-sm font-body-sm text-[#6B7280] pt-1">
-<div className="flex items-center gap-2">
-  <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold ring-2 ring-surface">EG</div>
-  <div className="flex flex-col leading-tight">
-    <span className="font-semibold text-[#111827] text-[12px]">Elora Global</span>
-    <span className="text-[11px] text-[#6B7280]">Official Broadcast</span>
+<div className="flex flex-wrap items-center gap-y-3 gap-x-6 text-[#6B7280] pt-3">
+<div className="flex items-center gap-3">
+  <div className="w-11 h-11 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-[14px] font-bold ring-4 ring-purple-50 shadow-sm">EG</div>
+  <div className="flex flex-col leading-tight gap-0.5">
+    <span className="font-bold text-[#111827] text-[15px]">Elora Global</span>
+    <span className="font-semibold text-[13px] text-purple-600">Official Broadcast</span>
   </div>
 </div>
-<span className="text-[#9CA3AF]">•</span>
-<div className="flex items-center gap-1 text-[#111827] font-semibold">
-  <span className="material-symbols-outlined text-[16px] text-[#6B7280]">schedule</span>
-  <span className="">{webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Starting Soon' : `Daily at ${webinar?.scheduled_start_time || '20:00'}`}</span>
+<span className="text-slate-300 text-lg hidden sm:block">•</span>
+<div className="flex items-center gap-2 text-[#111827] font-semibold bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+  <span className="material-symbols-outlined text-[20px] text-purple-500">schedule</span>
+  <span className="text-[14px] tracking-wide">{webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Starting Soon' : `Daily at ${webinar?.scheduled_start_time || '20:00'}`}</span>
 </div>
 </div>
 </div>
