@@ -55,10 +55,6 @@ export default function LiveClassesPage() {
         setWebinarStatus('UPCOMING');
       }
     };
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
 
     const savedBooking = localStorage.getItem('user_1on1_booking');
     if (savedBooking) {
