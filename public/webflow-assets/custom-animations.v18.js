@@ -178,43 +178,21 @@ mm.add('(min-width: 768px) and (hover: hover) and (pointer: fine)', () => {
    like Apple.com product page typography animations.
 ───────────────────────────────────────── */
 (function sectionHeadings() {
-  const headings = gsap.utils.toArray('.section_heading h2, .section_heading h3');
+  const headings = gsap.utils.toArray('.section_heading h2, .section_heading h3, .heading-style-h2, .heading-style-h3, .tag_component');
 
   headings.forEach(heading => {
-    let split;
-    try {
-      split = new SplitText(heading, { type: 'words,chars', wordsClass: 'split-word' });
-      // Wrap each word in an overflow:hidden mask
-      split.words.forEach(word => {
-        const mask = document.createElement('span');
-        mask.style.cssText = 'overflow:hidden; display:inline-block; vertical-align:bottom;';
-        word.parentNode.insertBefore(mask, word);
-        mask.appendChild(word);
-        gsap.set(word, { y: '110%', opacity: 0 });
-      });
-
-      gsap.to(split.words, {
-        y: '0%',
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.04,
+    // Super safe, rock-solid fade up for all headings
+    gsap.fromTo(heading,
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
         scrollTrigger: {
           trigger: heading,
           start: 'top 90%',
-          toggleActions: 'play none none none',
+          toggleActions: 'play none none none'
         }
-      });
-    } catch(e) {
-      // Fallback: simple fade-up
-      gsap.fromTo(heading,
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: heading, start: 'top 88%', toggleActions: 'play none none none' }
-        }
-      );
-    }
+      }
+    );
   });
 })();
 
