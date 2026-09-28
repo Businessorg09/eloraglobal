@@ -35,22 +35,48 @@ export default function WebinarRoom() {
       setGuestName(name)
     }
 
-    // 2. Fetch Webinar Details
-    fetch('/api/webinar/room')
-      .then(res => res.json())
-      .then(data => {
+    // 2. Fetch Webinar Details (with polling)
+    const fetchWebinar = async () => {
+      try {
+        const res = await fetch('/api/webinar/room')
+        
+        // If 404, it means the admin hit "End Broadcast Now" (is_active = false)
+        if (res.status === 404) {
+           handleTermination()
+           return
+        }
+
+        const data = await res.json()
         if (data.webinar) {
           setWebinar(data.webinar)
-        } else {
-          setError('No active masterclass found.')
+          setLoading(false)
         }
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error(err)
-        setError('Network error loading the broadcast.')
-        setLoading(false)
-      })
+      } catch (err) {
+        console.error('Polling error', err)
+      }
+    }
+
+    const handleTermination = () => {
+      // Check if user is logged in via cookies
+      const hasSupabaseCookie = document.cookie.includes('sb-') || document.cookie.includes('supabase')
+      
+      alert('The live broadcast has been terminated by the host.')
+      
+      if (hasSupabaseCookie) {
+        // Logged-in user -> Dashboard
+        router.push('/dashboard')
+      } else {
+        // Guest user -> Landing Page
+        router.push('/')
+      }
+    }
+
+    fetchWebinar() // Initial fetch
+    
+    // Poll every 10 seconds to see if admin killed the stream
+    const pollInterval = setInterval(fetchWebinar, 10000)
+    
+    return () => clearInterval(pollInterval)
   }, [sponsorUsername, router])
 
   // Helper to convert standard YouTube links to stealth embeds

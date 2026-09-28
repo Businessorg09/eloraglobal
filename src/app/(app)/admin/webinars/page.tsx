@@ -105,13 +105,32 @@ export default function AdminWebinarPage() {
           <h1 className="text-3xl font-bold text-gray-900">Marketing Webinar Settings</h1>
           <p className="text-gray-500 mt-1">Configure the global Evergreen Webinar funnel</p>
         </div>
-        <button 
-          onClick={handleSave} 
-          disabled={saving}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow-sm transition disabled:opacity-50"
-        >
-          {saving ? 'Saving...' : 'Save Settings'}
-        </button>
+        <div className="flex gap-3">
+          <button 
+            onClick={async () => {
+              if (confirm('Are you sure you want to terminate the live broadcast? All current viewers will be kicked out immediately.')) {
+                handleChange('is_active', false);
+                // Immediately save
+                const updated = { ...webinar, is_active: false };
+                await fetch('/api/admin/webinars', { method: 'POST', body: JSON.stringify(updated) });
+                setToast('Broadcast Terminated!');
+                setTimeout(() => setToast(''), 3000);
+              }
+            }}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">cancel</span>
+            End Broadcast Now
+          </button>
+          
+          <button 
+            onClick={handleSave} 
+            disabled={saving}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow-sm transition disabled:opacity-50"
+          >
+            {saving ? 'Saving...' : 'Save Settings'}
+          </button>
+        </div>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-8">
