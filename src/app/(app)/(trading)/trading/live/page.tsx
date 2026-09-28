@@ -3,13 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import { GatedContent } from '../components/GatedContent'
 
+import { useDashboardContext } from '@/components/dashboard/DashboardContext';
+
 export default function LiveClassesPage() {
+  const { profile } = useDashboardContext();
   const [activeTutor, setActiveTutor] = useState('vance');
   const [selectedDate, setSelectedDate] = useState('Mon 21');
   const [selectedTime, setSelectedTime] = useState('11:30 AM GMT');
   const [isBooking, setIsBooking] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [config, setConfig] = useState<any>(null);
+  const [webinar, setWebinar] = useState<any>(null);
+  const [webinarStatus, setWebinarStatus] = useState<'LIVE' | 'UPCOMING'>('UPCOMING');
   const [loading, setLoading] = useState(true);
   const [bookedSession, setBookedSession] = useState<any>(null);
 
@@ -23,8 +28,33 @@ export default function LiveClassesPage() {
             setActiveTutor(data.config.tutors[0].id);
           }
         }
+      });
+
+    // Fetch Automated Webinar
+    fetch('/api/webinar/room')
+      .then(res => res.json())
+      .then(data => {
+        if (data.webinar) {
+          setWebinar(data.webinar);
+          checkWebinarStatus(data.webinar);
+        }
         setLoading(false);
       })
+      .catch(err => setLoading(false));
+
+    const checkWebinarStatus = (web: any) => {
+      if (!web || web.broadcast_mode !== 'SIMULATED' || !web.scheduled_start_time) return;
+      const now = new Date();
+      const [hours, minutes, seconds] = web.scheduled_start_time.split(':').map(Number);
+      const scheduledTime = new Date();
+      scheduledTime.setHours(hours, minutes, seconds || 0, 0);
+      const diffSeconds = Math.floor((now.getTime() - scheduledTime.getTime()) / 1000);
+      if (diffSeconds >= 0 && diffSeconds < 7200) {
+        setWebinarStatus('LIVE');
+      } else {
+        setWebinarStatus('UPCOMING');
+      }
+    };
       .catch(err => {
         console.error(err);
         setLoading(false);
@@ -117,78 +147,63 @@ export default function LiveClassesPage() {
 </div>
 {/* SECTION 1: TOP SPLIT EXECUTIVE HERO BANNER */}
 <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-{/* Urgent Live Alert (7 Cols) */}
-<div className="lg:col-span-7 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 relative overflow-hidden flex flex-col justify-between gap-4">
-<div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#1D4ED8]"></div>
-<div className="absolute -right-16 -top-16 w-60 h-60 rounded-full bg-secondary-fixed/25 blur-3xl pointer-events-none"></div>
+{/* Urgent Live Alert (7 Cols) - Replaced with Webinar */}
+<div className={`lg:col-span-7 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border p-4 md:p-6 relative overflow-hidden flex flex-col justify-between gap-4 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'border-[#1D4ED8]' : 'border-[#E5E7EB]'}`}>
+<div className={`absolute left-0 top-0 bottom-0 w-1.5 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8]' : 'bg-purple-500'}`}></div>
+<div className={`absolute -right-16 -top-16 w-60 h-60 rounded-full ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-secondary-fixed/25' : 'bg-purple-100/50'} blur-3xl pointer-events-none`}></div>
 <div className="flex flex-col gap-2 relative">
 <div className="flex flex-wrap items-center gap-2">
-<span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] font-bold text-[11px] uppercase tracking-wider font-semibold">
-<span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            Live • Zoom Webinar
-          </span>
+{webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? (
+  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#059669] font-bold text-[11px] uppercase tracking-wider font-semibold">
+    <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+    Live • Global Broadcast
+  </span>
+) : (
+  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-600 font-bold text-[11px] uppercase tracking-wider font-semibold">
+    <span className="material-symbols-outlined text-[14px]">schedule</span>
+    Upcoming • Masterclass
+  </span>
+)}
 <span className="font-bold text-[11px] text-[#6B7280] bg-[#F8FAFC] px-2 py-0.5 rounded border border-[#E5E7EB] font-mono">
-            Room ID: {loading ? '—' : (lz.roomId || '—')}
-          </span>
-<span className="font-bold text-[11px] text-[#6B7280] font-semibold flex items-center gap-1">
-<span className="material-symbols-outlined text-[14px]">lock_open</span>
-            Passcode Embedded
-          </span>
+  Room ID: {loading ? '—' : (webinar?.id?.substring(0, 8) || 'ELORA-01')}
+</span>
 </div>
 <h2 className="font-extrabold text-[20px] md:text-[20px] md:text-[24px] text-[#111827] font-semibold tracking-tight">
-          {loading ? 'Loading…' : (lz.heading || 'Weekly Masterclass')}
-        </h2>
-{/* Speaker Badges & Details */}
+  {loading ? 'Loading…' : (webinar?.title || 'Daily Wealth Masterclass')}
+</h2>
 <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-body-sm font-body-sm text-[#6B7280] pt-1">
 <div className="flex items-center gap-2">
-<img className="w-8 h-8 rounded-full object-cover ring-2 ring-surface" data-alt="Host" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI4W3ChzS0WhedFj1xzcHi7mzt2hFGX4nTvjt2PCDDGBdGleE-6_zMmY_cbsz9ppGp5cCQZbTBfzkxX8gkuTb7fKp4g-Y5CGoQFswJYgiNNIgIQIi2Qn0VygH1Pb4cuj2CGzxcEO0AQuUtrtUfhnLAMQxLbVfM_b408jzDNIwokRRCny9vLJ-vgBSoNUIe6OM8aPNJAd3GvUKkxl-tKnbwT3cf5OwmGDbsmBoCVXEaRgLTRYPLC1Kpdg" />
-<div className="flex flex-col leading-tight">
-<span className="font-semibold text-[#111827] text-[12px]">{loading ? '—' : (lz.hostName || '—')}</span>
-<span className="text-[11px] text-[#6B7280]">{loading ? '—' : (lz.hostTitle || '—')}</span>
+  <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold ring-2 ring-surface">EG</div>
+  <div className="flex flex-col leading-tight">
+    <span className="font-semibold text-[#111827] text-[12px]">Elora Global</span>
+    <span className="text-[11px] text-[#6B7280]">Official Broadcast</span>
+  </div>
 </div>
-</div>
-{!loading && lz.coHostName && (
-  <>
-    <span className="text-[#9CA3AF]">•</span>
-    <div className="flex items-center gap-2">
-      <img className="w-8 h-8 rounded-full object-cover ring-2 ring-surface" data-alt="Co-host" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9MFEs2IXrLO5f3SijGIHqD6PeOl1NWaAUKswEElJ2XPYI6RZvqt52RHhanO3P01iUzSvVYXigX8TUaHOa5ptONObkzcnCiWxvrWSS99Q46rfSuy6LscJLMwZGmaKl-4q3IMYUjNNkrt3LKNiPJDfqiHmRdZ8N3IpDNrz9KDORafKcCZXrcwDyC-cK8ekmNQkxEqRdJMBoyMauQBISqvDtX8HACCPO8JH7Pl2gcoTCQ8elskKw6Tu7Tw" />
-      <div className="flex flex-col leading-tight">
-        <span className="font-semibold text-[#111827] text-[12px]">{lz.coHostName}</span>
-        <span className="text-[11px] text-[#9CA3AF]">{lz.coHostTitle}</span>
-      </div>
-    </div>
-  </>
-)}
 <span className="text-[#9CA3AF]">•</span>
 <div className="flex items-center gap-1 text-[#111827] font-semibold">
-<span className="material-symbols-outlined text-[16px] text-[#6B7280]">schedule</span>
-<span className="">{loading ? '—' : (lz.time || '—')}</span>
+  <span className="material-symbols-outlined text-[16px] text-[#6B7280]">schedule</span>
+  <span className="">{webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Starting Soon' : `Daily at ${webinar?.scheduled_start_time || '20:00'}`}</span>
 </div>
 </div>
 </div>
 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2 border-t border-[#E5E7EB]">
 <div className="flex items-center gap-2 text-body-sm font-body-sm text-[#6B7280]">
-<span className="material-symbols-outlined text-[18px] text-[#6B7280]">group</span>
-<span className=""><strong>{loading ? '—' : (lz.registeredUsers ?? '—')}</strong> Registered</span>
-<span className="text-[#9CA3AF]">/</span>
-<span className="text-red-500 font-semibold flex items-center gap-1">
-<span className="material-symbols-outlined text-[14px]">priority_high</span>
-            Only {loading ? '—' : (lz.seatsLeft ?? '—')} Seats Left
-          </span>
+  <span className="material-symbols-outlined text-[18px] text-[#6B7280]">group</span>
+  <span className=""><strong>Open</strong> to all members</span>
 </div>
 <div className="flex flex-col sm:flex-row items-stretch gap-2 w-full md:w-auto mt-4 md:mt-0">
-<a className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#F8FAFC] w-full sm:w-auto text-[#111827] font-bold text-[13px] hover:bg-[#F3F4F6] transition-colors" href={loading ? '#' : (lz.chartPackUrl || '#')} target="_blank">
-<span className="material-symbols-outlined text-[16px] text-[#6B7280]">description</span>
-<span className="">Chart Pack (.PDF)</span>
+<a className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#F8FAFC] w-full sm:w-auto text-[#111827] font-bold text-[13px] hover:bg-[#F3F4F6] transition-colors" href="#" target="_blank">
+  <span className="material-symbols-outlined text-[16px] text-[#6B7280]">description</span>
+  <span className="">Syllabus</span>
 </a>
-<a className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-[#1D4ED8] w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:bg-[#1e40af] transition-all" href={loading ? '#' : (lz.joinLink || '#')} rel="noopener noreferrer" target="_blank">
-<span className="material-symbols-outlined text-[18px]">videocam</span>
-<span className="">Join Zoom Masterclass</span>
+<a className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8] hover:bg-[#1e40af]' : 'bg-purple-600 hover:bg-purple-700'}`} href={`/live/${profile?.username || 'masterclass'}/room`} rel="noopener noreferrer">
+  <span className="material-symbols-outlined text-[18px]">play_circle</span>
+  <span className="">{webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Join Live Stream' : 'Enter Waiting Room'}</span>
 </a>
 </div>
 </div>
 </div>
-{/* Right Side: My Upcoming 1-on-1 Session & Credits (5 Cols) */}
+
 <div className="lg:col-span-5 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E7EB] p-4 md:p-6 flex flex-col justify-between gap-4">
 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div className="flex items-center gap-2">

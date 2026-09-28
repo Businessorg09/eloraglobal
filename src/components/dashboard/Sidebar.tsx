@@ -92,10 +92,7 @@ export default function Sidebar() {
             <span className={pathname === '/dashboard/settings' ? 'font-semibold tracking-wide' : ''}>Settings</span>
           </Link>
 
-          <Link href={`/live/${profile?.username || 'masterclass'}/room`} className="mt-2 flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-600/20">
-            <span className="material-symbols-outlined text-lg">play_circle</span>
-            <span className="font-semibold tracking-wide">Enter Masterclass</span>
-          </Link>
+
 
           <button onClick={handleLogout} className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-colors hover:bg-red-50 text-red-600 hover:text-red-700 w-full mt-2">
             <i className="ph-sign-out text-lg"></i>
