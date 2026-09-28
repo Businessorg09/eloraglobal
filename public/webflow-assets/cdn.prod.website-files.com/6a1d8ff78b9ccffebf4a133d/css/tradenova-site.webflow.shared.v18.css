@@ -9395,7 +9395,7 @@ figcaption {
 [data-stagger="animate"] > *,
 .section_heading,
 .pricing_card-plan {
-  opacity: 0;
+  opacity: 1; /* FIXED: Was 0, which caused permanently invisible elements if JS animated children */
 }
 
 /* After GSAP runs, the above elements will have opacity set by JS.
