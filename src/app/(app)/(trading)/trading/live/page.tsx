@@ -3,10 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { GatedContent } from '../components/GatedContent'
 
-import { useDashboardContext } from '@/components/dashboard/DashboardContext';
 
 export default function LiveClassesPage() {
-  const { profile } = useDashboardContext();
   const [activeTutor, setActiveTutor] = useState('vance');
   const [selectedDate, setSelectedDate] = useState('Mon 21');
   const [selectedTime, setSelectedTime] = useState('11:30 AM GMT');
@@ -192,7 +190,7 @@ export default function LiveClassesPage() {
   <span className="material-symbols-outlined text-[16px] text-[#6B7280]">description</span>
   <span className="">Syllabus</span>
 </a>
-<a className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8] hover:bg-[#1e40af]' : 'bg-purple-600 hover:bg-purple-700'}`} href={`/live/${profile?.username || 'masterclass'}/room`} rel="noopener noreferrer">
+<a className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8] hover:bg-[#1e40af]' : 'bg-purple-600 hover:bg-purple-700'}`} href="/live/masterclass/room" rel="noopener noreferrer">
   <span className="material-symbols-outlined text-[18px]">play_circle</span>
   <span className="">{webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Join Live Stream' : 'Enter Waiting Room'}</span>
 </a>
