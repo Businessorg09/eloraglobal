@@ -142,9 +142,9 @@ export default function LiveClassesPage() {
 {/* SECTION 1: TOP SPLIT EXECUTIVE HERO BANNER */}
 <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 {/* Urgent Live Alert (7 Cols) - Replaced with Webinar */}
-<div className={`lg:col-span-7 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border p-4 md:p-6 relative overflow-hidden flex flex-col justify-between gap-4 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'border-[#1D4ED8]' : 'border-[#E5E7EB]'}`}>
-<div className={`absolute left-0 top-0 bottom-0 w-1.5 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8]' : 'bg-purple-500'}`}></div>
-<div className={`absolute -right-16 -top-16 w-60 h-60 rounded-full ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-secondary-fixed/25' : 'bg-purple-100/50'} blur-3xl pointer-events-none`}></div>
+<div className={`lg:col-span-7 bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border p-4 md:p-6 relative overflow-hidden flex flex-col justify-between gap-4 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'border-purple-500' : 'border-[#E5E7EB]'}`}>
+<div className={`absolute left-0 top-0 bottom-0 w-1.5 ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
+<div className={`absolute -right-16 -top-16 w-60 h-60 rounded-full ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-purple-500/10' : 'bg-purple-500/5'} blur-3xl pointer-events-none`}></div>
 <div className="flex flex-col gap-2 relative">
 <div className="flex flex-wrap items-center gap-2">
 {webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? (
@@ -190,7 +190,7 @@ export default function LiveClassesPage() {
   <span className="material-symbols-outlined text-[16px] text-[#6B7280]">description</span>
   <span className="">Syllabus</span>
 </a>
-<a className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-[#1D4ED8] hover:bg-[#1e40af]' : 'bg-purple-600 hover:bg-purple-700'}`} href="/live/masterclass/room" rel="noopener noreferrer">
+<a className={`flex items-center justify-center gap-2 px-6 py-2 rounded-lg w-full sm:w-auto text-white font-bold text-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all ${webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-purple-500 hover:bg-purple-600'}`} href="/live/masterclass/room" rel="noopener noreferrer">
   <span className="material-symbols-outlined text-[18px]">play_circle</span>
   <span className="">{webinarStatus === 'LIVE' || webinar?.broadcast_mode === 'TRUE_LIVE' ? 'Join Live Stream' : 'Enter Waiting Room'}</span>
 </a>
