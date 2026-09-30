@@ -1020,34 +1020,30 @@ export default function BusinessCommandCenter() {
                 </div>
               )}
 
-              {/* ---- CRYPTO FORM ---- */}
+              {/* ---- CRYPTO FORM (NOWPayments Widget) ---- */}
               {paymentMethod === 'crypto' && (
                 <div className="space-y-3 animate-in fade-in duration-200">
                   <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-start gap-2">
-                    <span className="material-symbols-outlined text-blue-600 text-[18px] mt-0.5">info</span>
-                    <p className="font-body-sm text-body-sm text-blue-800">Send the exact amount to one of the addresses below. After sending, share the transaction hash with support. Activation happens within 30 mins of confirmation.</p>
+                    <span className="material-symbols-outlined text-blue-600 text-[18px] mt-0.5">verified</span>
+                    <p className="font-body-sm text-body-sm text-blue-800">Pay securely with any cryptocurrency via our payment gateway. Your package will be activated automatically after payment confirmation.</p>
                   </div>
-                  {cryptoAddresses.map((crypto) => (
-                    <div key={crypto.coin} className="flex items-center gap-3 p-3.5 bg-surface-container-low rounded-xl border border-surface-container-high">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-sm" style={{ backgroundColor: crypto.color }}>
-                        {crypto.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-label-sm text-label-sm text-outline">{crypto.coin}</div>
-                        <div className="font-body-sm text-body-sm text-on-surface font-medium truncate">{crypto.address}</div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyAddress(crypto.address)}
-                        className="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors"
-                      >
-                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">
-                          {copiedAddress === crypto.address ? 'check' : 'content_copy'}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-on-surface-variant">{copiedAddress === crypto.address ? 'Copied!' : 'Copy'}</span>
-                      </button>
-                    </div>
-                  ))}
+                  <div className="flex justify-center rounded-xl overflow-hidden bg-surface-container-low border border-surface-container-high">
+                    <iframe
+                      src={`https://nowpayments.io/embeds/payment-widget?iid=${
+                        upgradePackage?.name === 'Growth Partner' ? '5357268919' :
+                        upgradePackage?.name === 'Executive Pro' ? '5373964273' :
+                        '5321210035'
+                      }`}
+                      width="410"
+                      height="696"
+                      frameBorder="0"
+                      scrolling="no"
+                      style={{ overflowY: 'hidden', maxWidth: '100%' }}
+                      title="NOWPayments Crypto Payment"
+                    >
+                      Can&apos;t load widget
+                    </iframe>
+                  </div>
                 </div>
               )}
 

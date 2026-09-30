@@ -38,6 +38,7 @@ export default function EWalletPage() {
   const [depositCard, setDepositCard] = useState({ number: '', name: '', expiry: '', cvv: '' })
   const [depositUpiId, setDepositUpiId] = useState('')
   const [copiedDepositAddr, setCopiedDepositAddr] = useState<string|null>(null)
+  const [cryptoPackage, setCryptoPackage] = useState<'starter'|'growth'|'executive'>('starter')
 
   const depositCryptoAddresses = [
     { coin: 'USDT (TRC20)', address: 'TRX_ADDRESS_PLACEHOLDER', icon: '₮', color: '#26A17B' },
@@ -1353,31 +1354,60 @@ export default function EWalletPage() {
                 </div>
               )}
 
-              {/* CRYPTO FORM */}
+              {/* CRYPTO FORM (NOWPayments Widget) */}
               {depositPayMethod === 'crypto' && (
                 <div className="space-y-3 animate-in fade-in duration-200">
                   <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-start gap-2">
-                    <span className="material-symbols-outlined text-blue-600 text-[18px] mt-0.5">info</span>
-                    <p className="font-body-sm text-body-sm text-blue-800">Send the INR equivalent in crypto to one of the addresses below. Share your transaction hash with support to confirm. Balance is credited within 30 mins.</p>
+                    <span className="material-symbols-outlined text-blue-600 text-[18px] mt-0.5">verified</span>
+                    <p className="font-body-sm text-body-sm text-blue-800">Pay securely with any cryptocurrency via our payment gateway. Select the package you want to pay for below.</p>
                   </div>
-                  {depositCryptoAddresses.map((crypto) => (
-                    <div key={crypto.coin} className="flex items-center gap-3 p-3.5 bg-surface-container-low rounded-xl border border-surface-container-high">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-sm" style={{ backgroundColor: crypto.color }}>
-                        {crypto.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-label-sm text-label-sm text-outline">{crypto.coin}</div>
-                        <div className="font-body-sm text-body-sm text-on-surface font-medium truncate">{crypto.address}</div>
-                      </div>
-                      <button type="button" onClick={() => handleCopyDepositAddr(crypto.address)}
-                        className="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
-                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">
-                          {copiedDepositAddr === crypto.address ? 'check' : 'content_copy'}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-on-surface-variant">{copiedDepositAddr === crypto.address ? 'Copied!' : 'Copy'}</span>
+                  
+                  {/* Package selector for crypto */}
+                  <div className="space-y-1.5">
+                    <p className="font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase tracking-wide">Select Package</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      <button type="button" onClick={() => setCryptoPackage('starter')}
+                        className={`p-2.5 rounded-xl border-2 text-center transition-all ${
+                          cryptoPackage === 'starter' ? 'border-primary bg-primary/5' : 'border-surface-container-high bg-surface-container-low hover:border-primary/40'
+                        }`}>
+                        <span className={`block font-label-md text-label-md font-bold text-[12px] ${cryptoPackage === 'starter' ? 'text-primary' : 'text-on-surface'}`}>Starter</span>
+                        <span className={`block font-label-sm text-label-sm text-[11px] ${cryptoPackage === 'starter' ? 'text-primary' : 'text-outline'}`}>₹4,825</span>
+                      </button>
+                      <button type="button" onClick={() => setCryptoPackage('growth')}
+                        className={`p-2.5 rounded-xl border-2 text-center transition-all ${
+                          cryptoPackage === 'growth' ? 'border-primary bg-primary/5' : 'border-surface-container-high bg-surface-container-low hover:border-primary/40'
+                        }`}>
+                        <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-[9px] font-bold uppercase">Popular</span>
+                        <span className={`block font-label-md text-label-md font-bold text-[12px] mt-1 ${cryptoPackage === 'growth' ? 'text-primary' : 'text-on-surface'}`}>Growth</span>
+                        <span className={`block font-label-sm text-label-sm text-[11px] ${cryptoPackage === 'growth' ? 'text-primary' : 'text-outline'}`}>₹16,899</span>
+                      </button>
+                      <button type="button" onClick={() => setCryptoPackage('executive')}
+                        className={`p-2.5 rounded-xl border-2 text-center transition-all ${
+                          cryptoPackage === 'executive' ? 'border-primary bg-primary/5' : 'border-surface-container-high bg-surface-container-low hover:border-primary/40'
+                        }`}>
+                        <span className={`block font-label-md text-label-md font-bold text-[12px] ${cryptoPackage === 'executive' ? 'text-primary' : 'text-on-surface'}`}>Executive</span>
+                        <span className={`block font-label-sm text-label-sm text-[11px] ${cryptoPackage === 'executive' ? 'text-primary' : 'text-outline'}`}>₹53,200</span>
                       </button>
                     </div>
-                  ))}
+                  </div>
+
+                  <div className="flex justify-center rounded-xl overflow-hidden bg-surface-container-low border border-surface-container-high">
+                    <iframe
+                      src={`https://nowpayments.io/embeds/payment-widget?iid=${
+                        cryptoPackage === 'growth' ? '5357268919' :
+                        cryptoPackage === 'executive' ? '5373964273' :
+                        '5321210035'
+                      }`}
+                      width="410"
+                      height="696"
+                      frameBorder="0"
+                      scrolling="no"
+                      style={{ overflowY: 'hidden', maxWidth: '100%' }}
+                      title="NOWPayments Crypto Payment"
+                    >
+                      Can&apos;t load widget
+                    </iframe>
+                  </div>
                 </div>
               )}
 
