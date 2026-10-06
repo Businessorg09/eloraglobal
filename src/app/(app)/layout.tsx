@@ -4,8 +4,8 @@ import GlobalMobileNav from '@/components/dashboard/GlobalMobileNav';
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Elora Global — Trading & MLM Ecosystem",
-  description: "Simulated funded trading accounts and binary network business",
+  title: "Elora Global",
+  description: "Elora Global",
 };
 
 export default function RootLayout({
