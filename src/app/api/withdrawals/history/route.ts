@@ -34,6 +34,8 @@ export async function GET() {
         rejectionReason: w.rejection_reason,
         processedAt: w.processed_at,
         createdAt: w.created_at,
+        share_card_url: w.share_card_url,
+        share_card_status: w.share_card_status,
       }))
     })
   } catch (error: any) {

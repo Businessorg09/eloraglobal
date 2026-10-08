@@ -15,16 +15,20 @@ export async function POST(request: Request) {
 
     const adminDb = createAdminClient()
 
-    // 1. Fetch withdrawal with user data
+    // 1. Fetch withdrawal
     const { data: withdrawal, error: wError } = await adminDb
       .from('withdrawals')
-      .select('*, users(full_name, username, referral_code)')
+      .select('*')
       .eq('id', payoutId)
       .single()
 
     if (wError || !withdrawal) {
-      return NextResponse.json({ error: 'Withdrawal not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Withdrawal not found: ' + (wError?.message || 'No data') }, { status: 404 })
     }
+    
+    // 1.b Fetch user data separately to avoid PostgREST foreign key ambiguity
+    const { data: userData } = await adminDb.from('users').select('full_name, username, referral_code').eq('id', withdrawal.user_id).single();
+    withdrawal.users = userData;
 
     // Removed COMPLETED check so users can share pending certificates
 
