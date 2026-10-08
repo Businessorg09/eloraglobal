@@ -47,25 +47,8 @@ export default function PayoutPage() {
       if (!res.ok) throw new Error(data.error || 'Failed to request withdrawal')
       
       setMessage('Withdrawal request submitted successfully! (10% fee applied)')
-      setIsGeneratingCard(true)
-      try {
-        const cardRes = await fetch('/api/payout-card/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ payoutId: data.withdrawal.id })
-        })
-        const cardData = await cardRes.json()
-        if (cardData.url) {
-          setGeneratedCardUrl(cardData.url)
-          setIsGeneratingCard(false)
-        } else {
-          setError(cardData.error || 'Failed to generate certificate url')
-          setIsGeneratingCard(false)
-        }
-      } catch (err: any) {
-        setError(err.message || 'Failed to generate certificate')
-        setIsGeneratingCard(false)
-      }
+      // Removed automatic generation based on user feedback
+      setTimeout(() => window.location.reload(), 2000)
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -878,33 +861,34 @@ export default function PayoutPage() {
                               <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${tx.status === 'COMPLETED' ? 'bg-tertiary-container/20 text-tertiary' : tx.status === 'REJECTED' ? 'bg-error/10 text-error' : 'bg-surface-container text-outline'}`}>
                                 {tx.status || 'PENDING'}
                               </span>
-                              {tx.status === 'COMPLETED' && (
+                              { (tx.status === 'COMPLETED' || tx.status === 'PENDING') && (
                                 <button
                                   onClick={async (e) => {
-                                    e.currentTarget.innerText = 'Loading...';
                                     if (tx.share_card_url) {
-                                      window.open(tx.share_card_url, '_blank');
-                                      e.currentTarget.innerText = 'View Card';
+                                      setGeneratedCardUrl(tx.share_card_url);
                                     } else {
+                                      setIsGeneratingCard(true);
                                       try {
-                                        const res = await fetch('/api/payout-card/generate', {
+                                        const r = await fetch('/api/payout-card/generate', {
                                           method: 'POST',
-                                          headers: { 'Content-Type': 'application/json' },
                                           body: JSON.stringify({ payoutId: tx.id })
                                         });
-                                        const data = await res.json();
-                                        if (data.url) {
-                                          window.open(data.url, '_blank');
-                                          tx.share_card_url = data.url;
+                                        const d = await r.json();
+                                        if (d.url) {
+                                          setGeneratedCardUrl(d.url);
+                                        } else {
+                                          alert(d.error || 'Failed to generate card');
                                         }
-                                      } catch(err) {}
-                                      e.currentTarget.innerText = 'View Card';
+                                      } catch(err) {
+                                        alert('Failed to generate card');
+                                      } finally {
+                                        setIsGeneratingCard(false);
+                                      }
                                     }
                                   }}
-                                  className="px-2 py-1 bg-[#1e40af] hover:bg-[#2563eb] text-white rounded text-[10px] font-bold transition-colors inline-flex items-center gap-1"
+                                  className="px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-tertiary text-tertiary hover:bg-tertiary hover:text-white transition-colors"
                                 >
-                                  <span className="material-symbols-outlined text-[14px]">photo_camera</span>
-                                  View Card
+                                  View Certificate
                                 </button>
                               )}
                             </div>
