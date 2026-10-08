@@ -15,6 +15,13 @@ export async function updateKycStatusAction(userId: string, isVerified: boolean)
     throw new Error('Failed to update KYC status: ' + error.message)
   }
   
+  // Also update kyc_details table if it exists
+  await adminDb
+    .from('kyc_details')
+    .update({ status: isVerified ? 'APPROVED' : 'REJECTED' })
+    .eq('user_id', userId)
+    .catch(() => {})
+  
   revalidatePath(`/admin/users/${userId}`)
   return { success: true }
 }

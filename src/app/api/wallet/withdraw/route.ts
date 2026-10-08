@@ -42,9 +42,25 @@ export async function POST(req: Request) {
     }
 
     // 3. Fetch KYC Details for Bank Account
-    const { data: kyc } = await adminDb.from('kyc_details').select('*').eq('user_id', user.id).single()
+    let { data: kyc } = await adminDb.from('kyc_details').select('*').eq('user_id', user.id).single()
+    
+    // If not approved in kyc_details, check if they are manually verified in users table
     if (!kyc || kyc.status !== 'APPROVED') {
-      return NextResponse.json({ error: 'Your KYC details are not yet approved by admin.' }, { status: 403 })
+      if (!profile?.kyc_verified) {
+        return NextResponse.json({ error: 'Your KYC details are not yet approved by admin.' }, { status: 403 })
+      } else {
+        // Admin manually verified them via user table but kyc_details doesn't have status=APPROVED
+        // Let's create a fallback using their auth metadata if kyc is totally missing
+        const { data: authUser } = await adminDb.auth.admin.getUserById(user.id);
+        const meta = authUser?.user?.user_metadata || {};
+        const bankMeta = meta.bank_details || {};
+        
+        kyc = kyc || {
+          bank_account_number: bankMeta.accNumber || 'N/A',
+          bank_ifsc: bankMeta.ifsc || 'N/A',
+          pan_number: 'MANUAL_VERIFIED'
+        };
+      }
     }
 
     // 4. Check Wallet Balance
