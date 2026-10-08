@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     
     // Check if it's INR or USD based on method or some flag. We'll default to USD if USDT, else INR.
     const isCrypto = method.toLowerCase().includes('usdt') || method.toLowerCase().includes('crypto')
-    const symbol = isCrypto ? '
+    const symbol = isCrypto ? '$' : 'INR ';
     
     // For INR, the amount is usually in paise. For Crypto, it might be in cents or just direct value.
     // Assuming net_payable_paise is in paise (divide by 100).
@@ -285,7 +285,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Generation Error: ' + (error?.message || error?.toString()) }, { status: 500 })
   }
 }
- : 'INR '
+ : 'INR ';
     
     // For INR, the amount is usually in paise. For Crypto, it might be in cents or just direct value.
     // Assuming net_payable_paise is in paise (divide by 100).
