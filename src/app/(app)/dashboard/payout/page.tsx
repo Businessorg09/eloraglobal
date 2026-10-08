@@ -857,9 +857,40 @@ export default function PayoutPage() {
                             <td className="py-3 px-3 text-right font-mono text-error text-xs">-₹{(tds + admin).toLocaleString('en-IN')}</td>
                             <td className="py-3 px-3 text-right font-mono font-bold text-on-surface">₹{net.toLocaleString('en-IN')}</td>
                             <td className="py-3 px-3">
+                              <div className="flex items-center gap-2">
                               <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${tx.status === 'COMPLETED' ? 'bg-tertiary-container/20 text-tertiary' : tx.status === 'REJECTED' ? 'bg-error/10 text-error' : 'bg-surface-container text-outline'}`}>
                                 {tx.status || 'PENDING'}
                               </span>
+                              {tx.status === 'COMPLETED' && (
+                                <button
+                                  onClick={async (e) => {
+                                    e.currentTarget.innerText = 'Loading...';
+                                    if (tx.share_card_url) {
+                                      window.open(tx.share_card_url, '_blank');
+                                      e.currentTarget.innerText = 'View Card';
+                                    } else {
+                                      try {
+                                        const res = await fetch('/api/payout-card/generate', {
+                                          method: 'POST',
+                                          headers: { 'Content-Type': 'application/json' },
+                                          body: JSON.stringify({ payoutId: tx.id })
+                                        });
+                                        const data = await res.json();
+                                        if (data.url) {
+                                          window.open(data.url, '_blank');
+                                          tx.share_card_url = data.url;
+                                        }
+                                      } catch(err) {}
+                                      e.currentTarget.innerText = 'View Card';
+                                    }
+                                  }}
+                                  className="px-2 py-1 bg-[#1e40af] hover:bg-[#2563eb] text-white rounded text-[10px] font-bold transition-colors inline-flex items-center gap-1"
+                                >
+                                  <span className="material-symbols-outlined text-[14px]">photo_camera</span>
+                                  View Card
+                                </button>
+                              )}
+                            </div>
                             </td>
                           </tr>
                         );

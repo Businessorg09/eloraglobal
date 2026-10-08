@@ -1,6 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
-import { NextResponse } from 'next/server'
+import { NextResponse, after } from 'next/server'
 
 export async function POST(request: Request) {
   try {
@@ -64,7 +64,21 @@ export async function POST(request: Request) {
       }
     }
 
+    
+    after(async () => {
+      try {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+        await fetch(`${appUrl}/api/payout-card/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ payoutId: withdrawalId })
+        })
+      } catch(e) {
+        console.error('Failed to trigger card generation', e)
+      }
+    })
     return NextResponse.json({ message: 'Withdrawal approved and marked as completed.' })
+
   } catch (error: any) {
     console.error('Approve Withdrawal Error:', error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
