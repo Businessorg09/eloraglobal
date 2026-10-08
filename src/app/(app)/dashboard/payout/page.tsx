@@ -25,6 +25,8 @@ export default function PayoutPage() {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const [generatedCardUrl, setGeneratedCardUrl] = useState('')
+  const [isGeneratingCard, setIsGeneratingCard] = useState(false)
   const router = useRouter()
 
   const submitWithdrawal = async () => {
@@ -45,10 +47,24 @@ export default function PayoutPage() {
       if (!res.ok) throw new Error(data.error || 'Failed to request withdrawal')
       
       setMessage('Withdrawal request submitted successfully! (10% fee applied)')
-      setTimeout(() => {
-        setMessage('')
-        window.location.reload()
-      }, 2000)
+      setIsGeneratingCard(true)
+      try {
+        const cardRes = await fetch('/api/payout-card/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ payoutId: data.withdrawal.id })
+        })
+        const cardData = await cardRes.json()
+        if (cardData.url) {
+          setGeneratedCardUrl(cardData.url)
+        } else {
+          setTimeout(() => window.location.reload(), 2000)
+        }
+      } catch (err) {
+        setTimeout(() => window.location.reload(), 2000)
+      } finally {
+        setIsGeneratingCard(false)
+      }
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -953,6 +969,37 @@ export default function PayoutPage() {
           </div>
         </main>
       </div>
+
+      {/* Certificate Modal */}
+      {(isGeneratingCard || generatedCardUrl) && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-xl flex flex-col items-center max-w-sm w-full mx-4">
+            <h3 className="text-xl font-bold text-on-surface mb-2">Payout Certificate</h3>
+            {isGeneratingCard ? (
+              <div className="flex flex-col items-center justify-center py-10 gap-4">
+                <span className="material-symbols-outlined animate-spin text-4xl text-primary">progress_activity</span>
+                <p className="text-outline font-medium">Generating your custom certificate...</p>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center w-full gap-4">
+                <p className="text-sm text-outline text-center mb-2">Share this on social media to get more referrals!</p>
+                <img src={generatedCardUrl} alt="Payout Certificate" className="w-full rounded-xl shadow-lg border border-surface-container" />
+                <div className="flex items-center gap-3 w-full mt-2">
+                  <button onClick={() => window.open(generatedCardUrl, '_blank')} className="flex-1 py-2.5 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-colors">
+                    Download High-Res
+                  </button>
+                  <button onClick={() => {
+                    setGeneratedCardUrl('')
+                    window.location.reload()
+                  }} className="px-4 py-2.5 bg-surface-container text-on-surface font-bold rounded-xl hover:bg-surface-container-high transition-colors">
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
