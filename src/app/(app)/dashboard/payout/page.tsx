@@ -57,12 +57,13 @@ export default function PayoutPage() {
         const cardData = await cardRes.json()
         if (cardData.url) {
           setGeneratedCardUrl(cardData.url)
+          setIsGeneratingCard(false)
         } else {
-          setTimeout(() => window.location.reload(), 2000)
+          setError(cardData.error || 'Failed to generate certificate url')
+          setIsGeneratingCard(false)
         }
-      } catch (err) {
-        setTimeout(() => window.location.reload(), 2000)
-      } finally {
+      } catch (err: any) {
+        setError(err.message || 'Failed to generate certificate')
         setIsGeneratingCard(false)
       }
     } catch (err: any) {
